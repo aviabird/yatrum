@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
     this.authentication$ = this.store.let(fromRoot.getAuthStatus);
   }
 
+  
+
   ngOnInit() {
     this.auth$.subscribe(
       data => {
@@ -45,5 +47,7 @@ export class HeaderComponent implements OnInit {
     // this.af.auth.logout();
     this.store.dispatch(new LogoutAction);
   }
+
+
 
 }

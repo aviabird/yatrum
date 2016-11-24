@@ -1,3 +1,4 @@
+import { UserAuthService } from './services/user-auth.service';
 import { UserAuthEffects } from './effects/user-auth.effect';
 import { developmentReducers } from './reducers/index';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +40,7 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(UserAuthEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension()  
   ],
-  providers: [],
+  providers: [UserAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

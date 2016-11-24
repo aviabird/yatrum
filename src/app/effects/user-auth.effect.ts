@@ -1,3 +1,4 @@
+import { UserAuthService } from './../services/user-auth.service';
 import * as UserAuthActions from './../actions/user-auth.action';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
@@ -9,12 +10,17 @@ import 'rxjs';
 @Injectable() 
 export class UserAuthEffects {
 
-    constructor(private actions$: Actions) {}
+    constructor(private actions$: Actions, private authService: UserAuthService) {}
 
     @Effect() 
     login$: Observable<Action> =  this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGIN)
-        .map(() => {
+        
+        .switchMap(() => {
+            return this.authService.signIn();
+          })
+        .map((data) => {
+            console.log('data from api ', data);
              return {
                  type: UserAuthActions.ActionTypes.LOGIN_SUCCESS,
                  payload: {}
