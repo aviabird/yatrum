@@ -16,7 +16,7 @@ import "rxjs/add/operator/let";
 })
 export class HeaderComponent implements OnInit {
   user$: Observable<UserProfile>;
-  authentication$: Observable<boolean>;
+  authentication$: Observable<any>;
 
   constructor(private af: AngularFire, private store: Store<fromRoot.State>) {
     this.user$ = this.store.let(fromRoot.getUserProfile);

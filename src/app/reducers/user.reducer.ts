@@ -5,7 +5,7 @@ import { UserProfile } from './../models/user-profile';
 
 export interface State {
   user_profile: UserProfile;
-  auth: boolean;
+  auth: any;
 }
 
 const initialState = {
@@ -13,10 +13,10 @@ const initialState = {
                 email: null,
                 photoURL: null
               },
-  auth: false
+  auth: null
 };
 
-export function reducer(state = initialState, action: Action) {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case ActionTypes.LOGIN_SUCCESS: {
       // return Object.assign({}, state, {auth: true});
@@ -45,6 +45,6 @@ export function getUserProfile (state$: Observable<State>): Observable<UserProfi
   return state$.select(state => state.user_profile);
 }
 
-export function getAuthStatus (state$: Observable<State>): Observable<boolean> {
+export function getAuthStatus (state$: Observable<State>): Observable<any> {
   return state$.select(state => state.auth);
 }

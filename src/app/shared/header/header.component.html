@@ -1,6 +1,25 @@
-<div *ngIf="(authentication$ | async)">
-    Logged in
-</div>
-
-<button *ngIf="!(authentication$ | async)" (click)="login()">Login  </button>
-<button *ngIf="(authentication$ | async)" (click)="logout()">Logout </button>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TravelApp</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <div *ngIf="(authentication$ | async) != null">
+            <span *ngIf="(authentication$ | async)">
+                <img class="photo" [src]="(user$ | async).photoURL">
+            </span>
+            <span *ngIf="(authentication$ | async)">
+                {{(user$ | async).name}}
+            </span>
+            <span><a *ngIf="(authentication$ | async)" (click)="logout()">Logout</a></span>
+            
+        </div>  
+        <span><a *ngIf="!(authentication$ | async)" (click)="login()">Login</a></span>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
