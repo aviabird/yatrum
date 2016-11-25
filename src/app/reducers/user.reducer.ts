@@ -11,9 +11,9 @@ export interface State {
 const initialState = {
  user_profile: {name: null,
                 email: null,
-                photoURL: null
+                photoURL: null,
               },
-  auth: null
+  auth: null,
 };
 
 export function reducer(state = initialState, action: Action): State {

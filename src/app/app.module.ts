@@ -1,3 +1,5 @@
+import { routes } from './app.routes';
+import { RouterModule } from '@angular/router';
 import { UserAuthService } from './services/user-auth.service';
 import { UserAuthEffects } from './effects/user-auth.effect';
 import { developmentReducers } from './reducers/index';
@@ -8,12 +10,13 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -30,7 +33,8 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(developmentReducers),
     EffectsModule.run(UserAuthEffects),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()  
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    RouterModule.forRoot(routes)
   ],
   providers: [UserAuthService],
   bootstrap: [AppComponent]
