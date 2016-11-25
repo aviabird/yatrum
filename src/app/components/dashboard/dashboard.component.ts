@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
         id: "1",
         startDate: new Date("12-03-2016").toDateString(),
         endDate: new Date("12-12-2016").toDateString(),
-        description: "What an amazing trip",
+        description: "Las Vegas Trip",
         status: "ongoing", // A validation for inclusion
         cities: [
           { name: "Pune",
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
         id: "2",
         startDate: new Date("01-26-2016").toDateString(),
         endDate: new Date("02-04-2016").toDateString(),
-        description: "So nice trip",
+        description: "Dubai Trip",
         status: "completed",
         cities: [
           { name: "Pune",
