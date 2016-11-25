@@ -32,6 +32,7 @@ export class UserAuthService {
     }
 
     getUserProfile(data: any): UserProfile {
+        window['result'] = data;
         return {
             name: data.google.displayName,
             email: data.google.email,
