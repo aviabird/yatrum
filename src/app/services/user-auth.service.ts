@@ -16,9 +16,18 @@ export class UserAuthService {
         return this.af.auth;
     }
 
+    signOut() {
+        this.af.auth.logout();
+        return this.af.auth;
+    }
+
     getUserProfile(data: any): UserProfile {
-        console.log("profile data",data);
-        
+        return {
+            name: data.google.displayName,
+            email: data.google.email,
+            photoURL: data.google.photoURL
+        }
+
     }
 
 }

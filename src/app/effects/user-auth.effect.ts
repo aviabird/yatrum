@@ -18,19 +18,16 @@ export class UserAuthEffects {
         .switchMap(() => this.authService.signIn())
         .filter(data => data !== null)
         .map((data) => {
-            return {
-                type: UserAuthActions.ActionTypes.LOGIN_SUCCESS,
-                payload: {user: this.authService.getUserProfile(data)}
-            }
+            let userProfile = this.authService.getUserProfile(data);
+            return new UserAuthActions.LoginSuccessAction(userProfile);
         });
 
     @Effect()
     logout$: Observable<Action> = this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGOUT)
+        .switchMap(() => this.authService.signOut())
+        .filter(data => data === null)
         .map(() => {
-            return {
-                type: UserAuthActions.ActionTypes.LOGOUT_SUCCESS,
-                payload: {}
-            }
+            return new UserAuthActions.LogoutSuccessAction();
         })    
 } 

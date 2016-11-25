@@ -11,9 +11,7 @@ export interface State {
 const initialState = {
  user_profile: {name: null,
                 email: null,
-                photoURL: null,
-                user_uid: null,
-                provider_uid: null
+                photoURL: null
               },
   auth: false
 };
@@ -24,12 +22,7 @@ export function reducer(state = initialState, action: Action) {
       // return Object.assign({}, state, {auth: true});
       console.log('in success');
       return {
-        user_profile: {name: null,
-                email: null,
-                photoURL: null,
-                user_uid: null,
-                provider_uid: null
-              },
+        user_profile: action.payload,
         auth: true
       }
     }
@@ -37,12 +30,7 @@ export function reducer(state = initialState, action: Action) {
       // return Object.assign({}, state, {auth: true});
       console.log('in logout success');
       return {
-        user_profile: {name: null,
-                email: null,
-                photoURL: null,
-                user_uid: null,
-                provider_uid: null
-              },
+        user_profile: initialState.user_profile,
         auth: false
       }
     }
