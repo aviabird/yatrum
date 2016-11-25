@@ -15,17 +15,15 @@ export class UserAuthEffects {
     @Effect() 
     login$: Observable<Action> =  this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGIN)
-        
-        .switchMap(() => {
-            return this.authService.signIn();
-          })
+        .switchMap(() => this.authService.signIn())
+        .filter(data => data !== null)
         .map((data) => {
-            console.log('data from api ', data);
-             return {
-                 type: UserAuthActions.ActionTypes.LOGIN_SUCCESS,
-                 payload: {}
-                }
+            return {
+                type: UserAuthActions.ActionTypes.LOGIN_SUCCESS,
+                payload: {user: this.authService.getUserProfile(data)}
+            }
         });
+
     @Effect()
     logout$: Observable<Action> = this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGOUT)

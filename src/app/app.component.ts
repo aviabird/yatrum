@@ -17,11 +17,11 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.auth$.subscribe(
-      data => {
-        //  dispath action auth changed
-        console.log('data', data);
-      });
+    // this.auth$.subscribe(
+    //   data => {
+    //       dispath action auth changed
+    //      console.log('data', data);
+    //   });
   }
 
   login() {
