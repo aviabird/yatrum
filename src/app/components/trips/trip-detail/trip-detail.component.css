@@ -1,0 +1,20 @@
+.circle {
+	width: 100px;
+	height: 100px;
+	/*background: red;*/
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+    border: 1px solid;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.square {
+    text-align: center;
+	width: 100px;
+	height: 75px;
+	/*background: red;*/
+    border: 1px solid;
+}

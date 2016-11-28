@@ -3,3 +3,16 @@
   trip-detail component!
   Id: {{this.tripIndex}}
 </p>
+
+<div class="col-md-6 col-md-offset-3">
+<div *ngFor="let city of selectedTrip.cities">
+  <div class="circle">
+    {{city.name}}
+  </div>
+  <div *ngFor="let place of city.places">
+    <div class="square">
+      {{place.name}}
+    <div>
+  </div>
+</div>
+</div>

@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import { Trip } from './../../../models/trip';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
@@ -11,19 +12,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TripDetailComponent implements OnInit {
   private subscription: Subscription;
-  tripIndex: number;
+  tripIndex: string;
   selectedTrip: Trip;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private tripService: TripsService) { }
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
       (params) => {
         this.tripIndex = params['id'];
         console.log("received index", this.tripIndex);
-        // this.selectedTrip = this.tripService.getRecipe(this.tripIndex);
+        this.selectedTrip = this.tripService.getTrip(this.tripIndex);
       }
     )
+    console.log("trip", this.selectedTrip.cities[1].name);
   }
 
   goBack() {

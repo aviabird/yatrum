@@ -1,3 +1,4 @@
+import { TripsService } from './services/trips.service';
 import { routes } from './app.routes';
 import { RouterModule } from '@angular/router';
 import { UserAuthService } from './services/user-auth.service';
@@ -51,7 +52,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService],
+  providers: [UserAuthService, TripsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
