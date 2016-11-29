@@ -10,12 +10,11 @@ export class TripsEffects {
     constructor(private actions$: Actions, private tripsService: TripsService) {}
 
     @Effect()
-    LoadTrips$: Observable<Action> = this.actions$
+    Trips$: Observable<Action> = this.actions$
         .ofType(TripsActions.ActionTypes.LOAD_TRIPS)
         .switchMap(() => this.tripsService.getTrips())
         .map((data) => {
             return new TripsActions.TripsLoadedAction(data);
         })
-
 
 }

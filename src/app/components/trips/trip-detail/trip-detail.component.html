@@ -1,5 +1,5 @@
 <div class="col-md-6 col-md-offset-3">
-<div *ngFor="let city of selectedTrip.cities">
+<div *ngFor="let city of (selectedTrip$ | async)?.cities">
   <div class="circle">
     {{city.name}}
   </div>

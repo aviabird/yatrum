@@ -1,4 +1,4 @@
-import * as fromTripReducer from './trips.reducer';
+import * as fromTripsReducer from './trips.reducer';
 import { Observable } from 'rxjs/Observable';
 import '@ngrx/core/add/operator/select';
 import { compose } from '@ngrx/core/compose';
@@ -9,13 +9,13 @@ import * as fromUserReducer from './user.reducer';
 
 export interface State {
     user: fromUserReducer.State;
-    trips: fromTripReducer.State;
+    trips: fromTripsReducer.State;
     travelers: any;
 } 
 
 const reducers = {
     user: fromUserReducer.reducer,
-    trips: fromTripReducer.reducer
+    trips: fromTripsReducer.reducer
 }
 
 export const developmentReducers: ActionReducer<State> = combineReducers(reducers);
@@ -32,13 +32,12 @@ export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserSta
 export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState);
 
 
-// ============= trip states and compose methods ======================================================
+// ============= trips list states and compose methods ======================================================
 
-export function getTripsState(state$: Observable<State>): Observable<fromTripReducer.State> {
+export function getTripsState(state$: Observable<State>): Observable<fromTripsReducer.State> {
     return state$.select(state => state.trips);
 }
 
-export const getTrips = compose(fromTripReducer.getTrips, getTripsState);
-
-
+export const getTrips = compose(fromTripsReducer.getTrips, getTripsState);
+export const getSelectedTrip = compose(fromTripsReducer.getSelectedTrip,getTripsState);
 
