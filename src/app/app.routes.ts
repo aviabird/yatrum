@@ -6,7 +6,7 @@ import { TripsComponent } from './components/trips/trips.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'trip', pathMatch: 'full' },
     { path: 'trip', component: TripsComponent, children: TripRoutes },
     { path: 'dashboard', component: DashboardComponent }
 ];
