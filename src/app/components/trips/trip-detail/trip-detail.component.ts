@@ -25,7 +25,6 @@ export class TripDetailComponent implements OnInit {
         this.selectedTrip = this.tripService.getTrip(this.tripIndex);
       }
     )
-    console.log("trip", this.selectedTrip.cities[1].name);
   }
 
   goBack() {
