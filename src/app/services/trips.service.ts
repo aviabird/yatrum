@@ -111,13 +111,15 @@ export class TripsService {
   }
 
 
+// use map function to find the particular trip, so that it will not 
+// traverse the whole array, as it is doing with the current implementation.
   getTrip(tripIndex: string): Trip {
     return this.trips.filter((trip) => {
        return trip.id == tripIndex;
     })[0]
   }
 
-  getTrips() {
+  getTrips(): Observable<Trip[]>{
     return Observable.of(this.trips);
   }
 
