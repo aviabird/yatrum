@@ -20,6 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
+import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -39,7 +40,8 @@ const myFirebaseAuthConfig = {
     HeaderComponent,
     DashboardComponent,
     TripsComponent,
-    TripDetailComponent
+    TripDetailComponent,
+    TripsListComponent
   ],
   imports: [
     BrowserModule,
