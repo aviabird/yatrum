@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Trip } from './../models/trip';
 import { Injectable } from '@angular/core';
 
@@ -110,10 +111,14 @@ export class TripsService {
   }
 
 
-  getTrip(tripIndex: string) {
+  getTrip(tripIndex: string): Trip {
     return this.trips.filter((trip) => {
        return trip.id == tripIndex;
     })[0]
+  }
+
+  getTrips() {
+    return Observable.of(this.trips);
   }
 
 }

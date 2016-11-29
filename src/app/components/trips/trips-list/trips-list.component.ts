@@ -1,3 +1,7 @@
+import * as fromRoot from './../../../reducers/index';
+import { LoadTripsAction } from './../../../actions/trips.action';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 import { TripsService } from './../../../services/trips.service';
 import { Trip } from './../../../models/trip';
 import { Component, OnInit } from '@angular/core';
@@ -9,12 +13,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripsListComponent implements OnInit {
 
-  trips: Trip[];
+  trips$: Observable<Trip[]>;
 
-  constructor(private tripsService: TripsService) { }
+  constructor(private tripsService: TripsService,
+              private store: Store<fromRoot.State>) { 
+
+    this.trips$ = this.store.let(fromRoot.getTrips);
+
+  }
 
   ngOnInit() {
-    this.trips = this.tripsService.trips;
+    this.store.dispatch(new LoadTripsAction);
   }
 
 }
