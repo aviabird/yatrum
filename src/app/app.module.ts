@@ -1,3 +1,4 @@
+import { TripsEffects } from './effects/trips.effects';
 import { TripsService } from './services/trips.service';
 import { routes } from './app.routes';
 import { RouterModule } from '@angular/router';
@@ -51,6 +52,7 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(developmentReducers),
     EffectsModule.run(UserAuthEffects),
+    EffectsModule.run(TripsEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
