@@ -1,15 +1,2 @@
-<div class="container">
-  <div class="col-md-10 col-md-offset-1">
-    <div [routerLink]="['/trip', trip.id]" *ngFor="let trip of trips" class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{trip.description}} From {{trip.startDate}}</h3>
-      </div>
-      <div class="panel-body">
-        <h3>Status: {{trip.status}}</h3>
-        <span *ngFor="let city of trip.cities"> {{city.name}} - </span>
-
-      </div>
-    </div>
-  </div>
-  <!--<router-oulet>-->
-</div>
+<h1>Dashboard component</h1>
+<tr-trips></tr-trips>

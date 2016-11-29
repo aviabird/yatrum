@@ -1,9 +1,5 @@
-import { TripsService } from './../../services/trips.service';
-import { Media } from './../../models/media';
-import { Place } from './../../models/place';
 import { Component, OnInit } from '@angular/core';
 
-import { Trip } from './../../models/trip';
 
 @Component({
   selector: 'tr-dashboard',
@@ -11,11 +7,9 @@ import { Trip } from './../../models/trip';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  trips: Trip[]
 
-  constructor(private tripService: TripsService) { }
+  constructor() { }
 
   ngOnInit() {
-   this.trips = this.tripService.trips;
   }
 }
