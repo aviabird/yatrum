@@ -16,6 +16,7 @@ import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
 
 // Effects
+import { TripsEffects } from './effects/trips.effects';
 import { UserAuthEffects } from './effects/user-auth.effect';
 
 import { routes } from './app.routes';
@@ -59,6 +60,7 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(developmentReducers),
     EffectsModule.run(UserAuthEffects),
+    EffectsModule.run(TripsEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],

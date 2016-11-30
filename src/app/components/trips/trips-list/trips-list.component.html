@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-10 col-md-offset-1">
-    <div [routerLink]="['/trip', trip.id]" *ngFor="let trip of trips" class="panel panel-primary">
+    <div [routerLink]="['/trip', trip.id]" *ngFor="let trip of trips$ | async" class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">{{trip.description}} From {{trip.startDate}}</h3>
       </div>
