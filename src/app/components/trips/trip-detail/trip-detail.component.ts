@@ -25,7 +25,7 @@ export class TripDetailComponent implements OnInit {
               private tripService: TripsService,
               private store: Store<fromRoot.State>) { 
 
-    this.selectedTrip$ = this.store.let(fromRoot.getSelectedTrip);
+    this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
 
   }
 

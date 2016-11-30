@@ -19,7 +19,7 @@ export class TripsListComponent implements OnInit {
   constructor(private tripsService: TripsService,
               private store: Store<fromRoot.State>) { 
 
-    this.trips$ = this.store.let(fromRoot.getTrips);
+    this.trips$ = this.store.select(fromRoot.getTripsCollection);
 
   }
 
