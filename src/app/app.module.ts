@@ -1,9 +1,4 @@
-import { TripsService } from './services/trips.service';
-import { routes } from './app.routes';
-import { RouterModule } from '@angular/router';
-import { UserAuthService } from './services/user-auth.service';
-import { UserAuthEffects } from './effects/user-auth.effect';
-import { developmentReducers } from './reducers/index';
+// Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,10 +7,23 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
+// import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
 
+// Services 
+import { TripsService } from './services/trips.service';
+import { UserAuthService } from './services/user-auth.service';
+import { ServerAuthService } from './services/server-auth.service';
+
+// Effects
+import { UserAuthEffects } from './effects/user-auth.effect';
+
+import { routes } from './app.routes';
+import { developmentReducers } from './reducers/index';
+
+// Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
-
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TripsComponent } from './components/trips/trips.component';
@@ -54,7 +62,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService],
+  providers: [UserAuthService, TripsService, ServerAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
