@@ -30,7 +30,7 @@ export class LogoutSuccessAction implements Action {
 // Actions for Rails Api connection 
 export class ServerLoginAction implements Action {
     type = ActionTypes.SERVER_LOGIN;
-    constructor() {}
+    constructor(public payload: any) {}
 }
 export class ServerLoginSuccessAction implements Action {
     type = ActionTypes.SERVER_LOGIN_SUCCESS;

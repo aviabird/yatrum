@@ -17,7 +17,7 @@
             <span><a *ngIf="(authentication$ | async)" (click)="logout()">Logout</a></span>
             
         </div>  
-        <span><a *ngIf="!(authentication$ | async)" (click)="login()">Login</a></span>
+        <span><a [routerLink]="['/login']" *ngIf="!(authentication$ | async)">Login</a></span>
       </ul>
       
     </div><!-- /.navbar-collapse -->

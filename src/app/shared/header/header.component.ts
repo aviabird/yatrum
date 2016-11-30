@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
   login() {
     // Firebase authentication
     // this.store.dispatch(new LoginAction);
-    this.store.dispatch(new ServerLoginAction);
+    // this.store.dispatch(new ServerLoginAction);
   }
 
   logout() {

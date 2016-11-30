@@ -18,7 +18,9 @@ export class UserAuthEffects {
     @Effect() 
     login$: Observable<Action> =  this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGIN)
-        .switchMap(() => this.authService.signIn())
+        .switchMap(() => { 
+            console.log('login action')
+            return this.authService.signIn()})
         .filter(data => data !== null)
         .map((data) => {
             let userProfile = this.authService.getUserProfile(data);
@@ -37,9 +39,16 @@ export class UserAuthEffects {
     @Effect()
     server_login$: Observable<Action> = this.actions$
         .ofType(UserAuthActions.ActionTypes.SERVER_LOGIN)
-        .switchMap(() => this.serverAuthService.login())
-        .filter(data => data !== null)
+        .switchMap((data) => { 
+            console.log("Data in server action", data.payload);
+            return this.serverAuthService.login(data.payload);
+        })
+        .filter(data => { 
+            console.log('data in filter', data);
+            return data !== null
+        })
         .map((data) => {
+            console.log('data received', data);
             let user = this.serverAuthService.getServerUserProfile(data); 
             return new UserAuthActions.ServerLoginSuccessAction(user);
         });

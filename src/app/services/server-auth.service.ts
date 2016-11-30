@@ -25,12 +25,12 @@ export class ServerAuthService {
   }
 
    // returns an observable with user object
-  login() {
+  login(data) {
     const headers = new Headers({
       'Content-Type': 'application/json' 
     });
     return this.http.post(this.apiLink + '/authenticate' + '.json', 
-      JSON.stringify({email: 'ashish1@gmail.com', password: '123456789'}), {headers: headers}
+      JSON.stringify(data), {headers: headers}
     ).map((res: Response) => {
       this.setTokenInLocalStorage(res.json())
       return res.json();
