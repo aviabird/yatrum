@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import * as fromTripsReducer from './trips.reducer';
 import { Observable } from 'rxjs/Observable';
 import '@ngrx/core/add/operator/select';
@@ -34,10 +35,19 @@ export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState
 
 // ============= trips list states and compose methods ======================================================
 
-export function getTripsState(state$: Observable<State>): Observable<fromTripsReducer.State> {
-    return state$.select(state => state.trips);
+export function getTripsState(state: State): fromTripsReducer.State {
+    return state.trips;
 }
 
-export const getTrips = compose(fromTripsReducer.getTrips, getTripsState);
-export const getSelectedTrip = compose(fromTripsReducer.getSelectedTrip,getTripsState);
+export const getTrips = createSelector(getTripsState, fromTripsReducer.getTrips);
+export const getTripIds = createSelector(getTripsState, fromTripsReducer.getTripIds);
+export const getSelectedTripId = createSelector(getTripsState, fromTripsReducer.getSelectedTripId);
+
+export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, ids) => {
+    return ids.map(id => trips[id]);
+});
+
+export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trips, id) => {
+    return trips[id];
+});
 
