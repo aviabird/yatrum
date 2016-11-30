@@ -1,3 +1,4 @@
+import { ServerAuthService } from './../services/server-auth.service';
 import { UserAuthService } from './../services/user-auth.service';
 import * as UserAuthActions from './../actions/user-auth.action';
 import { Injectable } from '@angular/core';
@@ -10,7 +11,9 @@ import 'rxjs';
 @Injectable() 
 export class UserAuthEffects {
 
-    constructor(private actions$: Actions, private authService: UserAuthService) {}
+    constructor(private actions$: Actions, 
+                private authService: UserAuthService,
+                private serverAuthService: ServerAuthService) {}
 
     @Effect() 
     login$: Observable<Action> =  this.actions$
@@ -29,5 +32,15 @@ export class UserAuthEffects {
         .filter(data => data === null)
         .map(() => {
             return new UserAuthActions.LogoutSuccessAction();
-        })    
+        });
+
+    @Effect()
+    server_login$: Observable<Action> = this.actions$
+        .ofType(UserAuthActions.ActionTypes.SERVER_LOGIN)
+        .switchMap(() => this.serverAuthService.login())
+        .filter(data => data !== null)
+        .map((data) => {
+            let user = this.serverAuthService.getServerUserProfile(data); 
+            return new UserAuthActions.ServerLoginSuccessAction(user);
+        });        
 } 

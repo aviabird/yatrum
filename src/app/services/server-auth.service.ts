@@ -1,3 +1,4 @@
+import { UserProfile } from './../models/user-profile';
 import { Http, Headers, Response } from '@angular/http';
 // Users JWT TOKEN authentication connects with rails api
 import { Injectable } from '@angular/core';
@@ -23,10 +24,27 @@ export class ServerAuthService {
       'Content-Type': 'application/json' 
     });
     console.log('in signin method');
-    this.http.post(this.apiLink + '/authenticate' + '.json', 
+    return this.http.post(this.apiLink + '/authenticate' + '.json', 
       JSON.stringify({email: 'ashish1@gmail.com', password: '123456789'}), {headers: headers}
-    ).subscribe(data => console.log("Data from backend", data))
+    ).map((res: Response) => res.json())
+    // subscribe(
+    //   (response: Response) => {
+    //     console.log('response', response);
+    //     let token = response.json() && response.json().auth_token;
+    //     let user = response.json() && response.json().user;
+    //     console.log('token', token);
+    //     console.log('token', user);
+    //   });
     // .map(data => console.log("sent a request", data));
+  }
+
+  getServerUserProfile(data): UserProfile {
+    return {
+            name: data.user.name,
+            email: data.user.email,
+            photoURL: data.user.photoURL,
+            token: data.auth_token
+        }
   }
 
 }

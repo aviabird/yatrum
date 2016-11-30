@@ -1,5 +1,5 @@
 import { ServerAuthService } from './../../services/server-auth.service';
-import { LoginAction, LogoutAction } from './../../actions/user-auth.action';
+import { LoginAction, LogoutAction, ServerLoginAction } from './../../actions/user-auth.action';
 import { UserProfile } from './../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../reducers/index';
@@ -26,13 +26,12 @@ export class HeaderComponent implements OnInit {
     this.authentication$ = this.store.let(fromRoot.getAuthStatus);
   }
 
-  
-
   ngOnInit() {
   }
 
   login() {
-    this.store.dispatch(new LoginAction);
+    // this.store.dispatch(new LoginAction);
+    this.store.dispatch(new ServerLoginAction);
   }
 
   logout() {

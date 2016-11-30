@@ -12,6 +12,7 @@ const initialState = {
  user_profile: {name: null,
                 email: null,
                 photoURL: null,
+                token: null
               },
   auth: null,
 };
@@ -21,6 +22,14 @@ export function reducer(state = initialState, action: Action): State {
     case ActionTypes.LOGIN_SUCCESS: {
       // return Object.assign({}, state, {auth: true});
       console.log('in success');
+      return {
+        user_profile: action.payload,
+        auth: true
+      }
+    }
+    // Authentication with rails api backend
+    case ActionTypes.SERVER_LOGIN_SUCCESS: {
+      console.log('in server login success');
       return {
         user_profile: action.payload,
         auth: true

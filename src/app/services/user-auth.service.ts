@@ -31,12 +31,12 @@ export class UserAuthService {
         return this.af.auth;
     }
 
-    getUserProfile(data: any): UserProfile {
-        window['result'] = data;
+    getUserProfile(data: any) {
         return {
             name: data.google.displayName,
             email: data.google.email,
-            photoURL: data.google.photoURL
+            photoURL: data.google.photoURL,
+            token: data.token
         }
 
     }
