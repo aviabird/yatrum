@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './../models/user-profile';
 import { Http, Headers, Response } from '@angular/http';
 // Users JWT TOKEN authentication connects with rails api
@@ -11,11 +12,16 @@ export class ServerAuthService {
   // @LocalStorage() public token:Object = {};
   private apiLink:string = "http://localhost:3000";
 
-  constructor(private http: Http) {
-    // this.token = 'Ashish';
-    localStorage.setItem('token', "testing");
-    console.log('set ashish as a value');
-    this.login();
+  constructor(private http: Http) {}
+
+  getLoggedInUser(auth_token) {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': auth_token
+    })
+    return this.http.post(this.apiLink + '/users/show' + '.json', {}, {headers: headers})
+      .map(data => this.getServerUserProfile(data.json()))
+      // .map(data => this.getServerUserProfile(data));
   }
 
    // returns an observable with user object
@@ -23,19 +29,17 @@ export class ServerAuthService {
     const headers = new Headers({
       'Content-Type': 'application/json' 
     });
-    console.log('in signin method');
     return this.http.post(this.apiLink + '/authenticate' + '.json', 
       JSON.stringify({email: 'ashish1@gmail.com', password: '123456789'}), {headers: headers}
-    ).map((res: Response) => res.json())
-    // subscribe(
-    //   (response: Response) => {
-    //     console.log('response', response);
-    //     let token = response.json() && response.json().auth_token;
-    //     let user = response.json() && response.json().user;
-    //     console.log('token', token);
-    //     console.log('token', user);
-    //   });
-    // .map(data => console.log("sent a request", data));
+    ).map((res: Response) => {
+      this.setTokenInLocalStorage(res.json())
+      return res.json();
+    })
+  }
+
+  signOut() {
+    localStorage.removeItem('user');
+    return Observable.of('ok logged out');
   }
 
   getServerUserProfile(data): UserProfile {
@@ -45,6 +49,11 @@ export class ServerAuthService {
             photoURL: data.user.photoURL,
             token: data.auth_token
         }
+  }
+
+  setTokenInLocalStorage(user_data) {
+    let jsonData = JSON.stringify(user_data)
+    localStorage.setItem('user', jsonData);
   }
 
 }

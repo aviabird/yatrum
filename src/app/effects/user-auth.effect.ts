@@ -42,5 +42,13 @@ export class UserAuthEffects {
         .map((data) => {
             let user = this.serverAuthService.getServerUserProfile(data); 
             return new UserAuthActions.ServerLoginSuccessAction(user);
+        });
+
+    @Effect()
+    server_logout$: Observable<Action> = this.actions$
+        .ofType(UserAuthActions.ActionTypes.SERVER_LOGOUT)
+        .switchMap(() => this.serverAuthService.signOut())
+        .map(() => {
+            return new UserAuthActions.ServerLogoutSuccessAction();
         });        
 } 

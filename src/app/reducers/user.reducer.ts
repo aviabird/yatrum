@@ -27,6 +27,14 @@ export function reducer(state = initialState, action: Action): State {
         auth: true
       }
     }
+    case ActionTypes.LOGOUT_SUCCESS: {
+      // return Object.assign({}, state, {auth: true});
+      console.log('in logout success');
+      return {
+        user_profile: initialState.user_profile,
+        auth: false
+      }
+    }
     // Authentication with rails api backend
     case ActionTypes.SERVER_LOGIN_SUCCESS: {
       console.log('in server login success');
@@ -35,7 +43,7 @@ export function reducer(state = initialState, action: Action): State {
         auth: true
       }
     }
-    case ActionTypes.LOGOUT_SUCCESS: {
+    case ActionTypes.SERVER_LOGOUT_SUCCESS: {
       // return Object.assign({}, state, {auth: true});
       console.log('in logout success');
       return {

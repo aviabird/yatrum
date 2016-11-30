@@ -1,5 +1,5 @@
 import { ServerAuthService } from './../../services/server-auth.service';
-import { LoginAction, LogoutAction, ServerLoginAction } from './../../actions/user-auth.action';
+import { LoginAction, LogoutAction, ServerLoginAction, ServerLoginSuccessAction, ServerLogoutAction } from './../../actions/user-auth.action';
 import { UserProfile } from './../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../reducers/index';
@@ -24,18 +24,34 @@ export class HeaderComponent implements OnInit {
               private serverAuthService: ServerAuthService) {
     this.user$ = this.store.let(fromRoot.getUserProfile);
     this.authentication$ = this.store.let(fromRoot.getAuthStatus);
+    
+    // Check if the user is already logged in
+    let user_data = JSON.parse(localStorage.getItem('user'));
+    if (user_data) {
+      console.log('token is', user_data.auth_token);
+      console.log('user is', user_data.user);
+      let user = this.serverAuthService.getLoggedInUser(user_data.auth_token);
+      user.subscribe(
+        // Dispatch login success when the we get the user object
+        data => this.store.dispatch(new ServerLoginSuccessAction(data))
+        // if required do anyredirects after this
+      )
+    }
   }
 
   ngOnInit() {
   }
 
   login() {
+    // Firebase authentication
     // this.store.dispatch(new LoginAction);
     this.store.dispatch(new ServerLoginAction);
   }
 
   logout() {
-    this.store.dispatch(new LogoutAction);
+    // Firebase authentication    
+    // this.store.dispatch(new LogoutAction);
+    this.store.dispatch(new ServerLogoutAction);
   }
 
 
