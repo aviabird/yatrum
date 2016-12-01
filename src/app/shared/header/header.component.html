@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <div *ngIf="(authentication$ | async) != null">
-            <span *ngIf="(authentication$ | async)">
+            <!--<span *ngIf="(authentication$ | async)">
                 <img class="photo" [src]="(user$ | async).photoURL">
-            </span>
+            </span>-->
             <span *ngIf="(authentication$ | async)">
                 {{(user$ | async).name}}
             </span>
