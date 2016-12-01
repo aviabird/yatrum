@@ -15,7 +15,9 @@ export class TripsService {
         description: "Las Vegas Trip",
         status: "ongoing", // A validation for inclusion
         cities: [
-          { name: "Pune",
+          { 
+            id: "1",
+            name: "Pune",
             country: "India",
             places: [
               { 
@@ -41,7 +43,9 @@ export class TripsService {
         description: "Dubai Trip",
         status: "completed",
         cities: [
-          { name: "Pune",
+          { 
+            id: "1",
+            name: "Pune",
             country: "India",
             places: [
               { 
@@ -117,7 +121,9 @@ export class TripsService {
               }
             ]
           },
-          { name: "Dubai",
+          { 
+            id: "2",
+            name: "Dubai",
             country: "UAE",
             places: [
               { 

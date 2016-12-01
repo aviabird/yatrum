@@ -1,8 +1,10 @@
+import { SelectCityFromTripAction } from './../../../../actions/trips.action';
+import { City } from './../../../../models/city';
 import * as fromRoot from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Trip } from './../../../../models/trip';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tr-trip-flow-chart',
@@ -17,4 +19,10 @@ export class TripFlowChartComponent {
     this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
   }
 
+  showCityActivity(id: string) {
+    this.store.dispatch(new SelectCityFromTripAction(id));
+  }
+
 }
+
+
