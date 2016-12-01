@@ -1,12 +1,6 @@
-<div class="col-md-6 col-md-offset-3">
-<div *ngFor="let city of (selectedTrip$ | async)?.cities">
-  <div class="circle">
-    {{city.name}}
-  </div>
-  <div *ngFor="let place of city.places">
-    <div class="square">
-      {{place.name}}
-    <div>
-  </div>
+<div class="col-md-5 border-custom">
+  <tr-trip-flow-chart></tr-trip-flow-chart>
 </div>
+<div class="col-md-7 border-custom">
+  <tr-trip-activity></tr-trip-activity>
 </div>

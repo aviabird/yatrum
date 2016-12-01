@@ -1,0 +1,46 @@
+#city-row {
+	position: relative;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+#arrow {
+	position: absolute;
+	left: -15%;
+	top: 50%;
+	border: 1px solid #4C868F;
+	width: 60px;
+	height: 2px;
+}
+
+#circle-arrow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(0%,-50%);
+}
+
+#vertical-bar {
+	height: 440px;
+	border-left: 2px solid #4C868F;
+	position: absolute;
+	left: 59%;
+	transform: translate(10%);
+}
+
+.circle {
+	width: 100px;
+	height: 100px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+    border: 2px solid #4C868F;
+    text-align: center;
+}
+
+
+.square {
+    text-align: center;
+	width: 100px;
+    border: 2px solid #4C868F;
+}
