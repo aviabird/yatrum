@@ -1,13 +1,14 @@
-import { UpdateLoginFormNotification } from './../actions/notification.action';
+import { createSelector } from 'reselect';
+import { ActionReducer, combineReducers } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import '@ngrx/core/add/operator/select';
 import { compose } from '@ngrx/core/compose';
-import { ActionReducer, combineReducers } from '@ngrx/store';
 
 import { UserProfile } from '../models/user-profile';
 import * as fromUserReducer from './user.reducer';
 import * as fromTripsReducer from './trips.reducer';
 import * as fromNotificationReducer from './notification.reducer';
+import { UpdateLoginFormNotification } from './../actions/notification.action';
 
 export interface State {
     user: fromUserReducer.State;
@@ -36,12 +37,21 @@ export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState
 
 // ============= trips list states and compose methods ======================================================
 
-export function getTripsState(state$: Observable<State>): Observable<fromTripsReducer.State> {
-    return state$.select(state => state.trips);
+export function getTripsState(state: State): fromTripsReducer.State {
+    return state.trips;
 }
 
-export const getTrips = compose(fromTripsReducer.getTrips, getTripsState);
-export const getSelectedTrip = compose(fromTripsReducer.getSelectedTrip,getTripsState);
+export const getTrips = createSelector(getTripsState, fromTripsReducer.getTrips);
+export const getTripIds = createSelector(getTripsState, fromTripsReducer.getTripIds);
+export const getSelectedTripId = createSelector(getTripsState, fromTripsReducer.getSelectedTripId);
+
+export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, ids) => {
+    return ids.map(id => trips[id]);
+});
+
+export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trips, id) => {
+    return trips[id];
+});
 
 // ============= notification list states and compose methods ========================
 
