@@ -23,9 +23,7 @@ export class UserAuthEffects {
     @Effect() 
     login$: Observable<Action> =  this.actions$
         .ofType(UserAuthActions.ActionTypes.LOGIN)
-        .switchMap(() => { 
-            console.log('login action')
-            return this.authService.signIn()})
+        .switchMap(() => this.authService.signIn())
         .filter(data => data !== null)
         .map((data) => {
             let userProfile = this.authService.getUserProfile(data);
@@ -37,23 +35,15 @@ export class UserAuthEffects {
         .ofType(UserAuthActions.ActionTypes.LOGOUT)
         .switchMap(() => this.authService.signOut())
         .filter(data => data === null)
-        .map(() => {
-            return new UserAuthActions.LogoutSuccessAction();
-        });
+        .map(() => new UserAuthActions.LogoutSuccessAction());
 
     @Effect()
     server_login$: Observable<Action> = this.actions$
         .ofType(UserAuthActions.ActionTypes.SERVER_LOGIN)
-        .switchMap((data) => { 
-            console.log("Data in server action", data.payload);
-            return this.serverAuthService.login(data.payload);
-        })
-        .filter(data => { 
-            console.log('data in filter', data);
-            return data !== null
-        })
+        .switchMap((data) => this.serverAuthService.login(data.payload))
+        .filter(data => data !== null)
         .map((data) => {
-            if (typeof(data) == 'string'){
+            if (typeof(data) === typeof('string')){
                 return new UpdateLoginFormNotification('Invalid data');
             }
             else {
@@ -69,7 +59,5 @@ export class UserAuthEffects {
     server_logout$: Observable<Action> = this.actions$
         .ofType(UserAuthActions.ActionTypes.SERVER_LOGOUT)
         .switchMap(() => this.serverAuthService.signOut())
-        .map(() => {
-            return new UserAuthActions.ServerLogoutSuccessAction();
-        });  
+        .map(() => new UserAuthActions.ServerLogoutSuccessAction());  
 } 

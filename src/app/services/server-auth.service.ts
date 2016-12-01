@@ -20,7 +20,7 @@ export class ServerAuthService {
       'Content-Type': 'application/json',
       'Authorization': auth_token
     })
-    return this.http.post(this.apiLink + '/users/show' + '.json', {}, {headers: headers})
+    return this.http.post(`${this.apiLink}/users/show.json`, {}, {headers: headers})
       .map(data => this.getServerUserProfile(data.json()))
   }
 
@@ -30,7 +30,7 @@ export class ServerAuthService {
       'Content-Type': 'application/json' 
     });
     console.log('in login method');
-    return this.http.post(this.apiLink + '/authenticate' + '.json', 
+    return this.http.post(`${this.apiLink}/authenticate.json`, 
       JSON.stringify(data), {headers: headers}
     ).map((res: Response) => {
       this.setTokenInLocalStorage(res.json())

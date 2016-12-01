@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     let values = this.signInForm.value;
     console.log('user object', values);
     // First clear the login form message
-    // this.store.dispatch(new UpdateLoginFormNotification(''));
+    this.store.dispatch(new UpdateLoginFormNotification(''));
     this.store.dispatch(new ServerLoginAction(values));
   }
 
