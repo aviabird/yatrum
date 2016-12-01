@@ -19,7 +19,14 @@
         formControlName="password">
     </div>
   </div>
-  <!-- Implement this later -->
+  <div *ngIf="(formErrorMessage$ | async)?.length > 0" class="has-error col-sm-offset-2">
+    <label>
+      {{ formErrorMessage$ | async }}
+    </label>
+  </div>
+  <!--<p> {{ formErrorMessage$ | async }}</p>
+  <p *ngIf="(formErrorMessage$ | async)?.length > 0">Invalid username password</p>
+   Implement this later -->
   <!-- <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
@@ -31,7 +38,7 @@
   </div> -->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-6">
-      <button type="submit" class="btn btn-default">Sign in</button>
+      <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
   </div>
 </form>
