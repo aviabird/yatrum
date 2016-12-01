@@ -9,12 +9,14 @@ export interface State {
     ids: string[];
     trips: { [id: string]: Trip };
     selectedTripId: string;
+    selectedCityId: string;
 }
 
 const initialState = {
     ids: [],
     trips: {},
-    selectedTripId: null
+    selectedTripId: null,
+    selectedCityId: null
 }
 
 export function reducer(state = initialState, action: Action ): State {
@@ -33,7 +35,8 @@ export function reducer(state = initialState, action: Action ): State {
             return {
                 ids: [ ...state.ids, ...newTripIds],
                 trips: Object.assign({}, state.trips, trips),
-                selectedTripId: state.selectedTripId
+                selectedTripId: state.selectedTripId,
+                selectedCityId: state.selectedCityId
             };
         }
 
@@ -41,7 +44,17 @@ export function reducer(state = initialState, action: Action ): State {
             return {
                 ids: state.ids,
                 trips: state.trips,
-                selectedTripId: action.payload
+                selectedTripId: action.payload,
+                selectedCityId: null
+            };
+        }
+
+        case ActionTypes.SELECT_CITY: {
+            return {
+                ids: state.ids,
+                trips: state.trips,
+                selectedTripId: state.selectedTripId,
+                selectedCityId: action.payload
             };
         }
 
@@ -66,3 +79,6 @@ export function getSelectedTripId(state: State) {
     return state.selectedTripId;
 }
 
+export function getSelectedCityId(state: State) {
+    return state.selectedCityId;
+}

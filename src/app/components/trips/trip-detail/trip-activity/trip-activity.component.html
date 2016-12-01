@@ -1,0 +1,36 @@
+<div [ngClass]="{hide: !(selectedCity$ | async)}">
+  <div *ngFor="let place of (selectedCity$ | async)?.places">
+    <div id="place">
+      Checked into {{place.name}}
+    </div>
+    <div *ngFor="let media of place.media">
+      <div id="media">
+        <div id="media-description">
+          {{media.description}}
+        </div>
+        <img class="photo" [src]="media.link">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{hide: selectedCity$ | async}">
+  <div *ngFor="let city of cities$ | async">
+    <div id="city">
+      Arrived at {{city.name}}, {{city.country}}
+    </div>
+    <div *ngFor="let place of city.places">
+      <div id="place">
+      Checked into {{place.name}}
+      </div>
+      <div *ngFor="let media of place.media">
+        <div id="media">
+          <div id="media-description">
+            {{media.description}}
+          </div>
+          <img class="photo" [src]="media.link">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
