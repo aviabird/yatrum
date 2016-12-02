@@ -1,3 +1,6 @@
+import { LoadTripsAction } from './../../actions/trips.action';
+import * as fromRoot from './../../reducers/index';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    
+    this.store.dispatch(new LoadTripsAction);    
   }
 
 }
