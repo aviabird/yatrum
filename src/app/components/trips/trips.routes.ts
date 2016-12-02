@@ -1,4 +1,3 @@
-import { TripsExistGuard } from './../../guards/trips-exist.guard';
 import { TripsListComponent } from './trips-list/trips-list.component';
 import { TripsComponent } from './trips.component';
 import { Routes } from '@angular/router';
