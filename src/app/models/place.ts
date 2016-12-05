@@ -1,6 +1,7 @@
+import { Base } from './base';
 import { Media } from './media';
 
-export interface Place {
+export interface Place extends Base {
     name: string; // restaurant, tourist attraction, airport, etc
     description: string;
     review: string; 

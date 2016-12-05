@@ -9,12 +9,16 @@ export interface State {
 }
 
 const initialState = {
- user_profile: {name: null,
-                email: null,
-                photoURL: null,
-                token: null
-              },
-  auth: null,
+  //TODO: Provision this dummy object creation to user_profile model
+  user_profile: { id: null,
+                  name: null,
+                  email: null,
+                  photoURL: null,
+                  token: null,
+                  created_at: null,
+                  updated_at: null
+                },
+    auth: null,
 };
 
 export function reducer(state = initialState, action: Action): State {

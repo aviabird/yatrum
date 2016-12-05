@@ -31,7 +31,7 @@ export function reducer(state = initialState, action: Action ): State {
             }, {});
 
             return {
-                ids: [ ...state.ids, ...newTripIds],
+                ids: [ ...state.ids, ...newTripIds], // equivalent to ruby flatten
                 trips: Object.assign({}, state.trips, trips),
                 selectedTripId: state.selectedTripId
             };
@@ -44,15 +44,11 @@ export function reducer(state = initialState, action: Action ): State {
                 selectedTripId: action.payload
             };
         }
-
         default: {
             return state;
         }
     }
-
 }
-
-
 
 export function getTrips(state : State) {
     return state.trips;
