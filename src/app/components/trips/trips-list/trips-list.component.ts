@@ -5,15 +5,15 @@ import { Trip } from './../../../models/trip';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'tr-trips-list',
-  templateUrl: './trips-list.component.html',
-  styleUrls: ['./trips-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'tr-trips-list',
+	templateUrl: './trips-list.component.html',
+	styleUrls: ['./trips-list.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripsListComponent {
-  trips$: Observable<Trip[]>;
+	trips$: Observable<Trip[]>;
 
-  constructor(private store: Store<fromRoot.State>) { 
-    this.trips$ = this.store.select(fromRoot.getTripsCollection);
-  }  
+	constructor(private store: Store<fromRoot.State>) { 
+		this.trips$ = this.store.select(fromRoot.getTripsCollection);
+	}  
 }
