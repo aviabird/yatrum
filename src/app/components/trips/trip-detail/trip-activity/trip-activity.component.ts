@@ -21,8 +21,7 @@ export class TripActivityComponent implements OnInit {
     this.cities$ = this.store.select(fromRoot.getCitiesFromTrip);
     this.selectedCity$ = this.store.select(fromRoot.getSelectedCity);
   }
-
+  
   ngOnInit() {
   }
-
 }
