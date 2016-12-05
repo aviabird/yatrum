@@ -4,12 +4,12 @@ import { Routes } from '@angular/router';
 import { TripDetailComponent } from './trip-detail/trip-detail.component';
 
 export const TripRoutes = [
-    { 
-      path: '', 
-      component: TripsListComponent
-    },
-    { 
-      path: ':id',
-      component: TripDetailComponent
-    }
+  { 
+    path: '', 
+    component: TripsListComponent
+  },
+  { 
+    path: ':id',
+    component: TripDetailComponent
+  }
 ]

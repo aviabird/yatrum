@@ -9,11 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
-
   constructor(private store: Store<fromRoot.State>) { }
-
   ngOnInit() {
     this.store.dispatch(new LoadTripsAction);    
   }
-
 }

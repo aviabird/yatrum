@@ -11,13 +11,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripsListComponent {
-
   trips$: Observable<Trip[]>;
 
   constructor(private store: Store<fromRoot.State>) { 
-
     this.trips$ = this.store.select(fromRoot.getTripsCollection);
-
-  }
-  
+  }  
 }

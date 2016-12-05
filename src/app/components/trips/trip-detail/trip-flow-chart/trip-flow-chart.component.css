@@ -36,14 +36,14 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
-    border: 2px solid #4C868F;
-    text-align: center;
+  border: 2px solid #4C868F;
+  text-align: center;
 	background: white;
 }
 
 
 .square {
-    text-align: center;
+  text-align: center;
 	width: 100px;
-    border: 2px solid #4C868F;
+  border: 2px solid #4C868F;
 }
