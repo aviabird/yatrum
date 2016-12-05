@@ -15,13 +15,13 @@
 }
 
 #city, #place {
-    background: #00CC99;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    font-size: 40px;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+  background: #00CC99;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 40px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }

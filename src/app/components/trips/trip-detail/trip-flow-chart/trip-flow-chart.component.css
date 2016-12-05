@@ -11,6 +11,7 @@
 	border: 1px solid #4C868F;
 	width: 60px;
 	height: 2px;
+	z-index: -1;
 }
 
 #circle-arrow {
@@ -21,11 +22,12 @@
 }
 
 #vertical-bar {
-	height: 440px;
+	height: 100%;
 	border-left: 2px solid #4C868F;
 	position: absolute;
 	left: 59%;
 	transform: translate(10%);
+	z-index: -1;
 }
 
 .circle {
@@ -34,13 +36,14 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
-    border: 2px solid #4C868F;
-    text-align: center;
+	border: 2px solid #4C868F;
+	text-align: center;
+	background: white;
 }
 
 
 .square {
-    text-align: center;
+	text-align: center;
 	width: 100px;
-    border: 2px solid #4C868F;
+	border: 2px solid #4C868F;
 }
