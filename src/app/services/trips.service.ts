@@ -1,155 +1,30 @@
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../models/trip';
+import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TripsService {
-
-  trips: Trip[];
-  constructor() { 
-    this.trips = [
-      {
-        id: "1",
-        created_at: '',
-        updated_at: '',
-        startDate: new Date("12-03-2016").toDateString(),
-        endDate: new Date("12-12-2016").toDateString(),
-        description: "Las Vegas Trip",
-        status: "ongoing", // A validation for inclusion
-        cities: [
-          { id: '',
-            name: "Pune",
-            country: "India",
-            created_at: '',
-            updated_at: '',
-            places: [
-              { id: '',
-                name: "Aga Khan palace", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place", 
-                created_at: '',
-                updated_at: '',
-                media: [
-                  {
-                    id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: ''
-                   }
-                ]
-               }
-            ]
-          }
-        ]
-      },
-      {
-        id: "2",
-        startDate: new Date("01-26-2016").toDateString(),
-        endDate: new Date("02-04-2016").toDateString(),
-        description: "Dubai Trip",
-        status: "completed",
-        created_at: '',
-        updated_at: '',
-        cities: [
-          { id: '',
-            name: "Pune",
-            country: "India",
-            created_at: '',
-            updated_at: '',
-            places: [
-              { id: '',
-                name: "Koregaon park", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place",
-                created_at: '',
-                updated_at: '', 
-                media: [
-                  { id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: '',
-                   }
-                ]
-               },
-              { id: '',
-                name: "Koregaon park", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place",
-                created_at: '',
-                updated_at: '', 
-                media: [
-                  { id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: '',
-                   }
-                ]
-               },
-              { id: '',
-                name: "Koregaon park", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place",
-                created_at: '',
-                updated_at: '', 
-                media: [
-                  { id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: '',
-                   }
-                ]
-               }
-            ]
-          },
-          { id: '',
-            name: "Dubai",
-            country: "UAE",
-            created_at: '',
-            updated_at: '',
-            places: [
-              { id: '',
-                name: "Burj Khalifa", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place",
-                created_at: '',
-                updated_at: '', 
-                media: [
-                  { id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: '',
-                   }
-                ]
-               },
-              { id: '',
-                name: "Burj Khalifa", // restaurant, tourist attraction, airport, etc
-                description: "Very nice place",
-                review: "Very nice place",
-                created_at: '',
-                updated_at: '', 
-                media: [
-                  { id: '',
-                    link: "http://lorempixel.com/400/200",
-                    description: "Had so much fun here",
-                    created_at: '',
-                    updated_at: '',
-                   }
-                ]
-               }
-            ]
-          }
-        ]
-      }
-    ]
+  private trips: Trip[] = [];
+  private auth_token: string;
+  private apiLink:string = "http://localhost:3000";
+  // trips: Trip[];
+  constructor(private http: Http) {
+    //TODO: Move this out at a later stage for logged in user
+    let user_data = JSON.parse(localStorage.getItem('user'));
+    if (user_data) {
+      this.auth_token = user_data.auth_token;
+    }
   }
 
-  getTrips(): Observable<Trip[]>{
-    return Observable.of(this.trips);
+  getTrips(): Observable<any>{
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.auth_token
+    })
+    //TODO: Headers not required for this route
+    return this.http.get(`${this.apiLink}/trips.json`, {headers: headers})
+      .map((data) => data.json())
   }
 
 }

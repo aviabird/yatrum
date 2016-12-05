@@ -30,6 +30,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
+import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
+import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
 
 const firebaseConfig = {
@@ -52,6 +54,8 @@ const myFirebaseAuthConfig = {
     TripsComponent,
     TripDetailComponent,
     TripsListComponent,
+    TripFlowChartComponent,
+    TripActivityComponent,
     LoginComponent
   ],
   imports: [

@@ -1,0 +1,27 @@
+.photo {
+  width: 100%;
+  max-height: 80%;
+}
+
+#media {
+  background: #DDE0E4;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#media-description {
+  font-size: 20px;
+  background-color:#00CC99; 
+}
+
+#city, #place {
+    background: #00CC99;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 40px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
