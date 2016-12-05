@@ -55,6 +55,7 @@ export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trip
 });
 
 export const getCitiesFromTrip = createSelector(getSelectedTrip, (trip) => {
+	// use resolve guard to check if trips are loaded or not
 	if(trip)
 		return trip.cities;
 	else

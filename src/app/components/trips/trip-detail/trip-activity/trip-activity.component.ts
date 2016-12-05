@@ -12,13 +12,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-activity.component.css']
 })
 export class TripActivityComponent implements OnInit {
-  selectedTrip$: Observable<Trip>;
   selectedCity$: Observable<City>;
   cities$: Observable<City[]>;
   trips$: Observable<any>;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.trips$ = this.store.select(fromRoot.getTripsCollection);
     this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
     this.cities$ = this.store.select(fromRoot.getCitiesFromTrip);
     this.selectedCity$ = this.store.select(fromRoot.getSelectedCity);
