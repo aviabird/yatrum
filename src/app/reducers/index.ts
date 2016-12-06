@@ -13,7 +13,6 @@ import { UpdateLoginFormNotification } from './../actions/notification.action';
 export interface State {
 	user: fromUserReducer.State;
 	trips: fromTripsReducer.State;
-	travelers: any;
 	notifications: fromNotificationReducer.State;
 } 
 
