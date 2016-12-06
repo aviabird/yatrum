@@ -8,13 +8,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-// import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
 
 // Services 
 import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
-
 
 // Effects
 import { TripsEffects } from './effects/trips.effects';
@@ -34,6 +32,7 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
 import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -57,7 +56,8 @@ const myFirebaseAuthConfig = {
     TripsListComponent,
     TripFlowChartComponent,
     TripActivityComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

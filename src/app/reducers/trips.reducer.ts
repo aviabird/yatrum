@@ -50,12 +50,13 @@ export function reducer(state = initialState, action: Action ): State {
         }
 
         case ActionTypes.SELECT_CITY: {
-            return {
-                ids: state.ids,
-                trips: state.trips,
-                selectedTripId: state.selectedTripId,
-                selectedCityId: action.payload
-            };
+            return Object.assign({}, state, {getSelectedCityId: action.payload})
+            // return {
+            //     ids: state.ids,
+            //     trips: state.trips,
+            //     selectedTripId: state.selectedTripId,
+            //     selectedCityId: action.payload
+            // };
         }
         default: {
             return state;

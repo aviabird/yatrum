@@ -42,7 +42,22 @@ export class ServerAuthService {
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
 
+  /**
+   * signUp method
+   */
+  signUp(data) {
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    console.log('in signup method');
+    return this.http.post(`${this.apiLink}/users/create.json`,
+      JSON.stringify(data), {headers: headers})
+        .map((resp: Response) => resp.json())
+        .catch(this.catchError);
+  }
+
   catchError(response: Response) {
+      console.log('in catch error method');
       // not returning throw as it raises an error on the parent observable 
       // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
       return Observable.of('server error');
