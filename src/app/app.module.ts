@@ -15,6 +15,8 @@ import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
 
+// Guards
+import { TripsResolveGuard } from './guards/trips-resolve.guard';
 
 // Effects
 import { TripsEffects } from './effects/trips.effects';
@@ -72,7 +74,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
