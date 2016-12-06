@@ -14,7 +14,7 @@ export class TripsResolveGuard implements Resolve<any>{
 	constructor(private store: Store<fromRoot.State>, private router: Router, private tripsService: TripsService) {
 	}
 
-  resolve(route: ActivatedRouteSnapshot) {		
+  resolve(route: ActivatedRouteSnapshot): boolean {		
   	let tripIndex = route.params['id'];
 		return this.tripsService.getTrip(tripIndex);
   }

@@ -3,7 +3,7 @@ import * as fromRoot from './../reducers/index';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../models/trip';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -22,7 +22,29 @@ export class TripsService {
 
   getTrip(id: string) {
 		this.store.dispatch(new fromTripActions.SelectTripAction(id));
-    
+		console.log("get Trip method");
+
+		this.store.select(fromRoot.getSelectedTripId)
+			.filter((data) => data!= null)
+			.map((data) => {
+				let trip$ = this.store.select(fromRoot.getSelectedTrip);
+				trip$.subscribe(data => {
+					console.log('data present is', data);
+					if (typeof(data) !== typeof({})) {
+						console.log('we are fetching data');
+						this.http.get(`${this.apiLink}/trips/${id}.json`)
+							.subscribe(data => {
+								console.log('calling api');
+								this.store.dispatch(new fromTripActions.TripsLoadedAction(data.json()));
+							})
+						return Observable.of(true);
+					} else{
+						return Observable.of(true);
+					}
+				})	
+			});
+
+			return true;
   }
 
   getTrips(): Observable<any>{
@@ -32,7 +54,7 @@ export class TripsService {
     })
     //TODO: Headers not required for this route
     return this.http.get(`${this.apiLink}/trips.json`, {headers: headers})
-      .map((data) => data.json())
+      .map((data: Response) => data.json())
   }
 
 }
