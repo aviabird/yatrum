@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class TripActivityComponent implements OnInit {
   selectedCity$: Observable<City>;
   cities$: Observable<City[]>;
-  trips$: Observable<any>;
+  selectedTrip$: Observable<any>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
