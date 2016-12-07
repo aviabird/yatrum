@@ -20,12 +20,6 @@ export class TripsService {
     }
   }
 
-	loadTripApi(id: string) {
-		return this.http.get(`${this.apiLink}/trips/${id}.json`)
-			.map(data => data.json())
-			.toPromise();
-	}
-
   getTrip(id: string): boolean {
 		this.store.dispatch(new fromTripActions.SelectTripAction(id));
 
