@@ -48,12 +48,7 @@ export class TripsService {
   }
 
   getTrips(): Observable<any>{
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': this.auth_token
-    })
-    //TODO: Headers not required for this route
-    return this.http.get(`${this.apiLink}/trips.json`, {headers: headers})
+    return this.http.get(`${this.apiLink}/trips.json`)
       .map((data: Response) => data.json())
   }
 
