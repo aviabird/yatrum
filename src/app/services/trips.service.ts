@@ -20,29 +20,35 @@ export class TripsService {
     }
   }
 
-  getTrip(id: string) {
-		this.store.dispatch(new fromTripActions.SelectTripAction(id));
-		console.log("get Trip method");
+	loadTripApi(id: string) {
+		return this.http.get(`${this.apiLink}/trips/${id}.json`)
+			.map(data => data.json())
+			.toPromise();
+	}
 
-		this.store.select(fromRoot.getSelectedTripId)
-			.filter((data) => data!= null)
-			.map((data) => {
-				let trip$ = this.store.select(fromRoot.getSelectedTrip);
-				trip$.subscribe(data => {
-					console.log('data present is', data);
-					if (typeof(data) !== typeof({})) {
-						console.log('we are fetching data');
-						this.http.get(`${this.apiLink}/trips/${id}.json`)
-							.subscribe(data => {
-								console.log('calling api');
-								this.store.dispatch(new fromTripActions.TripsLoadedAction(data.json()));
-							})
-						return Observable.of(true);
-					} else{
-						return Observable.of(true);
-					}
-				})	
-			});
+  getTrip(id: string): boolean {
+		this.store.dispatch(new fromTripActions.SelectTripAction(id));
+
+		// TODO: first fetch trip from store, if trip is not found, then make an
+		// backend api request and store it, then resolve this request.
+		// Pivotal tracker link: https://www.pivotaltracker.com/story/show/135508621
+		
+		// this.store.select(fromRoot.getSelectedTripId)
+		// 	.filter((data) => data!= null)
+		// 	.map((data) => {
+		// 		let trip$ = this.store.select(fromRoot.getSelectedTrip);
+		// 		trip$.subscribe(data => {
+		// 			if (typeof(data) !== typeof({})) {
+		// 				console.log("before");
+		// 				this.loadTripApi(id)
+		// 					.then(data => {
+		// 						console.log("inside");
+		// 						this.store.dispatch(new fromTripActions.TripsLoadedAction(data));
+		// 					})
+		// 				console.log("after");	
+		// 			}
+		// 		})	
+		// 	}).subscribe();
 
 			return true;
   }
