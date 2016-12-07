@@ -47,9 +47,16 @@ export class TripsService {
 			return true;
   }
 
-  getTrips(): Observable<any>{
+  getTrips(): Observable<Trip[]> {
     return this.http.get(`${this.apiLink}/trips.json`)
       .map((data: Response) => data.json())
   }
+
+	getUserTrips(id: string): Observable<Trip[]> {
+		return this.http.get(`${this.apiLink}/${id}/trips.json`)
+			.map((data: Response) => data.json())
+
+	}
+
 
 }

@@ -6,7 +6,9 @@ export const ActionTypes = {
 	LOAD_TRIPS: "Load [Trips]",
 	LOAD_TRIPS_SUCCESS: "Load [Trips] Success",
 	SELECT_TRIP: "Select [Trip]",
-	SELECT_CITY: "Select [City] from [Trip]"
+	SELECT_CITY: "Select [City] from [Trip]",
+	LOAD_USER_TRIPS: "Load [User Trips]",
+	LOAD_USER_TRIPS_SUCCESS: "Load [User Trips] Success"
 }
 
 
@@ -28,4 +30,14 @@ export class SelectTripAction {
 export class SelectCityFromTripAction {
 	type = ActionTypes.SELECT_CITY;
 	constructor(public payload: string) {}
+}
+
+export class LoadUserTripsAction {
+	type = ActionTypes.LOAD_USER_TRIPS
+	constructor(public payload: string) {}
+}
+
+export class UserTripsLoadedAction {
+	type = ActionTypes.LOAD_USER_TRIPS_SUCCESS;
+	constructor(public payload: Trip[]) {}
 }
