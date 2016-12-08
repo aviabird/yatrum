@@ -36,9 +36,9 @@ export function reducer(state = initialState, action: Action): State {
 			const	newTrips = Trips.filter(trip => !state.userTrips[userId][trip.id]);
 			const newTripIds = newTrips.map(trip => trip.id);
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
-				return Object.assign(trips, {
-					[trip.id]: trip
-				});
+			return Object.assign(trips, {
+				[trip.id]: trip
+			});
 			}, {});
 
 			return Object.assign({},state, {
