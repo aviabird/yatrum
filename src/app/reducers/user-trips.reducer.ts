@@ -16,8 +16,10 @@ const initialState = {
 
 export function reducer(state = initialState, action: Action): State {
 	switch(action.type) {
-	
 		case ActionTypes.LOAD_USER_TRIPS: {
+			if(state.userTrips[action.payload]) {
+				return Object.assign({},state,{selectedUserId: action.payload});
+			}
 			return Object.assign({},state,{
 				selectedUserId: action.payload,
 				userTrips: {
@@ -49,9 +51,8 @@ export function reducer(state = initialState, action: Action): State {
 					}
 				}
 			})
-
 		}
-
+		
 		default: {
 			return state;
 		}
