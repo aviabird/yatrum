@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs/Rx';
   templateUrl: './traveller-profile.component.html',
   styleUrls: ['./traveller-profile.component.css']
 })
-export class TravellerProfileComponent implements OnInit {
+export class TravellerProfileComponent {
 
   private subscription: Subscription;
   private userIndex: string;

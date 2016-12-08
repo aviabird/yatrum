@@ -1,54 +1,72 @@
+import { TripsState } from './trips-state';
 import { ActionTypes } from './../actions/trips.action';
 import { Action } from '@ngrx/store';
 import { Trip } from './../models/trip';
 
 export interface State {
 	selectedUserId: string;
-	userTrips: { [id: string]: Trip[] };
+	userTrips: { [id: string]: TripsState };
 }
 
 const initialState = {
 	selectedUserId: null,
 	userTrips: {}
+
 }
 
-export function reducer(state = initialState, action: Action) {
+export function reducer(state = initialState, action: Action): State {
 	switch(action.type) {
 	
 		case ActionTypes.LOAD_USER_TRIPS: {
 			return Object.assign({},state,{
-				selectedUserId: action.payload
+				selectedUserId: action.payload,
+				userTrips: {
+					[action.payload]: {
+						ids: [],
+						trips: {}
+					}
+				}
 			})
 		}
 	
 		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
-			const trips = action.payload;
+			const Trips = action.payload;
 			const userId = state.selectedUserId;
-			let newTrips = null;
-			let userNewTrips = null;
+			const	newTrips = Trips.filter(trip => !state.userTrips[userId][trip.id]);
+			const newTripIds = newTrips.map(trip => trip.id);
+			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+					return Object.assign(trips, {
+							[trip.id]: trip
+					});
+			}, {});
 
-			if(state.userTrips[userId]) {
-				newTrips = trips.filter(trip => state.userTrips[userId]);
-				userNewTrips = { [userId]: [...state.userTrips[userId], ...newTrips] } 
-			}
-			else {
-				newTrips = trips;
-				userNewTrips = { [userId]: newTrips }
-			}
 
-			return Object.assign({},state,{
-				userTrips: userNewTrips
+			return Object.assign({},state, {
+				userTrips: {
+					[state.selectedUserId]: {
+						ids: [...state.userTrips[userId].ids, ...newTripIds],
+						trips: Object.assign({},state.userTrips[userId].trips,trips)
+					}
+				}
 			})
 
-
 		}
+
+		default: {
+			return state;
+		}
+
 	}
 }
 
 
 
 export function getUserTrips(state: State) {
-	return state.userTrips;
+	return state.userTrips[state.selectedUserId].trips;
+}
+
+export function getUserTripIds(state: State) {
+	return state.userTrips[state.selectedUserId].ids;
 }
 
 export function getSelectedUserId(state: State) {

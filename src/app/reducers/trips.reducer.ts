@@ -1,3 +1,4 @@
+import { TripsState } from './trips-state';
 import { createSelector } from 'reselect';
 import { Observable } from 'rxjs/Observable';
 import { ActionTypes } from './../actions/trips.action';
@@ -6,15 +7,16 @@ import { Trip } from './../models/trip';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
 export interface State {
-    ids: string[];
-    trips: { [id: string]: Trip };
+    trips: TripsState;
     selectedTripId: string;
     selectedCityId: string;
 }
 
 const initialState = {
-    ids: [],
-    trips: {},
+    trips: {
+    	ids: [],
+    	trips: {},
+    },
     selectedTripId: null,
     selectedCityId: null
 }
@@ -33,8 +35,10 @@ export function reducer(state = initialState, action: Action ): State {
             }, {});
 
             return {
-                ids: [ ...state.ids, ...newTripIds], // equivalent to ruby flatten
-                trips: Object.assign({}, state.trips, trips),
+								trips: {
+                	ids: [ ...state.trips.ids, ...newTripIds], // equivalent to ruby flatten
+                	trips: Object.assign({}, state.trips.trips, trips)
+								},
                 selectedTripId: state.selectedTripId,
                 selectedCityId: state.selectedCityId
             };
@@ -42,8 +46,10 @@ export function reducer(state = initialState, action: Action ): State {
 
         case ActionTypes.SELECT_TRIP: {
             return {
-                ids: state.ids,
-                trips: state.trips,
+								trips: {
+                	ids: state.trips.ids,
+                	trips: state.trips.trips
+								},
                 selectedTripId: action.payload,
                 selectedCityId: null
             };
@@ -51,8 +57,10 @@ export function reducer(state = initialState, action: Action ): State {
 
         case ActionTypes.SELECT_CITY: {
             return {
-                ids: state.ids,
-                trips: state.trips,
+								trips: {
+                	ids: state.trips.ids,
+                	trips: state.trips.trips
+								},
                 selectedTripId: state.selectedTripId,
                 selectedCityId: action.payload
             };
@@ -64,11 +72,11 @@ export function reducer(state = initialState, action: Action ): State {
 }
 
 export function getTrips(state : State) {
-    return state.trips;
+    return state.trips.trips;
 } 
 
 export function getTripIds(state: State) {
-    return state.ids;
+    return state.trips.ids;
 }
 
 export function getSelectedTripId(state: State) {

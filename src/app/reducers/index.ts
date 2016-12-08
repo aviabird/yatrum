@@ -74,11 +74,12 @@ export function getUserTripsState(state: State): fromUserTripsReducer.State  {
 	return state.userTrips;
 }
 
-export const getUserTripsObject = createSelector(getUserTripsState, fromUserTripsReducer.getUserTrips);
+export const getUserTrips = createSelector(getUserTripsState, fromUserTripsReducer.getUserTrips);
+export const getUserTripIds = createSelector(getUserTripsState, fromUserTripsReducer.getUserTripIds);
 export const getSelectedUserId = createSelector(getUserTripsState, fromUserTripsReducer.getSelectedUserId);
 
-export const getUserTripsCollection = createSelector(getUserTripsObject, getSelectedUserId, (userTripsObject, userId) => {
-	return userTripsObject[userId];
+export const getUserTripsCollection = createSelector(getUserTrips, getUserTripIds, (userTrips, userTripIds) => {
+	return userTripIds.map(id => userTrips[id]);
 })
 
 
