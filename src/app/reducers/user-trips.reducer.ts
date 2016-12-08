@@ -22,7 +22,7 @@ export function reducer(state = initialState, action: Action): State {
 			}
 			return Object.assign({},state,{
 				selectedUserId: action.payload,
-				userTrips: {
+				userTrips: { 
 					[action.payload]: {
 						ids: [],
 						trips: {}
@@ -30,18 +30,16 @@ export function reducer(state = initialState, action: Action): State {
 				}
 			})
 		}
-	
 		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
 			const Trips = action.payload;
 			const userId = state.selectedUserId;
 			const	newTrips = Trips.filter(trip => !state.userTrips[userId][trip.id]);
 			const newTripIds = newTrips.map(trip => trip.id);
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
-					return Object.assign(trips, {
-							[trip.id]: trip
-					});
+				return Object.assign(trips, {
+					[trip.id]: trip
+				});
 			}, {});
-
 
 			return Object.assign({},state, {
 				userTrips: {
@@ -51,12 +49,10 @@ export function reducer(state = initialState, action: Action): State {
 					}
 				}
 			})
-		}
-		
+		}		
 		default: {
 			return state;
 		}
-
 	}
 }
 

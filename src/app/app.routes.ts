@@ -8,12 +8,12 @@ import { TripsComponent } from './components/trips/trips.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'trips', pathMatch: 'full' },
-    { path: 'trips', component: TripsComponent, children: TripRoutes },
-    { 
-    	path: 'user/:id',
-      component: TravellerProfileComponent
-		},
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'login', component: LoginComponent }
+	{ path: '', redirectTo: 'trips', pathMatch: 'full' },
+	{ path: 'trips', component: TripsComponent, children: TripRoutes },
+	{ 
+		path: 'user/:id',
+		component: TravellerProfileComponent
+	},
+	{ path: 'dashboard', component: DashboardComponent },
+	{ path: 'login', component: LoginComponent }
 ];
