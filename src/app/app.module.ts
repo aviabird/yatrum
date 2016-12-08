@@ -1,4 +1,3 @@
-import { TravellerProfileGuard } from './guards/traveller-profile.guard';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -77,7 +76,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, TravellerProfileGuard],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

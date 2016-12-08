@@ -1,4 +1,3 @@
-import { TravellerProfileGuard } from './guards/traveller-profile.guard';
 import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RouterModule, Routes } from "@angular/router";
@@ -14,9 +13,6 @@ export const routes: Routes = [
     { 
     	path: 'user/:id',
       component: TravellerProfileComponent
-			// resolve: {
-			// 	currentUser: TravellerProfileGuard
-			// } 
 		},
     { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent }
