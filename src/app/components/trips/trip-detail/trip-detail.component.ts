@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Observable';
+import * as fromRoot from './../../../reducers/index';
+import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 
 
@@ -8,6 +11,12 @@ import { Component } from '@angular/core';
 })
 export class TripDetailComponent {
 
-  constructor() {}
+  userId$: Observable<string>;
+  userName$: Observable<string>;
+
+  constructor(private store: Store<fromRoot.State>) {
+    this.userId$ = this.store.select(fromRoot.getTripUserId);
+    this.userName$ = this.store.select(fromRoot.getTripUserName);
+  }
 
 }

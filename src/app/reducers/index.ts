@@ -5,6 +5,7 @@ import '@ngrx/core/add/operator/select';
 import { compose } from '@ngrx/core/compose';
 
 import { UserProfile } from '../models/user-profile';
+import * as fromUserTripsReducer from './user-trips.reducer';
 import * as fromUserReducer from './user.reducer';
 import * as fromTripsReducer from './trips.reducer';
 import * as fromNotificationReducer from './notification.reducer';
@@ -12,12 +13,14 @@ import { UpdateLoginFormNotification } from './../actions/notification.action';
 
 export interface State {
 	user: fromUserReducer.State;
+	userTrips: fromUserTripsReducer.State;
 	trips: fromTripsReducer.State;
 	notifications: fromNotificationReducer.State;
 } 
 
 const reducers = {
 	user: fromUserReducer.reducer,
+	userTrips: fromUserTripsReducer.reducer,
 	trips: fromTripsReducer.reducer,
 	notifications: fromNotificationReducer.reducer
 }
@@ -61,7 +64,30 @@ export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCity
   return cities.filter(city => city.id == cityId)[0];
 });
 
-// ============= notification list states and compose methods ========================
+export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
+	return trip.user_id;
+})
+
+export const getTripUserName = createSelector(getSelectedTrip, (trip) => {
+	return trip.traveller_name;
+})
+
+// ============= User Trip list States and compose methods ==================================================
+
+export function getUserTripsState(state: State): fromUserTripsReducer.State  {
+	return state.userTrips;
+}
+
+export const getUserTrips = createSelector(getUserTripsState, fromUserTripsReducer.getUserTrips);
+export const getUserTripIds = createSelector(getUserTripsState, fromUserTripsReducer.getUserTripIds);
+export const getSelectedUserId = createSelector(getUserTripsState, fromUserTripsReducer.getSelectedUserId);
+
+export const getUserTripsCollection = createSelector(getUserTrips, getUserTripIds, (userTrips, userTripIds) => {
+	return userTripIds.map(id => userTrips[id]);
+})
+
+
+// ============= notification list states and compose methods ===============================================
 
 export function getNotificationState(state$: Observable<State>): Observable<fromNotificationReducer.State> {
   return state$.select(state => state.notifications);

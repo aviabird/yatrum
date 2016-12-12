@@ -16,4 +16,13 @@ export class TripsEffects {
     .map((data) => {
       return new TripsActions.TripsLoadedAction(data);
     })
+
+  @Effect()
+  UserTrips$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS)
+    .switchMap((action: Action) => this.tripsService.getUserTrips(action.payload))
+    .map((data) => {
+      return new TripsActions.UserTripsLoadedAction(data);
+    })
+
 }

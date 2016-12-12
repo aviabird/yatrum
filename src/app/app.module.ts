@@ -36,6 +36,7 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
 import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -59,7 +60,8 @@ const myFirebaseAuthConfig = {
     TripsListComponent,
     TripFlowChartComponent,
     TripActivityComponent,
-    LoginComponent
+    LoginComponent,
+    TravellerProfileComponent
   ],
   imports: [
     BrowserModule,
