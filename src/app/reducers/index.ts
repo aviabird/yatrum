@@ -36,6 +36,19 @@ export function getUserState(state$: Observable<State>): Observable<fromUserRedu
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);
 export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState);
 
+// ============= User Trip list States and compose methods ==================================================
+
+export function getUserTripsState(state: State): fromUserTripsReducer.State  {
+	return state.userTrips;
+}
+
+export const getUserTrips = createSelector(getUserTripsState, fromUserTripsReducer.getUserTrips);
+export const getUserTripIds = createSelector(getUserTripsState, fromUserTripsReducer.getUserTripIds);
+export const getSelectedUserId = createSelector(getUserTripsState, fromUserTripsReducer.getSelectedUserId);
+
+export const getUserTripsCollection = createSelector(getUserTrips, getUserTripIds, (userTrips, userTripIds) => {
+	return userTripIds.map(id => userTrips[id]);
+})
 
 // ============= trips list states and compose methods ======================================================
 
@@ -52,8 +65,12 @@ export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, i
   return ids.map(id => trips[id]);
 });
 
-export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trips, id) => {
-  return trips[id];
+
+// Since we have to select a trip, either from dashboard trips or from user trips, so first we
+// are merging all trips, and then we can select a particular trip.
+export const getSelectedTrip = createSelector(getTrips, getUserTrips, getSelectedTripId, (trips, userTrips, id) => {
+	const allTrips = Object.assign({},trips,userTrips);
+	return allTrips[id];
 });
 
 export const getCitiesFromTrip = createSelector(getSelectedTrip, (trip) => {
@@ -71,21 +88,6 @@ export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
 export const getTripUserName = createSelector(getSelectedTrip, (trip) => {
 	return trip.traveller_name;
 })
-
-// ============= User Trip list States and compose methods ==================================================
-
-export function getUserTripsState(state: State): fromUserTripsReducer.State  {
-	return state.userTrips;
-}
-
-export const getUserTrips = createSelector(getUserTripsState, fromUserTripsReducer.getUserTrips);
-export const getUserTripIds = createSelector(getUserTripsState, fromUserTripsReducer.getUserTripIds);
-export const getSelectedUserId = createSelector(getUserTripsState, fromUserTripsReducer.getSelectedUserId);
-
-export const getUserTripsCollection = createSelector(getUserTrips, getUserTripIds, (userTrips, userTripIds) => {
-	return userTripIds.map(id => userTrips[id]);
-})
-
 
 // ============= notification list states and compose methods ===============================================
 
