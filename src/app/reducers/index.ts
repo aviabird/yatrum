@@ -68,6 +68,10 @@ export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
 	return trip.user_id;
 })
 
+export const getTripUserName = createSelector(getSelectedTrip, (trip) => {
+	return trip.traveller_name;
+})
+
 // ============= User Trip list States and compose methods ==================================================
 
 export function getUserTripsState(state: State): fromUserTripsReducer.State  {

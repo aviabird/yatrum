@@ -1,5 +1,5 @@
-<div [routerLink]="['/user',(userId$ | async)]">
-  Go To User Profile
+<div [routerLink]="['/user',(userId$ | async)]" id="to-profile">
+  <button type="button" class="btn btn-primary">{{userName$ | async}}</button>
 </div>
 
 <div class="col-md-5 border-custom">

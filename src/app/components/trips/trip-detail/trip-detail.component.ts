@@ -12,9 +12,11 @@ import { Component } from '@angular/core';
 export class TripDetailComponent {
 
   userId$: Observable<string>;
+  userName$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.userId$ = this.store.select(fromRoot.getTripUserId);
+    this.userName$ = this.store.select(fromRoot.getTripUserName);
   }
 
 }
