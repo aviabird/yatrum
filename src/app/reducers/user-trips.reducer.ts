@@ -59,7 +59,10 @@ export function reducer(state = initialState, action: Action): State {
 
 
 export function getUserTrips(state: State) {
-	return state.userTrips[state.selectedUserId].trips;
+	if(state.selectedUserId)
+		return state.userTrips[state.selectedUserId].trips;
+	else
+		return {};
 }
 
 export function getUserTripIds(state: State) {
