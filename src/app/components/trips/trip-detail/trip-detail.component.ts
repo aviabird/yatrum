@@ -1,9 +1,7 @@
+import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
-import * as fromTripActions from './../../../actions/trips.action';
-import { Subscription } from 'rxjs/Rx';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -11,21 +9,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './trip-detail.component.html',
   styleUrls: ['./trip-detail.component.css'], 
 })
-export class TripDetailComponent implements OnInit {
-  private subscription: Subscription;
-  tripIndex: string;
+export class TripDetailComponent {
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private store: Store<fromRoot.State>) { }
+  userId$: Observable<string>;
+  userName$: Observable<string>;
 
-  ngOnInit() {
-    this.subscription = this.activatedRoute.params.subscribe(
-      (params) => {
-        this.tripIndex = params['id'];
-        this.store.dispatch(new fromTripActions.SelectTripAction(this.tripIndex))     
-      }
-    )
+  constructor(private store: Store<fromRoot.State>) {
+    this.userId$ = this.store.select(fromRoot.getTripUserId);
+    this.userName$ = this.store.select(fromRoot.getTripUserName);
   }
 
 }

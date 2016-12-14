@@ -12,9 +12,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-activity.component.css']
 })
 export class TripActivityComponent implements OnInit {
-  selectedTrip$: Observable<Trip>;
   selectedCity$: Observable<City>;
   cities$: Observable<City[]>;
+  selectedTrip$: Observable<any>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);

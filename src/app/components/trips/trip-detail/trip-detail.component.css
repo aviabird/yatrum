@@ -1,3 +1,9 @@
 .border-custom {
 	border: 1px solid #4C868F !important;
 }
+
+#to-profile {
+	height: 50px;
+	border: 1px solid #4C868F !important;
+	margin-bottom: 20px;
+}

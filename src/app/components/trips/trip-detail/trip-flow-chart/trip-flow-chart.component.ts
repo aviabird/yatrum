@@ -22,7 +22,6 @@ export class TripFlowChartComponent {
   showCityActivity(id: string) {
     this.store.dispatch(new SelectCityFromTripAction(id));
   }
-
 }
 
 

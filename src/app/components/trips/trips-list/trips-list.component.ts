@@ -1,3 +1,4 @@
+import { LoadTripsAction } from './../../../actions/trips.action';
 import * as fromRoot from './../../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -14,6 +15,7 @@ export class TripsListComponent {
 	trips$: Observable<Trip[]>;
 
 	constructor(private store: Store<fromRoot.State>) { 
+		this.store.dispatch(new LoadTripsAction);
 		this.trips$ = this.store.select(fromRoot.getTripsCollection);
 	}  
 }

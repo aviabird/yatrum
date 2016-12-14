@@ -1,3 +1,7 @@
+<div [routerLink]="['/user',(userId$ | async)]" id="to-profile">
+  <button type="button" class="btn btn-primary">{{userName$ | async}}</button>
+</div>
+
 <div class="col-md-5 border-custom">
   <tr-trip-flow-chart></tr-trip-flow-chart>
 </div>

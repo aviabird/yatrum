@@ -15,6 +15,9 @@ import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
 
+// Guards
+import { TripsResolveGuard } from './guards/trips-resolve.guard';
+
 // Effects
 import { TripsEffects } from './effects/trips.effects';
 import { UserAuthEffects } from './effects/user-auth.effect';
@@ -34,6 +37,7 @@ import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -59,6 +63,7 @@ const myFirebaseAuthConfig = {
     TripActivityComponent,
     LoginComponent,
     SignupComponent
+    TravellerProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
