@@ -30,6 +30,7 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "firebase": "^3.6.1",
+    "ng2-validation": "^3.0.1",
     "reselect": "^2.5.4",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",

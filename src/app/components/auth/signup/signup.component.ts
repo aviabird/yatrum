@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
+import { passwordValidator } from '../../../shared/validators/password.validator';
 import * as fromRoot from '../../../reducers';
 
 @Component({
@@ -38,15 +40,13 @@ export class SignupComponent implements OnInit {
 
     this.signUpForm = this.fb.group({
       name: [name, Validators.required],
-      email: [email, Validators.required],
+      email: [email, [Validators.required ]],
       password: [password, Validators.required],
-      password_confirmation: [password_confirmation, Validators.required]
-    })
+      password_confirmation: [password_confirmation, [Validators.required]]
+    }, { validator: passwordValidator })
   }
 
   onSubmit() {
-    console.log('in on submit method', this.signUpForm.value);
-    // this.store.dispatch(new ServerSignUpAction(this.signUpForm.value));
     this.authService.signUp({user: this.signUpForm.value}).subscribe(data => {
        this.router.navigateByUrl('/login');
     }, error => {
