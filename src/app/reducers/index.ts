@@ -9,6 +9,7 @@ import * as fromUserTripsReducer from './user-trips.reducer';
 import * as fromUserReducer from './user.reducer';
 import * as fromTripsReducer from './trips.reducer';
 import * as fromNotificationReducer from './notification.reducer';
+import * as fromInstagramReducer from './instagram.reducers';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
 
 export interface State {
@@ -16,13 +17,15 @@ export interface State {
 	userTrips: fromUserTripsReducer.State;
 	trips: fromTripsReducer.State;
 	notifications: fromNotificationReducer.State;
+	instagramMedia: fromInstagramReducer.State;
 } 
 
 const reducers = {
 	user: fromUserReducer.reducer,
 	userTrips: fromUserTripsReducer.reducer,
 	trips: fromTripsReducer.reducer,
-	notifications: fromNotificationReducer.reducer
+	notifications: fromNotificationReducer.reducer,
+	instagramMedia: fromInstagramReducer.reducer
 }
 
 export const developmentReducers: ActionReducer<State> = combineReducers(reducers);
@@ -96,3 +99,11 @@ export function getNotificationState(state$: Observable<State>): Observable<from
 }
 
 export const getLoginFormMessage = compose(fromNotificationReducer.getLoginMessage, getNotificationState);
+
+// ===================Instagram list states and compose methods ================================================
+
+function getInstagramState(state: State): fromInstagramReducer.State {
+	return state.instagramMedia;
+}
+
+export const getInstagramMedia = createSelector(getInstagramState, fromInstagramReducer.getInstagramMedia);

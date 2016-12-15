@@ -18,6 +18,10 @@ import "rxjs/add/operator/let";
 export class HeaderComponent implements OnInit {
   user$: Observable<UserProfile>;
   authentication$: Observable<any>;
+  CLIENT_ID: string = "865ffa528b874fc3b755ee13b9a79037";
+  CLIENT_SECRET: string = "72e404fed36d4d779a0fad1411e9e486";
+  REDIRECT_URI: string = "http://localhost:4200/instagram_authentication_callback_url";
+
 
   constructor(private af: AngularFire, 
               private store: Store<fromRoot.State>,
@@ -54,6 +58,8 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new ServerLogoutAction);
   }
 
-
+  onLoginWithInstagram() {
+    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${this.CLIENT_ID}&redirect_uri=${this.REDIRECT_URI}&response_type=code`;
+}
 
 }
