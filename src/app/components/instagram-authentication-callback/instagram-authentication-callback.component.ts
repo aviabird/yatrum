@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstagramAuthenticationCallbackComponent implements OnInit {
 
-  exchangeTokenStatus$: Observable<string>;
+  exchangeTokenStatus: string;
+  codeStatus: boolean = false;
 
   constructor(private router: Router, private insta: InstagramIntegrationService) { }
 
@@ -21,15 +22,16 @@ export class InstagramAuthenticationCallbackComponent implements OnInit {
     const error_description = queryParams['error_description'];
     
     if(code){
-			this.exchangeTokenStatus$ = this.insta.exchangeCodeWithToken(code);
-      this.exchangeTokenStatus$.subscribe(data => {
-        console.log("status", data);
-        setTimeout(() => {
-          this.router.navigate(['/trips']);
-        },5000)
+      this.codeStatus = true;
+			this.insta.exchangeCodeWithToken(code)
+        .subscribe(data => {
+          this.exchangeTokenStatus = data['status'];
+          setTimeout(() => {
+            this.router.navigate(['/trips']);
+          }, 5000)
       });
     }
-    else{
+    else{ 
       console.log(error, ": ", error_description);
     }
   }

@@ -22,7 +22,7 @@ export class InstagramIntegrationService {
       'Authorization': this.auth_token
     })
     return this.http.post(`${this.apiLink}/exchange_code_with_token`, {code: code}, { headers: headers })
-		  .map(data => data.json()["status"]);
+		  .map(data => data.json());
   }
 
   getUserInstagramMedia(): Observable<{}> {
