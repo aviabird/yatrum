@@ -1,0 +1,17 @@
+<div *ngIf="!isInstagramAuthStatusPresent">
+	Checking for Instagram Authentication
+</div>
+
+<div *ngIf="isInstagramAuthStatusPresent">
+	<div *ngIf="!isInstagramAuthenticated">
+		<div>
+			You are Not Authenticated with Instagram
+		</div>
+		<button class="btn btn-primary" (click)="onLoginWithInstagram()">Authenticate with Instagram</button>
+	</div>
+	<div *ngIf="isInstagramAuthenticated">
+		<div>
+			You are Authenticated With Instagram
+		<div>
+	</div>
+</div>

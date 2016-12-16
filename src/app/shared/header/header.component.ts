@@ -1,4 +1,3 @@
-import { environment as env } from './../../../environments/environment';
 import { ServerAuthService } from './../../services/server-auth.service';
 import { LoginAction, LogoutAction, ServerLoginAction, ServerLoginSuccessAction, ServerLogoutAction } from './../../actions/user-auth.action';
 import { UserProfile } from './../../models/user-profile';
@@ -53,10 +52,6 @@ export class HeaderComponent implements OnInit {
     // Firebase authentication    
     // this.store.dispatch(new LogoutAction);
     this.store.dispatch(new ServerLogoutAction);
-  }
-
-  onLoginWithInstagram() {
-    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;
   }
 
 }
