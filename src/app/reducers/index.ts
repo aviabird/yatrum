@@ -96,3 +96,4 @@ export function getNotificationState(state$: Observable<State>): Observable<from
 }
 
 export const getLoginFormMessage = compose(fromNotificationReducer.getLoginMessage, getNotificationState);
+export const getSignUpFormMessage = compose(fromNotificationReducer.getSignUpMessage, getNotificationState);

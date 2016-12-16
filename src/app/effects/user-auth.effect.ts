@@ -30,6 +30,16 @@ export class UserAuthEffects {
         return new UserAuthActions.LoginSuccessAction(userProfile);
     });
 
+ @Effect() 
+  signup$: Observable<Action> =  this.actions$
+    .ofType(UserAuthActions.ActionTypes.SERVER_SIGNUP)
+    .switchMap((data) => this.serverAuthService.signUp(data.payload))
+    .filter(data => data !== null)
+    .map((data) => {
+        let userProfile = this.authService.getUserProfile(data);
+        return new UserAuthActions.LoginSuccessAction(userProfile);
+    });   
+
   @Effect()
   logout$: Observable<Action> = this.actions$
     .ofType(UserAuthActions.ActionTypes.LOGOUT)

@@ -4,10 +4,12 @@ import { Action } from '@ngrx/store';
 
 export interface State {
     loginFormErrorMessage: string;
+    signUpFormErrorMessage: string;
 }
 
 const initialState = {
-    loginFormErrorMessage: null
+    loginFormErrorMessage: null,
+    signUpFormErrorMessage: null
 }
 
 export function reducer(state = initialState, action: Action ): State {
@@ -16,6 +18,11 @@ export function reducer(state = initialState, action: Action ): State {
             console.log('updating message for the login form');
             let message = action.payload;
             state.loginFormErrorMessage = message;
+            return Object.assign({}, state);
+        }
+        case ActionTypes.UPDATE_SIGNUP_NOTIFICATION: {
+            let message = action.payload;
+            state.signUpFormErrorMessage = message;
             return Object.assign({}, state);
         }
         default: {
@@ -27,3 +34,7 @@ export function reducer(state = initialState, action: Action ): State {
 export function getLoginMessage(state$: Observable<State>): Observable<string> {
     return state$.select(state => state.loginFormErrorMessage);
 }
+export function getSignUpMessage(state$: Observable<State>): Observable<string> {
+    return state$.select(state => state.signUpFormErrorMessage);
+}
+

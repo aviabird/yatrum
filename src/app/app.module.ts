@@ -2,13 +2,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-// import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -36,6 +36,7 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
 import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
 
 const firebaseConfig = {
@@ -61,11 +62,13 @@ const myFirebaseAuthConfig = {
     TripFlowChartComponent,
     TripActivityComponent,
     LoginComponent,
+    SignupComponent
     TravellerProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
