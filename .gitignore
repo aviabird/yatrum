@@ -8,6 +8,9 @@
 /node_modules
 /bower_components
 
+# environment files
+/src/environments
+
 # IDEs and editors
 /.idea
 /.vscode
