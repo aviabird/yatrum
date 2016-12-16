@@ -15,7 +15,7 @@ export class ServerAuthService {
   constructor(private http: Http,
               private store: Store<fromRoot.State>) {}
 
-  getLoggedInUser(auth_token) {
+  getLoggedInUser(auth_token): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': auth_token
@@ -25,7 +25,7 @@ export class ServerAuthService {
   }
 
    // returns an observable with user object
-  login(data) {
+  login(data): Observable<Object> {
     const headers = new Headers({
       'Content-Type': 'application/json' 
     });
@@ -42,13 +42,28 @@ export class ServerAuthService {
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
 
-  catchError(response: Response) {
+  /**
+   * signUp method
+   */
+  signUp(data): Observable<Object>|any {
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    console.log('in signup method');
+    return this.http.post(`${this.apiLink}/users/create.json`,
+      JSON.stringify(data), {headers: headers})
+        .map((resp: Response) => resp.json())
+        .catch(this.catchError);
+  }
+
+  catchError(response: Response): Observable<String> {
+      console.log('in catch error method');
       // not returning throw as it raises an error on the parent observable 
       // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
       return Observable.of('server error');
   }
 
-  signOut() {
+  signOut(): Observable<String> {
     localStorage.removeItem('user');
     return Observable.of('ok logged out');
   }
@@ -64,7 +79,7 @@ export class ServerAuthService {
         }
   }
 
-  setTokenInLocalStorage(user_data) {
+  setTokenInLocalStorage(user_data): void {
     let jsonData = JSON.stringify(user_data)
     localStorage.setItem('user', jsonData);
   }

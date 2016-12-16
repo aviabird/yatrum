@@ -25,7 +25,7 @@ export class InstagramIntegrationService {
 		  .map(data => data.json());
   }
 
-  getUserInstagramMedia(): Observable<{}> {
+  getUserInstagramMedia(): Observable<Object> {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': this.auth_token

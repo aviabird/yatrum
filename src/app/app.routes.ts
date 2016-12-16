@@ -1,14 +1,15 @@
+import { RouterModule, Routes } from "@angular/router";
+import { TripRoutes } from './components/trips/trips.routes';
+
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RouterModule, Routes } from "@angular/router";
-
-import { TripRoutes } from './components/trips/trips.routes';
 import { TripsComponent } from './components/trips/trips.component';
-
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
+
 	{ path: '', redirectTo: 'trips', pathMatch: 'full' },
 	{ path: 'trips', component: TripsComponent, children: TripRoutes },
 	{ path: 'user/:id', component: TravellerProfileComponent},

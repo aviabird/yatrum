@@ -34,6 +34,7 @@ export function reducer(state = initialState, action: Action ): State {
 				});
 			}, {});
 
+
 			return {
 				trips: {
 					ids: [ ...state.trips.ids, ...newTripIds], // equivalent to ruby flatten
