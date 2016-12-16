@@ -1,3 +1,5 @@
+import { UserRoutes } from './components/user/user.routes';
+import { UserComponent } from './components/user/user.component';
 import { RouterModule, Routes } from "@angular/router";
 import { TripRoutes } from './components/trips/trips.routes';
 
@@ -12,7 +14,8 @@ export const routes: Routes = [
 
 	{ path: '', redirectTo: 'trips', pathMatch: 'full' },
 	{ path: 'trips', component: TripsComponent, children: TripRoutes },
-	{ path: 'user/:id', component: TravellerProfileComponent},
+	{ path: 'user', component: UserComponent, children: UserRoutes },
+	{ path: 'traveller/:id', component: TravellerProfileComponent},
 	{ path: 'dashboard', component: DashboardComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'instagram_authentication_callback_url', component: InstagramAuthenticationCallbackComponent }

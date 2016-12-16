@@ -14,11 +14,13 @@
             <span *ngIf="(authentication$ | async)">
                 {{(user$ | async).name}}
             </span>
+            <span *ngIf="(authentication$ | async)">
+              <a [routerLink]="['/user','settings']">Settings</a>
+            </span>
             <span><a *ngIf="(authentication$ | async)" (click)="logout()">Logout</a></span>
             
         </div>  
         <span><a [routerLink]="['/login']" *ngIf="!(authentication$ | async)">Login</a></span>
-        <button class="btn btn-primary" (click)="onLoginWithInstagram()">Login with Instagram</button>
       </ul>
       
     </div><!-- /.navbar-collapse -->

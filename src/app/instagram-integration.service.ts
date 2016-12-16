@@ -25,6 +25,15 @@ export class InstagramIntegrationService {
 		  .map(data => data.json());
   }
 
+  isUserInstagramAuthenticated(): Observable<boolean> {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.auth_token
+    })
+    return this.http.get(`${this.apiLink}/is_user_instagram_authenticated`, { headers: headers })
+      .map(data => data.json());    
+  }
+
   getUserInstagramMedia(): Observable<Object> {
     const headers = new Headers({
       'Content-Type': 'application/json',
