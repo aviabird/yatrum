@@ -1,3 +1,4 @@
+import { environment as env } from './../../../environments/environment';
 import { ServerAuthService } from './../../services/server-auth.service';
 import { LoginAction, LogoutAction, ServerLoginAction, ServerLoginSuccessAction, ServerLogoutAction } from './../../actions/user-auth.action';
 import { UserProfile } from './../../models/user-profile';
@@ -19,12 +20,12 @@ export class HeaderComponent implements OnInit {
   user$: Observable<UserProfile>;
   authentication$: Observable<any>;
 
-  constructor(private af: AngularFire, 
-              private store: Store<fromRoot.State>,
-              private serverAuthService: ServerAuthService) {
+  constructor(private af: AngularFire,
+    private store: Store<fromRoot.State>,
+    private serverAuthService: ServerAuthService) {
     this.user$ = this.store.let(fromRoot.getUserProfile);
     this.authentication$ = this.store.let(fromRoot.getAuthStatus);
-    
+
     // Check if the user is already logged in
     let user_data = JSON.parse(localStorage.getItem('user'));
     if (user_data) {
@@ -54,6 +55,8 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new ServerLogoutAction);
   }
 
-
+  onLoginWithInstagram() {
+    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;
+  }
 
 }

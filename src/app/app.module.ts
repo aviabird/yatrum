@@ -1,3 +1,5 @@
+import { InstagramEffects } from './effects/instagram.effects';
+import { InstagramIntegrationService } from './instagram-integration.service';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -38,6 +40,7 @@ import { TripActivityComponent } from './components/trips/trip-detail/trip-activ
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
+import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -62,8 +65,9 @@ const myFirebaseAuthConfig = {
     TripFlowChartComponent,
     TripActivityComponent,
     LoginComponent,
-    SignupComponent
-    TravellerProfileComponent
+    SignupComponent,
+    TravellerProfileComponent,
+    InstagramAuthenticationCallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -76,10 +80,11 @@ const myFirebaseAuthConfig = {
     StoreModule.provideStore(developmentReducers),
     EffectsModule.run(UserAuthEffects),
     EffectsModule.run(TripsEffects),
+    EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,6 @@ import { Component, OnInit } from '@angular/core';
 	templateUrl: './trips.component.html',
 	styleUrls: ['./trips.component.css']
 })
-export class TripsComponent {
-	constructor() { }
+export class TripsComponent{
+	constructor() {}
 }

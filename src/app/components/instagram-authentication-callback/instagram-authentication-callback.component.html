@@ -1,0 +1,22 @@
+<div class="panel panel-primary col-md-4 col-md-offset-4">
+  <div class="panel-body">
+    <div *ngIf="codeStatus">
+      <div *ngIf="!exchangeTokenStatus">
+        Authentication with Instgram, Please Wait ....
+      </div>
+      <div *ngIf="exchangeTokenStatus == 'success'">
+        <h3>You are Authenticated With Instgram</h3>
+        <h3>You will be redirected to dashboard in 5 seconds.....</h3>
+      </div>
+      <div *ngIf="exchangeTokenStatus == 'failure'">
+        <h3>Something went wrong, </h3>
+        <h3>Log out from the Instgram if you are already logged in some other window and try again</h3>
+        <h3>You will be redirected to dashboard in 5 seconds.....</h3>
+      </div>
+    </div>
+    <div *ngIf="!codeStatus">
+      <h3>{{error_description}}</h3>
+      <h3>You will be redirected to dashboard in 5 seconds</h3>
+    </div>
+  </div>
+</div>
