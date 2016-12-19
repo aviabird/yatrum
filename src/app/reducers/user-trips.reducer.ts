@@ -33,7 +33,7 @@ export function reducer(state = initialState, action: Action): State {
 		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
 			const Trips = action.payload;
 			const userId = state.selectedUserId;
-			const	newTrips = Trips.filter(trip => !state.userTrips[userId][trip.id]);
+			const	newTrips = Trips.filter(trip => !state.userTrips[userId].trips[trip.id]);
 			const newTripIds = newTrips.map(trip => trip.id);
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 			return Object.assign(trips, {
