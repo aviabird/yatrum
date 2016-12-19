@@ -1,9 +1,21 @@
 #completed {
 	border: 1px solid;	
+	.description {
+		padding: 10px;
+	}
 }
 
-.description {
-	padding: 10px;
+#ongoing {
+	margin-bottom: 30px;
+	border: 1px solid;
+	.description {
+		text-align: center;
+		padding: 10px;
+		background-color: #00CC99;
+		font-size: 30px;
+		height: 150px;
+		color: white;
+	}
 }
 
 .trip-cards {
