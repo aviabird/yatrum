@@ -1,12 +1,3 @@
-<button class="btn btn-primary" (click)="getUserInstagramMedia()">Select from Instagram</button>
-
-<div *ngIf="instagramMedia$ | async">
-  <div class="col-md-6" *ngFor="let media of instagramMedia$ | async">
-    <img [src]="media" class="insta-media">
-  </div>
-</div>
-
-
 <div [ngClass]="{hide: !(selectedCity$ | async)}">
   <div *ngFor="let place of (selectedCity$ | async)?.places">
     <div id="place">
