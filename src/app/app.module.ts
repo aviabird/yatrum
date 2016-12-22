@@ -43,6 +43,7 @@ import { TravellerProfileComponent } from './components/traveller-profile/travel
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 import { UserComponent } from './components/user/user.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
+import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -72,7 +73,8 @@ const myFirebaseAuthConfig = {
     InstagramAuthenticationCallbackComponent,
     UserComponent,
     UserSettingsComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    TripEditComponent
   ],
   imports: [
     BrowserModule,
