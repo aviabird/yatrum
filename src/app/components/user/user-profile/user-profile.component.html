@@ -1,0 +1,15 @@
+<div class="container">
+  
+  <div id="user-info">
+    <div col-md-3>
+      <img class="logo" [src]="'https://cdn-images-1.medium.com/max/138/1*-g_ZkdSERZXWs64UJ_IBhw@2x.png'">
+    </div>
+  </div>
+  
+  <div id="user-sections">
+    <button class="btn btn-primary col-md-6 btn-section" [routerLink]="['trips']">Trips</button>
+    <button class="btn btn-primary col-md-6 btn-section" [routerLink]="['media']">Media</button>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
