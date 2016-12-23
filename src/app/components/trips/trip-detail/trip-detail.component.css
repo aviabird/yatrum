@@ -2,6 +2,21 @@
 	border: 1px solid #4C868F !important;
 }
 
+.trip {
+	box-shadow: 0px 0px 20px teal;
+}
+
+.trip-image {
+	background-image: url("http://www.realgap.co.uk/sites/realgap/files/drupal-images/roads_quote.jpg");
+	height: 20rem;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+
+
+
 #to-profile {
 	height: 50px;
 	border: 1px solid #4C868F !important;

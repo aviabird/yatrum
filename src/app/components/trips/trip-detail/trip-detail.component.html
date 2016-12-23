@@ -1,10 +1,30 @@
-<div [routerLink]="['/user',(userId$ | async)]" id="to-profile">
-  <button type="button" class="btn btn-primary">{{userName$ | async}}</button>
+<!--<div [routerLink]="['/user',(userId$ | async)]" id="to-profile">
+  <button class="ui facebook button">
+    <i class="user icon"></i>
+    {{userName$ | async}}
+  </button>
 </div>
 
-<div class="col-md-5 border-custom">
-  <tr-trip-flow-chart></tr-trip-flow-chart>
-</div>
-<div class="col-md-7 border-custom">
-  <tr-trip-activity></tr-trip-activity>
+<div class="ui two column grid">
+  <div class="column border-custom">
+    <tr-trip-flow-chart></tr-trip-flow-chart>
+  </div>
+  <div class="column border-custom">
+    <tr-trip-activity></tr-trip-activity>
+  </div>
+</div>-->
+<div class="ui centered grid">
+  <div class="twelve wide column trip">
+    <div class="trip-image">
+    </div>
+    <div class="ui twelve column grid trip-detail">
+      <div class="four wide column trip-flow">
+        <tr-trip-flow-chart></tr-trip-flow-chart>
+      </div>
+      <div class="twelve wide column trip-activity">
+        <tr-trip-activity></tr-trip-activity>
+      </div>
+    </div>
+  </div>
+  
 </div>

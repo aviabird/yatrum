@@ -1,22 +1,5 @@
-<div id="vertical-bar" class="col-md-1"></div>
-<div class="col-md-11">
-  <div *ngFor="let city of (selectedTrip$ | async)?.cities">
-    <div class="row" id="city-row">
-      <div class="col-md-6">
-        <div class="square" (click)="showCityActivity(city.id)">
-          Stay at: Lavish Hotel <br>
-          Total Cost: $4500 <br>
-          <br>
-          Visited burj khalifa, <br>
-          palms island etc
-        </div>
-      </div>
-      <div class="col-md-6" id="circle-arrow" (click)="showCityActivity(city.id)">
-        <div id="arrow"></div>
-        <div class="circle">
-          {{city.name}}
-        </div>
-      </div>        
-    </div>
-  </div>
+<div *ngFor="let city of (selectedTrip$ | async)?.cities">
+  <i class="teal huge marker icon"></i>
 </div>
+
+

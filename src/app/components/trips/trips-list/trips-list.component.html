@@ -1,15 +1,23 @@
-<div class="container">
-  <div class="col-md-10 col-md-offset-1">
-    <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{trip.description}} From {{trip.startDate}}</h3>
-      </div>
-      <div class="panel-body">
-        <h3>Status: {{trip.status}}</h3>
-        <span *ngFor="let city of trip.cities"> {{city.name}} - </span>
-
+<div class="ui centered grid">
+  <div class="twelve wide column">
+    <div class="ui two column grid">
+      <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column">
+        <div class="ui card my-card">  
+          <div class="content">
+            <a class="header">{{trip.description}}</a>
+            <div class="meta">
+              <span class="date">25/4/2016</span>
+            </div>
+            <div class="description">
+              <span *ngFor="let city of trip.cities"> {{city.name}} - </span>
+              <img width="100%" class="photo" src="https://assets0.roadtrippers.com/uploads/region/image/466/-strip_-quality_60_-interlace_Plane_-resize_960x354_U__-gravity_center_-extent_960x354/region-image-1dd08944-c73f-4cb4-9b42-993ae414c58d.jpg">
+            </div>
+          </div>
+          <div class="extra content">
+            Completed Trip
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!--<router-oulet>-->
-</div>
+</div>  

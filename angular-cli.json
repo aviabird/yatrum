@@ -19,9 +19,12 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/semantic-ui/dist/semantic.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/semantic-ui/dist/semantic.min.js"
+        ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
