@@ -1,5 +1,15 @@
-<div *ngFor="let city of (selectedTrip$ | async)?.cities">
-  <i class="teal huge marker icon"></i>
+<div class="ui grid">
+  <div class="column bar">
+    <div class="vertical-bar"></div>
+  </div>
+  <div class="twelve wide column">
+    <div *ngFor="let city of (selectedTrip$ | async)?.cities" (click)="onSelectCity(city)" class="cityIcon">
+      <i class="teal huge map signs icon my-icon"></i>
+      <div *ngIf="city == selectedCity" class="place-icon-group">
+        <div *ngFor="let place of city.places" class="place-icon">
+          <i class="teal huge marker icon my-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

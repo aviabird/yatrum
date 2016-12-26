@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 })
 export class TripFlowChartComponent {
   selectedTrip$: Observable<Trip>;
+  selectedCity: string = null;
 
   constructor(private store: Store<fromRoot.State>) {
     this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
@@ -22,6 +23,14 @@ export class TripFlowChartComponent {
   showCityActivity(id: string) {
     this.store.dispatch(new SelectCityFromTripAction(id));
   }
+
+  onSelectCity(city: string) {
+    if(this.selectedCity == city)
+      this.selectedCity = null;
+    else
+      this.selectedCity = city;
+  }
+
 }
 
 

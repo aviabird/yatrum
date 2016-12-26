@@ -1,9 +1,12 @@
-<div class="ui inverted teal menu">
+<div class="ui inverted teal menu my-header">
   <a class="item" [routerLink]="['/trips']">
-    <img src="https://thumb1.shutterstock.com/display_pic_with_logo/3022592/309475973/stock-vector-travel-logo-template-309475973.jpg">
+    <img class="ui small image" [src]="'http://cdn-3.famouslogos.us/images/travel-logos/traveller-logo.png'">
   </a>
   <div class="right menu">
-    <a *ngIf="(authentication$ | async)" class="item" >{{(user$ | async).name}}</a>
+    <div *ngIf="(authentication$ | async)" class="item">
+      <img class="ui avatar image" [src]="(user$ | async).instagram_profile_picture"  onError="this.src='https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
+      <a >{{(user$ | async).name}}</a>
+    </div>
     <a *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user','settings']">Settings</a>
     <a *ngIf="(authentication$ | async)" class="item" (click)="logout()">LogOut</a>
     <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>

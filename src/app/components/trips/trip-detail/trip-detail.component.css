@@ -3,7 +3,7 @@
 }
 
 .trip {
-	box-shadow: 0px 0px 20px teal;
+	box-shadow: 0 0 10px #CC755B;
 }
 
 .trip-image {
@@ -12,13 +12,17 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+	box-shadow: 0 0 10px #CC755B;
 }
 
+.trip-detail {
+	margin-top: 30px;
+}
 
+.my-card {
+	width: 100%;
+}
 
-
-#to-profile {
-	height: 50px;
-	border: 1px solid #4C868F !important;
-	margin-bottom: 20px;
+.trip-user {
+	cursor: pointer;
 }
