@@ -22,17 +22,18 @@
   <!-- Cities Basic info -->
   <div class="row" style="margin-left:50px;"> <!--TODO: Remove inline CSS later -->
     <h2> City </h2>
+    <button class="btn btn-primary" (click)="addCity()">Add city</button>
     <ul class="list-group" formArrayName="cities">
       <div *ngFor="let city of tripForm.controls['cities'].controls; let i = index">
-        <div class="form-group col-md-offset-2" formGroupName="{{i}}">
-          <div class="col-sm-5">
+        <div class="form-group col-md-12" formGroupName="{{i}}">
+          <div class="col-sm-6">
             <label for="description">City name</label>
             <input type="text" 
               class="form-control" 
               placeholder="Caliornia, SF" 
               formControlName="name">
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <label for="description">Country</label>
             <input type="text" 
               class="form-control" 
@@ -42,24 +43,47 @@
           <!-- Places basic info -->
           <!--TODO: Add provision for places later-->
           <div class="row" style="margin-left:50px;">
-            <h2> Places </h2>
+            <h2> Places </h2> <button class="btn btn-primary" (click)="addPlace(city)">Add Place</button>
             <ul class="list-group" formArrayName="places">
               <div *ngFor="let place of city.controls['places'].controls; let j = index">
                 <div class="form-group" formGroupName="{{j}}">
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <label for="description">Place Name</label>
                     <input type="text" 
                       class="form-control" 
                       placeholder="Caliornia, SF" 
                       formControlName="name">
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <label for="description">Place Description</label>
                     <input type="text" 
                       class="form-control" 
                       placeholder="Caliornia, SF" 
                       formControlName="description">
                   </div>
+                  <!-- Media for all the trips go here -->
+                  <h2> Pictures </h2>
+                  <ul class="list-group" formGroupName="media">
+                    <div *ngFor="let media of place.controls['media'].controls; let k = index">
+                      <div class="form-group" formGroupName="{{k}}">
+                        <div class="col-sm-5">
+                          Link for image {{media.value.link}}
+                          <!--<image href="./assets/images/aviabird.png">-->
+                        </div>
+                        <!-- Add image uploading feature later -->
+                        <!--<image-upload></image-upload>-->
+                        <!--<div class="col-sm-5">
+                          <label for="description">Image Url</label>
+                          <input type="text" 
+                            class="form-control" 
+                            placeholder="http://some-image-link.html" 
+                            formControlName="link"
+                            #imageUrl>
+                        </div>-->
+
+                      </div>
+                    </div>
+                  </ul>
                 </div>
               </div>
             </ul>

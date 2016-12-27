@@ -88,4 +88,12 @@ export class TripEditComponent implements OnInit {
     })
   }
 
+  addCity() {
+    console.log('adding a new city');
+  }
+
+  addPlace(city) {
+    console.log('adding a new place for city ', city);
+  }
+
 }

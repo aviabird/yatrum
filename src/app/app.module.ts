@@ -11,6 +11,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { ImageUploadModule } from 'angular2-image-upload';
+import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -82,6 +84,7 @@ const myFirebaseAuthConfig = {
     CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ImageUploadModule.forRoot(),
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(developmentReducers),
@@ -89,7 +92,14 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    StoreDevtoolsModule.instrumentStore({
+      monitor: useLogMonitor({
+        visible: true,
+        position: 'right'
+      })
+    }),
+    StoreLogMonitorModule
   ],
   providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
   bootstrap: [AppComponent]
