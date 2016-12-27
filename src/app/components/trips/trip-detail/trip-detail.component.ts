@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'tr-trip-detail',
   templateUrl: './trip-detail.component.html',
-  styleUrls: ['./trip-detail.component.css'], 
+  styleUrls: ['./trip-detail.component.scss'], 
 })
 export class TripDetailComponent {
 

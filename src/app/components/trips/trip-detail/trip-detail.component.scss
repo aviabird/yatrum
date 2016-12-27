@@ -1,10 +1,14 @@
+@mixin default-box-shadow() {
+	box-shadow: 0 1px 5px #BBB;
+}
+
 .border-custom {
 	border: 1px solid #4C868F !important;
 }
 
 .trip {
-	box-shadow: 0 0 10px #CC755B;
-}
+	@include default-box-shadow();
+};
 
 .trip-image {
 	background-image: url("http://www.realgap.co.uk/sites/realgap/files/drupal-images/roads_quote.jpg");
@@ -12,7 +16,7 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	box-shadow: 0 0 10px #CC755B;
+	@include default-box-shadow();
 }
 
 .trip-detail {

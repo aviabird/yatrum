@@ -1,7 +1,0 @@
-<button class="btn btn-primary" (click)="getUserInstagramMedia()">Select from Instagram</button>
-
-<div *ngIf="instagramMedia$ | async">
-  <div class="col-md-3" *ngFor="let media of instagramMedia$ | async">
-    <img [src]="media" class="insta-media">
-  </div>
-</div>

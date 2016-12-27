@@ -1,0 +1,15 @@
+.my-card {
+	min-width: 100%;
+	box-shadow: 0 1px 5px #BBB;
+	transition: all 500ms;
+	&:hover {
+		box-shadow: 0 7px 20px #BBB;
+		transform: scale(1.05);
+		z-index: 1;
+	}
+}
+
+
+.photo {
+	height: 15rem;
+}

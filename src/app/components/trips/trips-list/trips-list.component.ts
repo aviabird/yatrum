@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
 	selector: 'tr-trips-list',
 	templateUrl: './trips-list.component.html',
-	styleUrls: ['./trips-list.component.css'],
+	styleUrls: ['./trips-list.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripsListComponent {
