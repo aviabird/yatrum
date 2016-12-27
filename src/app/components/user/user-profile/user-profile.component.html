@@ -7,10 +7,10 @@
 	<div class="extra content ui grid">
 		<div class="four wide column"></div>
 		<div class="twelve wide column">
-			<span class="content">Trips</span>
+			<span class="content" [routerLink]="['trips']">Trips</span>
 			<span class="content">Followers</span>
 			<span class="content">Following</span>
-			<span class="content">Media</span>
+			<span class="content" [routerLink]="['media']">Media</span>
 		</div>
 	</div>
 </div>
@@ -21,11 +21,11 @@
 		<div class="profile-image-div">
 			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
 		</div>
-		<div class="">
-			Main Info
+		<div class="ui grid">
+					
 		</div>
 	</div>
-	<div class="twelve wide column">
-		Main content
+	<div class="eight wide column">
+		<router-outlet></router-outlet>
 	</div>
 </div>
