@@ -15,7 +15,11 @@ export class TripEditComponent implements OnInit {
     this.initForm()
   }
 
-  onSubmit(): void {
+  onCancel() {
+    console.log('in cancel button')
+  }
+
+  onSubmit() {
     console.log('submitting form', this.tripForm.value);
     // dispatch saving the form Action.
     // sets the new trip in store, use that to navigate to the 
@@ -89,11 +93,30 @@ export class TripEditComponent implements OnInit {
   }
 
   addCity() {
-    console.log('adding a new city');
+    let places = new FormArray([]);
+    
+    (<FormArray>this.tripForm.controls['cities']).push(
+      new FormGroup({        
+        name: new FormControl('Dubai city', Validators.required),    //[''],
+        country: new FormControl('UAE', Validators.required), //[''],
+        places: places   //['']
+      })
+    )
   }
 
-  addPlace(city) {
-    console.log('adding a new place for city ', city);
+  addPlace(cityIndex) {
+    // let cityIndex = 0
+    let media: FormArray = new FormArray([]);
+
+    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
+      .controls[cityIndex]).controls['places']).push(
+        new FormGroup({
+          name: new FormControl('Koregaon park', Validators.required),
+          description: new FormControl('We had really nice food here', Validators.required),
+          review: new FormControl('Really lively place', Validators.required),
+          media: media
+        })
+    )
   }
 
 }

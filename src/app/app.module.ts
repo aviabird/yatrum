@@ -95,7 +95,7 @@ const myFirebaseAuthConfig = {
     RouterModule.forRoot(routes),
     StoreDevtoolsModule.instrumentStore({
       monitor: useLogMonitor({
-        visible: true,
+        visible: false,
         position: 'right'
       })
     }),

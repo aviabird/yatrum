@@ -43,7 +43,8 @@
           <!-- Places basic info -->
           <!--TODO: Add provision for places later-->
           <div class="row" style="margin-left:50px;">
-            <h2> Places </h2> <button class="btn btn-primary" (click)="addPlace(city)">Add Place</button>
+            <h2> Places </h2> 
+            <button class="btn btn-primary" (click)="addPlace(i)">Add Place</button>
             <ul class="list-group" formArrayName="places">
               <div *ngFor="let place of city.controls['places'].controls; let j = index">
                 <div class="form-group" formGroupName="{{j}}">
@@ -99,5 +100,11 @@
     <input type="text" id="endDate">
     <p class="help-block">When did this trip got over.</p>
   </div>-->
-  <button type="submit" class="btn btn-default">Submit</button>
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-success" [disabled]="!tripForm.valid" >Save</button>
+      <a class="btn btn-danger" (click)="onCancel()">Cancel</a>
+    </div>
+  </div>
+  <!--<button type="submit" class="btn btn-default">Submit</button>-->
 </form>
