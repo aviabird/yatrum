@@ -71,20 +71,16 @@ export class TripsService {
 	}
 
 	updateTrip(trip: Trip): Observable<Trip> {
-		console.log('we are updating trip');
-
+		const tripId = trip.id; 
 		const headers = new Headers({
       'Content-Type': 'application/json' 
 			// Add auth token by creating a common interceptor 
 			// use Restangular which creates interceptor
     });
 
-		return this.http.patch(`${this.apiLink}/trips/24.json`,
+		return this.http.patch(`${this.apiLink}/trips/${tripId}.json`,
 			JSON.stringify({trip: trip}), {headers: headers}
-		).map((data: Response) => {
-			console.log('data present is', data);
-			return data.json()
-		})
+		).map((data: Response) => data.json())
 	}
 
 }
