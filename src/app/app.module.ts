@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
+import { CloudinaryIntegrationService } from './services/cloudinary-integration.service';
 
 // Guards
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
@@ -97,7 +98,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService, CloudinaryIntegrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
