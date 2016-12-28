@@ -43,11 +43,13 @@ import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import { TravellerProfileComponent } from './components/traveller-profile/traveller-profile.component';
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 import { UserComponent } from './components/user/user.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
 import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
+import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -73,12 +75,14 @@ const myFirebaseAuthConfig = {
     TripActivityComponent,
     LoginComponent,
     SignupComponent,
-    TravellerProfileComponent,
     InstagramAuthenticationCallbackComponent,
     UserComponent,
     UserSettingsComponent,
     UserSettingsComponent,
     TripEditComponent
+    UserProfileComponent,
+    UserTripsComponent,
+    UserMediaComponent
   ],
   imports: [
     BrowserModule,

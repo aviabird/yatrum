@@ -1,0 +1,19 @@
+<div id="ongoing">
+  <div class="heading">
+    Ongoing Trips
+  </div>
+  <div class="description">
+    Traveller is At Rest
+  </div>
+</div>
+
+<div id="completed">
+  <div class="heading">
+    Completed Trips
+  </div>
+  <div class="description">
+    <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of userTrips$ | async" class="trip-cards">
+      {{trip.description}}  
+    </div>
+  </div>
+</div>
