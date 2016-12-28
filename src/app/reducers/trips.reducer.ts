@@ -106,3 +106,7 @@ export function getSelectedCityId(state: State) {
 export function isEditingTrip(state: State): boolean {
 	return state.editingTrip.id ? true : false;
 }
+
+export function getEditingTrip(state: State): Trip {
+	return state.editingTrip;
+}

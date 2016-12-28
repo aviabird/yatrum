@@ -1,3 +1,4 @@
+import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
 import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
 import { Store } from '@ngrx/store';
@@ -14,17 +15,47 @@ import * as fromRoot from '../../../reducers';
 export class TripEditComponent implements OnInit {
   tripForm: FormGroup;
   editingStatus$: Observable<boolean>;
-  isEditing: boolean = false;
+  isEditing: boolean = false; // calling create/update service methods
+  isNewTrip: boolean = false; // editing/creating a trip
+  trip$: Observable<Trip>;
 
   constructor(private fb: FormBuilder, private store: Store<fromRoot.State>) { 
     this.editingStatus$ = this.store.select(fromRoot.getEditingStatus);
+    this.trip$ = this.store.select(fromRoot.getEditingTrip);
+    // Set Editing status
     this.editingStatus$.subscribe((status) => {
       this.isEditing = status === true ? true : false;        
     }); 
+    // Set trip object
+    this.trip$.subscribe((trip) => {
+      console.log('Trip from store', trip);
+      if (trip.hasOwnProperty('id')){
+        console.log('syncing trip');
+        this.resetFormDataWithStoreTrip(trip)
+      }
+    })
   }
 
   ngOnInit() {
     this.initForm()
+  }
+
+  /**
+   * Set the create form with latest data trip from the backend updates ids
+   * @method setFormDataWithStoreTrip
+   * @param {Trip} trip from the store
+   * @return void
+   * 
+   * @unstable
+   */
+  resetFormDataWithStoreTrip(trip: Trip):void {
+    console.log('assigning values now');
+    window['t'] = this.tripForm;
+    this.tripForm.controls['id'].setValue(trip.id);
+    // this.tripForm.controls['cities_attributes'].patchValue(trip.cities);
+    for(let i=0; i < trip.cities.length; i++){
+      this.tripForm.controls['cities_attributes']
+    }
   }
 
   /**
@@ -49,10 +80,10 @@ export class TripEditComponent implements OnInit {
       // check with an observable whether we should call save action 
       // or update action
       if( this.isEditing === false ) {
+        // dispatch save action
         this.store.dispatch(new SaveTripAction(this.tripForm.value));
       } else {
         // dispatch update action
-        console.log('<<<---we are updating now--->>>');        
         this.store.dispatch(new UpdateTripAction(this.tripForm.value));
       }
     }

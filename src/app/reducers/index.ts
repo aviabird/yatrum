@@ -63,7 +63,8 @@ export const getTrips = createSelector(getTripsState, fromTripsReducer.getTrips)
 export const getTripIds = createSelector(getTripsState, fromTripsReducer.getTripIds);
 export const getSelectedTripId = createSelector(getTripsState, fromTripsReducer.getSelectedTripId);
 export const getSelectedCityId = createSelector(getTripsState, fromTripsReducer.getSelectedCityId);
-export const getEditingStatus = createSelector(getTripsState, fromTripsReducer.isEditingTrip )
+export const getEditingStatus = createSelector(getTripsState, fromTripsReducer.isEditingTrip);
+export const getEditingTrip = createSelector(getTripsState, fromTripsReducer.getEditingTrip);
 
 export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, ids) => {
   return ids.map(id => trips[id]);
