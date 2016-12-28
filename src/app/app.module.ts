@@ -11,6 +11,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { ImageUploadModule } from 'angular2-image-upload';
+import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
+import { DatePickerModule } from 'ng2-datepicker';
+
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -42,6 +46,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 import { UserComponent } from './components/user/user.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
+import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
@@ -74,9 +79,10 @@ const myFirebaseAuthConfig = {
     UserComponent,
     UserSettingsComponent,
     UserSettingsComponent,
+    TripEditComponent,
     UserProfileComponent,
     UserTripsComponent,
-    UserMediaComponent
+    UserMediaComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +90,7 @@ const myFirebaseAuthConfig = {
     CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ImageUploadModule.forRoot(),
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(developmentReducers),
@@ -91,7 +98,15 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    DatePickerModule,
+    StoreDevtoolsModule.instrumentStore({
+      monitor: useLogMonitor({
+        visible: false,
+        position: 'right'
+      })
+    }),
+    StoreLogMonitorModule,
   ],
   providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
   bootstrap: [AppComponent]

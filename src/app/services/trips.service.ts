@@ -20,6 +20,12 @@ export class TripsService {
     }
   }
 
+	/**
+	 * Get details of a particular trip
+	 * @method getTrip
+	 * @param {String} Trip id
+	 * @return {Boolean} CS:?
+	 */
   getTrip(id: string): boolean {
 		this.store.dispatch(new fromTripActions.SelectTripAction(id));
 
@@ -47,14 +53,76 @@ export class TripsService {
 			return true;
   }
 
-  getTrips(): Observable<Trip[]> {
+	/**
+	 * Get all trips for dashboard page
+	 * @method getTrips 
+	 * @param 
+	 * @return {Observable} Observable of array of trips
+	 */
+  getTrips(): Observable<Trip[]>|Observable<String> {
     return this.http.get(`${this.apiLink}/trips.json`)
       .map((data: Response) => data.json())
+			.catch(this.catchError);
   }
 
-	getUserTrips(id: string): Observable<Trip[]> {
+	/**
+	 * Get all trips of a particular user
+	 * @method getUserTrip 
+	 * @param {String} user id 
+	 * @return {Observable} Observable with array of user trip objects
+	 */
+	getUserTrips(id: string): Observable<Trip[]>|Observable<String> {
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
 			.map((data: Response) => data.json())
+			.catch(this.catchError);
 	}
 
+	/**
+	 * Save a trip 
+	 * @method saveTrip
+	 * @param {Trip} Trip object to be saved
+	 * @return {Observable} Observable with created trip object
+	 */
+	saveTrip(trip: Trip): Observable<Trip>|Observable<String> {
+		console.log('we are saving trip');
+		const headers = new Headers({
+      'Content-Type': 'application/json' 
+			// Add auth token by creating a common interceptor 
+			// use Restangular which creates interceptor
+    });
+
+		return this.http.post(`${this.apiLink}/trips.json`, 
+			JSON.stringify({trip: trip}), {headers: headers}
+		)
+		.map((data: Response) => data.json())
+		.catch(this.catchError);
+	}
+
+	/**
+	 * Update trip data 
+	 * @method udpateTrip
+	 * @param {Trip} trip object to be updated
+	 * @return {Observable} Observable with updated trip object
+	 */
+	updateTrip(trip: Trip): Observable<Trip>|Observable<String> {
+		const tripId = trip.id; 
+		const headers = new Headers({
+      'Content-Type': 'application/json' 
+			// Add auth token by creating a common interceptor 
+			// use Restangular which creates interceptor
+    });
+
+		return this.http.patch(`${this.apiLink}/trips/${tripId}.json`,
+			JSON.stringify({trip: trip}), {headers: headers}
+		)
+		.map((data: Response) => data.json())
+		.catch(this.catchError);
+	}
+
+	catchError(response: Response): Observable<String> {
+      console.log('in catch error method');
+      // not returning throw as it raises an error on the parent observable 
+      // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
+      return Observable.of('server error');
+  }
 }
