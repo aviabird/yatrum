@@ -79,10 +79,10 @@ const myFirebaseAuthConfig = {
     UserComponent,
     UserSettingsComponent,
     UserSettingsComponent,
-    TripEditComponent
+    TripEditComponent,
     UserProfileComponent,
     UserTripsComponent,
-    UserMediaComponent
+    UserMediaComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +106,7 @@ const myFirebaseAuthConfig = {
         position: 'right'
       })
     }),
-    StoreLogMonitorModule
+    StoreLogMonitorModule,
   ],
   providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
   bootstrap: [AppComponent]
