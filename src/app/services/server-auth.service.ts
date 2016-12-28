@@ -29,10 +29,10 @@ export class ServerAuthService {
     const headers = new Headers({
       'Content-Type': 'application/json' 
     });
-    console.log('in login method');
     return this.http.post(`${this.apiLink}/authenticate.json`, 
       JSON.stringify(data), {headers: headers}
     ).map((res: Response) => {
+      // Setting token after login
       this.setTokenInLocalStorage(res.json())
       return res.json();
     }).catch(this.catchError);

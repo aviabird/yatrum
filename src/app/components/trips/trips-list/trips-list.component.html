@@ -1,3 +1,7 @@
+<button *ngIf="(authentication$ | async) != null" 
+        class="btn btn-primary pull-right"
+        [routerLink]="['new']">Create Trip</button>
+
 <div class="ui centered grid">
   <div class="twelve wide column">
     <div class="ui two column grid">
