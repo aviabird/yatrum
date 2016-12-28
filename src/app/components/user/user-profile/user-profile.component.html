@@ -21,8 +21,11 @@
 		<div class="profile-image-div">
 			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
 		</div>
-		<div class="ui grid">
-					
+		<div class="">
+			<input type="file" ng2FileSelect [uploader]="uploader"/>
+			<div *ngFor="let item of uploader.queue">
+				<button class="btn btn-primary" (click)="item.upload()">Upload</button>
+			</div>
 		</div>
 	</div>
 	<div class="eight wide column">

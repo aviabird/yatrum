@@ -27,6 +27,9 @@ import { UserAuthEffects } from './effects/user-auth.effect';
 import { routes } from './app.routes';
 import { developmentReducers } from './reducers/index';
 
+//Directives
+import { FileSelectDirective } from 'ng2-file-upload';
+
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -76,7 +79,8 @@ const myFirebaseAuthConfig = {
     UserSettingsComponent,
     UserProfileComponent,
     UserTripsComponent,
-    UserMediaComponent
+    UserMediaComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

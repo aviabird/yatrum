@@ -23,7 +23,8 @@
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/semantic-ui/dist/semantic.min.js"
+        "../node_modules/semantic-ui/dist/semantic.min.js",
+        "../node_modules/jshashes/hashes.min.js"
         ],
       "environments": {
         "source": "environments/environment.ts",

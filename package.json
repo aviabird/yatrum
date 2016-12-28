@@ -31,6 +31,7 @@
     "core-js": "^2.4.1",
     "firebase": "^3.6.1",
     "jquery": "^3.1.1",
+    "jshashes": "^1.0.6",
     "ng2-file-upload": "^1.1.4-2",
     "ng2-validation": "^3.0.1",
     "reselect": "^2.5.4",

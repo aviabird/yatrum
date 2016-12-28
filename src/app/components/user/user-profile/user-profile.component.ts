@@ -4,6 +4,7 @@ import { State } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 @Component({
   selector: 'tr-user-profile',
@@ -14,8 +15,12 @@ export class UserProfileComponent implements OnInit {
 
   private subscription: Subscription;
   private userIndex: string;
+  public uploader: FileUploader = new FileUploader({url: '/src/assets/'});
+  private SHA1 = new Hashes.SHA1
+
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute) {}
+
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
@@ -23,5 +28,7 @@ export class UserProfileComponent implements OnInit {
     )
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
+
+  
 
 }
