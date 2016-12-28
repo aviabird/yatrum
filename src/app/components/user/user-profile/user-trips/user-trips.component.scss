@@ -1,34 +1,3 @@
-#completed {
-	border: 1px solid;	
-	.description {
-		padding: 10px;
-	}
-}
-
-#ongoing {
-	margin-bottom: 30px;
-	border: 1px solid;
-	.description {
-		text-align: center;
-		padding: 10px;
-		background-color: #00CC99;
-		font-size: 30px;
-		height: 150px;
-		color: white;
-	}
-}
-
-.trip-cards {
-	cursor: pointer;
-	background-color: #00CC99;
-  color: #fff;
-  font-size: 18px;
-	width: 23.33%;
-	margin-left: 5%;
-	margin-right: 5%;
-	margin-bottom: 3%;
-	margin-top: 2%;
-	display: inline-block;
-	border: 1px solid;
-	height: 150px;
+.my-card {
+	width: 100%;	
 }

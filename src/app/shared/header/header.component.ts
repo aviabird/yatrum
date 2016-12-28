@@ -28,8 +28,6 @@ export class HeaderComponent implements OnInit {
     // Check if the user is already logged in
     let user_data = JSON.parse(localStorage.getItem('user'));
     if (user_data) {
-      console.log('token is', user_data.auth_token);
-      console.log('user is', user_data.user);
       let user = this.serverAuthService.getLoggedInUser(user_data.auth_token);
       user.subscribe(
         // Dispatch login success when the we get the user object

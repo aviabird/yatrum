@@ -1,15 +1,34 @@
-<div class="container">
-  
-  <div id="user-info">
-    <div col-md-3>
-      <img class="logo" [src]="'https://cdn-images-1.medium.com/max/138/1*-g_ZkdSERZXWs64UJ_IBhw@2x.png'">
-    </div>
-  </div>
-  
-  <div id="user-sections">
-    <button class="btn btn-primary col-md-6 btn-section" [routerLink]="['trips']">Trips</button>
-    <button class="btn btn-primary col-md-6 btn-section" [routerLink]="['media']">Media</button>
-  </div>
+<router-outlet></router-outlet>
 
-  <router-outlet></router-outlet>
+<div class="ui card profile-cover">
+	<div class="image profile-cover-div">
+		<img class="cover-image" [src]="'https://pbs.twimg.com/profile_banners/2420548369/1482824909/1500x500'">
+	</div>
+	<div class="extra content ui grid">
+		<div class="four wide column"></div>
+		<div class="twelve wide column">
+			<span class="content" [routerLink]="['trips']">Trips</span>
+			<span class="content">Followers</span>
+			<span class="content">Following</span>
+			<span class="content" [routerLink]="['media']">Media</span>
+		</div>
+	</div>
+</div>
+
+<div class="main ui grid">
+	<div class="one wide column"></div>
+	<div class="three wide column profile-info">
+		<div class="profile-image-div">
+			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
+		</div>
+		<div class="">
+			<input type="file" ng2FileSelect [uploader]="uploader"/>
+			<div *ngFor="let item of uploader.queue">
+				<button class="btn btn-primary" (click)="item.upload()">Upload</button>
+			</div>
+		</div>
+	</div>
+	<div class="eight wide column">
+		<router-outlet></router-outlet>
+	</div>
 </div>

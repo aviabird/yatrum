@@ -1,24 +1,27 @@
-#user-info {
-	border: 1px solid;
-	padding-left: 40px;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	border-bottom: none;
+.profile-cover {
+	width: 100%;
+	margin-top: 0;
 }
 
-.btn-section {
-	font-size: 25px; 
+.profile-cover-div {
+	height: 320px;
 }
 
-#completed {
-	border: 1px solid;
+.cover-image {
+	max-width: 100%;
+	height: 100% !important;
 }
 
-#user-sections {
-	margin-bottom: 75px;
+.profile-info {
+	bottom: 14rem;
 }
 
-.logo {
-	width: 100px;
-	border: 1px solid;
+.profile-image {
+	border: 5px solid white;
+	border-radius: 8px;
+}
+
+.content {
+	margin-right: 30px;
+	cursor: pointer;
 }

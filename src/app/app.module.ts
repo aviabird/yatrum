@@ -1,5 +1,3 @@
-import { InstagramEffects } from './effects/instagram.effects';
-import { InstagramIntegrationService } from './instagram-integration.service';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,6 +18,8 @@ import { DatePickerModule } from 'ng2-datepicker';
 import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
+import { InstagramIntegrationService } from './instagram-integration.service';
+import { CloudinaryIntegrationService } from './services/cloudinary-integration.service';
 
 // Guards
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
@@ -27,9 +27,13 @@ import { TripsResolveGuard } from './guards/trips-resolve.guard';
 // Effects
 import { TripsEffects } from './effects/trips.effects';
 import { UserAuthEffects } from './effects/user-auth.effect';
+import { InstagramEffects } from './effects/instagram.effects';
 
 import { routes } from './app.routes';
 import { developmentReducers } from './reducers/index';
+
+//Directives
+import { FileSelectDirective } from 'ng2-file-upload';
 
 // Components
 import { AppComponent } from './app.component';
@@ -83,6 +87,7 @@ const myFirebaseAuthConfig = {
     UserProfileComponent,
     UserTripsComponent,
     UserMediaComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -108,7 +113,7 @@ const myFirebaseAuthConfig = {
     }),
     StoreLogMonitorModule,
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService],
+  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService, CloudinaryIntegrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,19 +3,24 @@
   max-height: 80%;
 }
 
+.my-card {
+  width: 95%;
+  box-shadow: 0 1px 5px #BBB;
+}
+
 #media {
-  background: #DDE0E4;
+  background: teal;
   text-align: center;
   margin-bottom: 30px;
 }
 
 #media-description {
   font-size: 20px;
-  background-color:#00CC99; 
+  background-color:teal; 
 }
 
 #city, #place {
-  background: #00CC99;
+  background: teal;
   margin-top: 30px;
   margin-bottom: 20px;
   padding-top: 30px;

@@ -1,7 +1,32 @@
-<button class="btn btn-primary" (click)="getUserInstagramMedia()">Select from Instagram</button>
+<div class="ui centered card">
+	<button (click)="getUserInstagramMedia()" class="ui instagram button">
+		<i class="instagram icon"></i>
+		Instagram
+	</button>
+</div>
 
-<div *ngIf="instagramMedia$ | async">
-  <div class="col-md-3" *ngFor="let media of instagramMedia$ | async">
-    <img [src]="media" class="insta-media">
-  </div>
+<div *ngFor="let media of instagramMedia$ | async">
+	<div class="ui centered card my-card">
+		<div class="content">
+			<div class="right floated meta">14h</div>
+			<img class="ui avatar image" [src]="media"> Elliot
+		</div>
+		<div class="image">
+			<img class="ui fluid image" [src]="media">
+		</div>
+		<div class="content">
+			<span class="right floated">
+				<i class="heart outline like icon"></i>
+				17 likes
+			</span>
+			<i class="comment icon"></i>
+			3 comments
+		</div>
+		<div class="extra content">
+			<div class="ui large transparent left icon input">
+				<i class="heart outline icon"></i>
+				<input type="text" placeholder="Add Comment...">
+			</div>
+		</div>
+	</div>
 </div>

@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: Action ): State {
 		// https://www.pivotaltracker.com/story/show/136717477
 		case ActionTypes.LOAD_TRIPS_SUCCESS: {
 			const Trips = action.payload;
-			const newTrips = Trips.filter(trip => !state.trips[trip.id]);
+			const newTrips = Trips.filter(trip => !state.trips.trips[trip.id]);
 			const newTripIds = newTrips.map(trip => trip.id);
 
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {

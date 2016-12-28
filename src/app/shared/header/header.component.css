@@ -1,10 +1,4 @@
-#app-header {
-  background-color: green;
-  min-height: 65px;
-  min-width: 950px;
-}
-
-.photo {
-    max-height: 48px;
-    padding: 5px;
+.my-header {
+  box-shadow: 0 1px 5px #BBB !important;
+  background: #fff;
 }
