@@ -13,7 +13,7 @@ export class UserMediaComponent implements OnInit {
 	instagramMedia$: Observable<string[]>;
 
   constructor(private store: Store<fromRoot.State>) { 
-    		this.instagramMedia$ = this.store.select(fromRoot.getInstagramMedia);
+    this.instagramMedia$ = this.store.select(fromRoot.getInstagramMedia);
   }
 
   getUserInstagramMedia() {
