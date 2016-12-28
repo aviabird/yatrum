@@ -20,6 +20,12 @@ export class TripsService {
     }
   }
 
+	/**
+	 * Get details of a particular trip
+	 * @method getTrip
+	 * @param {String} Trip id
+	 * @return {Boolean} CS:?
+	 */
   getTrip(id: string): boolean {
 		this.store.dispatch(new fromTripActions.SelectTripAction(id));
 
@@ -47,16 +53,34 @@ export class TripsService {
 			return true;
   }
 
+	/**
+	 * Get all trips for dashboard page
+	 * @method getTrips 
+	 * @param 
+	 * @return {Observable} Observable of array of trips
+	 */
   getTrips(): Observable<Trip[]> {
     return this.http.get(`${this.apiLink}/trips.json`)
       .map((data: Response) => data.json())
   }
 
+	/**
+	 * Get all trips of a particular user
+	 * @method getUserTrip 
+	 * @param {String} user id 
+	 * @return {Observable} Observable with array of user trip objects
+	 */
 	getUserTrips(id: string): Observable<Trip[]> {
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
 			.map((data: Response) => data.json())
 	}
 
+	/**
+	 * Save a trip 
+	 * @method saveTrip
+	 * @param {Trip} Trip object to be saved
+	 * @return {Observable} Observable with created trip object
+	 */
 	saveTrip(trip: Trip): Observable<Trip> {
 		console.log('we are saving trip');
 		const headers = new Headers({
@@ -70,6 +94,12 @@ export class TripsService {
 		).map((data: Response) => data.json())
 	}
 
+	/**
+	 * Update trip data 
+	 * @method udpateTrip
+	 * @param {Trip} trip object to be updated
+	 * @return {Observable} Observable with updated trip object
+	 */
 	updateTrip(trip: Trip): Observable<Trip> {
 		const tripId = trip.id; 
 		const headers = new Headers({
