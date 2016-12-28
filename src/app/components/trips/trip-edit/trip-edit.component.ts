@@ -1,5 +1,10 @@
+import { Observable } from 'rxjs/Observable';
+import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
+import { Store } from '@ngrx/store';
+import { createSelector } from 'reselect';
 import { Form, FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import * as fromRoot from '../../../reducers';
 
 @Component({
   selector: 'tr-trip-edit',
@@ -8,29 +13,56 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 })
 export class TripEditComponent implements OnInit {
   tripForm: FormGroup;
+  editingStatus$: Observable<boolean>;
+  isEditing: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: Store<fromRoot.State>) { 
+    this.editingStatus$ = this.store.select(fromRoot.getEditingStatus);
+    this.editingStatus$.subscribe((status) => {
+      this.isEditing = status === true ? true : false;        
+    }); 
+  }
 
   ngOnInit() {
     this.initForm()
   }
 
+  /**
+   * redirect user back
+   * @method onCancel
+   */
   onCancel() {
     console.log('in cancel button')
+    // redirect to back
   }
 
+  /**
+   * Sends update and create method requests to the api
+   * @method onSubmit
+   */
   onSubmit() {
+    // Set the editing trip everytime we get a success response from the 
+    // create success action and if the editing trip has some value(id) 
+    // or something then we send an update trip request.
     console.log('submitting form', this.tripForm.value);
-    // dispatch saving the form Action.
-    // sets the new trip in store, use that to navigate to the 
-    // trip detail page. 
-    // Once the trip and created in the backend even once we show 
-    // button for publishing the Trip
-    // As user publishes the trip he is directly taken to his profile 
-    // use an observable here.
+    if( this.tripForm.valid ) {
+      // check with an observable whether we should call save action 
+      // or update action
+      if( this.isEditing === false ) {
+        this.store.dispatch(new SaveTripAction(this.tripForm.value));
+      } else {
+        // dispatch update action
+        console.log('<<<---we are updating now--->>>');        
+        this.store.dispatch(new UpdateTripAction(this.tripForm.value));
+      }
+    }
   }
 
-  initForm() {
+  /**
+   * Initialises the tripForm 
+   * @method initForm
+   */
+  initForm():void {
     let name = 'Dubai Trip';
     let description = 'Desert safari';
     // let status = "completed"; //TODO use a checkbox or a select box.
@@ -44,6 +76,7 @@ export class TripEditComponent implements OnInit {
     // Add a Media
     media.push(
       new FormGroup({
+        id: new FormControl(),
         link: new FormControl('https://unsplash.it/300/300/?random', Validators.required),
         description: new FormControl('Enjoyed a lot', Validators.required)
       })
@@ -51,6 +84,7 @@ export class TripEditComponent implements OnInit {
     // Add a Place
     places.push(
       new FormGroup({
+        id: new FormControl(),
         name: new FormControl('Koregaon park', Validators.required),
         description: new FormControl('We had really nice food here', Validators.required),
         review: new FormControl('Really lively place', Validators.required),
@@ -60,57 +94,67 @@ export class TripEditComponent implements OnInit {
 
     places_1.push(
       new FormGroup({
+        id: new FormControl(),
         name: new FormControl('Koregaon park', Validators.required),
         description: new FormControl('We had really nice food here', Validators.required),
         review: new FormControl('Really lively place', Validators.required),
+        //TODO: Refactor this change media to pictures as per rails dependency
         media: media
       })
     )
     // Add a dummy City
     cities.push(
       new FormGroup({
-        name: new FormControl('Pune city', Validators.required),    //[''],
-        country: new FormControl('India', Validators.required), //[''],
-        places: places   //['']
-      })
-    )
-    cities.push(
-      new FormGroup({
-        name: new FormControl('Dubai city', Validators.required),    //[''],
-        country: new FormControl('UAE', Validators.required), //[''],
-        places: places_1   //['']
+        id: new FormControl(),
+        name: new FormControl('Pune city', Validators.required),
+        country: new FormControl('India', Validators.required),
+        places_attributes: places
       })
     )
 
     this.tripForm = this.fb.group({
+      id: [],
       name: [name, Validators.required],
       description: [description, Validators.required],
       startDate: [startDate, Validators.required],
       endDate: [endDate, Validators.required],
       // status: [status, Validators.required] //TODO use a checkbox or a select box.
-      cities: cities
+      cities_attributes: cities
     })
   }
 
-  addCity() {
+  /**
+   * Adds a city FormGroup to the cities <FormArray>FormControl(__cities__)
+   * @method addCity
+   * @param void
+   * @return void
+   */
+  addCity():void {
     let places = new FormArray([]);
-    
-    (<FormArray>this.tripForm.controls['cities']).push(
-      new FormGroup({        
-        name: new FormControl('Dubai city', Validators.required),    //[''],
-        country: new FormControl('UAE', Validators.required), //[''],
-        places: places   //['']
+
+    (<FormArray>this.tripForm.controls['cities_attributes']).push(
+      new FormGroup({
+        id: new FormControl(),        
+        name: new FormControl('Dubai city', Validators.required),
+        country: new FormControl('UAE', Validators.required),
+        places_attributes: places
       })
     )
   }
 
-  addPlace(cityIndex) {
-    // let cityIndex = 0
+  /**
+   * Adds a place FormGroup to the city's <FormArray>FormControl(__places__)
+   * @method addPlace
+   * @param {cityIndex} index of the city to which place is to be added
+   * @return {void}
+   */
+  addPlace(cityIndex: number):void {
     let media: FormArray = new FormArray([]);
 
-    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
-      .controls[cityIndex]).controls['places']).push(
+    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities_attributes'])
+      .controls[cityIndex]).controls['places_attributes']).push(
         new FormGroup({
+          id: new FormControl(),
           name: new FormControl('Koregaon park', Validators.required),
           description: new FormControl('We had really nice food here', Validators.required),
           review: new FormControl('Really lively place', Validators.required),
@@ -119,4 +163,16 @@ export class TripEditComponent implements OnInit {
     )
   }
 
+  /**
+   * Adds a new FormGroup to the places FormArray(FormControl)
+   * @method addPicture
+   * @param {cityIndex} the index of the city to whose place the picture is to be added
+   * @param {placeIndex} the index of the place to which the picture is to be added
+   * @return {void}
+   */
+  addPicture(cityIndex: number, placeIndex: number): void {
+    // TODO: 
+    // 1. First refactor media to pictures https://www.pivotaltracker.com/story/show/136716365
+    // 2. Check addPlace method to see how it should be done with 1 more level of nesting
+  }
 }

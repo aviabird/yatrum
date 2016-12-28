@@ -1,4 +1,7 @@
-<h2>Create a new Trip</h2>
+<div class="banner" *ngIf="isEditing">
+  <h3>Trip Successfully created, now updating it </h3>
+</div>
+<h2>Create a new Trip</h2> 
 <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <!-- Trip Basic detail -->
@@ -16,15 +19,15 @@
   <!-- Start date of trip -->
   <div class="form-group">
     <label for="startDate">Start Date</label>
-    <input type="text" id="startDate">
+    <ng2-datepicker formControlName="startDate"></ng2-datepicker>
     <!--<p class="help-block">When did you start this trip.</p>-->
   </div>
   <!-- Cities Basic info -->
   <div class="row" style="margin-left:50px;"> <!--TODO: Remove inline CSS later -->
-    <h2> City </h2>
-    <button class="btn btn-primary" (click)="addCity()">Add city</button>
-    <ul class="list-group" formArrayName="cities">
-      <div *ngFor="let city of tripForm.controls['cities'].controls; let i = index">
+    <h2 class="side"> City </h2>
+    <button class="btn btn-primary" (click)="addCity()">+</button>
+    <ul class="list-group" formArrayName="cities_attributes">
+      <div *ngFor="let city of tripForm.controls['cities_attributes'].controls; let i = index">
         <div class="form-group col-md-12" formGroupName="{{i}}">
           <div class="col-sm-6">
             <label for="description">City name</label>
@@ -43,10 +46,10 @@
           <!-- Places basic info -->
           <!--TODO: Add provision for places later-->
           <div class="row" style="margin-left:50px;">
-            <h2> Places </h2> 
-            <button class="btn btn-primary" (click)="addPlace(i)">Add Place</button>
-            <ul class="list-group" formArrayName="places">
-              <div *ngFor="let place of city.controls['places'].controls; let j = index">
+            <h2 class="side"> Places </h2> 
+            <button class="btn btn-primary" (click)="addPlace(i)">+</button>
+            <ul class="list-group" formArrayName="places_attributes">
+              <div *ngFor="let place of city.controls['places_attributes'].controls; let j = index">
                 <div class="form-group" formGroupName="{{j}}">
                   <div class="col-sm-6">
                     <label for="description">Place Name</label>
@@ -62,29 +65,30 @@
                       placeholder="Caliornia, SF" 
                       formControlName="description">
                   </div>
+                  <!--TODO: Implement it later -->
                   <!-- Media for all the trips go here -->
-                  <h2> Pictures </h2>
+                  <!--<h2> Pictures </h2>
                   <ul class="list-group" formGroupName="media">
                     <div *ngFor="let media of place.controls['media'].controls; let k = index">
                       <div class="form-group" formGroupName="{{k}}">
                         <div class="col-sm-5">
                           Link for image {{media.value.link}}
-                          <!--<image href="./assets/images/aviabird.png">-->
+                          <image href="./assets/images/aviabird.png">
                         </div>
-                        <!-- Add image uploading feature later -->
-                        <!--<image-upload></image-upload>-->
-                        <!--<div class="col-sm-5">
+                         Add image uploading feature later 
+                        <image-upload></image-upload>
+                        <div class="col-sm-5">
                           <label for="description">Image Url</label>
                           <input type="text" 
                             class="form-control" 
                             placeholder="http://some-image-link.html" 
                             formControlName="link"
                             #imageUrl>
-                        </div>-->
+                        </div>
 
                       </div>
                     </div>
-                  </ul>
+                  </ul>-->
                 </div>
               </div>
             </ul>
@@ -102,7 +106,10 @@
   </div>-->
   <div class="row">
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-success" [disabled]="!tripForm.valid" >Save</button>
+      <!--REFACTOR: Switch to ngIf/Else syntax while updating to angular4.0 -->
+      <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
+      <button type="submit" *ngIf="!isEditing" class="btn btn-success" [disabled]="!tripForm.valid" >Save</button>
+      <button type="submit" *ngIf="isEditing" class="btn btn-success" [disabled]="!tripForm.valid" >Update</button>
       <a class="btn btn-danger" (click)="onCancel()">Cancel</a>
     </div>
   </div>

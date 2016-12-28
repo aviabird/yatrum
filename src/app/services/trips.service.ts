@@ -57,4 +57,34 @@ export class TripsService {
 			.map((data: Response) => data.json())
 	}
 
+	saveTrip(trip: Trip): Observable<Trip> {
+		console.log('we are saving trip');
+		const headers = new Headers({
+      'Content-Type': 'application/json' 
+			// Add auth token by creating a common interceptor 
+			// use Restangular which creates interceptor
+    });
+
+		return this.http.post(`${this.apiLink}/trips.json`, 
+			JSON.stringify({trip: trip}), {headers: headers}
+		).map((data: Response) => data.json())
+	}
+
+	updateTrip(trip: Trip): Observable<Trip> {
+		console.log('we are updating trip');
+
+		const headers = new Headers({
+      'Content-Type': 'application/json' 
+			// Add auth token by creating a common interceptor 
+			// use Restangular which creates interceptor
+    });
+
+		return this.http.patch(`${this.apiLink}/trips/24.json`,
+			JSON.stringify({trip: trip}), {headers: headers}
+		).map((data: Response) => {
+			console.log('data present is', data);
+			return data.json()
+		})
+	}
+
 }

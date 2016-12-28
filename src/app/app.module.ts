@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { ImageUploadModule } from 'angular2-image-upload';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
+import { DatePickerModule } from 'ng2-datepicker';
+
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -93,6 +95,7 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
+    DatePickerModule,
     StoreDevtoolsModule.instrumentStore({
       monitor: useLogMonitor({
         visible: false,
