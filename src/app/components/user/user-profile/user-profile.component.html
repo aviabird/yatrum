@@ -22,9 +22,12 @@
 			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
 		</div>
 		<div class="">
-			<input type="file" ng2FileSelect [uploader]="uploader"/>
-			<div *ngFor="let item of uploader.queue">
-				<button class="btn btn-primary" (click)="item.upload()">Upload</button>
+			<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
+			<div *ngIf="imageSrc">
+				<button (click)="onUpload()" class="ui instagram button">
+					<i class="cloud icon"></i>
+					Upload Image
+				</button>
 			</div>
 		</div>
 	</div>
