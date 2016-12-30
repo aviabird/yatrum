@@ -69,10 +69,10 @@ export class ServerAuthService {
   }
 
   getServerUserProfile(data): UserProfile {
-    return { id: '',
+    return { id: data.user.id,
             name: data.user.name,
             email: data.user.email,
-            photoURL: data.user.photoURL,
+            photoURL: data.user.profile_pic ? data.user.profile_pic['url'] : null,
             token: data.auth_token,
             created_at: '',
             updated_at: ''

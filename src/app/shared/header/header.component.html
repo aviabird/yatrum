@@ -3,8 +3,8 @@
     <img class="ui tiny image" [src]="'http://cdn-3.famouslogos.us/images/travel-logos/traveller-logo.png'">
   </a>
   <div class="right menu">
-    <div *ngIf="(authentication$ | async)" class="item">
-      <img class="ui avatar image" [src]="(user$ | async).instagram_profile_picture"  onError="this.src='https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
+    <div *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user', (user$ | async).id]">
+      <img class="ui avatar image" [src]="(user$ | async).profile_pic"  onError="this.src='https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
       <a >{{(user$ | async).name}}</a>
     </div>
     <a *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user','settings']">Settings</a>
