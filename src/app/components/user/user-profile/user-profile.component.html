@@ -2,18 +2,20 @@
 
 <div class="ui card profile-cover">
 	<div class="image profile-cover-div">
-		<img class="cover-image" [src]="'https://pbs.twimg.com/profile_banners/2420548369/1482824909/1500x500'">
-	</div>
-	<div class="extra content ui grid">
-		<div class="four wide column"></div>
-		<div class="twelve wide column">
-			<span class="content" [routerLink]="['trips']">Trips</span>
-			<span class="content">Followers</span>
-			<span class="content">Following</span>
-			<span class="content" [routerLink]="['media']">Media</span>
-		</div>
+		<img class="ui cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">
 	</div>
 </div>
+
+<div class="extra content ui grid">
+	<div class="four wide column"></div>
+	<div class="twelve wide column">
+		<span class="content" [routerLink]="['trips']">Trips</span>
+		<span class="content">Followers</span>
+		<span class="content">Following</span>
+		<span class="content" [routerLink]="['media']">Media</span>
+	</div>
+</div>
+
 
 <div class="main ui grid">
 	<div class="one wide column"></div>
@@ -24,10 +26,14 @@
 		<div class="">
 			<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
 			<div *ngIf="imageSrc">
-				<button (click)="onUpload()" class="ui instagram button">
+				<button (click)="onUpdateMedia('profile_pic')" class="ui instagram button">
 					<i class="cloud icon"></i>
 					Upload Image
 				</button>
+				<button (click)="onUpdateMedia('cover_photo')" class="ui instagram button">
+					<i class="cloud icon"></i>
+					Upload Image
+				</button>				
 			</div>
 		</div>
 	</div>

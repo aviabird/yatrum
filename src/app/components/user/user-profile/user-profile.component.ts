@@ -55,8 +55,8 @@ export class UserProfileComponent implements OnInit {
       this.loaded = true;
     }
 
-    onUpload() {
-      this.cloudinaryService.uploadImages(this.imageSrc);
+    onUpdateMedia(mediaType) {
+      this.cloudinaryService.uploadImages(this.imageSrc, mediaType);
     }
 
 }
