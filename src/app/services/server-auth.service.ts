@@ -72,7 +72,8 @@ export class ServerAuthService {
     return { id: data.user.id,
             name: data.user.name,
             email: data.user.email,
-            photoURL: data.user.profile_pic ? data.user.profile_pic['url'] : null,
+            profilePic: data.user.profile_pic,
+            coverPhoto: data.user.cover_photo,
             token: data.auth_token,
             created_at: '',
             updated_at: ''

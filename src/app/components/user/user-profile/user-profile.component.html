@@ -19,7 +19,7 @@
 	<div class="one wide column"></div>
 	<div class="three wide column profile-info">
 		<div class="profile-image-div">
-			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
+			<img class="ui medium image profile-image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">
 		</div>
 		<div class="">
 			<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">

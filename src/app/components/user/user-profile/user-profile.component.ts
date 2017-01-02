@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Observable';
+import { UserProfile } from './../../../models/user-profile';
 import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
 import { environment as env} from './../../../../environments/environment';
 import { LoadUserTripsAction } from './../../../actions/trips.action';
 import { ActivatedRoute } from '@angular/router';
-import { State } from './../../../reducers/index';
+import { State, getUserProfile } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -20,8 +22,12 @@ export class UserProfileComponent implements OnInit {
   private userIndex: string;
   public loaded: boolean = false;
   public imageSrc: string = '';
+  public user$: Observable<UserProfile>;
 
-  constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, private cloudinaryService: CloudinaryIntegrationService) {}
+  constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, private cloudinaryService: CloudinaryIntegrationService) {
+    this.user$ = this.store.let(getUserProfile);
+    this.user$.subscribe(data => console.log(data));
+  }
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(

@@ -13,7 +13,8 @@ const initialState = {
   user_profile: { id: null,
                   name: null,
                   email: null,
-                  photoURL: null,
+                  profilePic: null,
+                  coverPhoto: null,
                   token: null,
                   created_at: null,
                   updated_at: null
@@ -53,6 +54,12 @@ export function reducer(state = initialState, action: Action): State {
       return {
         user_profile: initialState.user_profile,
         auth: false
+      }
+    }
+    case ActionTypes.USER_UPDATE_SUCCESS: {
+      return {
+        user_profile: action.payload,
+        auth: true
       }
     }
     default: {

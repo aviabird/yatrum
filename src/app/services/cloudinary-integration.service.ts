@@ -1,3 +1,6 @@
+import { UserUpdateSuccessAction } from './../actions/user-auth.action';
+import { State } from './../reducers/index';
+import { Store } from '@ngrx/store';
 import { Http, Headers } from '@angular/http';
 import { environment as env } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -8,7 +11,7 @@ export class CloudinaryIntegrationService {
   private serverLink: string = "http://localhost:3000";
   private auth_token: string;
 
-  constructor(private http: Http) { 
+  constructor(private http: Http, private store: Store<State>) { 
     let user_data = JSON.parse(localStorage.getItem('user'));
     if (user_data) {
       this.auth_token = user_data.auth_token;
@@ -33,9 +36,21 @@ export class CloudinaryIntegrationService {
       public_id: data.public_id
     }
     return this.http.post(`${this.serverLink}/update_user_profile_media`, params, {headers: headers})
-      .subscribe(data => console.log("success"));
+      .map(response => response.json())
+      .subscribe(data => {
+        let payload = { 
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          profilePic: data.user.profile_pic,
+          coverPhoto: data.user.cover_photo,
+          token: data.auth_token,
+          created_at: '',
+          updated_at: ''
+        }
+        this.store.dispatch(new UserUpdateSuccessAction(payload));
+      });
   }
-
 
   private createUploadParams(image) {
     return {
