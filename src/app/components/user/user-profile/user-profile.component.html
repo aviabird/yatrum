@@ -22,21 +22,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="overlay-image"></div>
-		<img class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/mally/image/upload/e_blur:1000/v1483380368/1500x500_jh1ip6.jpg'">
+		<img class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
 	</div>
 
-	<div class="ui grid centered">
-		<div class="four wide column"></div>
-		<div class="twelve wide column">
-			<span class="content" [routerLink]="['trips']">Trips</span>
-			<span class="content">Followers</span>
-			<span class="content">Following</span>
-			<span class="content" [routerLink]="['media']">Media</span>
-		</div>
+	<div class="ui grid centered profile-nav">
+		<span class="profile-nav-links active" [routerLink]="['trips']">Trips</span>
+		<span class="profile-nav-links">Followers</span>
+		<span class="profile-nav-links">Following</span>
+		<span class="profile-nav-links" [routerLink]="['media']">Media</span>
 	</div>
 </div>
-
 
 <div class="main ui grid">
 	<div class="one wide column"></div>
