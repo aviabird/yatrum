@@ -30,7 +30,9 @@
   <!-- Cities Basic info -->
   <div class="row" style="margin-left:50px;"> <!--TODO: Remove inline CSS later -->
     <h2 class="side"> City </h2>
-    <button class="btn btn-primary" (click)="addCity()">+</button>
+    <button type="button" class="circular ui icon button" (click)="addCity()">
+      <i class="icon plus"></i>
+    </button>
     <ul class="list-group" formArrayName="cities_attributes">
       <div *ngFor="let city of tripForm.controls['cities_attributes'].controls; let i = index">
         <div class="form-group col-md-12" formGroupName="{{i}}">
@@ -52,7 +54,9 @@
           <!--TODO: Add provision for places later-->
           <div class="row" style="margin-left:50px;">
             <h2 class="side"> Places </h2> 
-            <button class="btn btn-primary" (click)="addPlace(i)">+</button>
+            <button type="button" class="circular ui icon button" (click)="addPlace(i)">
+              <i class="icon plus"></i>
+            </button>
             <ul class="list-group" formArrayName="places_attributes">
               <div *ngFor="let place of city.controls['places_attributes'].controls; let j = index">
                 <div class="form-group" formGroupName="{{j}}">
