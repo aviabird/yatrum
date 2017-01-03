@@ -5,3 +5,11 @@
         width: 960px;
     }   
 }
+
+.text-white {
+	color: white !important;
+}
+
+body {
+	letter-spacing: 1px;
+}

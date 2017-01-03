@@ -1,14 +1,31 @@
 <div class="ui menu my-header">
   <a class="item" [routerLink]="['/trips']">
-    <img class="ui tiny image" [src]="'http://cdn-3.famouslogos.us/images/travel-logos/traveller-logo.png'">
-  </a>
-  <div class="right menu">
-    <div *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user', (user$ | async).id]">
-      <img class="ui avatar image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
-      <a >{{(user$ | async).name}}</a>
+    <div>&nbsp;</div>
+    <i class="big travel icon"></i>
+    <div class="title">
+      <div class="title1">travel</div>
+      <div class="title2">diary</div>
     </div>
-    <a *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user','settings']">Settings</a>
-    <a *ngIf="(authentication$ | async)" class="item" (click)="logout()">LogOut</a>
-    <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
+  </a>
+  
+  <div class="right menu">
+    <div class="ui right aligned category search item">
+      <div class="ui icon input">
+        <input class="prompt" type="text" placeholder="Search animals...">
+        <i class="search link icon"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+    <div class="ui simple dropdown item text-white" *ngIf="(authentication$ | async)">
+      <img class="ui avatar image" [src]="(user$ | async).instagram_profile_picture"  onError="this.src='https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user','settings']">Settings</a>
+        <a *ngIf="(authentication$ | async)" class="item" (click)="logout()">LogOut</a>
+      </div>
+      <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
+    </div>
+    <div>&nbsp;</div>
   </div>
+
 </div>

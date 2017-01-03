@@ -1,0 +1,50 @@
+.my-header {
+  box-shadow: 0 1px 5px #BBB !important;
+  background: rgba(26, 40, 52, 0.95);
+  border-radius: 0;
+  color: white;
+  padding: 0 5rem;
+  box-shadow: none !important;
+  width: 100%;
+
+  a, a:hover {
+  	color: white;
+  }
+
+  .title {
+  	font-size: 1.5rem;
+  	font-weight: 100;
+  	float: left;
+  	.title1 {
+	  	color: grey;
+	  	float: left;
+	  }
+
+	  .title2 {
+	  	color: grey + 100;
+	  	float: left;
+	  }
+  }
+
+  .search {
+    color: white;
+    .input {
+      background: transparent;
+      color: white;
+      .prompt {
+        background: transparent;
+        border: 1px solid green;
+        border-radius: 6px;
+        color: white;
+      }
+    }
+  }
+
+  .travel {
+    color: rgb(17, 225, 139);
+  }
+
+  .avatar {
+    border-radius: 5px;
+  }
+}
