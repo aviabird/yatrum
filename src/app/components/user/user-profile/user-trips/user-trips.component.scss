@@ -1,3 +1,39 @@
 .my-card {
-	width: 100%;	
+	margin: 2rem auto;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+
+	.photo {
+		position: relative;	
+    bottom: -0.35rem;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+	}
+
+	.avatar {
+		border-radius: 5px;
+		width: 100%;
+    height: auto;
+	}
+
+	.content {
+		padding: 2rem;
+	}
+
+	h3 {
+		font-weight: 400;
+		margin-bottom: 5px;
+	}
+
+	p {
+		font-size: 1.1rem;
+	}
+
+	.icon {
+		color: #aaa;
+	}
+
+	.icon-group {
+		text-align: center;
+	}
 }

@@ -20,11 +20,11 @@
       <img class="ui avatar image" [src]="(user$ | async).instagram_profile_picture"  onError="this.src='https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
       <i class="dropdown icon"></i>
       <div class="menu">
-        <a *ngIf="(authentication$ | async)" class="item" [routerLink]="['/user','settings']">Settings</a>
-        <a *ngIf="(authentication$ | async)" class="item" (click)="logout()">LogOut</a>
+        <a class="item" [routerLink]="['/user','settings']">Settings</a>
+        <a class="item" (click)="logout()">LogOut</a>
       </div>
-      <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
     </div>
+    <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
     <div>&nbsp;</div>
   </div>
 
