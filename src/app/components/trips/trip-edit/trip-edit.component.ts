@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
-import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
+import { SaveTripAction, UpdateTripAction, ClearEditingTripAction, AddTripToLocalStore } from './../../../actions/trips.action';
 import { Store } from '@ngrx/store';
 import { createSelector } from 'reselect';
 import { Form, FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
@@ -16,30 +17,51 @@ export class TripEditComponent implements OnInit {
   tripForm: FormGroup;
   editingStatus$: Observable<boolean>;
   isEditing: boolean = false; // calling create/update service methods
-  isNewTrip: boolean = false; // editing/creating a trip
+  isNewTrip: boolean = true; // editing/creating a trip
   trip$: Observable<Trip>;
+  tripId: String;
 
-  constructor(private fb: FormBuilder, private store: Store<fromRoot.State>) { 
-    this.editingStatus$ = this.store.select(fromRoot.getEditingStatus);
-    this.trip$ = this.store.select(fromRoot.getEditingTrip);
-    // Set Editing status
-    this.editingStatus$.subscribe((status) => {
-      this.isEditing = status === true ? true : false;        
-    }); 
-    // Set trip object
-    this.trip$.subscribe((trip) => {
-      console.log('Trip from store', trip);
-      if (trip.hasOwnProperty('id')){
-        console.log('syncing trip');
-        this.resetFormDataWithStoreTrip(trip)
-      }
-    })
+  constructor(private fb: FormBuilder, 
+              private store: Store<fromRoot.State>,
+              private router: Router) { 
+    this.setEditingStatus();
+    this.redirectUponCreate();
   }
 
   ngOnInit() {
     this.initForm()
   }
 
+  /** 
+   * sets the editing status
+   */
+  setEditingStatus() {
+    this.editingStatus$ = this.store.select(fromRoot.getEditingStatus);
+    
+    this.editingStatus$.subscribe((status) => {
+      this.isEditing = status === true ? true : false;
+    }); 
+  }
+
+  /**
+   * 1. Redirect after successful trip creation
+   * 2. Clear editingTrip from store
+   * 3. Add the created to local trip store
+   * @method redirectUponCreate
+   */
+  redirectUponCreate() {
+    this.trip$ = this.store.select(fromRoot.getEditingTrip);
+    
+    this.trip$.subscribe((trip) => {
+      if (trip && trip.hasOwnProperty('id')){
+        this.tripId = trip.id;
+        this.store.dispatch(new AddTripToLocalStore(trip));
+        this.router.navigateByUrl(`/trips/${this.tripId}`);
+        this.store.dispatch(new ClearEditingTripAction());
+      }
+    })
+  }
+  
   /**
    * Set the create form with latest data trip from the backend updates ids
    * @method setFormDataWithStoreTrip
