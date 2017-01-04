@@ -1,6 +1,9 @@
-<button *ngIf="(authentication$ | async) != null" 
-        class="btn btn-primary pull-right"
-        [routerLink]="['new']">Create Trip</button>
+<div class="create-button">
+  <div class="ui primary animated button" tabindex="0" [routerLink]="['new']">
+    <div class="visible content">Create Trip</div>
+    <div class="hidden content"><i class="plus icon"></i></div>
+  </div>
+</div>
 
 <div class="ui centered grid">
   <div class="twelve wide column">
@@ -8,7 +11,7 @@
       <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column">
         <div class="ui card my-card">  
           <div class="content">
-            <a class="header">{{trip.description}}</a>
+            <a class="header">{{trip.name}}</a>
             <div class="meta">
               <span class="date">25/4/2016</span>
             </div>
