@@ -1,9 +1,9 @@
 
 /* You can add global styles to this file, and also import other style files */
 @media (min-width: 1200px) {
-    .container {
-        width: 960px;
-    }   
+  .container {
+    width: 960px;
+  }   
 }
 
 .text-white {
@@ -13,4 +13,14 @@
 body {
 	letter-spacing: 1px;
 	font-weight: 100;
+}
+
+.ta-main-input {
+  border-left: transparent !important;
+  border-right: transparent !important;
+  border-top: transparent !important;
+  border-radius: 0px !important; 
+  padding-bottom: 2px !important;
+  padding-left: 0px !important;
+  font-size: 34px !important;
 }

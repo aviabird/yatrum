@@ -86,8 +86,8 @@ export class TripsService {
 	saveTrip(trip: Trip): Observable<Trip>|Observable<String> {
 		console.log('we are saving trip');
 		const headers = new Headers({
-      'Content-Type': 'application/json' 
-			// Add auth token by creating a common interceptor 
+      'Content-Type': 'application/json', 
+			'Authorization': this.auth_token
 			// use Restangular which creates interceptor
     });
 
@@ -107,8 +107,8 @@ export class TripsService {
 	updateTrip(trip: Trip): Observable<Trip>|Observable<String> {
 		const tripId = trip.id; 
 		const headers = new Headers({
-      'Content-Type': 'application/json' 
-			// Add auth token by creating a common interceptor 
+      'Content-Type': 'application/json',
+			'Authorization': this.auth_token 
 			// use Restangular which creates interceptor
     });
 

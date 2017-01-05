@@ -73,7 +73,7 @@ export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, i
 // Since we have to select a trip, either from dashboard trips or from user trips, so first we
 // are merging all trips, and then we can select a particular trip.
 export const getSelectedTrip = createSelector(getTrips, getUserTrips, getSelectedTripId, (trips, userTrips, id) => {
-	const allTrips = Object.assign({},trips,userTrips);
+	const allTrips = Object.assign({}, trips, userTrips);
 	return allTrips[id];
 });
 
