@@ -8,18 +8,8 @@
 				<h1 class="profile-name">{{(user$ | async)?.name}}</h1>
 				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
 			</div>
-			<div *ngIf="false">
+			<div [hidden]="true">
 				<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
-				<div *ngIf="imageSrc">
-					<button (click)="onUpdateMedia('profile_pic')" class="ui instagram button">
-						<i class="cloud icon"></i>
-						Upload Image
-					</button>
-					<button (click)="onUpdateMedia('cover_photo')" class="ui instagram button">
-						<i class="cloud icon"></i>
-						Upload Image
-					</button>				
-				</div>
 			</div>
 		</div>
 		<img class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">

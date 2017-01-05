@@ -2,16 +2,14 @@
 	<div class="my-card">
 		<div class="ui grid content">
 			<div class="two wide column">
-				<img class="ui avatar image" src="https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg">
+				<img class="ui avatar image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
 			</div> 
 			<div class="ten wide column">
 				<h3>
-					Chandra Shekhar
+					{{(user$ | async).name}}
 				</h3>
-				<p class="header">
-					Nothing like to walk on the beach to clear your mind.
-					Nothing like to walk on the beach to clear your mind.
-					Nothing like to walk on the beach to clear your mind.
+				<p class="description">
+					{{trip.description}}
 				</p>
 			</div>
 			<div class="four wide column icon-group">
@@ -20,7 +18,7 @@
 				<i class="large icon">2h</i>
 			</div>
 		</div>
-		<div class="description">
+		<div class="trip-image">
 			<img width="100%" class="photo" src="http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg">
 		</div>
 	</div>
