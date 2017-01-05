@@ -4,25 +4,27 @@
 	<div class="image profile-cover-div">
 		<div class="profile-info">
 			<div class="profile-image-div text-white">
-				<img class="ui centered image profile-image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+				<div class="profile-image-text" (click)="onUpdateProfilePicture()" >
+					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+					<img *ngIf="imageSrc && isProfilPicChanged" class="ui centered image profile-image" [src]="imageSrc">
+					<div class="update-icon-text">
+						<i class="big photo icon"></i>
+					</div>
+				</div>
 				<h1 class="profile-name">{{(user$ | async)?.name}}</h1>
 				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
 			</div>
-			<div>
-				<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
-				<div *ngIf="imageSrc">
-					<button (click)="onUpdateMedia('profile_pic')" class="ui instagram button">
-						<i class="cloud icon"></i>
-						Update Profile Picture
-					</button>
-					<button (click)="onUpdateMedia('cover_photo')" class="ui instagram button">
-						<i class="cloud icon"></i>
-						Update Cover Photo
-					</button>				
-				</div>
+			<div [hidden]="true">
+				<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
 			</div>
 		</div>
-		<img class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
+		<img *ngIf="!imageSrc || isProfilPicChanged" class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
+		<img *ngIf="imageSrc && !isProfilPicChanged" class="cover-image" [src]="imageSrc">
+		<div class="cover-update-text" (click)="onUpdateCoverPhoto()">
+			<i class="big photo icon"></i>
+			<div class="cover-photo-update-text1">Update Cover</div>
+			<div class="cover-photo-update-text2">Photo</div>
+		</div>
 	</div>
 
 	<div class="ui grid centered profile-nav">
