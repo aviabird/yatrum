@@ -6,18 +6,18 @@
 }
 
 .profile-cover-div {
-	height: 37rem;
+	height: 27rem;
 	overflow: hidden;
 }
 
-.cover-image {
-	// width: 100%;	
-}
+// .cover-image {
+// 	// width: 100%;	
+// }
 
 .profile-info {
 	position: absolute;
 	transform: translateZ;
-	top: 30%;
+	top: 16%;
 	left: 50%;
 	transform: translate(-50%);
 	z-index: 1;
