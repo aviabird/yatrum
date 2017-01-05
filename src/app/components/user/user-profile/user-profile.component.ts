@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Observable';
+import { UserProfile } from './../../../models/user-profile';
 import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
 import { environment as env} from './../../../../environments/environment';
 import { LoadUserTripsAction } from './../../../actions/trips.action';
 import { ActivatedRoute } from '@angular/router';
-import { State } from './../../../reducers/index';
+import { State, getUserProfile } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -16,13 +18,16 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 })
 export class UserProfileComponent implements OnInit {
 
-  private URL = `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}/image/upload`
-
   private subscription: Subscription;
   private userIndex: string;
-  public uploader: FileUploader = new FileUploader({url: this.URL});
+  public loaded: boolean = false;
+  public imageSrc: string = '';
+  public user$: Observable<UserProfile>;
 
-  constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, private cloudinaryService: CloudinaryIntegrationService) {}
+  constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, private cloudinaryService: CloudinaryIntegrationService) {
+    this.user$ = this.store.let(getUserProfile);
+    this.user$.subscribe(data => console.log(data));
+  }
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
@@ -30,9 +35,28 @@ export class UserProfileComponent implements OnInit {
     )
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
+    
+  handleInputChange(e) {
+    let file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    let pattern = /image-*/;
+    let reader = new FileReader();
 
-  onUpload() {
-    this.cloudinaryService.uploadImages(this.uploader.queue);
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onload = this.handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file);
   }
+    
+    private handleReaderLoaded(e) {
+      let reader = e.target;
+      this.imageSrc = reader.result;
+      this.loaded = true;
+    }
+
+    onUpdateMedia(mediaType) {
+      this.cloudinaryService.uploadImages(this.imageSrc, mediaType);
+    }
 
 }

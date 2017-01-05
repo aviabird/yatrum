@@ -3,7 +3,7 @@ import { City } from './city';
 
 export interface Trip extends Base {
     user_id: string;
-    traveller_name: string;
+    profile_pic_url: string;
     startDate: string;
     status: string; //TODO: https://www.pivotaltracker.com/story/show/134956979
     endDate:   string;

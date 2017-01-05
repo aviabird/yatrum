@@ -1,33 +1,40 @@
 <router-outlet></router-outlet>
 
-<div class="ui card profile-cover">
+<div class="profile-cover">
 	<div class="image profile-cover-div">
-		<img class="cover-image" [src]="'https://pbs.twimg.com/profile_banners/2420548369/1482824909/1500x500'">
-	</div>
-	<div class="extra content ui grid">
-		<div class="four wide column"></div>
-		<div class="twelve wide column">
-			<span class="content" [routerLink]="['trips']">Trips</span>
-			<span class="content">Followers</span>
-			<span class="content">Following</span>
-			<span class="content" [routerLink]="['media']">Media</span>
+		<div class="profile-info">
+			<div class="profile-image-div text-white">
+				<img class="ui centered image profile-image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+				<h1 class="profile-name">{{(user$ | async)?.name}}</h1>
+				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
+			</div>
+			<div>
+				<input type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
+				<div *ngIf="imageSrc">
+					<button (click)="onUpdateMedia('profile_pic')" class="ui instagram button">
+						<i class="cloud icon"></i>
+						Update Profile Picture
+					</button>
+					<button (click)="onUpdateMedia('cover_photo')" class="ui instagram button">
+						<i class="cloud icon"></i>
+						Update Cover Photo
+					</button>				
+				</div>
+			</div>
 		</div>
+		<img class="cover-image" [src]="(user$ | async).coverPhoto && (user$ | async).coverPhoto['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
+	</div>
+
+	<div class="ui grid centered profile-nav">
+		<span class="profile-nav-links active" [routerLink]="['trips']">Trips</span>
+		<span class="profile-nav-links">Followers</span>
+		<span class="profile-nav-links">Following</span>
+		<span class="profile-nav-links" [routerLink]="['media']">Media</span>
 	</div>
 </div>
 
 <div class="main ui grid">
-	<div class="one wide column"></div>
-	<div class="three wide column profile-info">
-		<div class="profile-image-div">
-			<img class="ui medium image profile-image" [src]="'https://avatars1.githubusercontent.com/u/13932478?v=3&s=460'">
-		</div>
-		<div class="">
-			<input type="file" ng2FileSelect [uploader]="uploader"/>
-			<div *ngFor="let item of uploader.queue">
-				<button class="btn btn-primary" (click)="item.upload()">Upload</button>
-			</div>
-		</div>
-	</div>
+	<div class="four wide column"></div>
 	<div class="eight wide column">
 		<router-outlet></router-outlet>
 	</div>

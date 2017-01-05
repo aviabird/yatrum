@@ -89,8 +89,9 @@ export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
 	return trip.user_id;
 })
 
-export const getTripUserName = createSelector(getSelectedTrip, (trip) => {
-	return trip.traveller_name;
+
+export const getTripUserProfilePictureUrl = createSelector(getSelectedTrip, (trip) => {
+	return trip.profile_pic_url;
 })
 
 // ============= notification list states and compose methods ===============================================

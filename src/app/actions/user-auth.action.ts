@@ -10,7 +10,8 @@ export const ActionTypes = {
   SERVER_LOGOUT:        "[User] Server Logout",  
   SERVER_LOGOUT_SUCCESS:"[User] Server Logout Success",
   SERVER_SIGNUP:        "[User] Server Signup",
-  SERVER_SIGNUP_SUCCESS:"[User] Server Signup Success"
+  SERVER_SIGNUP_SUCCESS:"[User] Server Signup Success",
+  USER_UPDATE_SUCCESS:  "[User] Update Success]"
 }
 
 export class LoginAction implements Action {
@@ -53,4 +54,8 @@ export class ServerSignUpAction implements Action {
 export class ServerSignUpSuccessAction implements Action {
   type = ActionTypes.SERVER_SIGNUP_SUCCESS;
   constructor() {}
+}
+export class UserUpdateSuccessAction implements Action {
+  type = ActionTypes.USER_UPDATE_SUCCESS;
+  constructor(public payload: any) {}
 }
