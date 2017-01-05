@@ -19,7 +19,11 @@
       "mobile": false,
       "styles": [
         "styles.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/semantic-ui/dist/semantic.min.css"
+        // "./ionicons.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

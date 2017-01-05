@@ -12,7 +12,9 @@ export const ActionTypes = {
 	SAVE_TRIP: "Save [Trip]",
 	SAVE_TRIP_SUCCESS: "Save [Trip] Success",
 	UPDATE_TRIP: "Update [Trip]",
-	UPDATE_TRIP_SUCCESS: "Update [Trip] Success"
+	UPDATE_TRIP_SUCCESS: "Update [Trip] Success",
+	CLEAR_EDITING_TRIP: "Clear Editing [Trip]",
+	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store"
 }
 
 export class LoadTripsAction {
@@ -53,5 +55,13 @@ export class UpdateTripAction {
 }
 export class UpdateTripSuccessAction {
 	type = ActionTypes.UPDATE_TRIP_SUCCESS;
+	constructor(public payload: Trip) {}
+}
+export class ClearEditingTripAction {
+	type = ActionTypes.CLEAR_EDITING_TRIP;
+	constructor() {}
+}
+export class AddTripToLocalStore {
+	type = ActionTypes.ADD_TRIP_TO_STORE;
 	constructor(public payload: Trip) {}
 }

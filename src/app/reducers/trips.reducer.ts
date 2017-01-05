@@ -10,11 +10,6 @@ export interface State {
 	trips: TripsState;
 	selectedTripId: string;
 	selectedCityId: string;
-	// editingTripId:  
-	// 1. Reset this id to null; Upon publishing Trip. 
-	// 2. Set this editing trip id twice 
-	//	(a) at create success from backend
-	//  (b) when users goes to edit his/her trips 
 	editingTrip: Trip; 
 }
 
@@ -55,6 +50,17 @@ export function reducer(state = initialState, action: Action ): State {
 				editingTrip: state.editingTrip
 			};
 		}
+		case ActionTypes.ADD_TRIP_TO_STORE: {
+			const trip = action.payload;
+			const newTrip = {
+				[trip.id]: trip 
+			} 
+
+			return Object.assign({}, state, {trips: {
+				ids: [...state.trips.ids, trip.id],
+				trips: Object.assign({}, state.trips.trips, newTrip)
+			}})
+		}
 		case ActionTypes.SELECT_TRIP: {
 			return {
 				trips: {
@@ -81,6 +87,10 @@ export function reducer(state = initialState, action: Action ): State {
 			const trip = action.payload;
 			return Object.assign({}, state, {editingTrip: trip})
 		}
+		case ActionTypes.CLEAR_EDITING_TRIP: {
+			// Removed trip which was being edited
+			return Object.assign({}, state, {editingTrip: trip})
+		}
 		default: {
 			return state;
 		}
@@ -103,8 +113,9 @@ export function getSelectedCityId(state: State) {
     return state.selectedCityId;
 }
 
+// Buggy implementation change when working on editing feature
 export function isEditingTrip(state: State): boolean {
-	return state.editingTrip.id ? true : false;
+	return state.editingTrip.hasOwnProperty('id') ? true : false;
 }
 
 export function getEditingTrip(state: State): Trip {
