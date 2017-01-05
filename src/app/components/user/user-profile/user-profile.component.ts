@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
   public loaded: boolean = false;
   public imageSrc: string = '';
   public user$: Observable<UserProfile>;
+  private mediaType: string = '';
+  public isProfilPicChanged: boolean = false;
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, private cloudinaryService: CloudinaryIntegrationService) {
     this.user$ = this.store.let(getUserProfile);
@@ -49,14 +51,31 @@ export class UserProfileComponent implements OnInit {
     reader.readAsDataURL(file);
   }
     
-    private handleReaderLoaded(e) {
-      let reader = e.target;
-      this.imageSrc = reader.result;
-      this.loaded = true;
-    }
+  private handleReaderLoaded(e) {
+    let reader = e.target;
+    this.imageSrc = reader.result;
+    this.loaded = true;
+    this.uploadMedia();
+  }
 
-    onUpdateMedia(mediaType) {
-      this.cloudinaryService.uploadImages(this.imageSrc, mediaType);
-    }
+  private uploadMedia() {
+    this.cloudinaryService.uploadImages(this.imageSrc, this.mediaType);
+  }
+
+  onUpdateProfilePicture() {
+    this.imageSrc = '';
+    this.loaded = false;
+    this.isProfilPicChanged = true;
+    $('#selectMedia').click();
+    this.mediaType = 'profile_pic';
+  }
+
+  onUpdateCoverPhoto() {
+    this.imageSrc = '';
+    this.loaded = false;
+    this.isProfilPicChanged = false;
+    $('#selectMedia').click();
+    this.mediaType = 'cover_photo';
+  }
 
 }
