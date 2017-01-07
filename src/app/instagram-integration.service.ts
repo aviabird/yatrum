@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class InstagramIntegrationService {
   private auth_token: string;
-  private apiLink:string = "http://localhost:3000";
+  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private http: Http) {
     let user_data = JSON.parse(localStorage.getItem('user'));
