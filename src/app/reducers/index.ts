@@ -38,6 +38,7 @@ export function getUserState(state$: Observable<State>): Observable<fromUserRedu
 
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);
 export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState);
+export const getLoggedInUserId = compose(fromUserReducer.getLoggedInUserId, getUserState);
 
 // ============= User Trip list States and compose methods ==================================================
 

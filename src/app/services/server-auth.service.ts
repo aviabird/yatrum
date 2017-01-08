@@ -87,4 +87,12 @@ export class ServerAuthService {
     localStorage.setItem('user', jsonData);
   }
 
+  getUserById(id: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    })
+    return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
+      .map(data => data.json());
+  }
+
 }
