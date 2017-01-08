@@ -86,14 +86,6 @@ export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCity
   return cities.filter(city => city.id == cityId)[0];
 });
 
-export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
-	return trip.user_id;
-})
-
-
-export const getTripUserProfilePictureUrl = createSelector(getSelectedTrip, (trip) => {
-	return trip.profile_pic_url;
-})
 
 // ============= notification list states and compose methods ===============================================
 
