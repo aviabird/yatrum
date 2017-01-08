@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import * as fromTripActions from './../actions/trips.action';
 import * as fromRoot from './../reducers/index';
 import { Store } from '@ngrx/store';
@@ -10,7 +11,7 @@ import { Injectable } from '@angular/core';
 export class TripsService {
   private trips: Trip[] = [];
   private auth_token: string;
-  private apiLink:string = "http://localhost:3000";
+  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
   // trips: Trip[];
   constructor(private http: Http, private store: Store<fromRoot.State>) {
     //TODO: Move this out at a later stage for logged in user

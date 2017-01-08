@@ -6,11 +6,13 @@ import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
+import { environment } from './../../environments/environment';
+
 
 @Injectable()
 export class ServerAuthService {
   // @LocalStorage() public token:Object = {};
-  private apiLink:string = "http://localhost:3000";
+  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private http: Http,
               private store: Store<fromRoot.State>) {}

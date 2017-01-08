@@ -5,13 +5,16 @@ import { Store } from '@ngrx/store';
 import { Http, Headers } from '@angular/http';
 import { environment as env } from './../../environments/environment';
 import { Injectable } from '@angular/core';
+import { environment } from './../../environments/environment';
+
 
 @Injectable()
 export class CloudinaryIntegrationService {
   private cloudinaryApiLink: string = `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}`;
-  private serverLink: string = "http://localhost:3000";
+  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
   private auth_token: string;
   private user$: Observable<any>;
+
 
   constructor(private http: Http, private store: Store<State>) { 
     let user_data = JSON.parse(localStorage.getItem('user'));
@@ -39,7 +42,7 @@ export class CloudinaryIntegrationService {
       url: data.secure_url, 
       public_id: data.public_id
     }
-    return this.http.post(`${this.serverLink}/update_user_profile_media`, params, {headers: headers})
+    return this.http.post(`${this.apiLink}/update_user_profile_media`, params, {headers: headers})
       .map(response => response.json())
       .subscribe(data => {
         let payload = { 

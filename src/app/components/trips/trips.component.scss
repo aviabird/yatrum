@@ -1,0 +1,100 @@
+.trip-box {
+    margin-top: 20px;
+    padding-top: 20px;
+    border: solid 1px lightgrey;
+}
+
+.trips-cover {
+	width: 100%;
+	margin-top: 0;
+	border: none;
+	top: -7rem;
+}
+
+.trips-cover-div {
+	position: relative;
+	height: 27rem;
+	overflow: hidden;
+	&:hover {
+		.cover-update-text {
+			opacity: 1;
+		}
+	}
+}
+
+.cover-image {
+	width: 100%;	
+}
+
+
+.trips-nav-links {
+	margin-right: 30px;
+	cursor: pointer;
+	height: 2.2rem;
+	&.active{
+		border-bottom: 5px solid rgb(14, 175, 138);
+	}
+}
+
+.trips-nav {
+  position: relative;
+  color: white;
+  text-transform: uppercase;
+  left: 50%;
+  transform: translate(-50%, -71%);
+  position: relative;
+  padding-top: 1rem;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.overlay-image {
+	position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(36, 37, 39, 0.37);
+}
+
+.prompt-box {
+  position: absolute;
+	transform: translateZ;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 1;
+  padding: 2.5%;
+  border-radius: 5px;
+  min-width: 400px;
+  width: 35%;
+  background: rgba(48, 186, 151, 0.69);
+  textarea {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    resize: none;
+    border-radius: 5px;
+    &:placeholder-shown {
+      border: none;
+    }
+    &:focus{
+      outline: none;
+      font-size: 1.2rem;
+      background: rgba(34, 131, 106, 0.40);
+      width: 100%;
+      padding: 5px;
+      height: 4rem;
+    }
+  }
+}
+
+.prompt-box-btns {
+  a{
+    margin-right: 3rem;
+    color: rgba(255, 255, 255, 0.50);
+    font-weight: 100;
+    transition-duration: 500ms;
+    &:hover{
+      color: white;
+    }
+  }
+}
