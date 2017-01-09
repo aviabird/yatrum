@@ -67,6 +67,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   onUpdateProfilePicture() {
+    let isLoggedInUser = false;
+    this.loggedUserId$.subscribe(id => {
+      if(id == this.userIndex)
+        isLoggedInUser = true;
+    })
+    if(!isLoggedInUser)
+      return;
+      
     this.imageSrc = '';
     this.loaded = false;
     this.isProfilPicChanged = true;
