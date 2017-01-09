@@ -38,6 +38,7 @@ export function getUserState(state$: Observable<State>): Observable<fromUserRedu
 
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);
 export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState);
+export const getLoggedInUserId = compose(fromUserReducer.getLoggedInUserId, getUserState);
 
 // ============= User Trip list States and compose methods ==================================================
 
@@ -85,14 +86,6 @@ export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCity
   return cities.filter(city => city.id == cityId)[0];
 });
 
-export const getTripUserId = createSelector(getSelectedTrip, (trip) => {
-	return trip.user_id;
-})
-
-
-export const getTripUserProfilePictureUrl = createSelector(getSelectedTrip, (trip) => {
-	return trip.profile_pic_url;
-})
 
 // ============= notification list states and compose methods ===============================================
 

@@ -11,12 +11,10 @@ import { Component } from '@angular/core';
 })
 export class TripDetailComponent {
 
-  userId$: Observable<string>;
-  profilePicUrl$: Observable<string>;
+  trip$: Observable<any>;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.userId$ = this.store.select(fromRoot.getTripUserId);
-    this.profilePicUrl$ = this.store.select(fromRoot.getTripUserProfilePictureUrl);
+    this.trip$ = this.store.select(fromRoot.getSelectedTrip);
   }
 
 }
