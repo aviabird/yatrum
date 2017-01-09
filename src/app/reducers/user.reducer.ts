@@ -73,6 +73,10 @@ export function getUserProfile (state$: Observable<State>): Observable<UserProfi
   return state$.select(state => state.user_profile);
 }
 
+export function getLoggedInUserId(state$: Observable<State>): Observable<string> {
+  return state$.select(state => state.user_profile.id);
+} 
+
 export function getAuthStatus (state$: Observable<State>): Observable<any> {
   return state$.select(state => state.auth);
 }
