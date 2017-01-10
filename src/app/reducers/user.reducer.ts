@@ -6,20 +6,32 @@ import { UserProfile } from './../models/user-profile';
 export interface State {
   user_profile: UserProfile;
   auth: any;
+  selected_user_profile: UserProfile;
 }
 
 const initialState = {
   //TODO: Provision this dummy object creation to user_profile model
-  user_profile: { id: null,
-                  name: null,
-                  email: null,
-                  profilePic: null,
-                  coverPhoto: null,
-                  token: null,
-                  created_at: null,
-                  updated_at: null
-                },
+  user_profile: { 
+    id: null,
+    name: null,
+    email: null,
+    profilePic: null,
+    coverPhoto: null,
+    token: null,
+    created_at: null,
+    updated_at: null
+  },
     auth: null,
+    selected_user_profile: { 
+      id: null,
+      name: null,
+      email: null,
+      profilePic: null,
+      coverPhoto: null,
+      token: null,
+      created_at: null,
+      updated_at: null
+    }
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -29,7 +41,8 @@ export function reducer(state = initialState, action: Action): State {
       console.log('in success');
       return {
         user_profile: action.payload,
-        auth: true
+        auth: true,
+        selected_user_profile: state.selected_user_profile
       }
     }
     case ActionTypes.LOGOUT_SUCCESS: {
@@ -37,7 +50,8 @@ export function reducer(state = initialState, action: Action): State {
       console.log('in logout success');
       return {
         user_profile: initialState.user_profile,
-        auth: false
+        auth: false,
+        selected_user_profile: state.selected_user_profile
       }
     }
     // Authentication with rails api backend
@@ -45,7 +59,8 @@ export function reducer(state = initialState, action: Action): State {
       console.log('in server login success');
       return {
         user_profile: action.payload,
-        auth: true
+        auth: true,
+        selected_user_profile: state.selected_user_profile
       }
     }
     case ActionTypes.SERVER_LOGOUT_SUCCESS: {
@@ -53,13 +68,23 @@ export function reducer(state = initialState, action: Action): State {
       console.log('in logout success');
       return {
         user_profile: initialState.user_profile,
-        auth: false
+        auth: false,
+        selected_user_profile: state.selected_user_profile
       }
     }
     case ActionTypes.USER_UPDATE_SUCCESS: {
       return {
         user_profile: action.payload,
-        auth: true
+        auth: true,
+        selected_user_profile: state.selected_user_profile
+      }
+    }
+    case ActionTypes.SELECTED_PROFILE_USER: {
+      window['payload'] = action.payload;
+      return {
+        user_profile: state.user_profile,
+        auth: state.auth,
+        selected_user_profile: action.payload
       }
     }
     default: {
@@ -79,4 +104,8 @@ export function getLoggedInUserId(state$: Observable<State>): Observable<string>
 
 export function getAuthStatus (state$: Observable<State>): Observable<any> {
   return state$.select(state => state.auth);
+}
+
+export function getSelectedProfileUser (state$: Observable<State>): Observable<UserProfile> {
+  return state$.select(state => state.selected_user_profile);
 }

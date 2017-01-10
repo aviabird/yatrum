@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { UserUpdateSuccessAction } from './../actions/user-auth.action';
+import { SelectedProfileUserAction, UserUpdateSuccessAction } from './../actions/user-auth.action';
 import { State, getUserProfile } from './../reducers/index';
 import { Store } from '@ngrx/store';
 import { Http, Headers } from '@angular/http';
@@ -55,6 +55,7 @@ export class CloudinaryIntegrationService {
           created_at: '',
           updated_at: ''
         }
+        this.store.dispatch(new SelectedProfileUserAction(payload));
         this.store.dispatch(new UserUpdateSuccessAction(payload));
       });
   }
@@ -68,8 +69,12 @@ export class CloudinaryIntegrationService {
   }
 
   upload(params) {
+    console.log("upload");
     return this.http.post(`${this.cloudinaryApiLink}/image/upload`, params)
-      .map(data => data.json());
+      .map(
+        data => data.json(),
+        error => console.log(error)
+      );
   }
 
 }

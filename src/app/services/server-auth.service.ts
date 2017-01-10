@@ -1,3 +1,4 @@
+import { SelectedProfileUserAction } from './../actions/user-auth.action';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
 import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './../models/user-profile';
@@ -92,7 +93,20 @@ export class ServerAuthService {
       'Content-Type': 'application/json'
     })
     return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
-      .map(data => data.json());
+      .map(response => response.json())
+      .subscribe(data => {
+        let payload = { 
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          profilePic: data.user.profile_pic,
+          coverPhoto: data.user.cover_photo,
+          token: data.auth_token,
+          created_at: '',
+          updated_at: ''
+        }
+        this.store.dispatch(new SelectedProfileUserAction(payload));
+      });
   }
 
 }

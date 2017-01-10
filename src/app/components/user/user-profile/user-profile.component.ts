@@ -5,7 +5,7 @@ import { CloudinaryIntegrationService } from './../../../services/cloudinary-int
 import { environment as env} from './../../../../environments/environment';
 import { LoadUserTripsAction } from './../../../actions/trips.action';
 import { ActivatedRoute } from '@angular/router';
-import { State, getLoggedInUserId } from './../../../reducers/index';
+import { State, getLoggedInUserId, getSelectedProfileUser } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -23,22 +23,23 @@ export class UserProfileComponent implements OnInit {
   private userIndex: string;
   public loaded: boolean = false;
   public imageSrc: string = '';
-  public user: UserProfile;
   public loggedUserId$: Observable<string>;
   private mediaType: string = '';
   public isProfilPicChanged: boolean = false;
+  public selectedProfileUser$: Observable<UserProfile>;
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
               private serverAuth: ServerAuthService) {
     this.loggedUserId$ = this.store.let(getLoggedInUserId);
+    this.selectedProfileUser$ = this.store.let(getSelectedProfileUser);
   }
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
       (params) => this.userIndex = params['id']
     )
-    this.serverAuth.getUserById(this.userIndex).subscribe((data) => this.user = data.user);
+    this.serverAuth.getUserById(this.userIndex);
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
     
