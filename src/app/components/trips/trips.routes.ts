@@ -20,5 +20,9 @@ export const TripRoutes = [
     resolve: {
       trip: TripsResolveGuard
     }
+  },
+  {
+    path: ':id/edit',
+    component: TripEditComponent
   }
 ]

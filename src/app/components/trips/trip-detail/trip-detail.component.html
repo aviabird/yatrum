@@ -5,6 +5,10 @@
         <img class="ui tiny image" [src]="(trip$ | async).profile_pic_url" onError="this.src='https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
       </div>
     </div>
+    <!--TODO: Activate this only after checking if the user is an owner of this trip -->
+    <!--<div class="trip-edit"> 
+      <button [routerLink]="['/trips', (trip$ | async).id, 'edit']">Edit</button>
+    </div>-->
     <div class="ui card my-card">
       <div class="ui twelve column grid trip-detail">
         <div class="four wide column trip-flow">
