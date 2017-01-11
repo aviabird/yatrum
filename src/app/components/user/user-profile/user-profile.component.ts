@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 import { ServerAuthService } from './../../../services/server-auth.service';
 import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './../../../models/user-profile';
@@ -5,7 +6,7 @@ import { CloudinaryIntegrationService } from './../../../services/cloudinary-int
 import { environment as env} from './../../../../environments/environment';
 import { LoadUserTripsAction } from './../../../actions/trips.action';
 import { ActivatedRoute } from '@angular/router';
-import { State, getLoggedInUserId, getSelectedProfileUser } from './../../../reducers/index';
+import { State, getLoggedInUserId, getSelectedProfileUser, getAuthStatus } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -30,7 +31,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
-              private serverAuth: ServerAuthService) {
+              private userService: UserService) {
     this.loggedUserId$ = this.store.let(getLoggedInUserId);
     this.selectedProfileUser$ = this.store.let(getSelectedProfileUser);
   }
@@ -39,7 +40,7 @@ export class UserProfileComponent implements OnInit {
     this.subscription = this.activatedRoute.params.subscribe(
       (params) => this.userIndex = params['id']
     )
-    this.serverAuth.getUserById(this.userIndex);
+    this.userService.getUserById(this.userIndex);
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
     
@@ -90,4 +91,10 @@ export class UserProfileComponent implements OnInit {
     $('#selectMedia').click();
     this.mediaType = 'cover_photo';
   }
+
+  onFollow() {
+    this.userService.addTravellerToFollowingList(this.userIndex)
+      .subscribe(data => console.log(data));
+  }
+
 }

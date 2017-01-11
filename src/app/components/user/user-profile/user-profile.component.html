@@ -14,6 +14,12 @@
 				<h1 class="profile-name">{{(selectedProfileUser$ | async).name}}</h1>
 				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
 			</div>
+			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onFollow()">
+				<button class="ui facebook button">
+					<i class="plus icon"></i>
+					Follow
+				</button>
+			</div>
 			<div [hidden]="true">
 				<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
 			</div>

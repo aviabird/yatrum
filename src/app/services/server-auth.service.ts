@@ -88,25 +88,4 @@ export class ServerAuthService {
     localStorage.setItem('user', jsonData);
   }
 
-  getUserById(id: string) {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    })
-    return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
-      .map(response => response.json())
-      .subscribe(data => {
-        let payload = { 
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          profilePic: data.user.profile_pic,
-          coverPhoto: data.user.cover_photo,
-          token: data.auth_token,
-          created_at: '',
-          updated_at: ''
-        }
-        this.store.dispatch(new SelectedProfileUserAction(payload));
-      });
-  }
-
 }
