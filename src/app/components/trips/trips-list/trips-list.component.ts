@@ -18,6 +18,6 @@ export class TripsListComponent {
 	constructor(private store: Store<fromRoot.State>) { 
 		this.store.dispatch(new LoadTripsAction);
 		this.trips$ = this.store.select(fromRoot.getTripsCollection);
-		this.authentication$ = this.store.let(fromRoot.getAuthStatus);
+		this.authentication$ = this.store.select(fromRoot.getAuthStatus);
 	}  
 }

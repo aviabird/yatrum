@@ -24,7 +24,7 @@ export class CloudinaryIntegrationService {
   }
 
   uploadImages(image, mediaType) {
-    this.user$ = this.store.let(getSelectedProfileUser);
+    this.user$ = this.store.select(getSelectedProfileUser);
     this.user$.subscribe(user => {
       this.toUpdateMediaPublicId = user.profile_pic['public_id'];
     })

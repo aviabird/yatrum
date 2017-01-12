@@ -32,8 +32,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
               private userService: UserService) {
-    this.loggedUserId$ = this.store.let(getLoggedInUserId);
-    this.selectedProfileUser$ = this.store.let(getSelectedProfileUser);
+    this.loggedUserId$ = this.store.select(getLoggedInUserId);
+    this.selectedProfileUser$ = this.store.select(getSelectedProfileUser);
   }
 
   ngOnInit() {

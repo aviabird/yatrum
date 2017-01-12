@@ -32,8 +32,8 @@ export const developmentReducers: ActionReducer<State> = combineReducers(reducer
 
 // =============== user-auth states and compose methods ===============================================
 
-export function getUserState(state$: Observable<State>): Observable<fromUserReducer.State> {
-  return state$.select(state => state.user);
+export function getUserState(state: State): fromUserReducer.State {
+  return state.user;
 }
 
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);
@@ -90,8 +90,8 @@ export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCity
 
 // ============= notification list states and compose methods ===============================================
 
-export function getNotificationState(state$: Observable<State>): Observable<fromNotificationReducer.State> {
-  return state$.select(state => state.notifications);
+export function getNotificationState(state: State): fromNotificationReducer.State {
+  return state.notifications;
 }
 
 export const getLoginFormMessage = compose(fromNotificationReducer.getLoginMessage, getNotificationState);

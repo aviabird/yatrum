@@ -94,18 +94,18 @@ export function reducer(state = initialState, action: Action): State {
 }
 
 //========================= Exporter functions -==================================
-export function getUserProfile (state$: Observable<State>): Observable<UserProfile> {
-  return state$.select(state => state.user_profile);
+export function getUserProfile (state: State): UserProfile {
+  return state.user_profile;
 }
 
-export function getLoggedInUserId(state$: Observable<State>): Observable<string> {
-  return state$.select(state => state.user_profile.id);
+export function getLoggedInUserId(state: State): string {
+  return state.user_profile.id;
 } 
 
-export function getAuthStatus (state$: Observable<State>): Observable<any> {
-  return state$.select(state => state.auth);
+export function getAuthStatus (state: State): any {
+  return state.auth;
 }
 
-export function getSelectedProfileUser (state$: Observable<State>): Observable<UserProfile> {
-  return state$.select(state => state.selected_user_profile);
+export function getSelectedProfileUser (state: State): UserProfile {
+  return state.selected_user_profile;
 }

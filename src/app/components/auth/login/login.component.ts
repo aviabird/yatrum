@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private store: Store<fromRoot.State>,
               private router: Router) {
-    this.authStatus$ = this.store.let(fromRoot.getAuthStatus);
-    this.formErrorMessage$ = this.store.let(fromRoot.getLoginFormMessage)
+    this.authStatus$ = this.store.select(fromRoot.getAuthStatus);
+    this.formErrorMessage$ = this.store.select(fromRoot.getLoginFormMessage)
     this.redirectIfUserLoggedIn()
   }
 

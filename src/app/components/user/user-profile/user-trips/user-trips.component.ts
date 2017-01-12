@@ -15,7 +15,7 @@ export class UserTripsComponent implements OnInit {
   public user$: Observable<UserProfile>;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.user$ = this.store.let(fromRoot.getSelectedProfileUser);
+    this.user$ = this.store.select(fromRoot.getSelectedProfileUser);
     this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection);
    }
 
