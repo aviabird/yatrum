@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { TripsService } from './../services/trips.service';
 import { Effect, Actions } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
+import { Trip } from '../models/trip';
 
 @Injectable() 
 export class TripsEffects {
@@ -13,25 +14,28 @@ export class TripsEffects {
   @Effect()
   Trips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_TRIPS)
-    .switchMap(() => this.tripsService.getTrips())
-    .map((data) => new TripsActions.TripsLoadedAction(data));
+    .switchMap<Action, Trip[] | String>(() => this.tripsService.getTrips())
+    .filter((data) => typeof(data) == "string")
+    .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
 
   @Effect()
   UserTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS)
-    .switchMap((action: Action) => this.tripsService.getUserTrips(action.payload))
-    .map((data) => new TripsActions.UserTripsLoadedAction(data));
+    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getUserTrips(action.payload))
+    .filter((data) => typeof(data) == "string")
+    .map((data: Trip[]) => new TripsActions.UserTripsLoadedAction(data));
 
   @Effect()
   SaveTrip$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SAVE_TRIP)
-    .switchMap((action: Action) => this.tripsService.saveTrip(action.payload))
-    .map((data) => new TripsActions.SaveTripSuccessAction(data));
+    .switchMap<Action, Trip | String>((action: Action) => this.tripsService.saveTrip(action.payload))
+    .filter((data) => typeof(data) == "string")
+    .map((data: Trip) => new TripsActions.SaveTripSuccessAction(data));
 
   @Effect()
   UpdateTrip$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.UPDATE_TRIP)
-    .switchMap((action: Action) => this.tripsService.updateTrip(action.payload))
+    .switchMap<Action, Trip>((action: Action) => this.tripsService.updateTrip(action.payload))
     .map((data) => new TripsActions.UpdateTripSuccessAction(data));
 
 }

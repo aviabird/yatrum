@@ -7,9 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { ImageUploadModule } from 'angular2-image-upload';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
 
@@ -30,7 +28,7 @@ import { UserAuthEffects } from './effects/user-auth.effect';
 import { InstagramEffects } from './effects/instagram.effects';
 
 import { routes } from './app.routes';
-import { developmentReducers } from './reducers/index';
+import { reducer } from './reducers/index';
 
 //Directives
 import { FileSelectDirective } from 'ng2-file-upload';
@@ -39,7 +37,6 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
@@ -54,6 +51,13 @@ import { TripEditComponent } from './components/trips/trip-edit/trip-edit.compon
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
+import { SearchComponent } from './containers/search/search.component';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { SearchFilterComponent } from './components/search/search-filter/search-filter.component';
+import { DashboardSearchFilterComponent } from './components/search/dashboard-search-filter/dashboard-search-filter.component';
+import { TripsSearchFilterComponent } from './components/search/trips-search-filter/trips-search-filter.component';
+import { DashboardSearchComponent } from './containers/dashboard/dashboard-search/dashboard-search.component';
+import { DashboardTripsComponent } from './containers/dashboard/dashboard-trips/dashboard-trips.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -71,7 +75,6 @@ const myFirebaseAuthConfig = {
   declarations: [
     AppComponent,
     HeaderComponent,
-    DashboardComponent,
     TripsComponent,
     TripDetailComponent,
     TripsListComponent,
@@ -87,7 +90,14 @@ const myFirebaseAuthConfig = {
     UserProfileComponent,
     UserTripsComponent,
     UserMediaComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    SearchComponent,
+    DashboardComponent,
+    SearchFilterComponent,
+    DashboardSearchFilterComponent,
+    TripsSearchFilterComponent,
+    DashboardSearchComponent,
+    DashboardTripsComponent
   ],
   imports: [
     BrowserModule,
@@ -95,22 +105,20 @@ const myFirebaseAuthConfig = {
     CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
-    ImageUploadModule.forRoot(),
-    NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
-    StoreModule.provideStore(developmentReducers),
+    StoreModule.provideStore(reducer),
     EffectsModule.run(UserAuthEffects),
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
     DatePickerModule,
-    StoreDevtoolsModule.instrumentStore({
-      monitor: useLogMonitor({
-        visible: false,
-        position: 'right'
-      })
-    }),
+    // StoreDevtoolsModule.instrumentStore({
+    //   monitor: useLogMonitor({
+    //     visible: false,
+    //     position: 'right'
+    //   })
+    // }),
     StoreLogMonitorModule,
   ],
   providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService, CloudinaryIntegrationService],

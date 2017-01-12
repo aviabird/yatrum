@@ -1,0 +1,13 @@
+<div class="ui form">
+  <div class="ui huge icon action input">
+    <input type="text"
+      placeholder="Search for destinations, activities or people"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="onSearch()">
+    <button class="ui huge icon teal button">
+      <i class="search icon"></i>
+    </button>
+  </div>
+</div>
+
+<div (keywordEntered)="onEvent($event)"></div>
