@@ -23,6 +23,9 @@ export const TripRoutes = [
   },
   {
     path: ':id/edit',
-    component: TripEditComponent
+    component: TripEditComponent,
+    resolve: {
+      trip: TripsResolveGuard
+    }
   }
 ]

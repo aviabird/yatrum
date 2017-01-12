@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
 import { SaveTripAction, UpdateTripAction, ClearEditingTripAction, AddTripToLocalStore } from './../../../actions/trips.action';
@@ -23,9 +23,20 @@ export class TripEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
               private store: Store<fromRoot.State>,
-              private router: Router) { 
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { 
     this.setEditingStatus();
     this.redirectUponCreate();
+    // only call this if the route params has an id in it 
+    if ('id' in this.activatedRoute.snapshot.params) {
+      // We are editing a trip
+      console.log('editing a trip');
+      this.trip$ = this.store.select(fromRoot.getSelectedTrip);
+
+    } else {
+      // Creating a new trip
+      console.log('creating a trip');      
+    }
   }
 
   ngOnInit() {
