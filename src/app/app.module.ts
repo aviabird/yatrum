@@ -60,6 +60,8 @@ import { TripsSearchFilterComponent } from './components/search/trips-search-fil
 import { DashboardSearchComponent } from './containers/dashboard/dashboard-search/dashboard-search.component';
 import { DashboardTripsComponent } from './containers/dashboard/dashboard-trips/dashboard-trips.component';
 import { TripListItemComponent } from './components/trips/trip-list-item/trip-list-item.component';
+import { TripsSearchComponent } from './containers/search/trips-search/trips-search.component';
+import { SearchedTripsComponent } from './containers/search/searched-trips/searched-trips.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -100,7 +102,9 @@ const myFirebaseAuthConfig = {
     TripsSearchFilterComponent,
     DashboardSearchComponent,
     DashboardTripsComponent,
-    TripListItemComponent
+    TripListItemComponent,
+    TripsSearchComponent,
+    SearchedTripsComponent
   ],
   imports: [
     BrowserModule,

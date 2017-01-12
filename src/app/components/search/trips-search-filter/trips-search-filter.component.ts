@@ -1,3 +1,4 @@
+import { SearchFilterComponent } from './../search-filter/search-filter.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './trips-search-filter.component.html',
   styleUrls: ['./trips-search-filter.component.scss']
 })
-export class TripsSearchFilterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class TripsSearchFilterComponent extends SearchFilterComponent {
 
 }

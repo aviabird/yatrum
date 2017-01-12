@@ -1,0 +1,38 @@
+.search-box-cover {
+	width: 100%;
+	margin-top: 0;
+	border: none;
+	top: -7rem;
+}
+
+.search-box-cover-div {
+	position: relative;
+	height: 17rem;
+	overflow: hidden;
+	&:hover {
+		.cover-update-text {
+			opacity: 1;
+		}
+	}
+}
+
+.cover-image {
+	width: 100%;	
+}
+
+.search-box {
+  position: absolute;
+	transform: translateZ;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 1;
+  padding: 2.5%;
+  border-radius: 5px;
+  min-width: 400px;
+  width: 70%;
+  h1, h2{
+    font-weight: 100;
+    text-shadow: 1px 1px 8px #111;
+  }
+}

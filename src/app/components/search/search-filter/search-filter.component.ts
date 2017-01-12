@@ -17,12 +17,7 @@ export class SearchFilterComponent implements OnInit {
   }
 
   onSearch() {
-    console.log('base filter', this.searchQuery);
     this.keywordEntered.emit(this.searchQuery);
-  }
-
-  onEvent(event) {
-    console.log(event);
   }
 
 }

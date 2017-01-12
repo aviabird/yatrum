@@ -91,6 +91,9 @@ export function reducer(state = initialState, action: Action ): State {
 			// Removed trip which was being edited
 			return Object.assign({}, state, {editingTrip: trip})
 		}
+		case ActionTypes.SEARCH_TRIPS: {
+			return Object.assign({}, initialState)
+		}
 		default: {
 			return state;
 		}

@@ -20,7 +20,6 @@ export class DashboardTripsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTripsAction);
   }
 
 }
