@@ -1,3 +1,4 @@
+import { CanActivateViaAuthGuard } from './guards/auth.guard';
 import { TripActivityComponent } from './containers/trips/trip-detail/trip-activity/trip-activity.component';
 import { TripFlowChartComponent } from './containers/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripsListComponent } from './containers/trips/trips-list/trips-list.component';
@@ -123,7 +124,15 @@ const myFirebaseAuthConfig = {
     // }),
     StoreLogMonitorModule,
   ],
-  providers: [UserAuthService, TripsService, ServerAuthService, TripsResolveGuard, InstagramIntegrationService, CloudinaryIntegrationService],
+  providers: [
+    UserAuthService,
+    TripsService,
+    ServerAuthService,
+    TripsResolveGuard,
+    InstagramIntegrationService,
+    CloudinaryIntegrationService,
+    CanActivateViaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
