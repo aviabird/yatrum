@@ -55,6 +55,8 @@ import { TripEditComponent } from './components/trips/trip-edit/trip-edit.compon
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
+import { UserFollowersComponent } from './components/user/user-profile/user-followers/user-followers.component';
+import { UserFollowingComponent } from './components/user/user-profile/user-following/user-following.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -88,7 +90,9 @@ const myFirebaseAuthConfig = {
     UserProfileComponent,
     UserTripsComponent,
     UserMediaComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    UserFollowersComponent,
+    UserFollowingComponent
   ],
   imports: [
     BrowserModule,
