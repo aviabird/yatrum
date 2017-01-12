@@ -1,3 +1,9 @@
+import { TripActivityComponent } from './containers/trips/trip-detail/trip-activity/trip-activity.component';
+import { TripFlowChartComponent } from './containers/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
+import { TripsListComponent } from './containers/trips/trips-list/trips-list.component';
+import { TripEditComponent } from './containers/trips/trip-edit/trip-edit.component';
+import { TripDetailComponent } from './containers/trips/trip-detail/trip-detail.component';
+import { TripsComponent } from './containers/trips/trips.component';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -37,17 +43,11 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TripsComponent } from './components/trips/trips.component';
-import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
-import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
-import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
-import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
 import { UserComponent } from './components/user/user.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
-import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
@@ -58,6 +58,7 @@ import { DashboardSearchFilterComponent } from './components/search/dashboard-se
 import { TripsSearchFilterComponent } from './components/search/trips-search-filter/trips-search-filter.component';
 import { DashboardSearchComponent } from './containers/dashboard/dashboard-search/dashboard-search.component';
 import { DashboardTripsComponent } from './containers/dashboard/dashboard-trips/dashboard-trips.component';
+import { TripListItemComponent } from './components/trips/trip-list-item/trip-list-item.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -97,7 +98,8 @@ const myFirebaseAuthConfig = {
     DashboardSearchFilterComponent,
     TripsSearchFilterComponent,
     DashboardSearchComponent,
-    DashboardTripsComponent
+    DashboardTripsComponent,
+    TripListItemComponent
   ],
   imports: [
     BrowserModule,

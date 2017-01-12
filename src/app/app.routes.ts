@@ -1,10 +1,10 @@
 import { UserRoutes } from './components/user/user.routes';
 import { UserComponent } from './components/user/user.component';
 import { RouterModule, Routes } from "@angular/router";
-import { TripRoutes } from './components/trips/trips.routes';
+import { TripRoutes } from './containers/trips/trips.routes';
 
 import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
-import { TripsComponent } from './components/trips/trips.component';
+import { TripsComponent } from './containers/trips/trips.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { SearchComponent } from './containers/search/search.component';

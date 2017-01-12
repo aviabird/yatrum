@@ -15,21 +15,18 @@ export class TripsEffects {
   Trips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_TRIPS)
     .switchMap<Action, Trip[] | String>(() => this.tripsService.getTrips())
-    .filter((data) => typeof(data) == "string")
     .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
 
   @Effect()
   UserTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS)
     .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getUserTrips(action.payload))
-    .filter((data) => typeof(data) == "string")
     .map((data: Trip[]) => new TripsActions.UserTripsLoadedAction(data));
 
   @Effect()
   SaveTrip$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SAVE_TRIP)
     .switchMap<Action, Trip | String>((action: Action) => this.tripsService.saveTrip(action.payload))
-    .filter((data) => typeof(data) == "string")
     .map((data: Trip) => new TripsActions.SaveTripSuccessAction(data));
 
   @Effect()
