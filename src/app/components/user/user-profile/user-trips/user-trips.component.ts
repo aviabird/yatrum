@@ -1,10 +1,10 @@
+import { LoadUserTripsAction } from './../../../../actions/trips.action';
+import * as fromRoot from './../../../../reducers/index';
+import { UserProfile } from './../../../../models/user-profile';
+import { Trip } from './../../../../models/trip';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { LoadUserTripsAction } from './../../../../actions/trips.action';
-import { UserProfile } from './../../../../models/user-profile';
-import * as fromRoot from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
-import { Trip } from './../../../../models/trip';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 

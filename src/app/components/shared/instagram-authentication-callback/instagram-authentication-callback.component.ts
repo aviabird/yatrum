@@ -1,5 +1,5 @@
+import { InstagramIntegrationService } from './../../../services/instagram-integration.service';
 import { Observable } from 'rxjs/Observable';
-import { InstagramIntegrationService } from './../../instagram-integration.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 

@@ -1,5 +1,5 @@
-import { ServerAuthService } from './../../../services/server-auth.service';
-import { ServerSignUpAction } from './../../../actions/user-auth.action';
+import { ServerAuthService } from './../../../../services/server-auth.service';
+import * as fromRoot from './../../../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -7,7 +7,6 @@ import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/
 import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
 import { passwordValidator } from '../../../shared/validators/password.validator';
-import * as fromRoot from '../../../reducers';
 
 @Component({
   selector: 'tr-signup',

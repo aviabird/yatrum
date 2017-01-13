@@ -1,12 +1,9 @@
+import { getLoggedInUserId, getSelectedProfileUser, State } from './../../../reducers/index';
 import { UserService } from './../../../services/user.service';
-import { ServerAuthService } from './../../../services/server-auth.service';
-import { Observable } from 'rxjs/Observable';
-import { UserProfile } from './../../../models/user-profile';
 import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
-import { environment as env} from './../../../../environments/environment';
-import { LoadUserTripsAction } from './../../../actions/trips.action';
+import { UserProfile } from './../../../models/user-profile';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { State, getLoggedInUserId, getSelectedProfileUser, getAuthStatus } from './../../../reducers/index';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
