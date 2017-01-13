@@ -1,5 +1,5 @@
-import { LoadMediaAction } from './../../../../../actions/instagram.action';
-import * as fromRoot from './../../../../../reducers/index';
+import { LoadMediaAction } from './../../../../actions/instagram.action';
+import * as fromRoot from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';

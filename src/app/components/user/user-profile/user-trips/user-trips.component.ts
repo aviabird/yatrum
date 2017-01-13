@@ -1,7 +1,7 @@
-import { LoadUserTripsAction } from './../../../../../actions/trips.action';
-import * as fromRoot from './../../../../../reducers/index';
-import { Trip } from './../../../../../models/trip';
-import { UserProfile } from './../../../../../models/user-profile';
+import { LoadUserTripsAction } from './../../../../actions/trips.action';
+import * as fromRoot from './../../../../reducers/index';
+import { UserProfile } from './../../../../models/user-profile';
+import { Trip } from './../../../../models/trip';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';

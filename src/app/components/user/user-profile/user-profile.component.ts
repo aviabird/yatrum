@@ -1,7 +1,7 @@
-import { UserService } from './../../../../services/user.service';
-import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
-import { UserProfile } from './../../../../models/user-profile';
-import { State, getLoggedInUserId, getSelectedProfileUser } from './../../../../reducers/index';
+import { getLoggedInUserId, getSelectedProfileUser, State } from './../../../reducers/index';
+import { UserService } from './../../../services/user.service';
+import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
+import { UserProfile } from './../../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';

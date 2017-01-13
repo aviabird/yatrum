@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -48,14 +49,7 @@ import { DashboardSearchFilterComponent } from './components/shared/search/dashb
 import { SearchFilterComponent } from './components/shared/search/search-filter/search-filter.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SearchComponent } from './components/search/search.component';
-import { UserFollowingComponent } from './components/shared/user/user-profile/user-following/user-following.component';
-import { UserMediaComponent } from './components/shared/user/user-profile/user-media/user-media.component';
-import { UserFollowersComponent } from './components/shared/user/user-profile/user-followers/user-followers.component';
-import { UserTripsComponent } from './components/shared/user/user-profile/user-trips/user-trips.component';
-import { UserProfileComponent } from './components/shared/user/user-profile/user-profile.component';
 import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
-import { UserSettingsComponent } from './components/shared/user/user-settings/user-settings.component';
-import { UserComponent } from './components/shared/user/user.component';
 import { SignupComponent } from './components/shared/auth/signup/signup.component';
 import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
 import { LoginComponent } from './components/shared/auth/login/login.component';
@@ -65,6 +59,12 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { UserFollowingComponent } from './components/user/user-profile/user-following/user-following.component';
+import { UserFollowersComponent } from './components/user/user-profile/user-followers/user-followers.component';
+import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
+import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
