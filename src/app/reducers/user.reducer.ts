@@ -93,13 +93,13 @@ export function reducer(state = initialState, action: Action): State {
 				});
 			}, {});
 
-      return Object.assign({},state, {
-        selected_user_profile: {
+      return Object.assign({}, state, {
+        selected_user_profile: Object.assign({}, state.selected_user_profile, {
           trips: {
             ids: [...state.selected_user_profile.trips.ids, ...new_trip_ids],
             trips: Object.assign({}, state.selected_user_profile.trips.trips, trips)
           }
-        }
+        })
       })
 
 
