@@ -1,10 +1,10 @@
-import { UpdateLoginFormNotification } from './../../../actions/notification.action';
+import { ServerLoginAction } from './../../../../actions/user-auth.action';
+import { UpdateLoginFormNotification } from './../../../../actions/notification.action';
+import * as fromRoot from './../../../../reducers/index';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ServerLoginAction, LoginAction } from './../../../actions/user-auth.action';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../../reducers';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({

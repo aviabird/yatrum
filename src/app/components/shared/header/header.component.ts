@@ -1,8 +1,8 @@
-import { ServerAuthService } from './../../services/server-auth.service';
-import { LoginAction, LogoutAction, ServerLoginAction, ServerLoginSuccessAction, ServerLogoutAction } from './../../actions/user-auth.action';
-import { UserProfile } from './../../models/user-profile';
+import { ServerLoginSuccessAction, ServerLogoutAction } from './../../../actions/user-auth.action';
+import { ServerAuthService } from './../../../services/server-auth.service';
+import { UserProfile } from './../../../models/user-profile';
+import * as fromRoot from './../../../reducers/index';
 import { Observable } from 'rxjs/Observable';
-import * as fromRoot from './../../reducers/index';
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Store } from '@ngrx/store';

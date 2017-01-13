@@ -1,10 +1,3 @@
-import { CanActivateViaAuthGuard } from './guards/auth.guard';
-import { TripActivityComponent } from './containers/trips/trip-detail/trip-activity/trip-activity.component';
-import { TripFlowChartComponent } from './containers/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
-import { TripsListComponent } from './containers/trips/trips-list/trips-list.component';
-import { TripEditComponent } from './containers/trips/trip-edit/trip-edit.component';
-import { TripDetailComponent } from './containers/trips/trip-detail/trip-detail.component';
-import { TripsComponent } from './containers/trips/trips.component';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 // Services 
@@ -29,6 +23,7 @@ import { UserService } from './services/user.service';
 
 // Guards
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
+import { CanActivateViaAuthGuard } from './guards/auth.guard';
 
 // Effects
 import { TripsEffects } from './effects/trips.effects';
@@ -43,28 +38,33 @@ import { FileSelectDirective } from 'ng2-file-upload';
 
 // Components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { LoginComponent } from './components/auth/login/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
-import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
-import { UserComponent } from './components/user/user.component';
-import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
-import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
-import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
-import { UserFollowersComponent } from './components/user/user-profile/user-followers/user-followers.component';
-import { UserFollowingComponent } from './components/user/user-profile/user-following/user-following.component';
-import { SearchComponent } from './containers/search/search.component';
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
-import { SearchFilterComponent } from './components/search/search-filter/search-filter.component';
-import { DashboardSearchFilterComponent } from './components/search/dashboard-search-filter/dashboard-search-filter.component';
-import { TripsSearchFilterComponent } from './components/search/trips-search-filter/trips-search-filter.component';
-import { DashboardSearchComponent } from './containers/dashboard/dashboard-search/dashboard-search.component';
-import { DashboardTripsComponent } from './containers/dashboard/dashboard-trips/dashboard-trips.component';
-import { TripListItemComponent } from './components/trips/trip-list-item/trip-list-item.component';
-import { TripsSearchComponent } from './containers/search/trips-search/trips-search.component';
-import { SearchedTripsComponent } from './containers/search/searched-trips/searched-trips.component';
+import { SearchedTripsComponent } from './components/search/searched-trips/searched-trips.component';
+import { TripsSearchComponent } from './components/search/trips-search/trips-search.component';
+import { TripListItemComponent } from './components/shared/trips/trip-list-item/trip-list-item.component';
+import { DashboardTripsComponent } from './components/dashboard/dashboard-trips/dashboard-trips.component';
+import { DashboardSearchComponent } from './components/dashboard/dashboard-search/dashboard-search.component';
+import { TripsSearchFilterComponent } from './components/shared/search/trips-search-filter/trips-search-filter.component';
+import { DashboardSearchFilterComponent } from './components/shared/search/dashboard-search-filter/dashboard-search-filter.component';
+import { SearchFilterComponent } from './components/shared/search/search-filter/search-filter.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SearchComponent } from './components/search/search.component';
+import { UserFollowingComponent } from './components/shared/user/user-profile/user-following/user-following.component';
+import { UserMediaComponent } from './components/shared/user/user-profile/user-media/user-media.component';
+import { UserFollowersComponent } from './components/shared/user/user-profile/user-followers/user-followers.component';
+import { UserTripsComponent } from './components/shared/user/user-profile/user-trips/user-trips.component';
+import { UserProfileComponent } from './components/shared/user/user-profile/user-profile.component';
+import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
+import { UserSettingsComponent } from './components/shared/user/user-settings/user-settings.component';
+import { UserComponent } from './components/shared/user/user.component';
+import { SignupComponent } from './components/shared/auth/signup/signup.component';
+import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
+import { LoginComponent } from './components/shared/auth/login/login.component';
+import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
+import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
+import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
+import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
+import { TripsComponent } from './components/trips/trips.component';
+import { HeaderComponent } from './components/shared/header/header.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -91,7 +91,6 @@ const myFirebaseAuthConfig = {
     SignupComponent,
     InstagramAuthenticationCallbackComponent,
     UserComponent,
-    UserSettingsComponent,
     UserSettingsComponent,
     TripEditComponent,
     UserProfileComponent,

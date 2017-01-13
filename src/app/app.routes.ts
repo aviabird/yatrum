@@ -1,14 +1,13 @@
-import { UserRoutes } from './components/user/user.routes';
-import { UserComponent } from './components/user/user.component';
+import { UserRoutes } from './components/shared/user/user.routes';
+import { TripRoutes } from './components/trips/trips.routes';
+import { SearchComponent } from './components/search/search.component';
+import { LoginComponent } from './components/shared/auth/login/login.component';
+import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserComponent } from './components/shared/user/user.component';
+import { TripsComponent } from './components/trips/trips.component';
 import { RouterModule, Routes } from "@angular/router";
-import { TripRoutes } from './containers/trips/trips.routes';
 
-import { InstagramAuthenticationCallbackComponent } from './components/instagram-authentication-callback/instagram-authentication-callback.component';
-import { TripsComponent } from './containers/trips/trips.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
-import { SearchComponent } from './containers/search/search.component';
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
 export const routes: Routes = [
 

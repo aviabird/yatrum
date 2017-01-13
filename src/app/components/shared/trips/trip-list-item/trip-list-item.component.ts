@@ -1,4 +1,4 @@
-import { Trip } from './../../../models/trip';
+import { Trip } from './../../../../models/trip';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
