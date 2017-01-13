@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   constructor(private af: AngularFire,
     private store: Store<fromRoot.State>,
     private serverAuthService: ServerAuthService) {
-    this.user$ = this.store.let(fromRoot.getUserProfile);
-    this.authentication$ = this.store.let(fromRoot.getAuthStatus);
+    this.user$ = this.store.select(fromRoot.getUserProfile);
+    this.authentication$ = this.store.select(fromRoot.getAuthStatus);
 
     // Check if the user is already logged in
     let user_data = JSON.parse(localStorage.getItem('user'));

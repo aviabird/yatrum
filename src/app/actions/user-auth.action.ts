@@ -11,7 +11,8 @@ export const ActionTypes = {
   SERVER_LOGOUT_SUCCESS:"[User] Server Logout Success",
   SERVER_SIGNUP:        "[User] Server Signup",
   SERVER_SIGNUP_SUCCESS:"[User] Server Signup Success",
-  USER_UPDATE_SUCCESS:  "[User] Update Success]"
+  USER_UPDATE_SUCCESS:  "[User] Update Success]",
+  SELECTED_PROFILE_USER: "Selected Profile [User]"
 }
 
 export class LoginAction implements Action {
@@ -57,5 +58,9 @@ export class ServerSignUpSuccessAction implements Action {
 }
 export class UserUpdateSuccessAction implements Action {
   type = ActionTypes.USER_UPDATE_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class SelectedProfileUserAction implements Action {
+  type = ActionTypes.SELECTED_PROFILE_USER;
   constructor(public payload: any) {}
 }

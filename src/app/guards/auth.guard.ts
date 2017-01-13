@@ -17,7 +17,7 @@ export class CanActivateViaAuthGuard implements CanActivate{
 
   canActivate() {
     this.store
-      .let(fromRoot.getAuthStatus)
+      .select(fromRoot.getAuthStatus)
       .subscribe(isAuthenticated => {
         this.isAuthenticated = isAuthenticated;
         if(!isAuthenticated) {

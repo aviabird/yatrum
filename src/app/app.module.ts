@@ -25,6 +25,7 @@ import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
 import { InstagramIntegrationService } from './instagram-integration.service';
 import { CloudinaryIntegrationService } from './services/cloudinary-integration.service';
+import { UserService } from './services/user.service';
 
 // Guards
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
@@ -52,6 +53,8 @@ import { UserSettingsComponent } from './components/user/user-settings/user-sett
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';
+import { UserFollowersComponent } from './components/user/user-profile/user-followers/user-followers.component';
+import { UserFollowingComponent } from './components/user/user-profile/user-following/user-following.component';
 import { SearchComponent } from './containers/search/search.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { SearchFilterComponent } from './components/search/search-filter/search-filter.component';
@@ -95,6 +98,8 @@ const myFirebaseAuthConfig = {
     UserTripsComponent,
     UserMediaComponent,
     FileSelectDirective,
+    UserFollowersComponent,
+    UserFollowingComponent,
     SearchComponent,
     DashboardComponent,
     SearchFilterComponent,
@@ -130,6 +135,7 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     UserAuthService,
+    UserService,
     TripsService,
     ServerAuthService,
     TripsResolveGuard,

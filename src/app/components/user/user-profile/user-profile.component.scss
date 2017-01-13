@@ -7,7 +7,7 @@
 
 .profile-cover-div {
 	position: relative;
-	height: 27rem;
+	height: 30rem;
 	overflow: hidden;
 	&:hover {
 		.cover-update-text {
@@ -16,9 +16,10 @@
 	}
 }
 
-// .cover-image {
-// 	// width: 100%;	
-// }
+.follow {
+	text-align: center;
+	margin-top: 2rem;
+}
 
 .profile-info {
 	position: absolute;

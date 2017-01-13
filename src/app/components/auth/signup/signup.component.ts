@@ -23,8 +23,8 @@ export class SignupComponent implements OnInit {
               private router: Router,
               private store: Store<fromRoot.State>,
               private authService: ServerAuthService) {
-    this.authStatus$ = this.store.let(fromRoot.getAuthStatus);
-    this.formErrorMessage$ = this.store.let(fromRoot.getSignUpFormMessage)
+    this.authStatus$ = this.store.select(fromRoot.getAuthStatus);
+    this.formErrorMessage$ = this.store.select(fromRoot.getSignUpFormMessage)
     this.redirectIfUserLoggedIn()
   }
 

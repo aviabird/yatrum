@@ -1,5 +1,5 @@
 <div *ngFor="let trip of userTrips$ | async">
-	<div class="my-card">
+	<div class="my-card" [routerLink]="['/trips',(trip.id)]">
 		<div class="ui grid content">
 			<div class="two wide column">
 				<img class="ui avatar image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
