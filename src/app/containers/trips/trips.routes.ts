@@ -1,3 +1,4 @@
+import { CanActivateViaAuthGuard } from './../../guards/auth.guard';
 import { TripEditComponent } from './trip-edit/trip-edit.component';
 import { TripsResolveGuard } from './../../guards/trips-resolve.guard';
 import { TripsListComponent } from './trips-list/trips-list.component';
@@ -12,13 +13,15 @@ export const TripRoutes = [
   },
   {
     path: 'new',
-    component: TripEditComponent
+    component: TripEditComponent,
+    canActivate: [ CanActivateViaAuthGuard ]
   },
   { 
     path: ':id',
     component: TripDetailComponent,
     resolve: {
       trip: TripsResolveGuard
-    }
+    },
+    canActivate: [ CanActivateViaAuthGuard ]
   }
 ]

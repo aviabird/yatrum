@@ -11,6 +11,7 @@ import * as fromTripsReducer from './trips.reducer';
 import * as fromNotificationReducer from './notification.reducer';
 import * as fromInstagramReducer from './instagram.reducers';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
+import { environment } from '../../environments/environment';
 
 export interface State {
 	user: fromUserReducer.State;
@@ -28,7 +29,17 @@ const reducers = {
 	instagramMedia: fromInstagramReducer.reducer
 }
 
-export const developmentReducers: ActionReducer<State> = combineReducers(reducers);
+export const developmentReducer: ActionReducer<State> = combineReducers(reducers);
+const productionReducer: ActionReducer<State> = combineReducers(reducers);
+
+export function reducer(state: any, action: any) {
+  if (environment.production) {
+    return productionReducer(state, action);
+  }
+  else {
+    return developmentReducer(state, action);
+  }
+}
 
 // =============== user-auth states and compose methods ===============================================
 
