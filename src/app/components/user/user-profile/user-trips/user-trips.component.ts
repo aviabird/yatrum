@@ -16,11 +16,9 @@ import { Component, OnInit } from '@angular/core';
 export class UserTripsComponent implements OnInit {
   private subscription: Subscription
   userTrips$: Observable<Trip[]>;
-  public user$: Observable<UserProfile>;
   userIndex: string;
 
   constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
-    this.user$ = this.store.select(fromRoot.getSelectedProfileUser);
     this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection);
    }
 

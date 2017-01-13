@@ -1,3 +1,4 @@
+import { SignupComponent } from './components/shared/auth/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { UserRoutes } from './components/user/user.routes';
 import { TripRoutes } from './components/trips/trips.routes';
@@ -11,11 +12,12 @@ import { RouterModule, Routes } from "@angular/router";
 
 export const routes: Routes = [
 
-	{ path: '', redirectTo: 'trips', pathMatch: 'full' },
+	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 	{ path: 'trips', component: TripsComponent, children: TripRoutes },
 	{ path: 'user', component: UserComponent, children: UserRoutes },
 	{ path: 'dashboard', component: DashboardComponent },
 	{ path: 'login', component: LoginComponent },
+	{ path: 'signup', component: SignupComponent},
 	{ path: 'instagram_authentication_callback_url', component: InstagramAuthenticationCallbackComponent },
 	{ path: 'search', component: SearchComponent}
 ];
