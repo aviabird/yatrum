@@ -1,4 +1,4 @@
-import { UserComponent } from './components/user/user.component';
+import { InstagramIntegrationService } from './services/instagram-integration.service';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,7 +18,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TripsService } from './services/trips.service';
 import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
-import { InstagramIntegrationService } from './instagram-integration.service';
 import { CloudinaryIntegrationService } from './services/cloudinary-integration.service';
 import { UserService } from './services/user.service';
 
@@ -59,6 +58,7 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { UserComponent } from './components/user/user.component';
 import { UserFollowingComponent } from './components/user/user-profile/user-following/user-following.component';
 import { UserFollowersComponent } from './components/user/user-profile/user-followers/user-followers.component';
 import { UserMediaComponent } from './components/user/user-profile/user-media/user-media.component';

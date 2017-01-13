@@ -1,5 +1,5 @@
+import { InstagramIntegrationService } from './../../../services/instagram-integration.service';
 import { environment as env } from './../../../../environments/environment';
-import { InstagramIntegrationService } from './../../../instagram-integration.service';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 
