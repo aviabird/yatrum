@@ -1,3 +1,4 @@
+import { Trip } from './../models/trip';
 import { ActionTypes as tripActions } from './../actions/trips.action';
 import { Observable } from 'rxjs/Observable';
 import { ActionTypes as userAuthActions } from './../actions/user-auth.action';
@@ -18,7 +19,10 @@ const initialState = {
     email: null,
     profilePic: null,
     coverPhoto: null,
-    trips: {},
+    trips: {
+      ids: [],
+      trips: {},
+    },
     token: null,
     created_at: null,
     updated_at: null
@@ -30,7 +34,10 @@ const initialState = {
       email: null,
       profilePic: null,
       coverPhoto: null,
-      trips: {},
+      trips: {
+        ids: [],
+        trips: {},
+      },
       token: null,
       created_at: null,
       updated_at: null
@@ -40,89 +47,63 @@ const initialState = {
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case userAuthActions.LOGIN_SUCCESS: {
-      // return Object.assign({}, state, {auth: true});
-      console.log('in success');
-      return {
+      return Object.assign({}, state, {
         user_profile: action.payload,
-        auth: true,
-        selected_user_profile: state.selected_user_profile
-      }
+        auth: true
+      });
     }
     case userAuthActions.LOGOUT_SUCCESS: {
-      // return Object.assign({}, state, {auth: true});
-      console.log('in logout success');
-      return {
+      return Object.assign({}, state, {
         user_profile: initialState.user_profile,
-        auth: false,
-        selected_user_profile: state.selected_user_profile
-      }
+        auth: false
+      });
     }
     // Authentication with rails api backend
     case userAuthActions.SERVER_LOGIN_SUCCESS: {
-      console.log('in server login success');
-      return {
+      return Object.assign({}, state, {
         user_profile: action.payload,
-        auth: true,
-        selected_user_profile: state.selected_user_profile
-      }
+        auth: true
+      })
     }
     case userAuthActions.SERVER_LOGOUT_SUCCESS: {
-      // return Object.assign({}, state, {auth: true});
-      console.log('in logout success');
-      return {
+      return Object.assign({}, state, {
         user_profile: initialState.user_profile,
-        auth: false,
-        selected_user_profile: state.selected_user_profile
-      }
+        auth: false
+      })
     }
     case userAuthActions.USER_UPDATE_SUCCESS: {
-      return {
+      return Object.assign({}, state, {
         user_profile: action.payload,
-        auth: true,
-        selected_user_profile: state.selected_user_profile
-      }
+        auth: true
+      })
     }
     case userAuthActions.SELECTED_PROFILE_USER: {
-      window['payload'] = action.payload;
-      return {
-        user_profile: state.user_profile,
-        auth: state.auth,
+      return Object.assign({}, state, {
         selected_user_profile: action.payload
-      }
-    }
-    case tripActions.LOAD_USER_TRIPS: {
-			if(state.selected_user_profile.trips[action.payload]) {
-				return Object.assign({},state,{selectedUserId: action.payload});
-			}
-			return Object.assign({},state,{
-				selectedUserId: action.payload,
-				userTrips: { 
-					[action.payload]: {
-						ids: [],
-						trips: {}
-					}
-				}
-			})
+      })
     }
 		case tripActions.LOAD_USER_TRIPS_SUCCESS: {
-			const Trips = action.payload;
-			const userId = state.selected_user_profile.id;
-			const	newTrips = Trips.filter(trip => !state.selected_user_profile.trips[userId].trips[trip.id]);
-			const newTripIds = newTrips.map(trip => trip.id);
-			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
-			return Object.assign(trips, {
-				[trip.id]: trip
-			});
+      const user_trips = action.payload;
+      const user_new_trips = user_trips.filter(trip => !state.selected_user_profile.trips.trips[trip.id]);
+      const new_trip_ids = user_new_trips.map(trip => trip.id);
+
+			const trips = user_new_trips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+				return Object.assign(trips, {
+					[trip.id]: trip
+				});
 			}, {});
 
-			return Object.assign({},state, {
-				userTrips: {
-					[state.selectedUserId]: {
-						ids: [...state.userTrips[userId].ids, ...newTripIds],
-						trips: Object.assign({},state.userTrips[userId].trips,trips)
-					}
-				}
-			})
+      debugger;
+      return Object.assign({},state, {
+        selected_user_profile: {
+          trips: {
+            ids: [...state.selected_user_profile.trips.ids, ...new_trip_ids],
+            trips: Object.assign({}, state.selected_user_profile.trips.trips, trips)
+          }
+        }
+      })
+
+
 		}
     default: {
       return state;
@@ -145,4 +126,12 @@ export function getAuthStatus (state: State): any {
 
 export function getSelectedProfileUser (state: State): UserProfile {
   return state.selected_user_profile;
+}
+
+export function getUserTrips(state: State) {
+  return state.selected_user_profile.trips.trips;
+}
+
+export function getUserTripIds(state: State) {
+  return state.selected_user_profile.trips.ids;
 }

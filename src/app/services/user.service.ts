@@ -31,6 +31,10 @@ export class UserService {
           email: data.user.email,
           profilePic: data.user.profile_pic,
           coverPhoto: data.user.cover_photo,
+          trips: {
+            ids: [],
+            trips: {}
+          },
           token: data.auth_token,
           created_at: '',
           updated_at: ''

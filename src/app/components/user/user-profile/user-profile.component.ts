@@ -41,7 +41,6 @@ export class UserProfileComponent implements OnInit {
       (params) => this.userIndex = params['id']
     )
     this.userService.getUserById(this.userIndex);
-    this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
     
   handleInputChange(e) {

@@ -11,6 +11,6 @@ export interface UserProfile extends Base {
   email: string;
   profilePic: Object;
   coverPhoto: Object;
-  trips: { [id: string]: TripsState };
+  trips: TripsState;
   token: string;
 }
