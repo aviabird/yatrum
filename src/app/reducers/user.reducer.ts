@@ -93,7 +93,6 @@ export function reducer(state = initialState, action: Action): State {
 				});
 			}, {});
 
-      debugger;
       return Object.assign({},state, {
         selected_user_profile: {
           trips: {

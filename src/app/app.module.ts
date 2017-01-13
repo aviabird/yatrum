@@ -135,6 +135,7 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     UserAuthService,
+    UserService,
     TripsService,
     ServerAuthService,
     TripsResolveGuard,
