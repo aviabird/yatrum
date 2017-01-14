@@ -21,7 +21,7 @@ export class UserTripsComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
     this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(
-      trips => { trips.length ? this.hideLoader = true : null }
+      trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
     );;
    }
 
