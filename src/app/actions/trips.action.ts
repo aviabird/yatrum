@@ -14,7 +14,8 @@ export const ActionTypes = {
 	UPDATE_TRIP: "Update [Trip]",
 	UPDATE_TRIP_SUCCESS: "Update [Trip] Success",
 	CLEAR_EDITING_TRIP: "Clear Editing [Trip]",
-	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store"
+	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store",
+	SEARCH_TRIPS: "Search [Trips]"
 }
 
 export class LoadTripsAction {
@@ -64,4 +65,8 @@ export class ClearEditingTripAction {
 export class AddTripToLocalStore {
 	type = ActionTypes.ADD_TRIP_TO_STORE;
 	constructor(public payload: Trip) {}
+}
+export class SearchTrip {
+	type = ActionTypes.SEARCH_TRIPS;
+	constructor(public payload: string) {}
 }

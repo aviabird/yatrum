@@ -67,6 +67,18 @@ export class TripsService {
   }
 
 	/**
+	 * Get all trips for search page
+	 * @method searchTrips 
+	 * @param 
+	 * @return {Observable} Observable of array of trips
+	 */
+  searchTrips(searchQuery): Observable<Trip[]>|Observable<String> {
+    return this.http.post(`${this.apiLink}/trips/search`, {keywords: searchQuery})
+      .map((data: Response) => data.json())
+			.catch(this.catchError);
+  }
+
+	/**
 	 * Get all trips of a particular user
 	 * @method getUserTrip 
 	 * @param {String} user id 

@@ -1,0 +1,16 @@
+<div class="create-button">
+  <div class="ui primary animated button" tabindex="0" [routerLink]="['/','trips','new']">
+    <div class="visible content">Create Trip</div>
+    <div class="hidden content"><i class="plus icon"></i></div>
+  </div>
+</div>
+
+<div class="ui centered grid">
+  <div class="twelve wide column">
+    <div class="ui two column grid">
+      <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column">
+        <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+      </div>
+    </div>
+  </div>
+</div>  

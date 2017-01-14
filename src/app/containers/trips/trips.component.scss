@@ -1,0 +1,48 @@
+.trip-box {
+    margin-top: 20px;
+    padding-top: 20px;
+    border: solid 1px lightgrey;
+}
+
+.trips-cover {
+	width: 100%;
+	margin-top: 0;
+	border: none;
+	top: -7rem;
+}
+
+.trips-cover-div {
+	position: relative;
+	height: 17rem;
+	overflow: hidden;
+	&:hover {
+		.cover-update-text {
+			opacity: 1;
+		}
+	}
+}
+
+.cover-image {
+	width: 100%;	
+}
+
+
+.trips-nav-links {
+	margin-right: 30px;
+	cursor: pointer;
+	height: 2.2rem;
+	&.active{
+		border-bottom: 5px solid rgb(14, 175, 138);
+	}
+}
+
+.trips-nav {
+  position: relative;
+  color: white;
+  text-transform: uppercase;
+  left: 50%;
+  transform: translate(-50%, -71%);
+  position: relative;
+  padding-top: 1rem;
+  background: rgba(0, 0, 0, 0.28);
+}

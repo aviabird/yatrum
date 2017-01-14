@@ -1,3 +1,5 @@
+import { Place } from './../../../models/place';
+import { City } from './../../../models/city';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
@@ -25,33 +27,42 @@ export class TripEditComponent implements OnInit {
               private store: Store<fromRoot.State>,
               private router: Router,
               private activatedRoute: ActivatedRoute) { 
-    this.setEditingStatus();
+    // this.setEditingTrip();
     this.redirectUponCreate();
     // only call this if the route params has an id in it 
-    if ('id' in this.activatedRoute.snapshot.params) {
-      // We are editing a trip
-      console.log('editing a trip');
-      this.trip$ = this.store.select(fromRoot.getSelectedTrip);
-
-    } else {
-      // Creating a new trip
-      console.log('creating a trip');      
-    }
+    
   }
 
   ngOnInit() {
     this.initForm()
+    this.setEditingTrip();    
   }
 
   /** 
    * sets the editing status
    */
-  setEditingStatus() {
-    this.editingStatus$ = this.store.select(fromRoot.getEditingStatus);
-    
-    this.editingStatus$.subscribe((status) => {
-      this.isEditing = status === true ? true : false;
-    }); 
+  setEditingTrip() {
+    if (this.idPresentInParams()) {
+      // We are editing a trip
+      this.isEditing = true;
+      console.log('editing a trip');
+      let getSelectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
+      getSelectedTrip$.subscribe((trip) => {
+        console.log('trip selected is ', trip);
+        this.resetFormDataWithStoreTrip(trip);
+      })
+    } else {
+      // Creating a new trip
+      this.isEditing = false;
+      console.log('creating a trip');      
+    }
+  }
+
+  /**
+   * helper method returns true if id is present in params
+   */
+  idPresentInParams(){
+    return 'id' in this.activatedRoute.snapshot.params
   }
 
   /**
@@ -84,11 +95,28 @@ export class TripEditComponent implements OnInit {
   resetFormDataWithStoreTrip(trip: Trip):void {
     console.log('assigning values now');
     window['t'] = this.tripForm;
+    // this.tripForm.patchValue(trip);
     this.tripForm.controls['id'].setValue(trip.id);
-    // this.tripForm.controls['cities_attributes'].patchValue(trip.cities);
-    for(let i=0; i < trip.cities.length; i++){
-      this.tripForm.controls['cities_attributes']
-    }
+    this.tripForm.controls['name'].setValue(trip.name);
+    this.tripForm.controls['description'].setValue(trip.description);
+
+    trip.cities.forEach((city, cityIndex) => {
+      // Set a city form group
+      this.addCity(city);
+
+      // console.log('city is ', city, 'city index ', cityIndex);
+      city.places.forEach((place, placeIndex) =>{
+        // console.log('place is ', place, 'place index is ', placeIndex);
+        // console.log('for city', city.id);
+        this.addPlace(cityIndex, place);
+        // set a place form group
+      })
+    })
+    // this.tripForm.controls['id'].setValue(trip.id);
+    // // this.tripForm.controls['cities'].patchValue(trip.cities);
+    // for(let i=0; i < trip.cities.length; i++){
+    //   this.tripForm.controls['cities']
+    // }
   }
 
   /**
@@ -138,52 +166,52 @@ export class TripEditComponent implements OnInit {
     let media: FormArray = new FormArray([]);
     
     // Add a Media
-    media.push(
-      new FormGroup({
-        id: new FormControl(),
-        link: new FormControl('https://unsplash.it/300/300/?random', Validators.required),
-        description: new FormControl('Enjoyed a lot', Validators.required)
-      })
-    )
+    // media.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     link: new FormControl('https://unsplash.it/300/300/?random', Validators.required),
+    //     description: new FormControl('Enjoyed a lot', Validators.required)
+    //   })
+    // )
     // Add a Place
-    places.push(
-      new FormGroup({
-        id: new FormControl(),
-        name: new FormControl('Koregaon park', Validators.required),
-        description: new FormControl('We had really nice food here', Validators.required),
-        review: new FormControl('Really lively place', Validators.required),
-        media: media
-      })
-    )
+    // places.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Koregaon park', Validators.required),
+    //     description: new FormControl('We had really nice food here', Validators.required),
+    //     review: new FormControl('Really lively place', Validators.required),
+    //     media: media
+    //   })
+    // )
 
-    places_1.push(
-      new FormGroup({
-        id: new FormControl(),
-        name: new FormControl('Koregaon park', Validators.required),
-        description: new FormControl('We had really nice food here', Validators.required),
-        review: new FormControl('Really lively place', Validators.required),
-        //TODO: Refactor this change media to pictures as per rails dependency
-        media: media
-      })
-    )
+    // places_1.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Koregaon park', Validators.required),
+    //     description: new FormControl('We had really nice food here', Validators.required),
+    //     review: new FormControl('Really lively place', Validators.required),
+    //     //TODO: Refactor this change media to pictures as per rails dependency
+    //     media: media
+    //   })
+    // )
     // Add a dummy City
-    cities.push(
-      new FormGroup({
-        id: new FormControl(),
-        name: new FormControl('Pune city', Validators.required),
-        country: new FormControl('India', Validators.required),
-        places_attributes: places
-      })
-    )
+    // cities.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Pune city', Validators.required),
+    //     country: new FormControl('India', Validators.required),
+    //     places: places
+    //   })
+    // )
 
     this.tripForm = this.fb.group({
-      id: [],
+      id: [""],
       name: [name, Validators.required],
       description: [description, Validators.required],
       startDate: [startDate, Validators.required],
       endDate: [endDate, Validators.required],
       // status: [status, Validators.required] //TODO use a checkbox or a select box.
-      cities_attributes: cities
+      cities: cities
     })
   }
 
@@ -193,15 +221,31 @@ export class TripEditComponent implements OnInit {
    * @param void
    * @return void
    */
-  addCity():void {
+  addCity(city?:City):void {
     let places = new FormArray([]);
+    let passedCity: City;
+    console.log('city we are adding is', city);
+    
+    let id: String;
+    let name: String; 
+    let country: String;
 
-    (<FormArray>this.tripForm.controls['cities_attributes']).push(
+    if (city) {
+        id = city.id;
+        name = city.name;
+        country = city.country;
+    } else {
+        id = '';
+        name = '';
+        country = '';
+    }
+    console.log("id ", id, 'name', name, 'county', country);
+    (<FormArray>this.tripForm.controls['cities']).push(
       new FormGroup({
-        id: new FormControl(),        
-        name: new FormControl('Dubai city', Validators.required),
-        country: new FormControl('UAE', Validators.required),
-        places_attributes: places
+        id: new FormControl(id),
+        name: new FormControl(name, Validators.required),
+        country: new FormControl(country),
+        places: places
       })
     )
   }
@@ -212,16 +256,31 @@ export class TripEditComponent implements OnInit {
    * @param {cityIndex} index of the city to which place is to be added
    * @return {void}
    */
-  addPlace(cityIndex: number):void {
+  addPlace(cityIndex: number, place?: Place):void {
     let media: FormArray = new FormArray([]);
+    let id: String;
+    let description: String;
+    let name: String;
+    let review: String;
+    if(place) {
+      name = place.name;
+      description = place.description;
+      review = place.review;
+      id = place.id;
+    } else {
+      name = ''; 
+      description = ''; 
+      review = ''; 
+      id = '';
+    }
 
-    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities_attributes'])
-      .controls[cityIndex]).controls['places_attributes']).push(
+    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
+      .controls[cityIndex]).controls['places']).push(
         new FormGroup({
-          id: new FormControl(),
-          name: new FormControl('Koregaon park', Validators.required),
-          description: new FormControl('We had really nice food here', Validators.required),
-          review: new FormControl('Really lively place', Validators.required),
+          id: new FormControl(id),
+          name: new FormControl(name, Validators.required),
+          description: new FormControl(description, Validators.required),
+          review: new FormControl(review, Validators.required),
           media: media
         })
     )
