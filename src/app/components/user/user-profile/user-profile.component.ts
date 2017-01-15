@@ -6,14 +6,31 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  trigger,
+  state,
+  transition,
+  style,
+  animate
+} from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
 @Component({
   selector: 'tr-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  animations: [
+    trigger('flyInDown', [
+      state('in', style({ })),
+      transition('void => *', [
+        style({ top: "-5%", opacity: 0 }),
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class UserProfileComponent implements OnInit {
 

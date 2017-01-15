@@ -1,14 +1,31 @@
 import { Store } from '@ngrx/store';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  trigger,
+  state,
+  transition,
+  style,
+  animate
+} from '@angular/core';
 import * as fromRoot from './../../../reducers/index';
 
 
 @Component({
   selector: 'tr-searched-trips',
   templateUrl: './searched-trips.component.html',
-  styleUrls: ['./searched-trips.component.scss']
+  styleUrls: ['./searched-trips.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      state('in', style({ opacity: 1 })),
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class SearchedTripsComponent implements OnInit {
   trips$: Observable<Trip[]>;
