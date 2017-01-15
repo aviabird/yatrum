@@ -47,3 +47,10 @@ body {
     font-weight: 400;
   }
 }
+
+ng2-slim-loading-bar{
+  .slim-loading-bar-progress{
+    position: absolute;
+    top: 0px;
+  }
+}

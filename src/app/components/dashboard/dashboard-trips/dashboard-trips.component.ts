@@ -12,10 +12,15 @@ import { LoadTripsAction } from './../../../actions/trips.action';
 })
 export class DashboardTripsComponent implements OnInit {
   trips$: Observable<Trip[]>;
-	authentication$: Observable<boolean>;
+  authentication$: Observable<boolean>;
+  hideLoader: boolean = false;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.trips$ = this.store.select(fromRoot.getTripsCollection);
+    this.trips$ =
+      this.store.select(fromRoot.getTripsCollection).do(
+        trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
+      );
+
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);
   }
 

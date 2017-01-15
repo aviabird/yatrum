@@ -11,12 +11,14 @@ import * as fromRoot from './../../../reducers/index';
   styleUrls: ['./searched-trips.component.scss']
 })
 export class SearchedTripsComponent implements OnInit {
-
   trips$: Observable<Trip[]>;
 	authentication$: Observable<boolean>;
+  hideLoader: boolean = false;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.trips$ = this.store.select(fromRoot.getTripsCollection);
+    this.trips$ = this.store.select(fromRoot.getTripsCollection).do(
+        trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
+      );
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);
   }
 

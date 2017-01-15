@@ -17,9 +17,12 @@ export class UserTripsComponent implements OnInit {
   private subscription: Subscription
   userTrips$: Observable<Trip[]>;
   userIndex: string;
+  hideLoader: boolean = false;
 
   constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
-    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection);
+    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(
+      trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
+    );;
    }
 
   ngOnInit() {
