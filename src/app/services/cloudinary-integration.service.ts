@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { Observable } from 'rxjs/Observable';
 import { SelectedProfileUserAction, UserUpdateSuccessAction } from './../actions/user-auth.action';
 import { State, getSelectedProfileUser } from './../reducers/index';
@@ -20,7 +21,8 @@ export class CloudinaryIntegrationService {
   constructor(
     private http: Http,
     private store: Store<State>,
-    private slimLoadingBarService: SlimLoadingBarService
+    private slimLoadingBarService: SlimLoadingBarService,
+    private toastyService: ToastyService
   ) { 
     let user_data = JSON.parse(localStorage.getItem('user'));
     if (user_data) {
@@ -30,7 +32,9 @@ export class CloudinaryIntegrationService {
 
   uploadImages(image, mediaType) {
     this.user$ = this.store.select(getSelectedProfileUser);
+    
     this.user$.subscribe(user => {
+      debugger
       this.toUpdateMediaPublicId = user.profile_pic['public_id'];
     })
     let params = this.createUploadParams(image);
@@ -82,7 +86,7 @@ export class CloudinaryIntegrationService {
     return this.http.post(`${this.cloudinaryApiLink}/image/upload`, params)
       .map(
         data => data.json(),
-        error => console.log(error)
+        error => this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" })
       ).finally(() => this.slimLoadingBarService.complete());
   }
 
