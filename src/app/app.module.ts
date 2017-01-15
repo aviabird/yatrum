@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import {ToastyModule} from 'ng2-toasty';
 
 
 // Services 
@@ -135,6 +137,8 @@ const myFirebaseAuthConfig = {
     //   })
     // }),
     StoreLogMonitorModule,
+    SlimLoadingBarModule.forRoot(),
+    ToastyModule.forRoot()
   ],
   providers: [
     UserAuthService,

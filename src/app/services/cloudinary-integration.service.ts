@@ -6,6 +6,7 @@ import { Http, Headers } from '@angular/http';
 import { environment as env } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 
 @Injectable()
@@ -16,7 +17,11 @@ export class CloudinaryIntegrationService {
   private user$: Observable<any>;
   private toUpdateMediaPublicId: string = null;
 
-  constructor(private http: Http, private store: Store<State>) { 
+  constructor(
+    private http: Http,
+    private store: Store<State>,
+    private slimLoadingBarService: SlimLoadingBarService
+  ) { 
     let user_data = JSON.parse(localStorage.getItem('user'));
     if (user_data) {
       this.auth_token = user_data.auth_token;
@@ -73,11 +78,12 @@ export class CloudinaryIntegrationService {
 
   upload(params) {
     console.log("upload");
+    this.slimLoadingBarService.start();
     return this.http.post(`${this.cloudinaryApiLink}/image/upload`, params)
       .map(
         data => data.json(),
         error => console.log(error)
-      );
+      ).finally(() => this.slimLoadingBarService.complete());
   }
 
 }

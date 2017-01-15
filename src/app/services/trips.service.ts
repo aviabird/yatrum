@@ -6,20 +6,27 @@ import { Observable } from 'rxjs/Observable';
 import { Trip } from './../models/trip';
 import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { ToastyService } from 'ng2-toasty';
 
 @Injectable()
 export class TripsService {
-  private trips: Trip[] = [];
-  private auth_token: string;
-  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
-  // trips: Trip[];
-  constructor(private http: Http, private store: Store<fromRoot.State>) {
-    //TODO: Move this out at a later stage for logged in user
-    let user_data = JSON.parse(localStorage.getItem('user'));
-    if (user_data) {
-      this.auth_token = user_data.auth_token;
-    }
-  }
+	private trips: Trip[] = [];
+	private auth_token: string;
+	private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
+	// trips: Trip[];
+	constructor(
+		private http: Http,
+		private store: Store<fromRoot.State>,
+		private slimLoadingBarService: SlimLoadingBarService,
+		private toastyService: ToastyService
+	) {
+		//TODO: Move this out at a later stage for logged in user
+		let user_data = JSON.parse(localStorage.getItem('user'));
+		if (user_data) {
+			this.auth_token = user_data.auth_token;
+		}
+	}
 
 	/**
 	 * Get details of a particular trip
@@ -27,13 +34,13 @@ export class TripsService {
 	 * @param {String} Trip id
 	 * @return {Boolean} CS:?
 	 */
-  getTrip(id: string): boolean {
+	getTrip(id: string): boolean {
 		this.store.dispatch(new fromTripActions.SelectTripAction(id));
 
 		// TODO: first fetch trip from store, if trip is not found, then make an
 		// backend api request and store it, then resolve this request.
 		// Pivotal tracker link: https://www.pivotaltracker.com/story/show/135508621
-		
+
 		// this.store.select(fromRoot.getSelectedTripId)
 		// 	.filter((data) => data!= null)
 		// 	.map((data) => {
@@ -51,8 +58,8 @@ export class TripsService {
 		// 		})	
 		// 	}).subscribe();
 
-			return true;
-  }
+		return true;
+	}
 
 	/**
 	 * Get all trips for dashboard page
@@ -60,11 +67,13 @@ export class TripsService {
 	 * @param 
 	 * @return {Observable} Observable of array of trips
 	 */
-  getTrips(): Observable<Trip[]>|Observable<String> {
-    return this.http.get(`${this.apiLink}/trips.json`)
-      .map((data: Response) => data.json())
-			.catch(this.catchError);
-  }
+	getTrips(): Observable<Trip[]> | Observable<String> {
+		this.slimLoadingBarService.start();
+		return this.http.get(`${this.apiLink}/trips.json`)
+			.map((data: Response) => data.json())
+			.catch(this.catchError)
+			.finally(() => this.slimLoadingBarService.complete());
+	}
 
 	/**
 	 * Get all trips for search page
@@ -72,11 +81,13 @@ export class TripsService {
 	 * @param 
 	 * @return {Observable} Observable of array of trips
 	 */
-  searchTrips(searchQuery): Observable<Trip[]>|Observable<String> {
-    return this.http.post(`${this.apiLink}/trips/search`, {keywords: searchQuery})
-      .map((data: Response) => data.json())
-			.catch(this.catchError);
-  }
+	searchTrips(searchQuery): Observable<Trip[]> | Observable<String> {
+		this.slimLoadingBarService.start();
+		return this.http.post(`${this.apiLink}/trips/search`, { keywords: searchQuery })
+			.map((data: Response) => data.json())
+			.catch(this.catchError)
+			.finally(() => this.slimLoadingBarService.complete());
+	}
 
 	/**
 	 * Get all trips of a particular user
@@ -84,10 +95,12 @@ export class TripsService {
 	 * @param {String} user id 
 	 * @return {Observable} Observable with array of user trip objects
 	 */
-	getUserTrips(id: string): Observable<Trip[]>|Observable<String> {
+	getUserTrips(id: string): Observable<Trip[]> | Observable<String> {
+		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
 			.map((data: Response) => data.json())
-			.catch(this.catchError);
+			.catch(this.catchError)
+			.finally(() => this.slimLoadingBarService.complete());
 	}
 
 	/**
@@ -96,19 +109,19 @@ export class TripsService {
 	 * @param {Trip} Trip object to be saved
 	 * @return {Observable} Observable with created trip object
 	 */
-	saveTrip(trip: Trip): Observable<Trip>|Observable<String> {
+	saveTrip(trip: Trip): Observable<Trip> | Observable<String> {
 		console.log('we are saving trip');
 		const headers = new Headers({
-      'Content-Type': 'application/json', 
+			'Content-Type': 'application/json',
 			'Authorization': this.auth_token
 			// use Restangular which creates interceptor
-    });
+		});
 
-		return this.http.post(`${this.apiLink}/trips.json`, 
-			JSON.stringify({trip: trip}), {headers: headers}
+		return this.http.post(`${this.apiLink}/trips.json`,
+			JSON.stringify({ trip: trip }), { headers: headers }
 		)
-		.map((data: Response) => data.json())
-		.catch(this.catchError);
+			.map((data: Response) => data.json())
+			.catch(this.catchError);
 	}
 
 	/**
@@ -117,25 +130,26 @@ export class TripsService {
 	 * @param {Trip} trip object to be updated
 	 * @return {Observable} Observable with updated trip object
 	 */
-	updateTrip(trip: Trip): Observable<Trip>|Observable<String> {
-		const tripId = trip.id; 
+	updateTrip(trip: Trip): Observable<Trip> | Observable<String> {
+		const tripId = trip.id;
 		const headers = new Headers({
-      'Content-Type': 'application/json',
-			'Authorization': this.auth_token 
+			'Content-Type': 'application/json',
+			'Authorization': this.auth_token
 			// use Restangular which creates interceptor
-    });
+		});
 
 		return this.http.patch(`${this.apiLink}/trips/${tripId}.json`,
-			JSON.stringify({trip: trip}), {headers: headers}
+			JSON.stringify({ trip: trip }), { headers: headers }
 		)
-		.map((data: Response) => data.json())
-		.catch(this.catchError);
+			.map((data: Response) => data.json())
+			.catch(this.catchError);
 	}
 
 	catchError(response: Response): Observable<String> {
-      console.log('in catch error method');
-      // not returning throw as it raises an error on the parent observable 
-      // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
-      return Observable.of('server error');
-  }
+		this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" });
+		console.log('in catch error method');
+		// not returning throw as it raises an error on the parent observable 
+		// MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
+		return Observable.of('server error');
+	}
 }
