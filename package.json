@@ -39,6 +39,8 @@
     "jshashes": "^1.0.6",
     "ng2-datepicker": "^1.4.7",
     "ng2-file-upload": "^1.1.4-2",
+    "ng2-slim-loading-bar": "^2.0.7",
+    "ng2-toasty": "^2.2.2",
     "ng2-validation": "^3.0.1",
     "primeng": "^1.1.2",
     "reselect": "^2.5.4",

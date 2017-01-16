@@ -31,10 +31,10 @@ export function reducer(state = initialState, action: Action ): State {
     }
 }
 
-export function getLoginMessage(state$: Observable<State>): Observable<string> {
-    return state$.select(state => state.loginFormErrorMessage);
+export function getLoginMessage(state: State): string {
+    return state.loginFormErrorMessage;
 }
-export function getSignUpMessage(state$: Observable<State>): Observable<string> {
-    return state$.select(state => state.signUpFormErrorMessage);
+export function getSignUpMessage(state: State): string {
+    return state.signUpFormErrorMessage;
 }
 

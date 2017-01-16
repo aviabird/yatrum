@@ -1,7 +1,10 @@
-import { UserProfile } from './../../../../models/user-profile';
+import { LoadUserTripsAction } from './../../../../actions/trips.action';
 import * as fromRoot from './../../../../reducers/index';
-import { Store } from '@ngrx/store';
+import { UserProfile } from './../../../../models/user-profile';
 import { Trip } from './../../../../models/trip';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,15 +14,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-trips.component.scss']
 })
 export class UserTripsComponent implements OnInit {
+  private subscription: Subscription
   userTrips$: Observable<Trip[]>;
-  public user$: Observable<UserProfile>;
+  userIndex: string;
+  hideLoader: boolean = false;
 
-  constructor(private store: Store<fromRoot.State>) {
-    this.user$ = this.store.let(fromRoot.getUserProfile);
-    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection);
+  constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
+    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(
+      trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
+    );;
    }
 
   ngOnInit() {
+    this.subscription = this.route.parent.params.subscribe(
+      (params) => this.userIndex = params['id']
+    )
+    this.store.dispatch(new LoadUserTripsAction(this.userIndex));
   }
 
 }

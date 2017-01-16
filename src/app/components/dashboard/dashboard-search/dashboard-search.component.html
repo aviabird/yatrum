@@ -1,0 +1,28 @@
+<div class="search-box-cover">
+  <div class="image search-box-cover-div">
+    <img class="cover-image" src='http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg'>
+    <div class="search-box" [@flyInDown]="'in'">
+      <div class="ui grid">
+        <div class="row">
+          <h1 class="text-white text-center column">
+            <i class="teal large marker icon"></i>
+            Explore
+            the Unexplored
+          </h1>
+        </div>
+        <div class="row">
+          <h2 class="text-white text-center column">
+            <i class="orange large map signs icon"></i>
+            Discover
+            Trips Shared by Real Travellers
+          </h2>
+        </div>
+        <div class="row">
+          <div class="column">
+            <tr-dashboard-search-filter (keywordEntered)='onSearch($event)'></tr-dashboard-search-filter>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

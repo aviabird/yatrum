@@ -1,7 +1,7 @@
+import { InstagramIntegrationService } from './../services/instagram-integration.service';
 import * as InstagramActions from './../actions/instagram.action';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { InstagramIntegrationService } from './../instagram-integration.service';
 import { Actions, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 

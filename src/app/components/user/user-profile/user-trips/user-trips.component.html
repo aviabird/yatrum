@@ -1,28 +1,4 @@
+<tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
 <div *ngFor="let trip of userTrips$ | async">
-	<div class="my-card">
-		<div class="ui grid content">
-			<div class="two wide column">
-				<img class="ui avatar image" [src]="(user$ | async).profilePic && (user$ | async).profilePic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
-			</div> 
-			<div class="ten wide column">
-				<h3>
-					{{(user$ | async).name}}
-				</h3>
-				<p class="description">
-					{{trip.description}} -> {{ trip.id }}
-				</p>
-			</div>
-			<div class="four wide column icon-group">
-				<i class="reply large icon"></i>
-				<i class="empty heart large icon"></i>
-				<i class="large icon">2h</i>
-				<a [routerLink]="['/trips', trip.id, 'edit']">
-					<i  class="large icon pencil"></i>
-				</a>
-			</div>
-		</div>
-		<div class="trip-image">
-			<img width="100%" class="photo" src="http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg">
-		</div>
-	</div>
+	<tr-user-trip-list-item [trip]="trip"></tr-user-trip-list-item>
 </div>

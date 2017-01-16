@@ -1,3 +1,4 @@
+import { SelectedProfileUserAction } from './../actions/user-auth.action';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
 import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './../models/user-profile';
@@ -76,6 +77,7 @@ export class ServerAuthService {
             email: data.user.email,
             profilePic: data.user.profile_pic,
             coverPhoto: data.user.cover_photo,
+            trips: null,
             token: data.auth_token,
             created_at: '',
             updated_at: ''
@@ -85,14 +87,6 @@ export class ServerAuthService {
   setTokenInLocalStorage(user_data): void {
     let jsonData = JSON.stringify(user_data)
     localStorage.setItem('user', jsonData);
-  }
-
-  getUserById(id: string) {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    })
-    return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
-      .map(data => data.json());
   }
 
 }

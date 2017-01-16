@@ -2,23 +2,29 @@
 
 <div class="profile-cover">
 	<div class="image profile-cover-div">
-		<div class="profile-info">
+		<div class="profile-info" [@flyInDown]="'in'">
 			<div class="profile-image-div text-white">
 				<div class="profile-image-text" [ngClass]="{'logged-in-user': (loggedUserId$ | async) == userIndex}" (click)="onUpdateProfilePicture()" >
-					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="user?.profile_pic && user?.profile_pic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
 					<img *ngIf="imageSrc && isProfilPicChanged" class="ui centered image profile-image" [src]="imageSrc">
 					<div class="update-icon-text" *ngIf="(loggedUserId$ | async) == userIndex">
 						<i class="big photo icon"></i>
 					</div>
 				</div>
-				<h1 class="profile-name">{{user?.name}}</h1>
+				<h1 class="profile-name">{{(selectedProfileUser$ | async).name}}</h1>
 				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
+			</div>
+			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onFollow()">
+				<button class="ui facebook button">
+					<i class="plus icon"></i>
+					Follow
+				</button>
 			</div>
 			<div [hidden]="true">
 				<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
 			</div>
 		</div>
-		<img *ngIf="!imageSrc || isProfilPicChanged" class="cover-image" [src]="user?.cover_photo && user?.cover_photo['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
+		<img *ngIf="!imageSrc || isProfilPicChanged" class="cover-image" [src]="(selectedProfileUser$ | async).cover_photo && (selectedProfileUser$ | async).cover_photo['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
 		<img *ngIf="imageSrc && !isProfilPicChanged" class="cover-image" [src]="imageSrc">
 		<div class="cover-update-text" *ngIf="(loggedUserId$ | async) == userIndex" (click)="onUpdateCoverPhoto()">
 			<i class="big photo icon"></i>
@@ -28,10 +34,10 @@
 	</div>
 
 	<div class="ui grid centered profile-nav">
-		<span class="profile-nav-links active" [routerLink]="['trips']">Trips</span>
-		<span class="profile-nav-links">Followers</span>
-		<span class="profile-nav-links">Following</span>
-		<span class="profile-nav-links" [routerLink]="['media']">Media</span>
+		<span class="profile-nav-links" [routerLink]="['trips']" routerLinkActive="active">Trips</span>
+		<span class="profile-nav-links" [routerLink]="['followers']" routerLinkActive="active">Followers</span>
+		<span class="profile-nav-links" [routerLink]="['following']" routerLinkActive="active">Following</span>
+		<span class="profile-nav-links" [routerLink]="['media']" routerLinkActive="active">Media</span>
 	</div>
 </div>
 
