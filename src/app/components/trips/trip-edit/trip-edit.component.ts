@@ -27,10 +27,7 @@ export class TripEditComponent implements OnInit {
               private store: Store<fromRoot.State>,
               private router: Router,
               private activatedRoute: ActivatedRoute) { 
-    // this.setEditingTrip();
     this.redirectUponCreate();
-    // only call this if the route params has an id in it 
-    
   }
 
   ngOnInit() {
@@ -43,16 +40,12 @@ export class TripEditComponent implements OnInit {
    */
   setEditingTrip() {
     if (this.idPresentInParams()) {
-      // We are editing a trip
       this.isEditing = true;
-      console.log('editing a trip');
       let getSelectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
       getSelectedTrip$.subscribe((trip) => {
-        console.log('trip selected is ', trip);
         this.resetFormDataWithStoreTrip(trip);
       })
     } else {
-      // Creating a new trip
       this.isEditing = false;
       console.log('creating a trip');      
     }
@@ -93,30 +86,20 @@ export class TripEditComponent implements OnInit {
    * @unstable
    */
   resetFormDataWithStoreTrip(trip: Trip):void {
-    console.log('assigning values now');
-    window['t'] = this.tripForm;
-    // this.tripForm.patchValue(trip);
+    // patchValue It doesn't work the way we want it
+    // Mimicking its behavious using setValue.
+    // this.tripForm.patchValue(trip); 
     this.tripForm.controls['id'].setValue(trip.id);
     this.tripForm.controls['name'].setValue(trip.name);
     this.tripForm.controls['description'].setValue(trip.description);
 
     trip.cities.forEach((city, cityIndex) => {
-      // Set a city form group
       this.addCity(city);
-
-      // console.log('city is ', city, 'city index ', cityIndex);
       city.places.forEach((place, placeIndex) =>{
-        // console.log('place is ', place, 'place index is ', placeIndex);
-        // console.log('for city', city.id);
         this.addPlace(cityIndex, place);
-        // set a place form group
+        //NOTE: Media should be assigned here
       })
     })
-    // this.tripForm.controls['id'].setValue(trip.id);
-    // // this.tripForm.controls['cities'].patchValue(trip.cities);
-    // for(let i=0; i < trip.cities.length; i++){
-    //   this.tripForm.controls['cities']
-    // }
   }
 
   /**
@@ -124,7 +107,7 @@ export class TripEditComponent implements OnInit {
    * @method onCancel
    */
   onCancel() {
-    console.log('in cancel button')
+    console.log('Cancel button clicked');
     // redirect to back
   }
 
@@ -136,15 +119,10 @@ export class TripEditComponent implements OnInit {
     // Set the editing trip everytime we get a success response from the 
     // create success action and if the editing trip has some value(id) 
     // or something then we send an update trip request.
-    console.log('submitting form', this.tripForm.value);
     if( this.tripForm.valid ) {
-      // check with an observable whether we should call save action 
-      // or update action
       if( this.isEditing === false ) {
-        // dispatch save action
         this.store.dispatch(new SaveTripAction(this.tripForm.value));
       } else {
-        // dispatch update action
         this.store.dispatch(new UpdateTripAction(this.tripForm.value));
       }
     }
@@ -155,7 +133,7 @@ export class TripEditComponent implements OnInit {
    * @method initForm
    */
   initForm():void {
-    let name = 'Dubai Trip';
+    let name = 'Trip';
     let description = 'Desert safari';
     // let status = "completed"; //TODO use a checkbox or a select box.
     let startDate = Date.now();
@@ -165,6 +143,8 @@ export class TripEditComponent implements OnInit {
     let places_1: FormArray = new FormArray([]);
     let media: FormArray = new FormArray([]);
     
+    //NOTE: Don't remove this commented code for reference purposes
+    /**
     // Add a Media
     // media.push(
     //   new FormGroup({
@@ -203,6 +183,7 @@ export class TripEditComponent implements OnInit {
     //     places: places
     //   })
     // )
+    **/
 
     this.tripForm = this.fb.group({
       id: [""],
@@ -224,7 +205,6 @@ export class TripEditComponent implements OnInit {
   addCity(city?:City):void {
     let places = new FormArray([]);
     let passedCity: City;
-    console.log('city we are adding is', city);
     
     let id: String;
     let name: String; 
@@ -239,7 +219,6 @@ export class TripEditComponent implements OnInit {
         name = '';
         country = '';
     }
-    console.log("id ", id, 'name', name, 'county', country);
     (<FormArray>this.tripForm.controls['cities']).push(
       new FormGroup({
         id: new FormControl(id),

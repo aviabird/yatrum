@@ -30,8 +30,10 @@ export function reducer(state = initialState, action: Action ): State {
 		// is consistent in other reducers too.
 		// https://www.pivotaltracker.com/story/show/136717477
 		case ActionTypes.LOAD_TRIPS_SUCCESS: {
+			//TODO: Make this method use trips already cached 
+			//Only add to store the new trips from backend.
+			//Story https://www.pivotaltracker.com/story/show/137695851
 			const payloadTrips = action.payload;
-			// const newTrips = payloadTrips.filter(trip => !state.trips.trips[trip.id]);
 			const newTripIds = payloadTrips.map(trip => trip.id);
 			const trips = payloadTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 				return Object.assign(trips, {
