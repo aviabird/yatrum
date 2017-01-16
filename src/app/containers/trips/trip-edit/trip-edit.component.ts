@@ -280,7 +280,7 @@ export class TripEditComponent implements OnInit {
           id: new FormControl(id),
           name: new FormControl(name, Validators.required),
           description: new FormControl(description, Validators.required),
-          review: new FormControl(review, Validators.required),
+          review: new FormControl(review),
           media: media
         })
     )
