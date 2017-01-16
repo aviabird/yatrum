@@ -52,4 +52,15 @@ export class UserService {
       .map(response => response.json());
   }
 
+  getUserFollowers(id: string) {
+    return this.http.post(`${this.apiLink}/user_followers`, {user_id: id})
+      .map(response => response.json());
+  }
+
+  getUserFollowing(id: string) {
+    return this.http.post(`${this.apiLink}/user_following`, {user_id: id})
+      .map(response => response.json());
+  }
+   
+
 }
