@@ -20,9 +20,26 @@ import {
         style({ transform: "translateY(100%)" }),
         animate(500)
       ])
+    ]),
+    trigger('onClickToggle', [
+      state('inactive', style({})),
+      state('active', style({
+        color: 'rgba(255, 5, 5, 0.6)',
+        opacity: 1,
+        transform: "scale(1.0)"
+      })),
+      transition('inactive => active', [
+        style({ transform: "scale(3.0)", opacity: 0, color: 'red' }),
+        animate(500)
+      ]),
+      transition('active => inactive', animate(500))
     ])
   ]
 })
 export class UserTripListItemComponent extends TripListItemComponent {
+  state: string = 'inactive';
 
+  toggleMove() {
+      this.state = (this.state === 'inactive' ? 'active' : 'inactive');
+  }
 }
