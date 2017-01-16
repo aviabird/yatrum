@@ -34,8 +34,8 @@ export class CloudinaryIntegrationService {
     this.user$ = this.store.select(getSelectedProfileUser);
     
     this.user$.subscribe(user => {
-      debugger
-      this.toUpdateMediaPublicId = user.profile_pic['public_id'];
+      this.toUpdateMediaPublicId = user.profilePic.public_id;
+      console.log("public id", this.toUpdateMediaPublicId);
     })
     let params = this.createUploadParams(image);
     this.upload(params)
@@ -57,17 +57,21 @@ export class CloudinaryIntegrationService {
     return this.http.post(`${this.apiLink}/update_user_profile_media`, params, {headers: headers})
       .map(response => response.json())
       .subscribe(data => {
+        console.log("data", data);
         let payload = { 
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          profilePic: data.user.profile_pic,
-          coverPhoto: data.user.cover_photo,
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          profilePic: data.profile_pic,
+          coverPhoto: data.cover_photo,
+          trips: {
+            ids: [],
+            trips: {}
+          },
           token: data.auth_token,
           created_at: '',
           updated_at: ''
         }
-        this.store.dispatch(new SelectedProfileUserAction(payload));
         this.store.dispatch(new UserUpdateSuccessAction(payload));
       });
   }
@@ -81,7 +85,7 @@ export class CloudinaryIntegrationService {
   }
 
   upload(params) {
-    console.log("upload");
+    console.log("upload", params);
     this.slimLoadingBarService.start();
     return this.http.post(`${this.cloudinaryApiLink}/image/upload`, params)
       .map(
