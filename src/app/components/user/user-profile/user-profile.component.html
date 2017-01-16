@@ -5,7 +5,7 @@
 		<div class="profile-info" [@flyInDown]="'in'">
 			<div class="profile-image-div text-white">
 				<div class="profile-image-text" [ngClass]="{'logged-in-user': (loggedUserId$ | async) == userIndex}" (click)="onUpdateProfilePicture()" >
-					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="(selectedProfileUser$ | async).profile_pic && (selectedProfileUser$ | async).profile_pic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
 					<img *ngIf="imageSrc && isProfilPicChanged" class="ui centered image profile-image" [src]="imageSrc">
 					<div class="update-icon-text" *ngIf="(loggedUserId$ | async) == userIndex">
 						<i class="big photo icon"></i>
