@@ -130,6 +130,7 @@ const myFirebaseAuthConfig = {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
     DatePickerModule,
+    //TODO: Fix this when AOT error is resolved
     // StoreDevtoolsModule.instrumentStore({
     //   monitor: useLogMonitor({
     //     visible: false,

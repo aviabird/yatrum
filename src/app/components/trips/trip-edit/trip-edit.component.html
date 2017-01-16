@@ -1,7 +1,10 @@
 <div class="ui two column centered grid">
   <div class="column">
     <div class="banner" *ngIf="isEditing">
-      <h3>Trip Successfully created, now updating it </h3>
+      <h3>Editing Trip</h3>
+    </div>
+    <div class="banner" *ngIf="!isEditing">
+      <h3>Creating Trip</h3>
     </div>
     <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
       <div class="field ten wide">
@@ -34,10 +37,10 @@
         <button type="button" class="circular ui icon button" (click)="addCity()">
           <i class="icon plus"></i>
         </button>
-        <ul class="list-group" formArrayName="cities_attributes">
-          <div *ngFor="let city of tripForm.controls['cities_attributes'].controls; let i = index">
+        <ul class="list-group" formArrayName="cities">
+          <div *ngFor="let city of tripForm.controls['cities'].controls; let i = index">
             <div class="city-box" formGroupName="{{i}}">
-              <div class="fields">            
+              <div class="fields">
                 <div class="field eight wide">
                   <label for="description">City name</label>
                   <input type="text" 
@@ -59,13 +62,13 @@
                 <button type="button" class="circular ui icon button" (click)="addPlace(i)">
                   <i class="icon plus"></i>
                 </button>
-                <ul class="list-group" formArrayName="places_attributes">
-                  <div *ngFor="let place of city.controls['places_attributes'].controls; let j = index">
+                <ul class="list-group" formArrayName="places">
+                  <div *ngFor="let place of city.controls['places'].controls; let j = index">
                     <div class="place-box" formGroupName="{{j}}">
                       <div><i class="map pin icon"></i></div>
                       <div class="fields">
                         <div class="field eight wide">
-                          <label for="description">Place Name</label>
+                          <label for="name">Place Name</label>
                           <input type="text" 
                             placeholder="Caliornia, SF" 
                             formControlName="name">
@@ -126,7 +129,7 @@
           <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
           <button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
           <button type="submit" *ngIf="!isEditing" class="ui primary basic button" [disabled]="!tripForm.valid" >Save</button>
-          <button type="submit" *ngIf="isEditing" class="ui primary basic button" [disabled]="!tripForm.valid" >Update</button>
+          <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
         </div>
       </div>
     </form>

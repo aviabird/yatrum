@@ -5,6 +5,10 @@
         <img class="ui tiny image" [src]="(trip$ | async).user?.profile_pic?.url">      
       </div>
     </div>
+    <!--TODO: Activate this only after checking if the user is an owner of this trip -->
+    <!--<div class="trip-edit"> 
+      <button [routerLink]="['/trips', (trip$ | async).id, 'edit']">Edit</button>
+    </div>-->
     <div class="ui card my-card">
       <div class="ui twelve column grid trip-detail">
         <div class="four wide column trip-flow">
