@@ -1,4 +1,4 @@
-<div class="my-card" [routerLink]="['/trips',(trip.id)]">
+<div class="my-card" [@fadeIn]="'in'">
   <div class="ui grid content">
     <div class="two wide column">
       <img class="ui avatar image" [src]="trip.user.profile_pic|| 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
@@ -13,11 +13,11 @@
     </div>
     <div class="four wide column icon-group">
       <i class="reply large icon"></i>
-      <i class="empty heart large icon"></i>
+      <i class="heart large icon {{state}}" [ngClass]="{empty: state == 'inactive'}" [@onClickToggle]='state' (click)="toggleMove()"></i>
       <i class="large icon">2h</i>
     </div>
   </div>
-  <div class="trip-image">
+  <div class="trip-image" [routerLink]="['/trips',(trip.id)]">
     <img width="100%" class="photo" src="http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg">
   </div>
 </div>

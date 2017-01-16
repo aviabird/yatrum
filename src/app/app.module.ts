@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import {ToastyModule} from 'ng2-toasty';
 
 
 // Services 
@@ -66,6 +68,7 @@ import { UserTripsComponent } from './components/user/user-profile/user-trips/us
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
 import { UserTripListItemComponent } from './components/user/user-profile/user-trips/user-trip-list-item/user-trip-list-item.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -110,7 +113,8 @@ const myFirebaseAuthConfig = {
     TripListItemComponent,
     TripsSearchComponent,
     SearchedTripsComponent,
-    UserTripListItemComponent
+    UserTripListItemComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +137,8 @@ const myFirebaseAuthConfig = {
     //   })
     // }),
     StoreLogMonitorModule,
+    SlimLoadingBarModule.forRoot(),
+    ToastyModule.forRoot()
   ],
   providers: [
     UserAuthService,

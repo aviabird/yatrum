@@ -1,3 +1,5 @@
+import { SearchTrip, LoadTripsAction } from './../../../actions/trips.action';
+import { Router } from '@angular/router';
 import { ServerLoginSuccessAction, ServerLogoutAction } from './../../../actions/user-auth.action';
 import { ServerAuthService } from './../../../services/server-auth.service';
 import { UserProfile } from './../../../models/user-profile';
@@ -21,7 +23,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(private af: AngularFire,
     private store: Store<fromRoot.State>,
-    private serverAuthService: ServerAuthService) {
+    private serverAuthService: ServerAuthService,
+    private router: Router
+  ) {
     this.user$ = this.store.select(fromRoot.getUserProfile);
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);
 
@@ -50,6 +54,15 @@ export class HeaderComponent implements OnInit {
     // Firebase authentication    
     // this.store.dispatch(new LogoutAction);
     this.store.dispatch(new ServerLogoutAction);
+  }
+
+  onSearch(searchQuery){
+    this.router.navigate(['/search']);
+    
+    if(searchQuery != "")
+      this.store.dispatch(new SearchTrip(searchQuery))
+    else
+      this.store.dispatch(new LoadTripsAction)
   }
 
 }
