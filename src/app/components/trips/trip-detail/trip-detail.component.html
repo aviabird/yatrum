@@ -1,8 +1,8 @@
 <div class="ui centered grid">
   <div class="twelve wide column trip">
     <div class="trip-image">
-      <div class="trip-user" [routerLink]="['/user', (trip$ | async).user_id]">
-        <img class="ui tiny image" [src]="(trip$ | async).profile_pic_url" onError="this.src='https://i1.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Parted_spike.jpg?resize=246%2C155'">      
+      <div class="trip-user" [routerLink]="['/user', (trip$ | async).user?.id]">
+        <img class="ui tiny image" [src]="(trip$ | async).user?.profile_pic?.url">      
       </div>
     </div>
     <!--TODO: Activate this only after checking if the user is an owner of this trip -->
