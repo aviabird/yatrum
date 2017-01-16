@@ -130,9 +130,6 @@
           <button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
           <button type="submit" *ngIf="!isEditing" class="ui primary basic button" [disabled]="!tripForm.valid" >Save</button>
           <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
-          <div>
-            Trip Form valid: {{tripForm.valid}}
-          </div>
         </div>
       </div>
     </form>
