@@ -1,3 +1,4 @@
+import { LikeTripAction } from './../../../../actions/trips.action';
 import { Trip } from './../../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -59,11 +60,12 @@ import {
     ])
   ]
 })
-export class TripListItemComponent {
+export class TripListItemComponent implements OnInit {
   @Input() trip: Trip;
   state: any = {'like': 'inactive', 'follow': 'inactive'};
   
   toggleLike(status) {
+    this.store.dispatch(new LikeTripAction(this.trip.id))
     this.state.like = (status === 'inactive' ? 'active' : 'inactive');
   }
 
@@ -76,6 +78,10 @@ export class TripListItemComponent {
     private store: Store<State>,
     private authService: UserAuthService
   ) { }
+
+  ngOnInit() {
+    this.state.like = (this.trip.is_liked_by_current_user ? 'active' : 'inactive');
+  }
 
   onTagClick(searchQuery) {
     this.router.navigate(['/search']);
