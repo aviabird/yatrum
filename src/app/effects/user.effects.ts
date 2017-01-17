@@ -18,8 +18,8 @@ export class UserEffects {
 
 	@Effect()
 		UserFollowing$: Observable<Action> = this.action$
-			.ofType(UserActions.ActionTypes.LOAD_USER_FOLLOWERS)
-			.switchMap((action: Action) => this.userService.getUserFollowers(action.payload))
+			.ofType(UserActions.ActionTypes.LOAD_USER_FOLLOWING)
+			.switchMap((action: Action) => this.userService.getUserFollowing(action.payload))
 			.map((data) => new UserActions.UserFollowingLoadedAction(data));
 
 }

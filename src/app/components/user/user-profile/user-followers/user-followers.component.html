@@ -1,4 +1,4 @@
-<div *ngFor="let follower of followersList">
+<div *ngFor="let follower of followersList$ | async">
   <div class="ui grid follower-list">
     <div class="two wide column">
       <img class="ui avatar image" [src]="follower?.profile_pic.url">

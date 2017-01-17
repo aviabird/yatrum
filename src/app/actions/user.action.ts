@@ -19,7 +19,7 @@ export class UserFollowersLoadedAction {
 
 export class LoadUserFollowingAction {
 	type = ActionTypes.LOAD_USER_FOLLOWING;
-	constructor() {}
+	constructor(public payload: string) {}
 }
 
 export class UserFollowingLoadedAction {
