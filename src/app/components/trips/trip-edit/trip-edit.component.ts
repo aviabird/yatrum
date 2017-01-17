@@ -143,6 +143,29 @@ export class TripEditComponent implements OnInit {
     let places_1: FormArray = new FormArray([]);
     let media: FormArray = new FormArray([]);
     
+    // If we are creating a new trip add a city and a place by default
+    if (!this.isEditing) {
+      // Add a city
+      cities.push(
+        new FormGroup({
+          id: new FormControl(),
+          name: new FormControl('', Validators.required),
+          country: new FormControl('', Validators.required),
+          places: places
+        })
+      )
+      // Add a Place
+      places.push(
+        new FormGroup({
+          id: new FormControl(),
+          name: new FormControl('', Validators.required),
+          description: new FormControl('', Validators.required),
+          review: new FormControl('', Validators.required),
+          media: media
+        })
+      )
+    }
+
     //NOTE: Don't remove this commented code for reference purposes
     /**
     // Add a Media
