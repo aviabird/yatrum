@@ -17,7 +17,7 @@
       <div class="results"></div>
     </div>
     <div class="ui simple dropdown item text-white" *ngIf="(authentication$ | async)">
-      <img class="ui avatar image" [src]="(user$ | async).profilePic?.url">
+      <img class="ui avatar image" [src]="(user$ | async).profilePic?.url" [routerLink]="['/user', (user$ | async).id, 'trips' ]" >
       <i class="dropdown icon"></i>
       <div class="menu">
         <a class="item" [routerLink]="['/user','settings']">Settings</a>
