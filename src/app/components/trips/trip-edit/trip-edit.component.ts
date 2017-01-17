@@ -140,32 +140,10 @@ export class TripEditComponent implements OnInit {
     let endDate = Date.now();
     let cities: FormArray = new FormArray([]);
     let places: FormArray = new FormArray([]);
-    let places_1: FormArray = new FormArray([]);
     let media: FormArray = new FormArray([]);
     
     // If we are creating a new trip add a city and a place by default
-    if (!this.isEditing) {
-      // Add a city
-      cities.push(
-        new FormGroup({
-          id: new FormControl(),
-          name: new FormControl('', Validators.required),
-          country: new FormControl('', Validators.required),
-          places: places
-        })
-      )
-      // Add a Place
-      places.push(
-        new FormGroup({
-          id: new FormControl(),
-          name: new FormControl('', Validators.required),
-          description: new FormControl('', Validators.required),
-          review: new FormControl('', Validators.required),
-          media: media
-        })
-      )
-    }
-
+    this.provisionCityAndPlace(cities, places, media);
     //NOTE: Don't remove this commented code for reference purposes
     /**
     // Add a Media
@@ -217,6 +195,34 @@ export class TripEditComponent implements OnInit {
       // status: [status, Validators.required] //TODO use a checkbox or a select box.
       cities: cities
     })
+  }
+
+  /**
+   * Add an empty city and place for a new trip
+   * @method provisionCityAndPlace
+   */
+  provisionCityAndPlace(cities, places, media) {
+    if (!this.isEditing) {
+      // Add a city
+      cities.push(
+        new FormGroup({
+          id: new FormControl(),
+          name: new FormControl('', Validators.required),
+          country: new FormControl('', Validators.required),
+          places: places
+        })
+      )
+      // Add a Place
+      places.push(
+        new FormGroup({
+          id: new FormControl(),
+          name: new FormControl('', Validators.required),
+          description: new FormControl('', Validators.required),
+          review: new FormControl('', Validators.required),
+          media: media
+        })
+      )
+    }
   }
 
   /**
