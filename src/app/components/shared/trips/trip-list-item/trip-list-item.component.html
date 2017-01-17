@@ -1,15 +1,48 @@
-<div class="ui card my-card">  
-  <div class="content">
-    <a class="header">{{trip.name}}</a>
-    <div class="meta">
-      <span class="date">25/4/2016</span>
-    </div>
-    <div class="description">
-      <span *ngFor="let city of trip.cities"> {{city.name}} - </span>
-      <img width="100%" class="photo" src="https://assets0.roadtrippers.com/uploads/region/image/466/-strip_-quality_60_-interlace_Plane_-resize_960x354_U__-gravity_center_-extent_960x354/region-image-1dd08944-c73f-4cb4-9b42-993ae414c58d.jpg">
-    </div>
+<div class="my-card" [@flyInUp]="'in'">
+  
+  <div class="follow-ribbon" *ngIf="!(belongsToLoggedInUser() | async)"
+    (click)="toggleFollowBtn(state.follow)">
+    <a class="ui large right ribbon label"
+      [ngClass]="{blue: state.follow == 'active', teal: state.follow == 'inactive'}"
+      [@toggleFollow]='state.follow'>
+      <i class="white plus icon"></i>
+      {{state.follow == "inactive" ? "Follow" : "Following"}}
+    </a>
   </div>
-  <div class="extra content">
-    Completed Trip
+
+  <div class="ui grid content">
+    <div class="two wide column">
+      <img class="ui avatar image" [src]="trip.user?.profile_pic?.url">
+    </div> 
+    <div class="twelve wide column">
+      <h3>
+        {{trip.user.name}}
+      </h3>
+      <p class="description">
+        {{trip.description}}
+      </p>
+    </div>
+    <div class="one wide column">
+      <a [routerLink]="['/trips', trip.id, 'edit']" *ngIf="belongsToLoggedInUser() | async"><i class="large icon pencil"></i></a>
+    </div>
+    <div class="sixteen wide column" [routerLink]="['/trips',(trip.id)]">
+      <img width="100%" class="photo" src="http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg">
+    </div>
+    <div class="sixteen wide column tags">
+      <a class="ui blue label" (click)="onTagClick('river')">River</a>
+      <a class="ui green label" (click)="onTagClick('mountains')">Mountains</a>
+      <a class="ui grey label" (click)="onTagClick('cycling')">Cycling</a>
+      <a class="ui red label" (click)="onTagClick('treking')">Treking</a>
+      <a class="ui teal label" (click)="onTagClick('swimming')">Swimming</a>
+    </div>
+    <hr class="image-bottom-border">
+    <div class="sixteen wide column icon-group">
+      <i class="reply large icon"></i>
+      <i class="heart large icon"
+        [ngClass]="{empty: state.like == 'inactive'}"
+        [@toggleLike]='state.like'
+        (click)="toggleLike(state.like)"></i>
+      <i class="large icon">2h</i>
+    </div>
   </div>
 </div>

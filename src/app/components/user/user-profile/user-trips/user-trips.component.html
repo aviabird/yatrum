@@ -1,4 +1,4 @@
 <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
 <div *ngFor="let trip of userTrips$ | async">
-	<tr-user-trip-list-item [trip]="trip"></tr-user-trip-list-item>
+	<tr-trip-list-item [trip]="trip"></tr-trip-list-item>
 </div>

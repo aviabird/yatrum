@@ -67,7 +67,6 @@ import { UserMediaComponent } from './components/user/user-profile/user-media/us
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
-import { UserTripListItemComponent } from './components/user/user-profile/user-trips/user-trip-list-item/user-trip-list-item.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 
 const firebaseConfig = {
@@ -113,7 +112,6 @@ const myFirebaseAuthConfig = {
     TripListItemComponent,
     TripsSearchComponent,
     SearchedTripsComponent,
-    UserTripListItemComponent,
     LoaderComponent
   ],
   imports: [
