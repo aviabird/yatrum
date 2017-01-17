@@ -9,7 +9,7 @@ export const ActionTypes = {
 
 export class LoadUserFollowersAction {
 	type = ActionTypes.LOAD_USER_FOLLOWERS;
-	constructor() {}
+	constructor(public payload: string) {}
 }
 
 export class UserFollowersLoadedAction {
