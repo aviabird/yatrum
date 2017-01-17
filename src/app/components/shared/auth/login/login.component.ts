@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   redirectIfUserLoggedIn() {
     this.authStatus$.subscribe(
       data => { 
-        if(data == true){ this.router.navigateByUrl("/trips") }
+        if(data == true){ this.router.navigateByUrl("/dashboard") }
       }
     )
   }
