@@ -1,14 +1,67 @@
 .my-card {
-	min-width: 100%;
-	box-shadow: 0 1px 5px #BBB;
-	transition: all 500ms;
-	&:hover {
-		box-shadow: 0 7px 20px #BBB;
-		transform: scale(1.01);
-		z-index: 1;
-	}
-}
+	margin: 2rem auto;
+	border-radius: 5px;
+	border: none;
+	transition-duration: 0.5s;
+	background: white;
+	box-shadow: 0px 0px 5px #aaa;
 
-.photo {
-	height: 15rem;
+	&:hover {
+		box-shadow: 0px 0px 20px #aaa;
+		transform: scale(1.1)
+	}
+
+	.photo {
+		border-radius: 5px;
+	}
+
+	.image-bottom-border {
+		width: 100%;
+    border: none;
+    border-bottom: 1px solid #eee;
+	}
+
+	.avatar {
+		border-radius: 5px;
+		width: 100%;
+    height: auto;
+		background: rgb(250, 250, 250);
+	}
+
+	.content {
+		padding: 2rem;
+	}
+
+	h3 {
+		font-weight: 400;
+		margin-bottom: 5px;
+	}
+
+	p {
+		font-size: 1.1rem;
+	}
+
+	.icon-group {
+		text-align: center;
+		.icon {
+			color: #aaa;
+		}
+	}
+
+	.active {
+		color: red;
+	}
+
+	.tags a {
+		margin-bottom: 5px;
+	}
+
+	.follow-ribbon {
+		position: absolute;
+    top: 2.8rem;
+    right: 1rem;
+		cursor: pointer;
+		z-index: 1;
+		opacity: 0.9;
+	}
 }

@@ -1,5 +1,6 @@
 import { Base } from './base';
 import { City } from './city';
+import { UserProfile } from './user-profile';
 
 export interface Trip extends Base {
     user_id: string;
@@ -10,4 +11,5 @@ export interface Trip extends Base {
     description: string;
     name: string;
     cities: City[];
+    user: UserProfile;
 }
