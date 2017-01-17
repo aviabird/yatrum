@@ -5,7 +5,7 @@
 		<div class="profile-info" [@flyInDown]="'in'">
 			<div class="profile-image-div text-white">
 				<div class="profile-image-text" [ngClass]="{'logged-in-user': (loggedUserId$ | async) == userIndex}" (click)="onUpdateProfilePicture()" >
-					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="(selectedProfileUser$ | async).profile_pic && (selectedProfileUser$ | async).profile_pic['url'] || 'https://pbs.twimg.com/profile_images/706827216336752642/RUlj-EsL_400x400.jpg'">
+					<img *ngIf="!imageSrc || !isProfilPicChanged" class="ui centered image profile-image" [src]="(selectedProfileUser$ | async).profilePic?.url">
 					<img *ngIf="imageSrc && isProfilPicChanged" class="ui centered image profile-image" [src]="imageSrc">
 					<div class="update-icon-text" *ngIf="(loggedUserId$ | async) == userIndex">
 						<i class="big photo icon"></i>
@@ -24,7 +24,7 @@
 				<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
 			</div>
 		</div>
-		<img *ngIf="!imageSrc || isProfilPicChanged" class="cover-image" [src]="(selectedProfileUser$ | async).cover_photo && (selectedProfileUser$ | async).cover_photo['url'] || 'http://res.cloudinary.com/zeus999/image/upload/e_blur:1000/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg'">
+		<img *ngIf="!imageSrc || isProfilPicChanged" class="cover-image" [src]="(selectedProfileUser$ | async).coverPhoto?.url">
 		<img *ngIf="imageSrc && !isProfilPicChanged" class="cover-image" [src]="imageSrc">
 		<div class="cover-update-text" *ngIf="(loggedUserId$ | async) == userIndex" (click)="onUpdateCoverPhoto()">
 			<i class="big photo icon"></i>

@@ -30,11 +30,12 @@ export function reducer(state = initialState, action: Action ): State {
 		// is consistent in other reducers too.
 		// https://www.pivotaltracker.com/story/show/136717477
 		case ActionTypes.LOAD_TRIPS_SUCCESS: {
-			const Trips = action.payload;
-			const newTrips = Trips.filter(trip => !state.trips.trips[trip.id]);
-			const newTripIds = newTrips.map(trip => trip.id);
-
-			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+			//TODO: Make this method use trips already cached 
+			//Only add to store the new trips from backend.
+			//Story https://www.pivotaltracker.com/story/show/137695851
+			const payloadTrips = action.payload;
+			const newTripIds = payloadTrips.map(trip => trip.id);
+			const trips = payloadTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 				return Object.assign(trips, {
 					[trip.id]: trip
 				});
@@ -42,8 +43,8 @@ export function reducer(state = initialState, action: Action ): State {
 
 			return {
 				trips: {
-					ids: [ ...state.trips.ids, ...newTripIds], // equivalent to ruby flatten
-					trips: Object.assign({}, state.trips.trips, trips)
+					ids: newTripIds, // equivalent to ruby flatten
+					trips: Object.assign({}, trips)
 				},
 				selectedTripId: state.selectedTripId,
 				selectedCityId: state.selectedCityId,
@@ -93,6 +94,20 @@ export function reducer(state = initialState, action: Action ): State {
 		}
 		case ActionTypes.SEARCH_TRIPS: {
 			return Object.assign({}, initialState)
+		}
+		case ActionTypes.UPDATE_TRIP_SUCCESS: {
+			const updatedTrip = action.payload;
+			const updatedTripId = updatedTrip.id
+
+			let newTrips = state.trips.trips
+			newTrips[updatedTripId] = updatedTrip;
+
+			return Object.assign({}, state, {
+				trips: {
+					ids: state.trips.ids,
+					trips: newTrips
+				}
+			})
 		}
 		default: {
 			return state;

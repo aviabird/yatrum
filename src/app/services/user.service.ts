@@ -26,11 +26,11 @@ export class UserService {
       .map(response => response.json())
       .subscribe(data => {
         let payload = { 
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          profilePic: data.user.profile_pic,
-          coverPhoto: data.user.cover_photo,
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          profilePic: data.profile_pic,
+          coverPhoto: data.cover_photo,
           trips: {
             ids: [],
             trips: {}

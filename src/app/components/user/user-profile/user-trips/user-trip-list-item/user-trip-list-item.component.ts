@@ -1,3 +1,4 @@
+import { Trip } from './../../../../../models/trip';
 import { TripListItemComponent } from './../../../../shared/trips/trip-list-item/trip-list-item.component';
 import {
   Component,
@@ -6,7 +7,8 @@ import {
   state,
   transition,
   style,
-  animate
+  animate,
+  Input
 } from '@angular/core';
 
 @Component({
@@ -38,7 +40,7 @@ import {
 })
 export class UserTripListItemComponent extends TripListItemComponent {
   state: string = 'inactive';
-
+  
   toggleMove() {
       this.state = (this.state === 'inactive' ? 'active' : 'inactive');
   }

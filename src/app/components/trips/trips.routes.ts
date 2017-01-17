@@ -21,6 +21,13 @@ export const TripRoutes = [
     component: TripDetailComponent,
     resolve: {
       trip: TripsResolveGuard
+    }
+  },
+  {
+    path: ':id/edit',
+    component: TripEditComponent,
+    resolve: {
+      trip: TripsResolveGuard
     },
     canActivate: [ CanActivateViaAuthGuard ]
   }
