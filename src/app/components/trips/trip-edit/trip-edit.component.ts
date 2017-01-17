@@ -23,6 +23,10 @@ export class TripEditComponent implements OnInit {
   trip$: Observable<Trip>;
   tripId: String;
 
+  cities: FormArray = new FormArray([]);
+  places: FormArray = new FormArray([]);
+  media: FormArray = new FormArray([]);
+
   constructor(private fb: FormBuilder, 
               private store: Store<fromRoot.State>,
               private router: Router,
@@ -47,7 +51,6 @@ export class TripEditComponent implements OnInit {
       })
     } else {
       this.isEditing = false;
-      console.log('creating a trip');      
     }
   }
 
@@ -143,7 +146,7 @@ export class TripEditComponent implements OnInit {
     let media: FormArray = new FormArray([]);
     
     // If we are creating a new trip add a city and a place by default
-    this.provisionCityAndPlace(cities, places, media);
+    this.provisionCityAndPlace();
     //NOTE: Don't remove this commented code for reference purposes
     /**
     // Add a Media
@@ -193,7 +196,7 @@ export class TripEditComponent implements OnInit {
       startDate: [startDate, Validators.required],
       endDate: [endDate, Validators.required],
       // status: [status, Validators.required] //TODO use a checkbox or a select box.
-      cities: cities
+      cities: this.cities
     })
   }
 
@@ -201,25 +204,27 @@ export class TripEditComponent implements OnInit {
    * Add an empty city and place for a new trip
    * @method provisionCityAndPlace
    */
-  provisionCityAndPlace(cities, places, media) {
+  provisionCityAndPlace() {
     if (!this.isEditing) {
       // Add a city
-      cities.push(
+      this.cities.push(
+        //TODO: Refactor extract this creation of formGroup
         new FormGroup({
           id: new FormControl(),
           name: new FormControl('', Validators.required),
-          country: new FormControl('', Validators.required),
-          places: places
+          country: new FormControl(''),
+          places: this.places
         })
       )
       // Add a Place
-      places.push(
+      this.places.push(
+        //TODO: Refactor extract this creation of formGroup        
         new FormGroup({
           id: new FormControl(),
           name: new FormControl('', Validators.required),
           description: new FormControl('', Validators.required),
-          review: new FormControl('', Validators.required),
-          media: media
+          review: new FormControl(''),
+          media: this.media
         })
       )
     }
@@ -249,6 +254,7 @@ export class TripEditComponent implements OnInit {
         country = '';
     }
     (<FormArray>this.tripForm.controls['cities']).push(
+      //TODO: Refactor extract this creation of formGroup      
       new FormGroup({
         id: new FormControl(id),
         name: new FormControl(name, Validators.required),
@@ -284,6 +290,7 @@ export class TripEditComponent implements OnInit {
 
     (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
       .controls[cityIndex]).controls['places']).push(
+        //TODO: Refactor extract this creation of formGroup        
         new FormGroup({
           id: new FormControl(id),
           name: new FormControl(name, Validators.required),

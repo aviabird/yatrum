@@ -14,16 +14,6 @@
           id="tripName" 
           placeholder="Trip name" 
           formControlName="name">
-        <!--<input class="col-md-6" type="text" 
-          class="form-control" 
-          id="tripId" 
-          placeholder="Trip id" 
-          formControlName="id">-->
-        <!--<input class="col-md-6" type="text" 
-          class="form-control" 
-          id="description" 
-          placeholder="Description for trip" 
-          formControlName="description">  -->
       </div>
       <!--Start date of trip not implementing right now -->
       <!--<div class="form-group">
@@ -47,12 +37,6 @@
                     placeholder="Caliornia, SF" 
                     formControlName="name">
                 </div>
-                <!--<div class="field four wide">
-                  <label for="description">Country</label>
-                  <input type="text" 
-                    placeholder="United States" 
-                    formControlName="country">
-                </div>-->
               </div>
 
               <!-- Places basic info -->
@@ -128,7 +112,7 @@
           <!--REFACTOR: Switch to ngIf/Else syntax while updating to angular4.0/2.4.1 -->
           <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
           <button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
-          <button type="submit" *ngIf="!isEditing" class="ui primary basic button" [disabled]="!tripForm.valid" >Save</button>
+          <button type="submit" *ngIf="!isEditing" class="ui primary basic button">Save</button>
           <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
         </div>
       </div>
