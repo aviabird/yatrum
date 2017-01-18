@@ -7,16 +7,16 @@ import { Action } from '@ngrx/store';
 import { UserProfile } from './../models/user-profile';
 
 export interface State {
-  user_profile: UserProfile;
+  user: UserProfile;
   auth: any;
-  selected_user_profile: UserProfile;
+  selected_user: UserProfile;
   followers: Array<UserProfile>;
   following: Array<UserProfile>;
 }
 
 const initialState = {
-  //TODO: Provision this dummy object creation to user_profile model
-  user_profile: { 
+  //TODO: Provision this dummy object creation to user model
+  user: { 
     id: null,
     name: null,
     email: null,
@@ -29,7 +29,7 @@ const initialState = {
     updated_at: null
   },
     auth: null,
-    selected_user_profile: { 
+    selected_user: { 
       id: null,
       name: null,
       email: null,
@@ -49,38 +49,38 @@ export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case userAuthActions.LOGIN_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       });
     }
     case userAuthActions.LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: initialState.user_profile,
+        user: initialState.user,
         auth: false
       });
     }
     // Authentication with rails api backend
     case userAuthActions.SERVER_LOGIN_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       })
     }
     case userAuthActions.SERVER_LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: initialState.user_profile,
+        user: initialState.user,
         auth: false
       })
     }
     case userAuthActions.USER_UPDATE_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       })
     }
     case userAuthActions.SELECTED_PROFILE_USER: {
       return Object.assign({}, state, {
-        selected_user_profile: action.payload
+        selected_user: action.payload
       })
     }
 		case tripActions.SET_USER_TRIP_IDS: {
@@ -88,8 +88,8 @@ export function reducer(state = initialState, action: Action): State {
       const trip_ids = trips.map(trip => trip.id);
 
       return Object.assign({}, state, {
-        selected_user_profile: Object.assign({}, state.selected_user_profile, {
-          tripIds: [...state.selected_user_profile.tripIds, ...trip_ids]
+        selected_user: Object.assign({}, state.selected_user, {
+          tripIds: [...state.selected_user.tripIds, ...trip_ids]
         })
       })
 		}
@@ -111,11 +111,11 @@ export function reducer(state = initialState, action: Action): State {
 
 //========================= Exporter functions -==================================
 export function getUserProfile (state: State): UserProfile {
-  return state.user_profile;
+  return state.user;
 }
 
 export function getLoggedInUserId(state: State): string {
-  return state.user_profile.id;
+  return state.user.id;
 } 
 
 export function getAuthStatus (state: State): any {
@@ -123,11 +123,11 @@ export function getAuthStatus (state: State): any {
 }
 
 export function getSelectedProfileUser (state: State): UserProfile {
-  return state.selected_user_profile;
+  return state.selected_user;
 }
 
 export function getUserTripIds(state: State) {
-  return state.selected_user_profile.tripIds;
+  return state.selected_user.tripIds;
 }
 
 export function getUserFollowers(state: State) {
