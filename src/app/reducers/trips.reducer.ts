@@ -34,7 +34,7 @@ export function reducer(state = initialState, action: Action ): State {
 			//Story https://www.pivotaltracker.com/story/show/137695851
 			const payloadTrips = action.payload;
 			const newTrips = payloadTrips.filter(trip => !state.trips[trip.id]);
-			const newTripIds = newTrips.map(trip => trip.id);
+			const tripIds = payloadTrips.map(trip => trip.id);
 
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 				return Object.assign(trips, {
@@ -42,14 +42,18 @@ export function reducer(state = initialState, action: Action ): State {
 				});
 			}, {});
 
+			debugger;
+
 			return Object.assign({}, state, {
-				tripIds: [...state.tripIds, ...newTripIds],
+				tripIds: [...state.tripIds, ...tripIds],
 				trips: Object.assign({}, state.trips, trips)
 			})
 		}
 		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
       const payloadTrips = action.payload;
-			const newTrips = payloadTrips.filter(trip => !state.trips[trip.id]);
+			const newTrips = payloadTrips.filter(trip => {
+				return !state.trips[trip.id]
+			});
 
 			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 				return Object.assign(trips, {
@@ -57,8 +61,9 @@ export function reducer(state = initialState, action: Action ): State {
 				});
 			}, {});
 
+			
       return Object.assign({}, state, {
-        trips: Object.assign({}, state.trips, newTrips)
+        trips: Object.assign({}, state.trips, trips)
       })
 		}
 		case ActionTypes.ADD_TRIP_TO_STORE: {

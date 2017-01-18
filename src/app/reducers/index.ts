@@ -52,8 +52,6 @@ export const getEditingStatus = createSelector(getTripsState, fromTripsReducer.i
 export const getEditingTrip = createSelector(getTripsState, fromTripsReducer.getEditingTrip);
 
 export const getTripsCollection = createSelector(getTrips, getTripIds, (trips, ids) => {
-	console.log(trips);
-	console.log(ids);	
 	return ids.map(id => trips[id]);
 });
 
@@ -84,8 +82,8 @@ export const getUserTripIds = compose(fromUserReducer.getUserTripIds,getUserStat
 export const getUserFollowers = compose(fromUserReducer.getUserFollowers,getUserState);
 export const getUserFollowing = compose(fromUserReducer.getUserFollowing,getUserState);
 
-export const getUserTripsCollection = createSelector(getTrips, getUserTripIds, (userTrips, userTripIds) => {
-	return userTripIds.map(id => userTrips[id]);
+export const getUserTripsCollection = createSelector(getTrips, getUserTripIds, (trips, ids) => {
+	return ids.map(id => trips[id]);
 })
 
 
