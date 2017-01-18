@@ -24,6 +24,11 @@ export class TripsEffects {
     .map((data: Trip[]) => new TripsActions.UserTripsLoadedAction(data));
 
   @Effect()
+  UserTripIds$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS_SUCCESS)
+    .map((action: Action) => new TripsActions.SetUserTripIds(action.payload));
+
+  @Effect()
   SaveTrip$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SAVE_TRIP)
     .switchMap<Action, Trip | String>((action: Action) => this.tripsService.saveTrip(action.payload))

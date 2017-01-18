@@ -6,117 +6,113 @@ import { ActionTypes as userAuthActions } from './../actions/user-auth.action';
 import { Action } from '@ngrx/store';
 import { UserProfile } from './../models/user-profile';
 
+interface selectedUser {
+  user: UserProfile,
+  tripIds: string[],
+  followers: UserProfile[],
+  following: UserProfile[]
+}
+
 export interface State {
-  user_profile: UserProfile;
+  user: UserProfile;
   auth: any;
-  selected_user_profile: UserProfile;
-  followers: Array<UserProfile>;
-  following: Array<UserProfile>;
+  selected_user: selectedUser;
 }
 
 const initialState = {
-  //TODO: Provision this dummy object creation to user_profile model
-  user_profile: { 
+  //TODO: Provision this dummy object creation to user model
+  user: { 
     id: null,
     name: null,
     email: null,
     profilePic: null,
     coverPhoto: null,
     isFollowed: null,
-    trips: {
-      ids: [],
-      trips: {},
-    },
     token: null,
     created_at: null,
     updated_at: null
   },
-    auth: null,
-    selected_user_profile: { 
+  auth: null,
+  selected_user: {
+    user: {
       id: null,
       name: null,
       email: null,
       profilePic: null,
       coverPhoto: null,
       isFollowed: null,
-      trips: {
-        ids: [],
-        trips: {},
-      },
       token: null,
       created_at: null,
       updated_at: null
     },
-    followers: null,
-    following: null
+    tripIds: [],
+    followers: null, // change this to followers ids at later stage 
+    following: null  // change this to following ids at later stage
+  }, 
 };
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case userAuthActions.LOGIN_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       });
     }
     case userAuthActions.LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: initialState.user_profile,
+        user: initialState.user,
         auth: false
       });
     }
     // Authentication with rails api backend
     case userAuthActions.SERVER_LOGIN_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       })
     }
     case userAuthActions.SERVER_LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: initialState.user_profile,
+        user: initialState.user,
         auth: false
       })
     }
     case userAuthActions.USER_UPDATE_SUCCESS: {
       return Object.assign({}, state, {
-        user_profile: action.payload,
+        user: action.payload,
         auth: true
       })
     }
     case userAuthActions.SELECTED_PROFILE_USER: {
       return Object.assign({}, state, {
-        selected_user_profile: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          user: action.payload
+        })
       })
     }
-		case tripActions.LOAD_USER_TRIPS_SUCCESS: {
-      const user_trips = action.payload;
-      const user_new_trips = user_trips.filter(trip => !state.selected_user_profile.trips.trips[trip.id]);
-      const new_trip_ids = user_new_trips.map(trip => trip.id);
-
-			const trips = user_new_trips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
-				return Object.assign(trips, {
-					[trip.id]: trip
-				});
-			}, {});
+		case tripActions.SET_USER_TRIP_IDS: {
+      const trips = action.payload;
+      const trip_ids = trips.map(trip => trip.id);
 
       return Object.assign({}, state, {
-        selected_user_profile: Object.assign({}, state.selected_user_profile, {
-          trips: {
-            ids: [...state.selected_user_profile.trips.ids, ...new_trip_ids],
-            trips: Object.assign({}, state.selected_user_profile.trips.trips, trips)
-          }
+        selected_user: Object.assign({}, state.selected_user, {
+          tripIds: [...state.selected_user.tripIds, ...trip_ids]
         })
       })
 		}
     case UserActions.USER_FOLLOWERS_LOADED: {
       return Object.assign({}, state, {
-        followers: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          followers: action.payload
+        })
       })
     }
     case UserActions.USER_FOLLOWING_LOADED: {
       return Object.assign({}, state, {
-        following: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          following: action.payload
+        })
       })
     }
     default: {
@@ -127,11 +123,11 @@ export function reducer(state = initialState, action: Action): State {
 
 //========================= Exporter functions -==================================
 export function getUserProfile (state: State): UserProfile {
-  return state.user_profile;
+  return state.user;
 }
 
 export function getLoggedInUserId(state: State): string {
-  return state.user_profile.id;
+  return state.user.id;
 } 
 
 export function getAuthStatus (state: State): any {
@@ -139,21 +135,17 @@ export function getAuthStatus (state: State): any {
 }
 
 export function getSelectedProfileUser (state: State): UserProfile {
-  return state.selected_user_profile;
-}
-
-export function getUserTrips(state: State) {
-  return state.selected_user_profile.trips.trips;
+  return state.selected_user.user;
 }
 
 export function getUserTripIds(state: State) {
-  return state.selected_user_profile.trips.ids;
+  return state.selected_user.tripIds;
 }
 
 export function getUserFollowers(state: State) {
-  return state.followers;
+  return state.selected_user.followers;
 }
 
 export function getUserFollowing(state: State) {
-  return state.following;
+  return state.selected_user.following;
 }
