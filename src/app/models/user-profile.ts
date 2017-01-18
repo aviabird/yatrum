@@ -11,7 +11,7 @@ export class UserProfile extends Base {
   email: string;
   profilePic: Object;
   coverPhoto: Object;
-  trips: TripsState;
+  tripIds: string[];
   isFollowed: boolean;
   token: string;
 }

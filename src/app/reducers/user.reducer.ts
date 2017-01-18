@@ -23,10 +23,7 @@ const initialState = {
     profilePic: null,
     coverPhoto: null,
     isFollowed: null,
-    trips: {
-      ids: [],
-      trips: {},
-    },
+    tripIds: [],
     token: null,
     created_at: null,
     updated_at: null
@@ -39,10 +36,7 @@ const initialState = {
       profilePic: null,
       coverPhoto: null,
       isFollowed: null,
-      trips: {
-        ids: [],
-        trips: {},
-      },
+      tripIds: [],
       token: null,
       created_at: null,
       updated_at: null
@@ -89,23 +83,13 @@ export function reducer(state = initialState, action: Action): State {
         selected_user_profile: action.payload
       })
     }
-		case tripActions.LOAD_USER_TRIPS_SUCCESS: {
-      const user_trips = action.payload;
-      const user_new_trips = user_trips.filter(trip => !state.selected_user_profile.trips.trips[trip.id]);
-      const new_trip_ids = user_new_trips.map(trip => trip.id);
-
-			const trips = user_new_trips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
-				return Object.assign(trips, {
-					[trip.id]: trip
-				});
-			}, {});
+		case tripActions.SET_USER_TRIP_IDS: {
+      const trips = action.payload;
+      const trip_ids = trips.map(trip => trip.id);
 
       return Object.assign({}, state, {
         selected_user_profile: Object.assign({}, state.selected_user_profile, {
-          trips: {
-            ids: [...state.selected_user_profile.trips.ids, ...new_trip_ids],
-            trips: Object.assign({}, state.selected_user_profile.trips.trips, trips)
-          }
+          tripIds: [...state.selected_user_profile.tripIds, ...trip_ids]
         })
       })
 		}
@@ -142,12 +126,8 @@ export function getSelectedProfileUser (state: State): UserProfile {
   return state.selected_user_profile;
 }
 
-export function getUserTrips(state: State) {
-  return state.selected_user_profile.trips.trips;
-}
-
 export function getUserTripIds(state: State) {
-  return state.selected_user_profile.trips.ids;
+  return state.selected_user_profile.tripIds;
 }
 
 export function getUserFollowers(state: State) {

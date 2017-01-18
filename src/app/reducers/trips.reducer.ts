@@ -7,7 +7,7 @@ import { Trip } from './../models/trip';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
 export interface State {
-	dashboardTripIds: string[];
+	tripIds: string[];
 	trips: { [id: string]: Trip };
 	selectedTripId: string;
 	selectedCityId: string;
@@ -16,7 +16,7 @@ export interface State {
 
 const trip = <Trip>{}; // empty object
 const initialState = {
-	dashboardTripIds: [],
+	tripIds: [],
 	trips: {},
 	selectedTripId: null,
 	selectedCityId: null,
@@ -33,17 +33,33 @@ export function reducer(state = initialState, action: Action ): State {
 			//Only add to store the new trips from backend.
 			//Story https://www.pivotaltracker.com/story/show/137695851
 			const payloadTrips = action.payload;
-			const newTripIds = payloadTrips.map(trip => trip.id);
-			const trips = payloadTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+			const newTrips = payloadTrips.filter(trip => !state.trips[trip.id]);
+			const newTripIds = newTrips.map(trip => trip.id);
+
+			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
 				return Object.assign(trips, {
 					[trip.id]: trip
 				});
 			}, {});
 
 			return Object.assign({}, state, {
-				dashboardTripIds: newTripIds,
+				tripIds: [...state.tripIds, ...newTripIds],
 				trips: Object.assign({}, state.trips, trips)
 			})
+		}
+		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
+      const payloadTrips = action.payload;
+			const newTrips = payloadTrips.filter(trip => !state.trips[trip.id]);
+
+			const trips = newTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+				return Object.assign(trips, {
+					[trip.id]: trip
+				});
+			}, {});
+
+      return Object.assign({}, state, {
+        trips: Object.assign({}, state.trips, newTrips)
+      })
 		}
 		case ActionTypes.ADD_TRIP_TO_STORE: {
 			const trip = action.payload;
@@ -52,13 +68,14 @@ export function reducer(state = initialState, action: Action ): State {
 			} 
 
 			return Object.assign({}, state, {
-				dashboardTripIds: [...state.dashboardTripIds, trip.id],
+				tripIds: [...state.tripIds, trip.id],
 				trips: Object.assign({}, state.trips, newTrip)
 			})
 		}
+		
 		case ActionTypes.SELECT_TRIP: {
 			return {
-				dashboardTripIds: state.dashboardTripIds,
+				tripIds: state.tripIds,
 				trips: state.trips,
 				selectedTripId: action.payload,
 				selectedCityId: null,
@@ -67,7 +84,7 @@ export function reducer(state = initialState, action: Action ): State {
 		}
 		case ActionTypes.SELECT_CITY: {
 			return {
-				dashboardTripIds: state.dashboardTripIds,
+				tripIds: state.tripIds,
 				trips: state.trips,
 				selectedTripId: state.selectedTripId,
 				selectedCityId: action.payload,
@@ -107,7 +124,7 @@ export function getTrips(state : State) {
 } 
 
 export function getTripIds(state: State) {
-    return state.dashboardTripIds;
+    return state.tripIds;
 }
 
 export function getSelectedTripId(state: State) {

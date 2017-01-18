@@ -9,6 +9,7 @@ export const ActionTypes = {
 	SELECT_CITY: "Select [City] from [Trip]",
 	LOAD_USER_TRIPS: "Load [User Trips]",
 	LOAD_USER_TRIPS_SUCCESS: "Load [User Trips] Success",
+	SET_USER_TRIP_IDS: "Set [User] Trip Ids",
 	SAVE_TRIP: "Save [Trip]",
 	SAVE_TRIP_SUCCESS: "Save [Trip] Success",
 	UPDATE_TRIP: "Update [Trip]",
@@ -42,6 +43,10 @@ export class LoadUserTripsAction {
 export class UserTripsLoadedAction {
 	type = ActionTypes.LOAD_USER_TRIPS_SUCCESS;
 	constructor(public payload: Trip[]) { }
+}
+export class SetUserTripIds {
+	type = ActionTypes.SET_USER_TRIP_IDS;
+	constructor(public payload: Trip[]) {}
 }
 export class SaveTripAction {
 	type = ActionTypes.SAVE_TRIP;

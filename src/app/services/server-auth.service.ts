@@ -81,7 +81,7 @@ export class ServerAuthService {
             profilePic: data.profile_pic,
             coverPhoto: data.cover_photo,
             isFollowed: null,
-            trips: null,
+            tripIds: [],
             token: data.auth_token,
             created_at: '',
             updated_at: ''
