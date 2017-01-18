@@ -31,6 +31,7 @@ export class UserService {
           email: data.email,
           profilePic: data.profile_pic,
           coverPhoto: data.cover_photo,
+          isFollowed: data.is_followed_by_current_user,
           trips: {
             ids: [],
             trips: {}
@@ -52,4 +53,14 @@ export class UserService {
       .map(response => response.json());
   }
 
+  getUserFollowers(id: string) {
+    return this.http.post(`${this.apiLink}/user_followers`, {user_id: id})
+      .map(response => response.json());
+  }
+
+  getUserFollowing(id: string) {
+    return this.http.post(`${this.apiLink}/user_following`, {user_id: id})
+      .map(response => response.json());
+  }
+   
 }

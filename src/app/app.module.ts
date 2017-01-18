@@ -1,3 +1,4 @@
+import { UserEffects } from './effects/user.effects';
 import { InstagramIntegrationService } from './services/instagram-integration.service';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -120,6 +121,7 @@ const myFirebaseAuthConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(reducer),
+    EffectsModule.run(UserEffects),
     EffectsModule.run(UserAuthEffects),
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),

@@ -50,10 +50,14 @@ export const getLoggedInUserId = compose(fromUserReducer.getLoggedInUserId, getU
 export const getSelectedProfileUser = compose(fromUserReducer.getSelectedProfileUser,getUserState);
 export const getUserTrips = compose(fromUserReducer.getUserTrips, getUserState);
 export const getUserTripIds = compose(fromUserReducer.getUserTripIds,getUserState);
+export const getUserFollowers = compose(fromUserReducer.getUserFollowers,getUserState);
+export const getUserFollowing = compose(fromUserReducer.getUserFollowing,getUserState);
 
 export const getUserTripsCollection = createSelector(getUserTrips, getUserTripIds, (userTrips, userTripIds) => {
 	return userTripIds.map(id => userTrips[id]);
 })
+
+
 
 // ============= trips list states and compose methods ======================================================
 
