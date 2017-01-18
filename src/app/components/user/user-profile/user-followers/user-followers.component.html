@@ -14,7 +14,12 @@
       </div>
     </div>
     <div class="two wide column">
-      <i class="big teal check square icon"></i>
+      <div *ngIf="follower.is_followed_by_current_user" class="following">
+        <i class="big teal check square icon"></i>
+      </div>
+      <div class="not-following">
+        Follow
+      </div>
     </div>
   </div>
 </div>

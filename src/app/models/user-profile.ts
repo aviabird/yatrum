@@ -12,5 +12,6 @@ export interface UserProfile extends Base {
   profilePic: Object;
   coverPhoto: Object;
   trips: TripsState;
+  isFollowed: boolean;
   token: string;
 }

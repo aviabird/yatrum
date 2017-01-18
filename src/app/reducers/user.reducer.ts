@@ -22,6 +22,7 @@ const initialState = {
     email: null,
     profilePic: null,
     coverPhoto: null,
+    isFollowed: null,
     trips: {
       ids: [],
       trips: {},
@@ -37,6 +38,7 @@ const initialState = {
       email: null,
       profilePic: null,
       coverPhoto: null,
+      isFollowed: null,
       trips: {
         ids: [],
         trips: {},
