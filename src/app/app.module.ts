@@ -56,7 +56,6 @@ import { SignupComponent } from './components/shared/auth/signup/signup.componen
 import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
 import { LoginComponent } from './components/shared/auth/login/login.component';
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
-import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsComponent } from './components/trips/trips.component';
@@ -89,7 +88,6 @@ const myFirebaseAuthConfig = {
     TripsComponent,
     TripDetailComponent,
     TripsListComponent,
-    TripFlowChartComponent,
     TripActivityComponent,
     LoginComponent,
     SignupComponent,

@@ -7,7 +7,6 @@
 }
 
 .trip {
-	@include default-box-shadow();
 };
 
 .trip-image {
@@ -29,4 +28,25 @@
 
 .trip-user {
 	cursor: pointer;
+}
+
+.cover-image {
+	height: 17rem;
+	overflow: hidden;
+}
+
+.cover-header {
+	position: absolute;
+	color: white;
+	width: 80%;
+	left: 10%;
+	transform: matrix;
+	top: 30%;
+	font-weight: 100;
+}
+
+.likeBtn {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
 }
