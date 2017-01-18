@@ -7,7 +7,8 @@ import { Trip } from './../models/trip';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
 export interface State {
-	trips: TripsState;
+	dashboardTripIds: string[];
+	trips: { [id: string]: Trip };
 	selectedTripId: string;
 	selectedCityId: string;
 	editingTrip: Trip; 
@@ -15,10 +16,8 @@ export interface State {
 
 const trip = <Trip>{}; // empty object
 const initialState = {
-	trips: {
-		ids: [],
-		trips: {},
-	},
+	dashboardTripIds: [],
+	trips: {},
 	selectedTripId: null,
 	selectedCityId: null,
 	editingTrip: trip
@@ -41,15 +40,10 @@ export function reducer(state = initialState, action: Action ): State {
 				});
 			}, {});
 
-			return {
-				trips: {
-					ids: newTripIds, // equivalent to ruby flatten
-					trips: Object.assign({}, trips)
-				},
-				selectedTripId: state.selectedTripId,
-				selectedCityId: state.selectedCityId,
-				editingTrip: state.editingTrip
-			};
+			return Object.assign({}, state, {
+				dashboardTripIds: newTripIds,
+				trips: Object.assign({}, state.trips, trips)
+			})
 		}
 		case ActionTypes.ADD_TRIP_TO_STORE: {
 			const trip = action.payload;
@@ -57,17 +51,15 @@ export function reducer(state = initialState, action: Action ): State {
 				[trip.id]: trip 
 			} 
 
-			return Object.assign({}, state, {trips: {
-				ids: [...state.trips.ids, trip.id],
-				trips: Object.assign({}, state.trips.trips, newTrip)
-			}})
+			return Object.assign({}, state, {
+				dashboardTripIds: [...state.dashboardTripIds, trip.id],
+				trips: Object.assign({}, state.trips, newTrip)
+			})
 		}
 		case ActionTypes.SELECT_TRIP: {
 			return {
-				trips: {
-					ids: state.trips.ids,
-					trips: state.trips.trips
-				},
+				dashboardTripIds: state.dashboardTripIds,
+				trips: state.trips,
 				selectedTripId: action.payload,
 				selectedCityId: null,
 				editingTrip: state.editingTrip
@@ -75,10 +67,8 @@ export function reducer(state = initialState, action: Action ): State {
 		}
 		case ActionTypes.SELECT_CITY: {
 			return {
-				trips: {
-					ids: state.trips.ids,
-					trips: state.trips.trips
-				},
+				dashboardTripIds: state.dashboardTripIds,
+				trips: state.trips,
 				selectedTripId: state.selectedTripId,
 				selectedCityId: action.payload,
 				editingTrip: state.editingTrip
@@ -99,14 +89,11 @@ export function reducer(state = initialState, action: Action ): State {
 			const updatedTrip = action.payload;
 			const updatedTripId = updatedTrip.id
 
-			let newTrips = state.trips.trips
+			let newTrips = state.trips;
 			newTrips[updatedTripId] = updatedTrip;
 
 			return Object.assign({}, state, {
-				trips: {
-					ids: state.trips.ids,
-					trips: newTrips
-				}
+				trips: newTrips
 			})
 		}
 		default: {
@@ -116,11 +103,11 @@ export function reducer(state = initialState, action: Action ): State {
 }
 
 export function getTrips(state : State) {
-    return state.trips.trips;
+    return state.trips;
 } 
 
 export function getTripIds(state: State) {
-    return state.trips.ids;
+    return state.dashboardTripIds;
 }
 
 export function getSelectedTripId(state: State) {

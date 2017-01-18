@@ -6,7 +6,7 @@ interface TripsState {
   trips: { [id: string]: Trip };
 }
 
-export interface UserProfile extends Base {
+export class UserProfile extends Base {
   name: string;
   email: string;
   profilePic: Object;
