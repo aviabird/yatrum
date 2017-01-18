@@ -6,12 +6,20 @@
   }   
 }
 
+body {
+  font-weight: 100 !important;
+}
+
 .text-white {
 	color: white !important;
 }
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 body {
@@ -54,4 +62,10 @@ ng2-slim-loading-bar{
     position: absolute;
     top: 0px;
   }
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #eee;
+  margin: 1rem 0;
 }

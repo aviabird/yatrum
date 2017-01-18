@@ -1,23 +1,52 @@
 <div class="ui centered grid">
   <div class="twelve wide column trip">
-    <div class="trip-image">
-      <div class="trip-user" [routerLink]="['/user', (trip$ | async).user?.id]">
-        <img class="ui tiny image" [src]="(trip$ | async).user?.profile_pic?.url">      
+    <div class="ui column grid">
+      <div class="sixteen wide column">
+        <div class="ui segment">
+
+          <h1 class="cover-header text-center">
+            Journey to the Pune. Amazing Weather. Cool Places to eat. Awesome Hills.
+          </h1>
+          
+          <div class="cover-image">
+            <img src='http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg'>
+            <div class="ui labeled button likeBtn" tabindex="0">
+              <div class="ui red button" (click)="onToggleLike()">
+                <i class="heart icon"></i>
+                {{ trip?.is_liked_by_current_user ? "Unlike" : "Like"}}
+              </div>
+              <a class="ui basic red left pointing label">
+                1,048
+              </a>
+            </div>
+          </div>
+          
+          <div class="ui section divider"></div>
+          
+          <a class="ui teal ribbon label">Follow</a>
+          
+          <span>
+            <a class="ui teal image label" [routerLink]="['/user', user.id]">
+              <img [src]="user.profile_pic?.url">
+              {{user.name}}
+              <div class="detail">Enterprenuer</div>
+            </a>
+            <span class="ui red tag label"> 2.5K Followers</span>
+          </span>
+          
+          <p></p>
+        </div>
+      </div>
+      <div class="sixteen wide column">
+        <div class="ui segment">
+          <a class="ui blue ribbon label">Day 1</a>
+          <tr-trip-activity></tr-trip-activity>
+        </div>
       </div>
     </div>
     <!--TODO: Activate this only after checking if the user is an owner of this trip -->
     <!--<div class="trip-edit"> 
       <button [routerLink]="['/trips', (trip$ | async).id, 'edit']">Edit</button>
     </div>-->
-    <div class="ui card my-card">
-      <div class="ui twelve column grid trip-detail">
-        <div class="four wide column trip-flow">
-          <tr-trip-flow-chart></tr-trip-flow-chart>
-        </div>
-        <div class="twelve wide column trip-activity">
-          <tr-trip-activity></tr-trip-activity>
-        </div>
-      </div>
-    </div>
   </div>  
 </div>
