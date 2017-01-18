@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'tr-trip-activity',
 	templateUrl: './trip-activity.component.html',
-	styleUrls: ['./trip-activity.component.css']
+	styleUrls: ['./trip-activity.component.scss']
 })
 export class TripActivityComponent implements OnInit {
 	selectedCity$: Observable<City>;

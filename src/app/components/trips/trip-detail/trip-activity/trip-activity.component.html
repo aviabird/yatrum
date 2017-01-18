@@ -1,18 +1,15 @@
 <div *ngFor="let city of cities$ | async">
-  <div id="city" class="ui card my-card">
-    Arrived at {{city.name}}, {{city.country}}
-  </div>
+  <h2>Arrived at {{city.name}}, {{city.country}}</h2>
   <div *ngFor="let place of city.places">
-    <div id="place" class="ui card my-card">
+    <h3>
       Checked into {{place.name}}
-    </div>
+    </h3>
     <div *ngFor="let media of place.pictures">
-      <div id="media" class="ui-card my-card">
-        <div id="media-description">
-          {{media.description}}
-        </div>
-        <img class="photo" [src]="media.url">
+      <div class="">
+        <img class="ui centered medium image" [src]="media.url">
+        <p>{{media.description}}</p>
       </div>
     </div>
+    <div class="ui section divider"></div>
   </div>
 </div>

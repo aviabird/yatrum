@@ -1,3 +1,4 @@
+import { ActionTypes as UserActions } from './../actions/user.action';
 import { Trip } from './../models/trip';
 import { ActionTypes as tripActions } from './../actions/trips.action';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +10,8 @@ export interface State {
   user_profile: UserProfile;
   auth: any;
   selected_user_profile: UserProfile;
+  followers: Array<UserProfile>;
+  following: Array<UserProfile>;
 }
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
     email: null,
     profilePic: null,
     coverPhoto: null,
+    isFollowed: null,
     trips: {
       ids: [],
       trips: {},
@@ -34,6 +38,7 @@ const initialState = {
       email: null,
       profilePic: null,
       coverPhoto: null,
+      isFollowed: null,
       trips: {
         ids: [],
         trips: {},
@@ -41,7 +46,9 @@ const initialState = {
       token: null,
       created_at: null,
       updated_at: null
-    }
+    },
+    followers: null,
+    following: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -101,9 +108,17 @@ export function reducer(state = initialState, action: Action): State {
           }
         })
       })
-
-
 		}
+    case UserActions.USER_FOLLOWERS_LOADED: {
+      return Object.assign({}, state, {
+        followers: action.payload
+      })
+    }
+    case UserActions.USER_FOLLOWING_LOADED: {
+      return Object.assign({}, state, {
+        following: action.payload
+      })
+    }
     default: {
       return state;
     }
@@ -133,4 +148,12 @@ export function getUserTrips(state: State) {
 
 export function getUserTripIds(state: State) {
   return state.selected_user_profile.trips.ids;
+}
+
+export function getUserFollowers(state: State) {
+  return state.followers;
+}
+
+export function getUserFollowing(state: State) {
+  return state.following;
 }

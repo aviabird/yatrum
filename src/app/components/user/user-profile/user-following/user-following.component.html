@@ -1,3 +1,20 @@
-<p>
-  user-following works!
-</p>
+<div *ngFor="let following of followingList$ | async">
+  <div class="ui grid following-list">
+    <div class="two wide column">
+      <img class="ui avatar image" [src]="following?.profile_pic.url">
+    </div>
+    <div class="twelve wide column">
+      <div class="name">
+        {{following?.name}}
+      </div>
+      <div class="content">
+        <span class="info">{{following?.total_trips}} Trips</span>
+        <span class="info">{{following?.total_followers}} Followers</span>
+        <span class="info">{{following?.total_following}} Following</span>
+      </div>
+    </div>
+    <div class="two wide column">
+      <i class="big teal check square icon"></i>
+    </div>
+  </div>
+</div>

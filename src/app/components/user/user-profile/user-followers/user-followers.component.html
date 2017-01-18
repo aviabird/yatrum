@@ -1,3 +1,25 @@
-<p>
-  user-followers works!
-</p>
+<div *ngFor="let follower of followersList$ | async">
+  <div class="ui grid follower-list">
+    <div class="two wide column">
+      <img class="ui avatar image" [src]="follower?.profile_pic.url">
+    </div>
+    <div class="twelve wide column">
+      <div class="name">
+        {{follower?.name}}
+      </div>
+      <div class="content">
+        <span class="info">{{follower?.total_trips}} Trips</span>
+        <span class="info">{{follower?.total_followers}} Followers</span>
+        <span class="info">{{follower?.total_following}} Following</span>
+      </div>
+    </div>
+    <div class="two wide column">
+      <div *ngIf="follower.is_followed_by_current_user" class="following">
+        <i class="big teal check square icon"></i>
+      </div>
+      <div class="not-following">
+        Follow
+      </div>
+    </div>
+  </div>
+</div>
