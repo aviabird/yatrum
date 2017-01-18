@@ -46,8 +46,8 @@ const initialState = {
       updated_at: null
     },
     tripIds: [],
-    followers: null,
-    following: null
+    followers: null, // change this to followers ids at later stage 
+    following: null  // change this to following ids at later stage
   }, 
 };
 
