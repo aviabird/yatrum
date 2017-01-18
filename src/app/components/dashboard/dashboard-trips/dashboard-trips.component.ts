@@ -44,4 +44,9 @@ export class DashboardTripsComponent implements OnInit {
   ngOnInit() {
   }
 
+  pageChanged(page) {
+    this.store.dispatch(new LoadTripsAction({page: page}));
+    return page;
+  }
+
 }

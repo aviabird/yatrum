@@ -1,8 +1,11 @@
 <div class="ui centered grid">
+  <div class="ten wide column my-pagination">
+    <pagination-controls (pageChange)="p = pageChanged($event)" maxSize="5"></pagination-controls>
+  </div>
   <div class="ten wide column">
     <div class="ui stackable two column grid">
       <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
-      <div *ngFor="let trip of trips$ | async"
+      <div *ngFor="let trip of trips$ | async | paginate: { itemsPerPage: 6, currentPage: p, totalItems: 100 }"
         [@fadeIn]="'in'" class="column">
         <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
       </div>

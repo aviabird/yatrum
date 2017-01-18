@@ -21,7 +21,7 @@ export const ActionTypes = {
 
 export class LoadTripsAction {
 	type = ActionTypes.LOAD_TRIPS;
-	constructor() { }
+	constructor(public payload: Object) { }
 }
 export class TripsLoadedAction {
 	type = ActionTypes.LOAD_TRIPS_SUCCESS;

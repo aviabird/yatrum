@@ -31,16 +31,16 @@ export class DashboardSearchComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>, private router: Router) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTripsAction);
+    this.store.dispatch(new LoadTripsAction({page: 1}));
   }
 
   onSearch(searchQuery){
     this.router.navigate(['/search']);
     
     if(searchQuery != "")
-      this.store.dispatch(new SearchTrip(searchQuery))
+      this.store.dispatch(new SearchTrip(searchQuery));
     else
-      this.store.dispatch(new LoadTripsAction)
+      this.store.dispatch(new LoadTripsAction({page: 1}));
   }
 
 }

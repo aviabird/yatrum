@@ -69,9 +69,9 @@ export class TripsService {
 	 * @param 
 	 * @return {Observable} Observable of array of trips
 	 */
-	getTrips(): Observable<Trip[]> | Observable<String> {
+	getTrips(pageParams): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
-		return this.http.get(`${this.apiLink}/trips.json`)
+		return this.http.get(`${this.apiLink}/trips.json/?page=${pageParams['page']}`)
 			.map((data: Response) => data.json())
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
