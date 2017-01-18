@@ -1,4 +1,3 @@
-import { UserAuthService } from './user-auth.service';
 import { environment } from './../../environments/environment';
 import * as fromTripActions from './../actions/trips.action';
 import * as fromRoot from './../reducers/index';
@@ -9,6 +8,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastyService } from 'ng2-toasty';
+import { ServerAuthService } from './server-auth.service';
 
 @Injectable()
 export class TripsService {
@@ -21,7 +21,7 @@ export class TripsService {
 		private store: Store<fromRoot.State>,
 		private slimLoadingBarService: SlimLoadingBarService,
 		private toastyService: ToastyService,
-		private authSerive: UserAuthService
+		private authSerive: ServerAuthService
 	) {
 		//TODO: Move this out at a later stage for logged in user
 		let user_data = JSON.parse(localStorage.getItem('user'));
@@ -73,7 +73,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/trips.json`)
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this))
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -87,7 +87,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.post(`${this.apiLink}/trips/search`, { keywords: searchQuery })
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this))
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -101,7 +101,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this))
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -123,7 +123,7 @@ export class TripsService {
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this));
+			.catch((res: Response) => this.catchError(res));
 	}
 
 	/**
@@ -144,7 +144,7 @@ export class TripsService {
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this));
+			.catch((res: Response) => this.catchError(res));
 	}
 
 	/**
@@ -164,7 +164,7 @@ export class TripsService {
 			{ id: tripId }, { headers: headers }
 		)
 			.map((data: Response) => data.json())
-			.catch(this.catchError.bind(this));
+			.catch((res: Response) => this.catchError(res));
 	}
 
 	catchError(response: Response): Observable<String> {

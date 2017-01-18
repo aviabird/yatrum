@@ -8,15 +8,18 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { environment } from './../../environments/environment';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class ServerAuthService {
+  authUser: Observable<UserProfile>;
   // @LocalStorage() public token:Object = {};
   private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private http: Http,
-              private store: Store<fromRoot.State>) {}
+              private store: Store<fromRoot.State>,
+              private router: Router) {}
 
   getLoggedInUser(auth_token): Observable<any> {
     const headers = new Headers({
@@ -38,7 +41,7 @@ export class ServerAuthService {
       // Setting token after login
       this.setTokenInLocalStorage(res.json())
       return res.json();
-    }).catch(this.catchError);
+    }).catch((res: Response) => this.catchError(res));
     // catch should be handled here with the http observable 
     // so that only the inner obs dies and not the effect Observable
     // otherwise no further login requests will be fired
@@ -56,7 +59,7 @@ export class ServerAuthService {
     return this.http.post(`${this.apiLink}/users/create.json`,
       JSON.stringify(data), {headers: headers})
         .map((resp: Response) => resp.json())
-        .catch(this.catchError);
+        .catch((res: Response) => this.catchError(res));
   }
 
   catchError(response: Response): Observable<String> {
@@ -87,6 +90,14 @@ export class ServerAuthService {
   setTokenInLocalStorage(user_data): void {
     let jsonData = JSON.stringify(user_data)
     localStorage.setItem('user', jsonData);
+  }
+
+  belongsToLoggedInUser(user_id): Observable<boolean> {
+    return this.authUser.map((user) => user.id == user_id)
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 
 }
