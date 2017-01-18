@@ -14,7 +14,7 @@ import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import {ToastyModule} from 'ng2-toasty';
-
+import {Ng2PaginationModule} from 'ng2-pagination';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -137,7 +137,8 @@ const myFirebaseAuthConfig = {
     // }),
     StoreLogMonitorModule,
     SlimLoadingBarModule.forRoot(),
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    Ng2PaginationModule
   ],
   providers: [
     UserAuthService,
