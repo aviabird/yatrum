@@ -42,8 +42,6 @@ export function reducer(state = initialState, action: Action ): State {
 				});
 			}, {});
 
-			debugger;
-
 			return Object.assign({}, state, {
 				tripIds: [...state.tripIds, ...tripIds],
 				trips: Object.assign({}, state.trips, trips)

@@ -6,12 +6,17 @@ import { ActionTypes as userAuthActions } from './../actions/user-auth.action';
 import { Action } from '@ngrx/store';
 import { UserProfile } from './../models/user-profile';
 
+interface selectedUser {
+  user: UserProfile,
+  tripIds: string[],
+  followers: UserProfile[],
+  following: UserProfile[]
+}
+
 export interface State {
   user: UserProfile;
   auth: any;
-  selected_user: UserProfile;
-  followers: Array<UserProfile>;
-  following: Array<UserProfile>;
+  selected_user: selectedUser;
 }
 
 const initialState = {
@@ -23,26 +28,27 @@ const initialState = {
     profilePic: null,
     coverPhoto: null,
     isFollowed: null,
-    tripIds: [],
     token: null,
     created_at: null,
     updated_at: null
   },
-    auth: null,
-    selected_user: { 
+  auth: null,
+  selected_user: {
+    user: {
       id: null,
       name: null,
       email: null,
       profilePic: null,
       coverPhoto: null,
       isFollowed: null,
-      tripIds: [],
       token: null,
       created_at: null,
       updated_at: null
     },
+    tripIds: [],
     followers: null,
     following: null
+  }, 
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -80,7 +86,9 @@ export function reducer(state = initialState, action: Action): State {
     }
     case userAuthActions.SELECTED_PROFILE_USER: {
       return Object.assign({}, state, {
-        selected_user: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          user: action.payload
+        })
       })
     }
 		case tripActions.SET_USER_TRIP_IDS: {
@@ -95,12 +103,16 @@ export function reducer(state = initialState, action: Action): State {
 		}
     case UserActions.USER_FOLLOWERS_LOADED: {
       return Object.assign({}, state, {
-        followers: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          followers: action.payload
+        })
       })
     }
     case UserActions.USER_FOLLOWING_LOADED: {
       return Object.assign({}, state, {
-        following: action.payload
+        selected_user: Object.assign({}, state.selected_user, {
+          following: action.payload
+        })
       })
     }
     default: {
@@ -123,7 +135,7 @@ export function getAuthStatus (state: State): any {
 }
 
 export function getSelectedProfileUser (state: State): UserProfile {
-  return state.selected_user;
+  return state.selected_user.user;
 }
 
 export function getUserTripIds(state: State) {
@@ -131,9 +143,9 @@ export function getUserTripIds(state: State) {
 }
 
 export function getUserFollowers(state: State) {
-  return state.followers;
+  return state.selected_user.followers;
 }
 
 export function getUserFollowing(state: State) {
-  return state.following;
+  return state.selected_user.following;
 }
