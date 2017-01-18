@@ -21,6 +21,6 @@ export class TripsListComponent {
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTripsAction);
+    this.store.dispatch(new LoadTripsAction({page: 1}));
   }
 }
