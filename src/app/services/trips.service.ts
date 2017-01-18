@@ -8,6 +8,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastyService } from 'ng2-toasty';
+import { ServerAuthService } from './server-auth.service';
 
 @Injectable()
 export class TripsService {
@@ -19,7 +20,8 @@ export class TripsService {
 		private http: Http,
 		private store: Store<fromRoot.State>,
 		private slimLoadingBarService: SlimLoadingBarService,
-		private toastyService: ToastyService
+		private toastyService: ToastyService,
+		private authSerive: ServerAuthService
 	) {
 		//TODO: Move this out at a later stage for logged in user
 		let user_data = JSON.parse(localStorage.getItem('user'));
@@ -71,7 +73,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/trips.json`)
 			.map((data: Response) => data.json())
-			.catch(this.catchError)
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -85,7 +87,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.post(`${this.apiLink}/trips/search`, { keywords: searchQuery })
 			.map((data: Response) => data.json())
-			.catch(this.catchError)
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -99,7 +101,7 @@ export class TripsService {
 		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
 			.map((data: Response) => data.json())
-			.catch(this.catchError)
+			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
 
@@ -121,7 +123,7 @@ export class TripsService {
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
 			.map((data: Response) => data.json())
-			.catch(this.catchError);
+			.catch((res: Response) => this.catchError(res));
 	}
 
 	/**
@@ -142,11 +144,36 @@ export class TripsService {
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
 			.map((data: Response) => data.json())
-			.catch(this.catchError);
+			.catch((res: Response) => this.catchError(res));
+	}
+
+	/**
+	 * User Like/Dislikes trip 
+	 * @method likeTrip
+	 * @param {string} tripId of trip
+	 * @return {Observable} Observable with updated trip object
+	 */
+	likeTrip(tripId: string): Observable<Trip> | Observable<String> {
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.auth_token
+			// use Restangular which creates interceptor
+		});
+
+		return this.http.post(`${this.apiLink}/trips/like.json`,
+			{ id: tripId }, { headers: headers }
+		)
+			.map((data: Response) => data.json())
+			.catch((res: Response) => this.catchError(res));
 	}
 
 	catchError(response: Response): Observable<String> {
-		this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" });
+		if(response.status == 401){
+			this.authSerive.redirectToLogin();
+			this.toastyService.warning({ title: "Login", msg: "You need to login." });			
+		} else {
+			this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" });
+		}
 		console.log('in catch error method');
 		// not returning throw as it raises an error on the parent observable 
 		// MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    

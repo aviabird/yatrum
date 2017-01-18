@@ -1,34 +1,34 @@
-<form class="form-horizontal" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-6">
-      <input type="email" 
-        class="form-control" 
-        id="email" 
-        placeholder="Email"
-        formControlName="email">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-6">
-      <input type="password" 
-        class="form-control" 
-        id="password" 
-        placeholder="Password"
-        formControlName="password">
-    </div>
-  </div>
-  <div *ngIf="(formErrorMessage$ | async)?.length > 0" class="has-error col-sm-offset-2">
-    <label>
-      {{ formErrorMessage$ | async }}
-    </label>
-  </div>
+<div class="ui middle aligned center aligned grid">
+  <div class="sixteen wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="five wide column">
+    <h2 class="ui teal image header">
+      <img src='assets/images/balls.svg' class="image">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form class="ui medium form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address" formControlName="email" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password" formControlName="password" autocomplete="off">
+          </div>
+        </div>
+        <button type="submit" class="ui fluid large teal submit button">Sign in</button>
+      </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-6">
-      <button type="submit" class="btn btn-primary">Sign in</button>
-      <a [routerLink]="['/signup']">New travellers signup</a>
+    </form>
+
+    <div class="ui message">
+      New to us? <a [routerLink]="['/signup']">Sign Up</a>
     </div>
   </div>
-</form>
+</div>

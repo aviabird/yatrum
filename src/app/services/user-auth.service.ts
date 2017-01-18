@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as UserAuthActions from './../actions/user-auth.action';
 import { Observable } from 'rxjs/Observable';
@@ -10,7 +11,11 @@ import { UserProfile } from '../models/user-profile';
 export class UserAuthService {
   authUser: Observable<UserProfile>;
 
-  constructor(private af: AngularFire, private store: Store<fromRoot.State>) {
+  constructor(
+    private af: AngularFire,
+    private store: Store<fromRoot.State>,
+    private router: Router
+  ) {
     this.af.auth.subscribe(data => {
       if (data) {
         console.log('user data', data);
@@ -46,6 +51,10 @@ export class UserAuthService {
 
   belongsToLoggedInUser(user_id): Observable<boolean> {
     return this.authUser.map((user) => user.id == user_id)
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

@@ -38,8 +38,13 @@ export class TripsEffects {
   @Effect()
   SearchTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SEARCH_TRIPS)
-    .map(action => action.payload)
     .switchMap<Action, Trip[] | String>((searchQuery) => this.tripsService.searchTrips(searchQuery))
     .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
+
+  @Effect()
+  LikeTrip$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LIKE_TRIP)
+    .switchMap<Action, Trip>((action) => this.tripsService.likeTrip(action.payload))
+    .map((data) => new TripsActions.UpdateTripSuccessAction(data));
 
 }
