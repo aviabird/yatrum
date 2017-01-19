@@ -26,6 +26,7 @@ export class TripEditComponent implements OnInit {
   cities: FormArray = new FormArray([]);
   places: FormArray = new FormArray([]);
   media: FormArray = new FormArray([]);
+  pictures: FormArray = new FormArray([]);
 
   constructor(private fb: FormBuilder, 
               private store: Store<fromRoot.State>,
@@ -143,10 +144,11 @@ export class TripEditComponent implements OnInit {
     let endDate = Date.now();
     let cities: FormArray = new FormArray([]);
     let places: FormArray = new FormArray([]);
-    let media: FormArray = new FormArray([]);
+    let pictures: FormArray = new FormArray([]);
     
     // If we are creating a new trip add a city and a place by default
     this.provisionCityAndPlace();
+
     //NOTE: Don't remove this commented code for reference purposes
     /**
     // Add a Media
@@ -224,11 +226,23 @@ export class TripEditComponent implements OnInit {
           name: new FormControl('', Validators.required),
           description: new FormControl('', Validators.required),
           review: new FormControl(''),
-          media: this.media
+          pictures: this.pictures
         })
       )
     }
   }
+
+  /** 
+   * Update image for a place
+   */
+  imageUploaded(imageData: any) {
+    console.log('image uploaded data', imageData);
+    let placeIndex = imageData.placeIndex;
+    let cityIndex = imageData.cityIndex;
+    let url = imageData.imageUrl;
+
+  }
+
 
   /**
    * Adds a city FormGroup to the cities <FormArray>FormControl(__cities__)
@@ -271,7 +285,7 @@ export class TripEditComponent implements OnInit {
    * @return {void}
    */
   addPlace(cityIndex: number, place?: Place):void {
-    let media: FormArray = new FormArray([]);
+    let pictures: FormArray = new FormArray([]);
     let id: String;
     let description: String;
     let name: String;
@@ -296,7 +310,7 @@ export class TripEditComponent implements OnInit {
           name: new FormControl(name, Validators.required),
           description: new FormControl(description, Validators.required),
           review: new FormControl(review),
-          media: media
+          pictures: pictures
         })
     )
   }

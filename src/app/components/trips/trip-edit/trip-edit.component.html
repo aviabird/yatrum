@@ -65,6 +65,7 @@
                           placeholder="Caliornia, SF" 
                           formControlName="description"></textarea>
                       </div>
+                      <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>
                       <!--TODO: Implement it later -->
                       <!-- Media for all the trips go here -->
                       <!--<h2> Pictures </h2>
