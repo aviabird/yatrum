@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import {
   Component,
   OnInit,
@@ -33,7 +34,7 @@ export class DashboardTripsComponent implements OnInit {
   hideLoader: boolean = false;
   private page: number = 1;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
     this.trips$ =
       this.store.select(fromRoot.getTripsCollection).do(
         trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
@@ -47,7 +48,10 @@ export class DashboardTripsComponent implements OnInit {
 
   onScroll() {
     this.page++;
-    this.store.dispatch(new LoadMoreTripsAction({page: this.page}));
+    let total_pages = this.tripService.total_pages;
+    debugger;
+    if(this.page <=  total_pages)
+      this.store.dispatch(new LoadMoreTripsAction({page: this.page}));
   }
 
 }
