@@ -20,6 +20,8 @@
       <img class="ui avatar image" [src]="(user$ | async).profilePic?.url" [routerLink]="['/user', (user$ | async).id, 'trips' ]" >
       <i class="dropdown icon"></i>
       <div class="menu">
+        <a class="item" [routerLink]="['/trips','new']">Create Trip</a>
+        <a class="item" [routerLink]="['/user', (user$ | async).id, 'trips' ]">Profile</a>
         <a class="item" [routerLink]="['/user','settings']">Settings</a>
         <a class="item" (click)="logout()">LogOut</a>
       </div>
