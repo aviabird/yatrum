@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastyService } from 'ng2-toasty';
 import { ServerAuthService } from './server-auth.service';
+import { getSelectedTrip } from '../reducers/index';
 
 @Injectable()
 export class TripsService {
@@ -37,7 +38,19 @@ export class TripsService {
 	 * @return {Boolean} CS:?
 	 */
 	getTrip(id: string): boolean {
-		this.store.dispatch(new fromTripActions.SelectTripAction(id));
+		let subs = this.store.select(getSelectedTrip)
+			.do(trip => {
+				if (!trip) {
+					this.http.get(`${this.apiLink}/trips/${id}`)
+						.map((data: Response) => data.json())
+						.map(trip => this.store.dispatch(new fromTripActions.TripsLoadedAction([trip])))
+						.subscribe();
+				}
+				this.store.dispatch(new fromTripActions.SelectTripAction(id));
+			}).subscribe();
+		
+		subs.unsubscribe();
+		return true;
 
 		// TODO: first fetch trip from store, if trip is not found, then make an
 		// backend api request and store it, then resolve this request.
@@ -59,8 +72,6 @@ export class TripsService {
 		// 			}
 		// 		})	
 		// 	}).subscribe();
-
-		return true;
 	}
 
 	/**
@@ -168,9 +179,9 @@ export class TripsService {
 	}
 
 	catchError(response: Response): Observable<String> {
-		if(response.status == 401){
+		if (response.status == 401) {
 			this.authSerive.redirectToLogin();
-			this.toastyService.warning({ title: "Login", msg: "You need to login." });			
+			this.toastyService.warning({ title: "Login", msg: "You need to login." });
 		} else {
 			this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" });
 		}
