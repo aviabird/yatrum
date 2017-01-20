@@ -92,22 +92,15 @@ export function reducer(state = initialState, action: Action ): State {
 		}
 		
 		case ActionTypes.SELECT_TRIP: {
-			return {
-				tripIds: state.tripIds,
-				trips: state.trips,
+			return Object.assign({}, state, {
 				selectedTripId: action.payload,
-				selectedCityId: null,
-				editingTrip: state.editingTrip
-			};
+				selectedCityId: null
+			});
 		}
 		case ActionTypes.SELECT_CITY: {
-			return {
-				tripIds: state.tripIds,
-				trips: state.trips,
-				selectedTripId: state.selectedTripId,
-				selectedCityId: action.payload,
-				editingTrip: state.editingTrip
-			};
+			return Object.assign({}, state, {
+				selectedCityId: action.payload
+			});
 		}
 		case ActionTypes.SAVE_TRIP_SUCCESS: {
 			const trip = action.payload;

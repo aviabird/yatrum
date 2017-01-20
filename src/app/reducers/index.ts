@@ -17,7 +17,7 @@ export interface State {
 	trips: fromTripsReducer.State;
 	notifications: fromNotificationReducer.State;
 	instagramMedia: fromInstagramReducer.State;
-} 
+}
 
 const reducers = {
 	user: fromUserReducer.reducer,
@@ -30,18 +30,18 @@ export const developmentReducer: ActionReducer<State> = combineReducers(reducers
 const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  }
-  else {
-    return developmentReducer(state, action);
-  }
+	if (environment.production) {
+		return productionReducer(state, action);
+	}
+	else {
+		return developmentReducer(state, action);
+	}
 }
 
 // ============= trips list states and compose methods ======================================================
 
 export function getTripsState(state: State): fromTripsReducer.State {
-  return state.trips;
+	return state.trips;
 }
 
 export const getTrips = createSelector(getTripsState, fromTripsReducer.getTrips);
@@ -60,27 +60,28 @@ export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trip
 });
 
 export const getCitiesFromTrip = createSelector(getSelectedTrip, (trip) => {
+	if (!trip) { return [] };
 	return trip.cities;
 })
 
 export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCityId, (cities, cityId) => {
-  return cities.filter(city => city.id == cityId)[0];
+	return cities.filter(city => city.id == cityId)[0];
 });
 
 
 // =============== user-auth states and compose methods ===============================================
 
 export function getUserState(state: State): fromUserReducer.State {
-  return state.user;
+	return state.user;
 }
 
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);
 export const getAuthStatus = compose(fromUserReducer.getAuthStatus, getUserState);
 export const getLoggedInUserId = compose(fromUserReducer.getLoggedInUserId, getUserState);
-export const getSelectedProfileUser = compose(fromUserReducer.getSelectedProfileUser,getUserState);
-export const getUserTripIds = compose(fromUserReducer.getUserTripIds,getUserState);
-export const getUserFollowers = compose(fromUserReducer.getUserFollowers,getUserState);
-export const getUserFollowing = compose(fromUserReducer.getUserFollowing,getUserState);
+export const getSelectedProfileUser = compose(fromUserReducer.getSelectedProfileUser, getUserState);
+export const getUserTripIds = compose(fromUserReducer.getUserTripIds, getUserState);
+export const getUserFollowers = compose(fromUserReducer.getUserFollowers, getUserState);
+export const getUserFollowing = compose(fromUserReducer.getUserFollowing, getUserState);
 
 export const getUserTripsCollection = createSelector(getTrips, getUserTripIds, (trips, ids) => {
 	return ids.map(id => trips[id]);
@@ -90,7 +91,7 @@ export const getUserTripsCollection = createSelector(getTrips, getUserTripIds, (
 // ============= notification list states and compose methods ===============================================
 
 export function getNotificationState(state: State): fromNotificationReducer.State {
-  return state.notifications;
+	return state.notifications;
 }
 
 export const getLoginFormMessage = compose(fromNotificationReducer.getLoginMessage, getNotificationState);

@@ -4,7 +4,7 @@ import { ActionTypes as tripActions } from './../actions/trips.action';
 import { Observable } from 'rxjs/Observable';
 import { ActionTypes as userAuthActions } from './../actions/user-auth.action';
 import { Action } from '@ngrx/store';
-import { UserProfile } from './../models/user-profile';
+import { UserProfile } from '../models/user-profile';
 
 interface selectedUser {
   user: UserProfile,
@@ -21,30 +21,10 @@ export interface State {
 
 const initialState = {
   //TODO: Provision this dummy object creation to user model
-  user: { 
-    id: null,
-    name: null,
-    email: null,
-    profilePic: null,
-    coverPhoto: null,
-    isFollowed: null,
-    token: null,
-    created_at: null,
-    updated_at: null
-  },
+  user: new UserProfile,
   auth: null,
   selected_user: {
-    user: {
-      id: null,
-      name: null,
-      email: null,
-      profilePic: null,
-      coverPhoto: null,
-      isFollowed: null,
-      token: null,
-      created_at: null,
-      updated_at: null
-    },
+    user: new UserProfile,
     tripIds: [],
     followers: null, // change this to followers ids at later stage 
     following: null  // change this to following ids at later stage
