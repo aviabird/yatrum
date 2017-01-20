@@ -13,4 +13,5 @@ export class Trip extends Base {
     cities: City[];
     user: UserProfile;
     is_liked_by_current_user: string;
+    trip_likes_count: number;
 }

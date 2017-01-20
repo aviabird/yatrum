@@ -97,7 +97,7 @@ export class TripListItemComponent implements OnInit {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadTripsAction)
+      this.store.dispatch(new LoadTripsAction({page: 1}))
   }
 
   belongsToLoggedInUser() {

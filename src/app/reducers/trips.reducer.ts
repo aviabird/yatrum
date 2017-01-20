@@ -33,6 +33,21 @@ export function reducer(state = initialState, action: Action ): State {
 			//Only add to store the new trips from backend.
 			//Story https://www.pivotaltracker.com/story/show/137695851
 			const payloadTrips = action.payload;
+			const tripIds = payloadTrips.map(trip => trip.id);
+
+			const trips = payloadTrips.reduce( ( trips: { [id: string]: Trip }, trip: Trip ) => {
+				return Object.assign(trips, {
+					[trip.id]: trip
+				});
+			}, {});
+
+			return Object.assign({}, state, {
+				tripIds: tripIds,
+				trips: trips
+			})
+		}
+		case ActionTypes.LOAD_MORE_TRIPS_SUCCESS: {
+			const payloadTrips = action.payload;
 			const newTrips = payloadTrips.filter(trip => !state.trips[trip.id]);
 			const tripIds = payloadTrips.map(trip => trip.id);
 
@@ -45,7 +60,7 @@ export function reducer(state = initialState, action: Action ): State {
 			return Object.assign({}, state, {
 				tripIds: [...state.tripIds, ...tripIds],
 				trips: Object.assign({}, state.trips, trips)
-			})
+			}) 
 		}
 		case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
       const payloadTrips = action.payload;

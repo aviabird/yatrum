@@ -14,8 +14,8 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-import {ToastyModule} from 'ng2-toasty';
-
+import { ToastyModule } from 'ng2-toasty';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -137,7 +137,8 @@ const myFirebaseAuthConfig = {
     // }),
     StoreLogMonitorModule,
     SlimLoadingBarModule.forRoot(),
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [
     UserAuthService,

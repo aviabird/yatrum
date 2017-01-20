@@ -16,6 +16,7 @@ export class TripsService {
 	private trips: Trip[] = [];
 	private auth_token: string;
 	private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
+	public total_pages: number;
 	// trips: Trip[];
 	constructor(
 		private http: Http,
@@ -80,10 +81,14 @@ export class TripsService {
 	 * @param 
 	 * @return {Observable} Observable of array of trips
 	 */
-	getTrips(): Observable<Trip[]> | Observable<String> {
+	getTrips(pageParams): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
-		return this.http.get(`${this.apiLink}/trips.json`)
-			.map((data: Response) => data.json())
+		return this.http.get(`${this.apiLink}/trips.json/?page=${pageParams['page']}`)
+			.map((data: Response) => {
+				let trips_data = data.json();
+				this.total_pages = trips_data.total_pages;
+				return trips_data.trips;
+			})
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
