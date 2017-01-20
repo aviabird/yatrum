@@ -14,16 +14,6 @@
           id="tripName" 
           placeholder="Trip name" 
           formControlName="name">
-        <!--<input class="col-md-6" type="text" 
-          class="form-control" 
-          id="tripId" 
-          placeholder="Trip id" 
-          formControlName="id">-->
-        <!--<input class="col-md-6" type="text" 
-          class="form-control" 
-          id="description" 
-          placeholder="Description for trip" 
-          formControlName="description">  -->
       </div>
       <!--Start date of trip not implementing right now -->
       <!--<div class="form-group">
@@ -47,12 +37,6 @@
                     placeholder="Caliornia, SF" 
                     formControlName="name">
                 </div>
-                <!--<div class="field four wide">
-                  <label for="description">Country</label>
-                  <input type="text" 
-                    placeholder="United States" 
-                    formControlName="country">
-                </div>-->
               </div>
 
               <!-- Places basic info -->
@@ -81,30 +65,19 @@
                           placeholder="Caliornia, SF" 
                           formControlName="description"></textarea>
                       </div>
-                      <!--TODO: Implement it later -->
+                      <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>
                       <!-- Media for all the trips go here -->
-                      <!--<h2> Pictures </h2>
-                      <ul class="list-group" formGroupName="media">
-                        <div *ngFor="let media of place.controls['media'].controls; let k = index">
+                      <h2> Pictures </h2>
+                      <ul class="list-group" formGroupName="pictures">
+                        <div *ngFor="let picture of place.controls['pictures'].controls; let k = index">
                           <div class="form-group" formGroupName="{{k}}">
                             <div class="col-sm-5">
-                              Link for image {{media.value.link}}
-                              <image href="./assets/images/aviabird.png">
+                              <input #image type="text" formControlName="url" [hidden]="true">
+                              <img class="image-showcase" src="{{image.value}}">
                             </div>
-                            Add image uploading feature later 
-                            <image-upload></image-upload>
-                            <div class="col-sm-5">
-                              <label for="description">Image Url</label>
-                              <input type="text" 
-                                class="form-control" 
-                                placeholder="http://some-image-link.html" 
-                                formControlName="link"
-                                #imageUrl>
-                            </div>
-
                           </div>
                         </div>
-                      </ul>-->
+                      </ul>
                     </div>
                   </div>
                 </ul>
@@ -128,7 +101,7 @@
           <!--REFACTOR: Switch to ngIf/Else syntax while updating to angular4.0/2.4.1 -->
           <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
           <button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
-          <button type="submit" *ngIf="!isEditing" class="ui primary basic button" [disabled]="!tripForm.valid" >Save</button>
+          <button type="submit" *ngIf="!isEditing" class="ui primary basic button">Save</button>
           <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
         </div>
       </div>

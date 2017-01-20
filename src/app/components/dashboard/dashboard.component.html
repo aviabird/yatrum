@@ -3,7 +3,14 @@
   <div class="search row">
     <tr-dashboard-search></tr-dashboard-search>
   </div>
-
+  <div class="row">
+    <div class="create-button">
+      <div class="ui primary animated button" tabindex="0" [routerLink]="['/trips','new']">
+        <div class="visible content">Create Trip</div>
+        <div class="hidden content"><i class="plus icon"></i></div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <tr-dashboard-trips></tr-dashboard-trips>
   </div>

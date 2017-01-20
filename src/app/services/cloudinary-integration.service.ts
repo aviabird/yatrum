@@ -30,6 +30,15 @@ export class CloudinaryIntegrationService {
     }
   }
 
+  uploadPlacePicture(url: string): Observable<any> {
+    let cloudUpload$:Observable<any>;
+    let params = this.createUploadParams(url);
+    return this.upload(params)
+      .map(data => {
+        return { url: data.secure_url, public_id: data.public_id };
+      })
+  }
+
   uploadImages(image, mediaType) {
     this.user$ = this.store.select(getSelectedProfileUser);
     
