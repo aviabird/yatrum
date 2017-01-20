@@ -2,7 +2,7 @@ import { Base } from './base';
 import { City } from './city';
 import { UserProfile } from './user-profile';
 
-export interface Trip extends Base {
+export class Trip extends Base {
     user_id: string;
     profile_pic_url: string;
     startDate: string;
@@ -12,4 +12,6 @@ export interface Trip extends Base {
     name: string;
     cities: City[];
     user: UserProfile;
+    is_liked_by_current_user: boolean;
+    trip_likes_count: number;
 }

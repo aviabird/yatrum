@@ -3,9 +3,9 @@
   <div class="follow-ribbon" *ngIf="!(belongsToLoggedInUser() | async)"
     (click)="toggleFollowBtn(state.follow)">
     <a class="ui large right ribbon label"
-      [ngClass]="{blue: state.follow == 'active', teal: state.follow == 'inactive'}"
+      [ngClass]="{red: state.follow == 'active', teal: state.follow == 'inactive'}"
       [@toggleFollow]='state.follow'>
-      <i class="white plus icon"></i>
+      <i class="user icon"></i>
       {{state.follow == "inactive" ? "Follow" : "Following"}}
     </a>
   </div>

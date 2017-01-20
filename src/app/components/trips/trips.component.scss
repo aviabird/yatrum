@@ -1,7 +1,6 @@
 .trip-box {
-    margin-top: 20px;
-    padding-top: 20px;
-    border: solid 1px lightgrey;
+	margin-top: 20px;
+	padding-top: 20px;
 }
 
 .trips-cover {
@@ -13,7 +12,7 @@
 
 .trips-cover-div {
 	position: relative;
-	height: 17rem;
+	height: 10rem;
 	overflow: hidden;
 	&:hover {
 		.cover-update-text {
@@ -41,7 +40,7 @@
   color: white;
   text-transform: uppercase;
   left: 50%;
-  transform: translate(-50%, -71%);
+  transform: translate(-50%, -69%);
   position: relative;
   padding-top: 1rem;
   background: rgba(0, 0, 0, 0.28);

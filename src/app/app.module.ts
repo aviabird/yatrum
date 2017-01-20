@@ -1,3 +1,4 @@
+import { UserEffects } from './effects/user.effects';
 import { InstagramIntegrationService } from './services/instagram-integration.service';
 // Core angular modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,8 +14,8 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-import {ToastyModule} from 'ng2-toasty';
-
+import { ToastyModule } from 'ng2-toasty';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -55,7 +56,6 @@ import { SignupComponent } from './components/shared/auth/signup/signup.componen
 import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
 import { LoginComponent } from './components/shared/auth/login/login.component';
 import { TripActivityComponent } from './components/trips/trip-detail/trip-activity/trip-activity.component';
-import { TripFlowChartComponent } from './components/trips/trip-detail/trip-flow-chart/trip-flow-chart.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 import { TripDetailComponent } from './components/trips/trip-detail/trip-detail.component';
 import { TripsComponent } from './components/trips/trips.component';
@@ -89,7 +89,6 @@ const myFirebaseAuthConfig = {
     TripsComponent,
     TripDetailComponent,
     TripsListComponent,
-    TripFlowChartComponent,
     TripActivityComponent,
     LoginComponent,
     SignupComponent,
@@ -124,6 +123,7 @@ const myFirebaseAuthConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(reducer),
+    EffectsModule.run(UserEffects),
     EffectsModule.run(UserAuthEffects),
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),
@@ -139,7 +139,8 @@ const myFirebaseAuthConfig = {
     // }),
     StoreLogMonitorModule,
     SlimLoadingBarModule.forRoot(),
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [
     UserAuthService,

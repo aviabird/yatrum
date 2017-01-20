@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import {
   Component,
   OnInit,
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './../../../reducers/index';
-import { LoadTripsAction } from './../../../actions/trips.action';
+import { LoadMoreTripsAction } from './../../../actions/trips.action';
 
 @Component({
   selector: 'tr-dashboard-trips',
@@ -31,8 +32,9 @@ export class DashboardTripsComponent implements OnInit {
   trips$: Observable<Trip[]>;
   authentication$: Observable<boolean>;
   hideLoader: boolean = false;
+  private page: number = 1;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
     this.trips$ =
       this.store.select(fromRoot.getTripsCollection).do(
         trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
@@ -42,6 +44,13 @@ export class DashboardTripsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onScroll() {
+    this.page++;
+    let total_pages = this.tripService.total_pages;
+    if(this.page <=  total_pages)
+      this.store.dispatch(new LoadMoreTripsAction({page: this.page}));
   }
 
 }

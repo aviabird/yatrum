@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { LikeTripAction } from './../../../../actions/trips.action';
 import { Trip } from './../../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -37,18 +38,26 @@ import {
       transition('active => inactive', animate(500))
     ]),
     trigger('toggleFollow', [
-      state('inactive', style({})),
+      state('inactive', style({
+        background: 'rgba(0, 156, 149, 0.7)'
+      })),
       state('active', style({
-        background: 'rgba(255, 5, 5, 0.6)',
-        opacity: 1,
-        transform: "scale(1) translateX(-100%)"
+        background: 'rgba(255, 5, 5, 0.7)'
       })),
       transition('inactive => active', [
-        style({ transform: "scale(1.2) translateX(-89%)", opacity: 0, background: 'red', right: '2rem' }),
+        style({
+          transform: "scale(1.2) translateX(-89%)",
+          opacity: 0,
+          background: 'rgba(255, 5, 5, 0.7)',
+          right: '2rem' }),
         animate(500)
       ]),
       transition('active => inactive', [
-        style({ transform: "scale(1.2) translateX(-89%)", opacity: 0, background: 'red', right: '2rem' }),
+        style({
+          transform: "scale(1.2) translateX(-89%)",
+          opacity: 0,
+          background: 'rgba(0, 156, 149, 0.7)',
+          right: '2rem' }),
         animate(500)
       ])
     ])
@@ -64,18 +73,22 @@ export class TripListItemComponent implements OnInit {
     private router: Router,
     private store: Store<fromRoot.State>,
     private authService: UserAuthService
-  ) { }
+  ) {
+    this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);    
+   }
 
   ngOnInit() {
-    this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
-    this.loggedInUser$.subscribe(user => {
-      if (user.id === this.trip.user.id) {
-        this.userTrip = true;
-      } else {
-        this.userTrip = false;
-      }
-    });
+    this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
     this.tripMainPicture();
+    this.state.like = (this.trip.is_liked_by_current_user ? 'active' : 'inactive');
+  }
+
+  /**
+   * returns true if the user is owner of the trip
+   * {user} Auth user object
+   */
+  tripOfAuthUser(user) {
+    return user.id === this.trip.user.id ? true : false;
   }
 
   // TODO: Refactor this later
@@ -85,9 +98,10 @@ export class TripListItemComponent implements OnInit {
     } else {
       this.tripMainPictureUrl = "http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg";
     }
-}
+  }
 
   toggleLike(status) {
+    this.store.dispatch(new LikeTripAction(this.trip.id))
     this.state.like = (status === 'inactive' ? 'active' : 'inactive');
   }
 
@@ -101,7 +115,7 @@ export class TripListItemComponent implements OnInit {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadTripsAction)
+      this.store.dispatch(new LoadTripsAction({page: 1}))
   }
 
   belongsToLoggedInUser() {

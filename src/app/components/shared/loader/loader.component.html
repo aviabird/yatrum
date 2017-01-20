@@ -1,6 +1,10 @@
 <div class="ui segment">
   <div class="ui active inverted dimmer">
-    <div class="ui medium text loader">{{message}}</div>
+    <div class="ui medium text">
+      <img src='assets/images/balls.svg' class="loader-image">
+      <br>
+      {{message}}
+    </div>
   </div>
   <div *ngFor="let item of createRange(noOfParas)">
     <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/short-paragraph.png">

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'tr-login',
@@ -15,14 +16,21 @@ import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/
 export class LoginComponent implements OnInit {
   signInForm: FormGroup;
   authStatus$: Observable<boolean>;
-  formErrorMessage$: Observable<string>;
+  // formErrorMessage$: Observable<string>;
 
   constructor(private fb: FormBuilder,
               private store: Store<fromRoot.State>,
-              private router: Router) {
+              private router: Router,
+              private toastyService: ToastyService) {
     this.authStatus$ = this.store.select(fromRoot.getAuthStatus);
-    this.formErrorMessage$ = this.store.select(fromRoot.getLoginFormMessage)
-    this.redirectIfUserLoggedIn()
+    this.store.select(fromRoot.getLoginFormMessage)
+      .subscribe((errors) => {
+        if (errors && errors.length) {
+          this.toastyService.clearAll();
+          this.toastyService.error({title: "Login Error", msg: "Invalid Credentials"});
+        }
+      });
+    this.redirectIfUserLoggedIn();
   }
 
   ngOnInit() {

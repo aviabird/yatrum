@@ -14,14 +14,25 @@ export class TripsEffects {
   @Effect()
   Trips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_TRIPS)
-    .switchMap<Action, Trip[] | String>(() => this.tripsService.getTrips())
+    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrips(action.payload))
     .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
+  
+  @Effect()
+  MoreTrips$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_MORE_TRIPS)
+    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrips(action.payload))
+    .map((data: Trip[]) => new TripsActions.MoreTripsLoadedAction(data));
 
   @Effect()
   UserTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS)
     .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getUserTrips(action.payload))
     .map((data: Trip[]) => new TripsActions.UserTripsLoadedAction(data));
+
+  @Effect()
+  UserTripIds$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_USER_TRIPS_SUCCESS)
+    .map((action: Action) => new TripsActions.SetUserTripIds(action.payload));
 
   @Effect()
   SaveTrip$: Observable<Action> = this.actions$
@@ -38,8 +49,13 @@ export class TripsEffects {
   @Effect()
   SearchTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SEARCH_TRIPS)
-    .map(action => action.payload)
     .switchMap<Action, Trip[] | String>((searchQuery) => this.tripsService.searchTrips(searchQuery))
     .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
+
+  @Effect()
+  LikeTrip$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LIKE_TRIP)
+    .switchMap<Action, Trip>((action) => this.tripsService.likeTrip(action.payload))
+    .map((data) => new TripsActions.UpdateTripSuccessAction(data));
 
 }

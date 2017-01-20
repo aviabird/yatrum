@@ -11,13 +11,13 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 @Injectable()
 export class TripsResolveGuard implements Resolve<boolean>{
 
-	constructor(private store: Store<fromRoot.State>, 
-							private router: Router, 
-							private tripsService: TripsService) {
+	constructor(private store: Store<fromRoot.State>,
+		private router: Router,
+		private tripsService: TripsService) {
 	}
 
-  resolve(route: ActivatedRouteSnapshot): boolean {		
-  	let tripIndex = route.params['id'];
-	return this.tripsService.getTrip(tripIndex);
-  }
+	resolve(route: ActivatedRouteSnapshot): boolean {
+		let tripIndex = route.params['id'];
+		return this.tripsService.getTrip(tripIndex);
+	}
 }
