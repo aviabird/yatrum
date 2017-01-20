@@ -26,7 +26,7 @@
       <a [routerLink]="['/trips', trip.id, 'edit']" *ngIf="belongsToLoggedInUser() | async"><i class="large icon pencil"></i></a>
     </div>
     <div class="sixteen wide column" [routerLink]="['/trips',(trip.id)]">
-      <img width="100%" class="photo" src="http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg">
+      <img width="100%" class="photo" src="{{tripMainPictureUrl}}">
     </div>
     <div class="sixteen wide column tags">
       <a class="ui blue label" (click)="onTagClick('river')">River</a>

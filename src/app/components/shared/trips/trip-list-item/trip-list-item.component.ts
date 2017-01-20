@@ -59,7 +59,7 @@ export class TripListItemComponent implements OnInit {
   state: any = {'like': 'inactive', 'follow': 'inactive'};
   loggedInUser$: Observable<UserProfile>;
   userTrip: boolean;
-
+  tripMainPictureUrl: string;
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
@@ -70,14 +70,22 @@ export class TripListItemComponent implements OnInit {
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
     this.loggedInUser$.subscribe(user => {
       if (user.id === this.trip.user.id) {
-        console.log('we are editing trip')
         this.userTrip = true;
       } else {
-        console.log('we cannot edit trip')        
         this.userTrip = false;
       }
-    })
+    });
+    this.tripMainPicture();
   }
+
+  // TODO: Refactor this later
+  tripMainPicture(){
+    if (this.trip.cities[0].places[0].pictures.length > 0) {
+      this.tripMainPictureUrl = this.trip.cities[0].places[0].pictures[0].url; 
+    } else {
+      this.tripMainPictureUrl = "http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg";
+    }
+}
 
   toggleLike(status) {
     this.state.like = (status === 'inactive' ? 'active' : 'inactive');
