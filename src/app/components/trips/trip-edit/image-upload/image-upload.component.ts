@@ -11,6 +11,8 @@ export class ImageUploadComponent implements OnInit {
   @Input() cityIndex: number;
   @Output() imageData = new EventEmitter();
 
+  place: Place;
+
   constructor() { }
 
   ngOnInit() {
@@ -18,7 +20,21 @@ export class ImageUploadComponent implements OnInit {
 
   handleOnChange(event) {
     let files = event.target.files;
-    this.imageData.emit({placeIndex: this.placeIndex, cityIndex: this.cityIndex, imageUrl: 'https://unsplash.it/575x515'});
+    this.imageData.emit({
+      placeIndex: this.placeIndex, 
+      cityIndex: this.cityIndex, 
+      pictures: [{ 
+         id: '',
+         url: 'https://unsplash.it/200/300?image=0',
+         description: 'good thing',
+         review: 'not such a good place'
+      }, {
+        id: '',
+        url: 'https://unsplash.it/200/300?image=1',
+        description: 'not so bad',
+        review: 'not such a good place'
+      }]
+    });
   }
 
 }

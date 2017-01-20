@@ -68,28 +68,20 @@
                       <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>
                       <!--TODO: Implement it later -->
                       <!-- Media for all the trips go here -->
-                      <!--<h2> Pictures </h2>
-                      <ul class="list-group" formGroupName="media">
-                        <div *ngFor="let media of place.controls['media'].controls; let k = index">
+                      <h2> Pictures </h2>
+                      <ul class="list-group" formGroupName="pictures">
+                        <div *ngFor="let picture of place.controls['pictures'].controls; let k = index">
                           <div class="form-group" formGroupName="{{k}}">
                             <div class="col-sm-5">
-                              Link for image {{media.value.link}}
-                              <image href="./assets/images/aviabird.png">
+                              <!--Link for image {{picture.url}}-->
+                              <!--<img [src]="https://unsplash.it/575x515">-->
+                              Picture {{k}} : {{image.value}}
+                              <input #image type="text" formControlName="url">
+                              <img src="{{image.value}}">
                             </div>
-                            Add image uploading feature later 
-                            <image-upload></image-upload>
-                            <div class="col-sm-5">
-                              <label for="description">Image Url</label>
-                              <input type="text" 
-                                class="form-control" 
-                                placeholder="http://some-image-link.html" 
-                                formControlName="link"
-                                #imageUrl>
-                            </div>
-
                           </div>
                         </div>
-                      </ul>-->
+                      </ul>
                     </div>
                   </div>
                 </ul>

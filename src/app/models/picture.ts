@@ -1,6 +1,8 @@
 import { Base } from './base';
 
 export interface Picture extends Base {
-    link: string; // any remote link like cloudinay link
+    id: string;
+    url: string; // any remote link like cloudinay link
     description: string;
+    // review: string;
 }

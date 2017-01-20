@@ -1,3 +1,4 @@
+import { Picture } from './../../../models/picture';
 import { Place } from './../../../models/place';
 import { City } from './../../../models/city';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -124,11 +125,14 @@ export class TripEditComponent implements OnInit {
     // create success action and if the editing trip has some value(id) 
     // or something then we send an update trip request.
     if( this.tripForm.valid ) {
+      console.log('form is valid');
       if( this.isEditing === false ) {
         this.store.dispatch(new SaveTripAction(this.tripForm.value));
       } else {
         this.store.dispatch(new UpdateTripAction(this.tripForm.value));
       }
+    } else {
+      console.log('form is invalid ', this.tripForm);
     }
   }
 
@@ -239,8 +243,14 @@ export class TripEditComponent implements OnInit {
     console.log('image uploaded data', imageData);
     let placeIndex = imageData.placeIndex;
     let cityIndex = imageData.cityIndex;
-    let url = imageData.imageUrl;
-
+    let pictures = [];
+    imageData.pictures.forEach(picture => {
+      pictures.push(picture)
+    })
+    // let url = imageData.picture.url;
+    // TODO: this 
+    // let pictures: [Picture] = [{id: '', url: imageData.picture.url, description: imageData.picture.description, created_at: '', updated_at: ''}];
+    pictures.forEach(picture => this.addPicture(cityIndex, placeIndex, picture));
   }
 
 
@@ -320,11 +330,35 @@ export class TripEditComponent implements OnInit {
    * @method addPicture
    * @param {cityIndex} the index of the city to whose place the picture is to be added
    * @param {placeIndex} the index of the place to which the picture is to be added
+   * @param {picture} Picture object to be added to the Place.
    * @return {void}
    */
-  addPicture(cityIndex: number, placeIndex: number): void {
-    // TODO: 
-    // 1. First refactor media to pictures https://www.pivotaltracker.com/story/show/136716365
-    // 2. Check addPlace method to see how it should be done with 1 more level of nesting
+  addPicture(cityIndex: number, placeIndex: number, picture?: Picture): void {
+    let id: string;
+    let description: string; 
+    let url: string;
+    console.log('we are adding picture', picture);
+    if (picture) {
+      id = picture.id;
+      description = picture.description;
+      url = picture.url;
+    } else {
+      id = '';
+      description = '';
+      url = '';
+    }
+    // Create and add the FormControl for picture in place
+    (<FormArray>(<FormGroup>
+      (<FormArray>(<FormGroup>
+        (<FormArray>this.tripForm.controls['cities'])
+          .controls[cityIndex]).controls['places'])
+          .controls[placeIndex]).controls['pictures']).push(
+            new FormGroup({
+              id: new FormControl(id),
+              description: new FormControl(description),
+              url: new FormControl(url),
+              // pictures: pictures
+            })
+          )
   }
 }
