@@ -7,7 +7,7 @@
     </div>
     <!--TODO: Activate this only after checking if the user is an owner of this trip -->
     <div *ngIf="userTrip" class="trip-edit"> 
-      <button [routerLink]="['/trips', trip.id, 'edit']">Edit</button>
+      <a [routerLink]="['/trips', trip.id, 'edit']"><i class="large icon pencil">Edit</i></a>
     </div>
     <div class="ui card my-card">
       <div class="ui twelve column grid trip-detail">

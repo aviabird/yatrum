@@ -4,12 +4,19 @@ import { City } from './../../../models/city';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
-import { SaveTripAction, UpdateTripAction, ClearEditingTripAction, AddTripToLocalStore } from './../../../actions/trips.action';
 import { Store } from '@ngrx/store';
 import { createSelector } from 'reselect';
-import { Form, FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import * as fromRoot from '../../../reducers';
+
+import { 
+  SaveTripAction, UpdateTripAction, ClearEditingTripAction, 
+  AddTripToLocalStore, LoadTripsAction, SelectTripAction 
+} from './../../../actions/trips.action';
+import { 
+  Form, FormGroup, FormBuilder, FormArray, 
+  Validators, FormControl 
+} from '@angular/forms';
 
 @Component({
   selector: 'tr-trip-edit',
@@ -19,10 +26,11 @@ import * as fromRoot from '../../../reducers';
 export class TripEditComponent implements OnInit {
   tripForm: FormGroup;
   editingStatus$: Observable<boolean>;
-  isEditing: boolean = false; // calling create/update service methods
+  isEditing: boolean; // calling create/update service methods
   isNewTrip: boolean = true; // editing/creating a trip
   trip$: Observable<Trip>;
-  tripId: String;
+  tripId: string;
+  getSelectedTrip$: Observable<Trip>;
 
   cities: FormArray = new FormArray([]);
   places: FormArray = new FormArray([]);
@@ -37,21 +45,22 @@ export class TripEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initForm()
-    this.setEditingTrip();    
+    this.setEditingTripIntialise();    
   }
 
   /** 
    * sets the editing status
    */
-  setEditingTrip() {
+  setEditingTripIntialise() {
     if (this.idPresentInParams()) {
       this.isEditing = true;
-      let getSelectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
-      getSelectedTrip$.subscribe((trip) => {
-        this.resetFormDataWithStoreTrip(trip);
+      this.getSelectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
+      this.getSelectedTrip$.subscribe((trip) => {
+        this.initForm(trip);
+        this.tripId = trip.id;
       })
     } else {
+      this.initForm();
       this.isEditing = false;
     }
   }
@@ -80,6 +89,11 @@ export class TripEditComponent implements OnInit {
         this.store.dispatch(new ClearEditingTripAction());
       }
     })
+  }
+
+  redirectUponUpdate() {    
+    this.store.dispatch(new SelectTripAction(this.tripId));
+    this.router.navigateByUrl(`/trips/${this.tripId}`);
   }
   
   /**
@@ -133,6 +147,7 @@ export class TripEditComponent implements OnInit {
         this.store.dispatch(new SaveTripAction(this.tripForm.value));
       } else {
         this.store.dispatch(new UpdateTripAction(this.tripForm.value));
+        this.redirectUponUpdate();
       }
     } else {
       console.log('form is invalid ', this.tripForm);
@@ -143,7 +158,7 @@ export class TripEditComponent implements OnInit {
    * Initialises the tripForm 
    * @method initForm
    */
-  initForm():void {
+  initForm(trip?:Trip):void {
     let name = 'Trip';
     let description = 'Desert safari';
     // let status = "completed"; //TODO use a checkbox or a select box.
@@ -152,10 +167,7 @@ export class TripEditComponent implements OnInit {
     let cities: FormArray = new FormArray([]);
     let places: FormArray = new FormArray([]);
     let pictures: FormArray = new FormArray([]);
-    
-    // If we are creating a new trip add a city and a place by default
-    this.provisionCityAndPlace();
-    
+
     this.tripForm = this.fb.group({
       id: [""],
       name: [name, Validators.required],
@@ -165,6 +177,12 @@ export class TripEditComponent implements OnInit {
       // status: [status, Validators.required] //TODO use a checkbox or a select box.
       cities: this.cities
     })
+    // If we are creating a new trip add a city and a place by default
+    if(trip) {
+      this.resetFormDataWithStoreTrip(trip);
+    } else {
+      this.provisionCityAndPlace();      
+    }
   }
 
   /**

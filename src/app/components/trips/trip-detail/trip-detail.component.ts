@@ -25,8 +25,6 @@ export class TripDetailComponent implements OnInit {
   ngOnInit() {
     this.trip$.subscribe(trip => this.trip = trip);
     this.loggedInUser$.subscribe(user => {
-      console.log('user profile', user);
-      console.log('trip', this.trip);
       if (user.id === this.trip.user.id) {
         this.userTrip = true;
       } else {
