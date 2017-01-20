@@ -155,49 +155,7 @@ export class TripEditComponent implements OnInit {
     
     // If we are creating a new trip add a city and a place by default
     this.provisionCityAndPlace();
-
-    //NOTE: Don't remove this commented code for reference purposes
-    /**
-    // Add a Media
-    // media.push(
-    //   new FormGroup({
-    //     id: new FormControl(),
-    //     link: new FormControl('https://unsplash.it/300/300/?random', Validators.required),
-    //     description: new FormControl('Enjoyed a lot', Validators.required)
-    //   })
-    // )
-    // Add a Place
-    // places.push(
-    //   new FormGroup({
-    //     id: new FormControl(),
-    //     name: new FormControl('Koregaon park', Validators.required),
-    //     description: new FormControl('We had really nice food here', Validators.required),
-    //     review: new FormControl('Really lively place', Validators.required),
-    //     media: media
-    //   })
-    // )
-
-    // places_1.push(
-    //   new FormGroup({
-    //     id: new FormControl(),
-    //     name: new FormControl('Koregaon park', Validators.required),
-    //     description: new FormControl('We had really nice food here', Validators.required),
-    //     review: new FormControl('Really lively place', Validators.required),
-    //     //TODO: Refactor this change media to pictures as per rails dependency
-    //     media: media
-    //   })
-    // )
-    // Add a dummy City
-    // cities.push(
-    //   new FormGroup({
-    //     id: new FormControl(),
-    //     name: new FormControl('Pune city', Validators.required),
-    //     country: new FormControl('India', Validators.required),
-    //     places: places
-    //   })
-    // )
-    **/
-
+    
     this.tripForm = this.fb.group({
       id: [""],
       name: [name, Validators.required],
@@ -243,17 +201,9 @@ export class TripEditComponent implements OnInit {
    * Update image for a place
    */
   imageUploaded(imageData: any) {
-    console.log('image uploaded data', imageData);
     let placeIndex = imageData.placeIndex;
     let cityIndex = imageData.cityIndex;
-    let pictures = [];
-    imageData.pictures.forEach(picture => {
-      pictures.push(picture)
-    })
-    // let url = imageData.picture.url;
-    // TODO: this 
-    // let pictures: [Picture] = [{id: '', url: imageData.picture.url, description: imageData.picture.description, created_at: '', updated_at: ''}];
-    pictures.forEach(picture => this.addPicture(cityIndex, placeIndex, picture));
+    this.addPicture(cityIndex, placeIndex, imageData.picture);
   }
 
 
@@ -336,20 +286,12 @@ export class TripEditComponent implements OnInit {
    * @param {picture} Picture object to be added to the Place.
    * @return {void}
    */
-  addPicture(cityIndex: number, placeIndex: number, picture?: Picture): void {
-    let id: string;
-    let description: string; 
-    let url: string;
-    console.log('we are adding picture', picture);
-    if (picture) {
-      id = picture.id;
-      description = picture.description;
-      url = picture.url;
-    } else {
-      id = '';
-      description = '';
-      url = '';
-    }
+  addPicture(cityIndex: number, placeIndex: number, picture: Picture): void {
+    let id:string = picture.id;
+    let description:string = picture.description;
+    let url:string = picture.url;
+    let public_id:string = picture.public_id;
+    
     // Create and add the FormControl for picture in place
     (<FormArray>(<FormGroup>
       (<FormArray>(<FormGroup>
@@ -360,8 +302,52 @@ export class TripEditComponent implements OnInit {
               id: new FormControl(id),
               description: new FormControl(description),
               url: new FormControl(url),
-              // pictures: pictures
+              public_id: new FormControl(public_id)
             })
           )
   }
 }
+
+/**
+ * //NOTE: Don't remove this commented code for reference purposes
+ * This is how we can have a dummy trip while creating the form
+    /**
+    // Add a Media
+    // media.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     link: new FormControl('https://unsplash.it/300/300/?random', Validators.required),
+    //     description: new FormControl('Enjoyed a lot', Validators.required)
+    //   })
+    // )
+    // Add a Place
+    // places.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Koregaon park', Validators.required),
+    //     description: new FormControl('We had really nice food here', Validators.required),
+    //     review: new FormControl('Really lively place', Validators.required),
+    //     media: media
+    //   })
+    // )
+
+    // places_1.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Koregaon park', Validators.required),
+    //     description: new FormControl('We had really nice food here', Validators.required),
+    //     review: new FormControl('Really lively place', Validators.required),
+    //     //TODO: Refactor this change media to pictures as per rails dependency
+    //     media: media
+    //   })
+    // )
+    // Add a dummy City
+    // cities.push(
+    //   new FormGroup({
+    //     id: new FormControl(),
+    //     name: new FormControl('Pune city', Validators.required),
+    //     country: new FormControl('India', Validators.required),
+    //     places: places
+    //   })
+    // )
+    **/

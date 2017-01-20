@@ -67,7 +67,7 @@ export class UserProfileComponent implements OnInit {
       return;
     }
     reader.onload = this.handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
   }
     
   private handleReaderLoaded(e) {
