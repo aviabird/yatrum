@@ -102,7 +102,10 @@ export class TripEditComponent implements OnInit {
       this.addCity(city);
       city.places.forEach((place, placeIndex) =>{
         this.addPlace(cityIndex, place);
-        //NOTE: Media should be assigned here
+        //NOTE: Pictures should be assigned here
+        place.pictures.forEach(picture => {
+          this.addPicture(cityIndex, placeIndex, picture);
+        })
       })
     })
   }
