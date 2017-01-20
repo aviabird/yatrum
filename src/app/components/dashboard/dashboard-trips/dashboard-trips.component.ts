@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './../../../reducers/index';
-import { LoadTripsAction } from './../../../actions/trips.action';
+import { LoadMoreTripsAction } from './../../../actions/trips.action';
 
 @Component({
   selector: 'tr-dashboard-trips',
@@ -46,9 +46,8 @@ export class DashboardTripsComponent implements OnInit {
   }
 
   onScroll() {
-    console.log("scrolled");
     this.page++;
-    this.store.dispatch(new LoadTripsAction({page: this.page}));
+    this.store.dispatch(new LoadMoreTripsAction({page: this.page}));
   }
 
 }

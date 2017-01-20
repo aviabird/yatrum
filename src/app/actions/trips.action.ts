@@ -5,6 +5,8 @@ import { Action } from '@ngrx/store';
 export const ActionTypes = {
 	LOAD_TRIPS: "Load [Trips]",
 	LOAD_TRIPS_SUCCESS: "Load [Trips] Success",
+	LOAD_MORE_TRIPS: "Load More [Trips]",
+	LOAD_MORE_TRIPS_SUCCESS: "Load More [Trips] Success",	
 	SELECT_TRIP: "Select [Trip]",
 	SELECT_CITY: "Select [City] from [Trip]",
 	LOAD_USER_TRIPS: "Load [User Trips]",
@@ -27,6 +29,14 @@ export class LoadTripsAction {
 export class TripsLoadedAction {
 	type = ActionTypes.LOAD_TRIPS_SUCCESS;
 	constructor(public payload: Trip[]) { }
+}
+export class LoadMoreTripsAction {
+	type = ActionTypes.LOAD_MORE_TRIPS;
+	constructor(public payload: Object) {}
+}
+export class MoreTripsLoadedAction {
+	type = ActionTypes.LOAD_MORE_TRIPS_SUCCESS;
+	constructor(public payload: Trip[]) {}
 }
 export class SelectTripAction {
 	type = ActionTypes.SELECT_TRIP;
