@@ -42,7 +42,11 @@
         [ngClass]="{empty: state.like == 'inactive'}"
         [@toggleLike]='state.like'
         (click)="toggleLike(state.like)"></i>
+      <!-- TODO: Make this use the moment time ago api -->
       <i class="large icon">2h</i>
+      <a *ngIf="userTrip" [routerLink]="['/trips', trip.id, 'edit']">
+        <i class="large icon pencil"></i>
+      </a>
     </div>
   </div>
 </div>

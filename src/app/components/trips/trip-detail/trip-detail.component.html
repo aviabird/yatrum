@@ -1,14 +1,14 @@
 <div class="ui centered grid">
   <div class="twelve wide column trip">
     <div class="trip-image">
-      <div class="trip-user" [routerLink]="['/user', (trip$ | async).user?.id]">
-        <img class="ui tiny image" [src]="(trip$ | async).user?.profile_pic?.url">      
+      <div class="trip-user" [routerLink]="['/user', trip.user?.id]">
+        <img class="ui tiny image" [src]="trip.user?.profile_pic?.url">      
       </div>
     </div>
     <!--TODO: Activate this only after checking if the user is an owner of this trip -->
-    <!--<div class="trip-edit"> 
-      <button [routerLink]="['/trips', (trip$ | async).id, 'edit']">Edit</button>
-    </div>-->
+    <div *ngIf="userTrip" class="trip-edit"> 
+      <button [routerLink]="['/trips', trip.id, 'edit']">Edit</button>
+    </div>
     <div class="ui card my-card">
       <div class="ui twelve column grid trip-detail">
         <div class="four wide column trip-flow">

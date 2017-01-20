@@ -1,19 +1,14 @@
+import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { State } from '../../../../reducers';
+import * as fromRoot from '../../../../reducers';
 import { SearchTrip, LoadTripsAction } from '../../../../actions/trips.action';
 import { UserProfile } from '../../../../models/user-profile';
 import { UserAuthService } from '../../../../services/user-auth.service';
 import {
-  Component,
-  OnInit,
-  trigger,
-  state,
-  transition,
-  style,
-  animate,
-  Input
+  Component, OnInit, trigger, state,
+  style, animate, Input, transition,
 } from '@angular/core';
 
 @Component({
@@ -59,10 +54,31 @@ import {
     ])
   ]
 })
-export class TripListItemComponent {
+export class TripListItemComponent implements OnInit {
   @Input() trip: Trip;
   state: any = {'like': 'inactive', 'follow': 'inactive'};
-  
+  loggedInUser$: Observable<UserProfile>;
+  userTrip: boolean;
+
+  constructor(
+    private router: Router,
+    private store: Store<fromRoot.State>,
+    private authService: UserAuthService
+  ) { }
+
+  ngOnInit() {
+    this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
+    this.loggedInUser$.subscribe(user => {
+      if (user.id === this.trip.user.id) {
+        console.log('we are editing trip')
+        this.userTrip = true;
+      } else {
+        console.log('we cannot edit trip')        
+        this.userTrip = false;
+      }
+    })
+  }
+
   toggleLike(status) {
     this.state.like = (status === 'inactive' ? 'active' : 'inactive');
   }
@@ -70,12 +86,6 @@ export class TripListItemComponent {
   toggleFollowBtn(status) {
     this.state.follow = (status === 'inactive' ? 'active' : 'inactive');
   }
-
-  constructor(
-    private router: Router,
-    private store: Store<State>,
-    private authService: UserAuthService
-  ) { }
 
   onTagClick(searchQuery) {
     this.router.navigate(['/search']);

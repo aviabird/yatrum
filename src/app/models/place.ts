@@ -1,3 +1,4 @@
+import { Picture } from './picture';
 import { Base } from './base';
 import { Media } from './media';
 
@@ -6,6 +7,6 @@ export interface Place extends Base {
     visitedDate: Date;
     description: string;
     review: string; 
-    media: Media[];
+    pictures: Picture[];
     //TODO: Add expenditure here https://www.pivotaltracker.com/story/show/134957027
 }
