@@ -69,6 +69,7 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { ImageUploadComponent } from './components/trips/trip-edit/image-upload/image-upload.component';
+import { AddPlaceComponent } from './components/trips/trip-edit/add-place/add-place.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -113,7 +114,8 @@ const myFirebaseAuthConfig = {
     TripsSearchComponent,
     SearchedTripsComponent,
     LoaderComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    AddPlaceComponent
   ],
   imports: [
     BrowserModule,
