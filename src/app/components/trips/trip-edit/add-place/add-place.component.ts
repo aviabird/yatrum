@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPlaceComponent implements OnInit {
 
-  constructor() { }
+  placeForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.placeForm = formBuilder.group({
+      'name': ['', Validators.required],
+      'description': ['', Validators.required],
+      'images': formBuilder.array([{
+        'url': [''],
+        'description': ['']
+      }])
+    })
+  }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log("my form", this.placeForm);
   }
 
 }

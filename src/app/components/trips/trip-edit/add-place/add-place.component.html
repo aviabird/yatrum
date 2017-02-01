@@ -1,3 +1,12 @@
-<p>
-  add-place works!
-</p>
+<form class="ui form" [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <input type="text" class="" id="place-search" formControlName="name" placeholder="search place">
+  </div>
+  <div class="field">
+    <textarea class="" formControlName="description" placeholder="describe this place"></textarea>
+  </div>
+  <div class="field">
+    <i class="photo huge icon"></i>
+  </div>
+  <button class="ui button" type="submit">Add Place</button>
+</form>
