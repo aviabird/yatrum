@@ -3,3 +3,4 @@
 
 declare var System: any;
 declare var $: any;
+declare var google: any;

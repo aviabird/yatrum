@@ -22,6 +22,17 @@ export class AddPlaceComponent implements OnInit {
   }
 
   ngOnInit() {
+    let input = document.getElementById('place-search');
+    let options = {
+      types: ['establishment']
+    };
+
+    let autocomplete = new google.maps.places.Autocomplete(input);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var place = autocomplete.getPlace();
+      console.log(place);
+    });
   }
 
   onSubmit() {
