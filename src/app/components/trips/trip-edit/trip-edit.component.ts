@@ -1,4 +1,8 @@
+import { SaveTripAction } from './../../../actions/trips.action';
+import { State } from './../../../reducers/index';
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tr-trip-edit',
@@ -7,6 +11,41 @@ import { Component } from '@angular/core';
 })
 
 export class TripEditComponent {
+  tripForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private store: Store<State>) {
+    this.tripForm = formBuilder.group({
+      'name': ['',Validators.required],
+      'description': ['', Validators.required],
+      'cities': formBuilder.array([]) 
+    })
+
+    this.addCity();  
+
+  }
+
+  addNewPlace(event) {
+    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
+      .controls[0]).controls['places']).push(
+        this.formBuilder.group(event)
+      );
+    console.log("tripFrom", this.tripForm);
+  }
+
+  addCity() {
+    (<FormArray>this.tripForm.controls['cities']).push(
+      this.formBuilder.group({
+        'name': ['Pune'],
+        'country': ['India'],
+        'places': this.formBuilder.array([])
+      })
+    )
+  }
+
+  onSubmit() {
+    console.log("saving trip");
+    this.store.dispatch(new SaveTripAction(this.tripForm.value));
+  }
 
 }
 
@@ -241,39 +280,39 @@ export class TripEditComponent {
 //   }
 
 
-//   /**
-//    * Adds a city FormGroup to the cities <FormArray>FormControl(__cities__)
-//    * @method addCity
-//    * @param void
-//    * @return void
-//    */
-//   addCity(city?:City):void {
-//     let places = new FormArray([]);
-//     let passedCity: City;
+  // /**
+  //  * Adds a city FormGroup to the cities <FormArray>FormControl(__cities__)
+  //  * @method addCity
+  //  * @param void
+  //  * @return void
+  //  */
+  // addCity(city?:City):void {
+  //   let places = new FormArray([]);
+  //   let passedCity: City;
     
-//     let id: String;
-//     let name: String; 
-//     let country: String;
+  //   let id: String;
+  //   let name: String; 
+  //   let country: String;
 
-//     if (city) {
-//         id = city.id;
-//         name = city.name;
-//         country = city.country;
-//     } else {
-//         id = '';
-//         name = '';
-//         country = '';
-//     }
-//     (<FormArray>this.tripForm.controls['cities']).push(
-//       //TODO: Refactor extract this creation of formGroup      
-//       new FormGroup({
-//         id: new FormControl(id),
-//         name: new FormControl(name, Validators.required),
-//         country: new FormControl(country),
-//         places: places
-//       })
-//     )
-//   }
+  //   if (city) {
+  //       id = city.id;
+  //       name = city.name;
+  //       country = city.country;
+  //   } else {
+  //       id = '';
+  //       name = '';
+  //       country = '';
+  //   }
+  //   (<FormArray>this.tripForm.controls['cities']).push(
+  //     //TODO: Refactor extract this creation of formGroup      
+  //     new FormGroup({
+  //       id: new FormControl(id),
+  //       name: new FormControl(name, Validators.required),
+  //       country: new FormControl(country),
+  //       places: places
+  //     })
+  //   )
+  // }
 
 //   /**
 //    * Adds a place FormGroup to the city's <FormArray>FormControl(__places__)

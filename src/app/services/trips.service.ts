@@ -128,7 +128,7 @@ export class TripsService {
 	 * @return {Observable} Observable with created trip object
 	 */
 	saveTrip(trip: Trip): Observable<Trip> | Observable<String> {
-		console.log('we are saving trip');
+		console.log('we are saving trip', trip);
 		const headers = new Headers({
 			'Content-Type': 'application/json',
 			'Authorization': this.auth_token

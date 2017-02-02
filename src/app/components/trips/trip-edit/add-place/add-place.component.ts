@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tr-add-place',
@@ -8,16 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPlaceComponent implements OnInit {
 
+
   placeForm: FormGroup;
+  @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
+
 
   constructor(private formBuilder: FormBuilder) {
     this.placeForm = formBuilder.group({
       'name': ['', Validators.required],
       'description': ['', Validators.required],
-      'images': formBuilder.array([{
-        'url': [''],
-        'description': ['']
-      }])
+      'pictures': formBuilder.array([])
     })
   }
 
@@ -31,12 +31,13 @@ export class AddPlaceComponent implements OnInit {
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
       var place = autocomplete.getPlace();
-      console.log(place);
+      // console.log(place); 
     });
   }
 
   onSubmit() {
-    console.log("my form", this.placeForm);
+    console.log("my form", this.placeForm.value);
+    this.newPlace.emit(this.placeForm.value);
   }
 
 }
