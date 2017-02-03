@@ -1,6 +1,49 @@
-# TravelAppFrontend
+<p align="center">
+  <a href="https://angular2-hn.firebaseapp.com">
+    <img alt="Yatrum App Logo" title="Angular 2 Yatrum App" src="http://res.cloudinary.com/zeus999/image/upload/v1486108021/Yatrum%20Logo/Screen_Shot_2017-02-03_at_1.01.17_PM.png" width="200">
+  </a>
+</p>
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.19-3.
+
+<p align="center">
+  <a href="https://angular2-hn.firebaseapp.com">
+    <img alt="Yatrum App Logo" title="Angular 2 Yatrum App" src="http://res.cloudinary.com/zeus999/image/upload/v1486108021/Yatrum%20Logo/Screen_Shot_2017-02-03_at_1.01.33_PM.png" width="300">
+  </a>
+</p>
+
+<p align="center">
+  Travel platform built with ❤️ using Angular2, ngrx store, observables and reactive forms.
+</p>
+
+<p align="center">
+  <a href="https://yatrum.com">View App</a>
+</p>
+
+<p align="center">
+	<a href="/CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
+	<a href="https://codeclimate.com/github/aviabird/travel-app"><img src="https://codeclimate.com/github/aviabird/travel-app/badges/gpa.svg" /></a>
+</p>
+
+## What's included?
+
+* Example application utilising @ngrx libraries, showcasing common patterns and best practices. You can find the live <a href="https://yatrum.com">app here</a>.
+* This app is a travel diary app for travellers.
+* Travellers can create itinerary in for of trips.
+* This application utilises @ngrx/store to manage the state of the app and to cache requests made to the Google Books API, @angular/router to manage navigation between routes, @ngrx/effects to isolate side effects.
+
+## Setting up
+
+##### Clone the repo
+
+```
+$ git clone https://github.com/aviabird/travel-app.git
+$ cd travel-app
+```
+
+##### Install npm dependencies
+```
+$ npm install
+```
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -29,3 +72,6 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 ## Further help
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## License
+[MIT License](LICENSE.md)
