@@ -26,7 +26,7 @@
 
 ## What's included?
 
-* Example application utilising @ngrx libraries, showcasing common patterns and best practices. You can find the live <a href="https://yatrum.com">app here</a>.
+* Example application utilising @ngrx libraries, showcasing common patterns and best practices. You can find the live <a href="https://aviabird.github.io/travel-app">app here</a>.
 * This app is a travel diary app for travellers.
 * Travellers can create itinerary in for of trips.
 * This application utilises @ngrx/store to manage the state of the app and to cache requests made to the Google Books API, @angular/router to manage navigation between routes, @ngrx/effects to isolate side effects.
