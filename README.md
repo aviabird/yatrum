@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://yatrum.com">View App</a>
+  <a href="https://aviabird.github.io/travel-app">View App</a>
 </p>
 
 <p align="center">
