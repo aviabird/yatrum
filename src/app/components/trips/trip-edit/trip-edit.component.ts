@@ -1,9 +1,11 @@
 import { Subscription } from 'rxjs/Rx';
-import { SaveTripAction } from './../../../actions/trips.action';
+import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
 import { State } from './../../../reducers/index';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -14,24 +16,48 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 export class TripEditComponent implements OnInit {
   private subscription: Subscription;
+  trip$: Observable<any>;
+  trip;
   tripForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>, private activatedRoute: ActivatedRoute) {
-    this.tripForm = formBuilder.group({
-      'name': ['',Validators.required],
-      'description': ['', Validators.required],
-      'cities': formBuilder.array([]) 
-    })
-
-    this.addCity();  
-
+  constructor(private formBuilder: FormBuilder, private store: Store<State>, private route: Router) {
+    this.trip$ = this.store.select(fromRoot.getSelectedTrip);
+    this.trip$.subscribe(trip => this.trip = trip);
+    this.tripForm = this.initForm();
+    this.addCity();
+    if(this.trip)
+      this.addTripPlaces();  
   }
 
   ngOnInit() {
-    console.log("route", this.activatedRoute.url);
-    this.subscription = this.activatedRoute.params.subscribe(
-      (params) => console.log("params", params)
-    )
+  }
+
+  private initForm() {
+    if(this.trip){
+      return this.formBuilder.group({
+        'name': [this.trip.name,Validators.required],
+        'description': [this.trip.description, Validators.required],
+        'cities': this.formBuilder.array([])        
+      });
+    }
+    else
+    {
+      return this.formBuilder.group({
+        'name': ['',Validators.required],
+        'description': ['', Validators.required],
+        'cities': this.formBuilder.array([]) 
+      })
+    }
+  }
+
+  private addTripPlaces() {
+    for(let place of this.trip.cities[0].places) {
+      this.addNewPlace({
+        name: place.name,
+        description: place.description,
+        review: place.review
+      })
+    }
   }
 
   addNewPlace(event) {
@@ -39,7 +65,6 @@ export class TripEditComponent implements OnInit {
       .controls[0]).controls['places']).push(
         this.formBuilder.group(event)
       );
-    console.log("tripFrom", this.tripForm);
   }
 
   addCity() {
@@ -52,9 +77,22 @@ export class TripEditComponent implements OnInit {
     )
   }
 
+  emptyPlace() {
+   let place = {
+      name: '',
+      description: '',
+      review: ''
+    }
+    return place;
+  }
+
   onSubmit() {
-    console.log("saving trip");
-    this.store.dispatch(new SaveTripAction(this.tripForm.value));
+    if(this.trip){
+      this.tripForm.value['id'] = this.trip.id;
+      this.store.dispatch(new UpdateTripAction(this.tripForm.value));
+    }
+    else
+      this.store.dispatch(new SaveTripAction(this.tripForm.value));
   }
 
 }

@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tr-add-place',
@@ -8,20 +8,23 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class AddPlaceComponent implements OnInit {
 
-
   placeForm: FormGroup;
   @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
+  @Input() place;
 
 
   constructor(private formBuilder: FormBuilder) {
-    this.placeForm = formBuilder.group({
-      'name': ['', Validators.required],
-      'description': ['', Validators.required],
-      'pictures': formBuilder.array([])
-    })
   }
 
+
   ngOnInit() {
+    this.placeForm = this.formBuilder.group({
+      'name': [this.place.name, Validators.required],
+      'description': [this.place.description, Validators.required],
+      'review': [this.place.review, Validators.required],
+      'pictures': this.formBuilder.array([])
+    })
+
     let input = document.getElementById('place-search');
     let options = {
       types: ['establishment']

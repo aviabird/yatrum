@@ -9,11 +9,20 @@
     <button class="ui button" type="submit">Save Trip</button>
   </form>
 
-
   <div class="place-form">
-    <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
+    <tr-add-place [place]="emptyPlace()" (newPlace)="addNewPlace($event)"></tr-add-place>
   </div>
+
+  <div *ngFor="let city of trip?.cities" class="place-form">
+    <div *ngFor="let place of city?.places" class="place-form">
+      <tr-add-place [place]="place" (newPlace)="addNewPlace($event)"></tr-add-place>
+    </div>
+  </div>
+
 </div>
+
+
+
 
 
 
