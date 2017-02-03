@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  Travel platform built with ❤️ using Angular2, ngrx store, observables and reactive forms.
+  Yatrum built with ❤️ using Angular2, ngrx store, observables and reactive forms.
 </p>
 
 <p align="center">
