@@ -20,8 +20,8 @@
 </p>
 
 <p align="center">
-	<a href="/CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
-	<a href="https://codeclimate.com/github/aviabird/travel-app"><img src="https://codeclimate.com/github/aviabird/travel-app/badges/gpa.svg" /></a>
+  <a href="/CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
+  <a href="https://codeclimate.com/github/aviabird/travel-app"><img src="https://codeclimate.com/github/aviabird/travel-app/badges/gpa.svg" /></a>
 </p>
 
 ## What's included?
