@@ -1,7 +1,9 @@
+import { Subscription } from 'rxjs/Rx';
 import { SaveTripAction } from './../../../actions/trips.action';
 import { State } from './../../../reducers/index';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,10 +12,11 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./trip-edit.component.scss']
 })
 
-export class TripEditComponent {
+export class TripEditComponent implements OnInit {
+  private subscription: Subscription;
   tripForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>) {
+  constructor(private formBuilder: FormBuilder, private store: Store<State>, private activatedRoute: ActivatedRoute) {
     this.tripForm = formBuilder.group({
       'name': ['',Validators.required],
       'description': ['', Validators.required],
@@ -22,6 +25,13 @@ export class TripEditComponent {
 
     this.addCity();  
 
+  }
+
+  ngOnInit() {
+    console.log("route", this.activatedRoute.url);
+    this.subscription = this.activatedRoute.params.subscribe(
+      (params) => console.log("params", params)
+    )
   }
 
   addNewPlace(event) {
