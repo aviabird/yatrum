@@ -47,7 +47,7 @@ export function getTripsState(state: State): fromTripsReducer.State {
 export const getTrips = createSelector(getTripsState, fromTripsReducer.getTrips);
 export const getTripIds = createSelector(getTripsState, fromTripsReducer.getTripIds);
 export const getSelectedTripId = createSelector(getTripsState, fromTripsReducer.getSelectedTripId);
-export const getSelectedCityId = createSelector(getTripsState, fromTripsReducer.getSelectedCityId);
+// export const getSelectedCityId = createSelector(getTripsState, fromTripsReducer.getSelectedCityId);
 export const getEditingStatus = createSelector(getTripsState, fromTripsReducer.isEditingTrip);
 export const getEditingTrip = createSelector(getTripsState, fromTripsReducer.getEditingTrip);
 
@@ -59,14 +59,14 @@ export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trip
 	return trips[id];
 });
 
-export const getCitiesFromTrip = createSelector(getSelectedTrip, (trip) => {
-	if (!trip) { return [] };
-	return trip.cities;
-})
+// export const getCitiesFromTrip = createSelector(getSelectedTrip, (trip) => {
+// 	if (!trip) { return [] };
+// 	return trip.cities;
+// })
 
-export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCityId, (cities, cityId) => {
-	return cities.filter(city => city.id == cityId)[0];
-});
+// export const getSelectedCity = createSelector(getCitiesFromTrip, getSelectedCityId, (cities, cityId) => {
+// 	return cities.filter(city => city.id == cityId)[0];
+// });
 
 
 // =============== user-auth states and compose methods ===============================================

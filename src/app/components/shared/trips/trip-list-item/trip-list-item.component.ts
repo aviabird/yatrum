@@ -93,8 +93,8 @@ export class TripListItemComponent implements OnInit {
 
   // TODO: Refactor this later
   tripMainPicture(){
-    if (this.trip.cities[0].places[0].pictures.length > 0) {
-      this.tripMainPictureUrl = this.trip.cities[0].places[0].pictures[0].url; 
+    if (this.trip.places[0].pictures.length > 0) {
+      this.tripMainPictureUrl = this.trip.places[0].pictures[0].url; 
     } else {
       this.tripMainPictureUrl = "http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg";
     }

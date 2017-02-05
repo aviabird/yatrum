@@ -1,15 +1,12 @@
-<div *ngFor="let city of cities$ | async">
-  <h2>Arrived at {{city.name}}, {{city.country}}</h2>
-  <div *ngFor="let place of city.places">
-    <h3>
-      Checked into {{place.name}}
-    </h3>
-    <div *ngFor="let media of place.pictures">
-      <div class="">
-        <img class="ui centered medium image" [src]="media.url">
-        <p>{{media.description}}</p>
-      </div>
+<div *ngFor="let place of (selectedTrip$ | async).places">
+  <h3>
+    Checked into {{place.name}}
+  </h3>
+  <div *ngFor="let media of place.pictures">
+    <div class="">
+      <img class="ui centered medium image" [src]="media.url">
+      <p>{{media.description}}</p>
     </div>
-    <div class="ui section divider"></div>
   </div>
+  <div class="ui section divider"></div>
 </div>
