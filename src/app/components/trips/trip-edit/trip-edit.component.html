@@ -1,19 +1,23 @@
-<div class="trip">
-  <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <input type="text" placeholder="Trip Name" formControlName="name">
-    </div>
-    <div class="field">
-      <input type="text" placeholder="Describe Trip" formControlName="description">
-    </div>
-    <button class="ui button" type="submit">Save Trip</button>
-  </form>
-
-  <div class="place-form">
-    <tr-add-place [place]="emptyPlace()" (newPlace)="addNewPlace($event)"></tr-add-place>
+<div class="trip ui centered grid cards">
+  <div class="trip-form twelve wide column ui card">
+    <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+      <div class="save-button">
+        <button class="ui button" type="submit">Save Trip</button>
+      </div>
+      <div class="field">
+        <input type="text" placeholder="Trip Name" formControlName="name">
+      </div>
+      <div class="field">
+        <input type="text" placeholder="Describe Trip" formControlName="description">
+      </div>
+    </form>
   </div>
 
-  <div *ngFor="let place of trip?.places; let i = index" class="place-form">
+  <div class="place-form twelve wide column ui card">
+    <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
+  </div>
+  
+  <div *ngFor="let place of trip?.places; let i = index" class="place-form twelve wide column ui card">
     <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
   </div>
 

@@ -22,12 +22,23 @@ export class AddPlaceComponent implements OnInit {
 
 
   ngOnInit() {
-    this.placeForm = this.formBuilder.group({
-      'name': [this.place.name, Validators.required],
-      'description': [this.place.description, Validators.required],
-      'review': [this.place.review, Validators.required],
-      'pictures': this.formBuilder.array([])
-    })
+    if(this.place) {
+      this.placeForm = this.formBuilder.group({
+        'name': [this.place.name, Validators.required],
+        'description': [this.place.description, Validators.required],
+        'review': [this.place.review, Validators.required],
+        'pictures': this.formBuilder.array(this.place.pictures)
+      })
+    }
+    else {
+      this.placeForm = this.formBuilder.group({
+        'name': ['', Validators.required],
+        'description': ['', Validators.required],
+        'review': ['', Validators.required],
+        'pictures': this.formBuilder.array([])
+      })
+    }
+
 
     let input = document.getElementById('place-search');
     let options = {

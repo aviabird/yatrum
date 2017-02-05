@@ -18,13 +18,15 @@ export class TripEditComponent implements OnInit {
   private subscription: Subscription;
   trip$: Observable<any>;
   isNewTrip: boolean; 
-  trip;
+  trip = null;
   tripForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>, private route: Router) {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
-    this.trip$.subscribe(trip => this.trip = trip);
     this.isNewTrip = this.checkIfTripIsNew();
+    if(!this.isNewTrip) {
+      this.trip$.subscribe(trip => this.trip = trip);
+    }
     this.initForm();
   }
 
@@ -34,7 +36,6 @@ export class TripEditComponent implements OnInit {
 
 
   private checkIfTripIsNew() {
-    console.log(this.route.url);
     return (this.route.url == "/trips/new") ? true : false
   }
 
@@ -70,6 +71,7 @@ export class TripEditComponent implements OnInit {
 
 // add places to the tripForm from existing trip
   private addPlaces() {
+    console.log("add places");
     this.trip.places.forEach((place, placeIndex) => {
       (<FormArray>this.tripForm.controls['places']).push(
         this.formBuilder.group({
