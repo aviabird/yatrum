@@ -24,7 +24,7 @@ export class TripEditComponent implements OnInit {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
     this.trip$.subscribe(trip => this.trip = trip);
     this.tripForm = this.initForm();
-    this.addCity();
+    // this.addCity();
     if(this.trip)
       this.addTripPlaces();  
   }
@@ -37,7 +37,7 @@ export class TripEditComponent implements OnInit {
       return this.formBuilder.group({
         'name': [this.trip.name,Validators.required],
         'description': [this.trip.description, Validators.required],
-        'cities': this.formBuilder.array([])        
+        'places': this.formBuilder.array([])        
       });
     }
     else
@@ -45,13 +45,13 @@ export class TripEditComponent implements OnInit {
       return this.formBuilder.group({
         'name': ['',Validators.required],
         'description': ['', Validators.required],
-        'cities': this.formBuilder.array([]) 
+        'places': this.formBuilder.array([]) 
       })
     }
   }
 
   private addTripPlaces() {
-    for(let place of this.trip.cities[0].places) {
+    for(let place of this.trip.places) {
       this.addNewPlace({
         name: place.name,
         description: place.description,
@@ -61,8 +61,7 @@ export class TripEditComponent implements OnInit {
   }
 
   addNewPlace(event) {
-    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['cities'])
-      .controls[0]).controls['places']).push(
+    (<FormArray>this.tripForm.controls['places']).push(
         this.formBuilder.group(event)
       );
   }
