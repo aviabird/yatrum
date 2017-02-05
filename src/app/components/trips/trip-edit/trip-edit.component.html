@@ -13,10 +13,8 @@
     <tr-add-place [place]="emptyPlace()" (newPlace)="addNewPlace($event)"></tr-add-place>
   </div>
 
-  <div *ngFor="let city of trip?.cities" class="place-form">
-    <div *ngFor="let place of city?.places" class="place-form">
-      <tr-add-place [place]="place" (newPlace)="addNewPlace($event)"></tr-add-place>
-    </div>
+  <div *ngFor="let place of trip?.places; let i = index" class="place-form">
+    <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
   </div>
 
 </div>

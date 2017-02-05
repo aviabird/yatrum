@@ -149,6 +149,7 @@ export class TripsService {
 	 * @return {Observable} Observable with updated trip object
 	 */
 	updateTrip(trip: Trip): Observable<Trip> | Observable<String> {
+		console.log("upadating trip", trip);
 		const tripId = trip.id;
 		const headers = new Headers({
 			'Content-Type': 'application/json',

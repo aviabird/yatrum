@@ -1,4 +1,5 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,12 +9,15 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class AddPlaceComponent implements OnInit {
 
+
+  public loaded: boolean = false;
+  public imageSrc: string = '';
   placeForm: FormGroup;
   @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
   @Input() place;
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private cloudinaryService: CloudinaryIntegrationService) {
   }
 
 
@@ -36,6 +40,39 @@ export class AddPlaceComponent implements OnInit {
       var place = autocomplete.getPlace();
       // console.log(place); 
     });
+  }
+
+  handleInputChange(e) {
+    let file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    let pattern = /image-*/;
+    let reader = new FileReader();
+
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onload = this.handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file);
+  }
+    
+  private handleReaderLoaded(e) {
+    let reader = e.target;
+    this.imageSrc = reader.result;
+    this.loaded = true;
+    this.onAddPhoto();    
+  }
+
+  onAddPhoto() {
+    this.cloudinaryService.uploadPlacePicture(this.imageSrc)
+      .subscribe(data => {
+        (<FormArray>this.placeForm.controls['pictures']).push(
+          this.formBuilder.group({
+            'url': [data.url, Validators.required],
+            'description': ['Describe Picture'],
+            'public_id': [data.public_id, Validators.required]
+          })
+        )
+      })
   }
 
   onSubmit() {

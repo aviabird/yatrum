@@ -17,81 +17,120 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 export class TripEditComponent implements OnInit {
   private subscription: Subscription;
   trip$: Observable<any>;
+  isNewTrip: boolean; 
   trip;
   tripForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>, private route: Router) {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
     this.trip$.subscribe(trip => this.trip = trip);
-    this.tripForm = this.initForm();
-    // this.addCity();
-    if(this.trip)
-      this.addTripPlaces();  
+    this.isNewTrip = this.checkIfTripIsNew();
+    this.initForm();
   }
 
   ngOnInit() {
+
+  }
+
+
+  private checkIfTripIsNew() {
+    console.log(this.route.url);
+    return (this.route.url == "/trips/new") ? true : false
   }
 
   private initForm() {
-    if(this.trip){
-      return this.formBuilder.group({
-        'name': [this.trip.name,Validators.required],
-        'description': [this.trip.description, Validators.required],
-        'places': this.formBuilder.array([])        
-      });
+    if(this.isNewTrip){
+      this.tripForm = this.initNewTrip();
     }
     else
     {
-      return this.formBuilder.group({
-        'name': ['',Validators.required],
-        'description': ['', Validators.required],
-        'places': this.formBuilder.array([]) 
-      })
+      this.tripForm = this.initExistingTrip();
+      this.addPlaces()
     }
   }
 
-  private addTripPlaces() {
-    for(let place of this.trip.places) {
-      this.addNewPlace({
-        name: place.name,
-        description: place.description,
-        review: place.review
-      })
-    }
+// if trip is being newly created
+  private initNewTrip() {
+    return this.formBuilder.group({
+      'name': ['',Validators.required],
+      'description': ['', Validators.required],
+      'places': this.formBuilder.array([]) 
+    })
   }
 
-  addNewPlace(event) {
+// if trip is being updated
+  private initExistingTrip() {
+    return this.formBuilder.group({
+      'name': [this.trip.name, Validators.required],
+      'description': [this.trip.description, Validators.required],
+      'places': this.formBuilder.array([]) 
+    })
+  }
+
+
+// add places to the tripForm from existing trip
+  private addPlaces() {
+    this.trip.places.forEach((place, placeIndex) => {
+      (<FormArray>this.tripForm.controls['places']).push(
+        this.formBuilder.group({
+          'name': [place.name, Validators.required],
+          'description': [place.description, Validators.required],
+          'review': [place.review, Validators.required],
+          'pictures': this.formBuilder.array([])
+        })
+      )
+      this.addPictures(place,placeIndex);
+    }) 
+  }
+
+
+// add pictures to the tripForm from existing trip
+  private addPictures(place, index) {
+    place.pictures.forEach((picture) => {
+      (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
+        this.formBuilder.group({
+          'url': [picture.url, Validators.required],
+          'description': [picture.description],
+          'public_id': [picture.public_id, Validators.required]        
+        })
+      )
+    })
+  }
+
+// add a new place
+  addNewPlace(place) {
     (<FormArray>this.tripForm.controls['places']).push(
-        this.formBuilder.group(event)
+        this.formBuilder.group({
+          'name': [place.name, Validators.required],
+          'description': [place.description, Validators.required],
+          'review': [place.review, Validators.required],
+          'pictures': this.formBuilder.array(place.pictures)
+        })
       );
   }
 
-  addCity() {
-    (<FormArray>this.tripForm.controls['cities']).push(
-      this.formBuilder.group({
-        'name': ['Pune'],
-        'country': ['India'],
-        'places': this.formBuilder.array([])
-      })
-    )
-  }
+// update existing place
+  updatePlace(place, index) {
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).patchValue(place);
+  }  
 
   emptyPlace() {
-   let place = {
-      name: '',
+    return  {
+      name:        '',
       description: '',
-      review: ''
+      review:      ''
     }
-    return place;
   }
 
   onSubmit() {
-    if(this.trip){
+    if(this.isNewTrip){
+      this.store.dispatch(new SaveTripAction(this.tripForm.value));
+    }
+    else
+    {
       this.tripForm.value['id'] = this.trip.id;
       this.store.dispatch(new UpdateTripAction(this.tripForm.value));
     }
-    else
-      this.store.dispatch(new SaveTripAction(this.tripForm.value));
   }
 
 }
