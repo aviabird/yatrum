@@ -78,6 +78,14 @@ export class AddPlaceComponent implements OnInit {
 
   onSubmit() {
     this.newPlace.emit(this.placeForm.value);
+    if(!this.place) {
+      this.placeForm = this.formBuilder.group({
+        'name': ['', Validators.required],
+        'description': ['', Validators.required],
+        'review': ['', Validators.required],
+        'pictures': this.formBuilder.array([])
+      })
+    }
   }
 
   focusFunction($event) {

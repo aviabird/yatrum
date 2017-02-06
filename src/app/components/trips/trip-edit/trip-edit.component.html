@@ -17,7 +17,7 @@
     <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
   </div>
   
-  <div *ngFor="let place of trip?.places; let i = index" class="place-form twelve wide column ui card">
+  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form twelve wide column ui card">
     <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
   </div>
 
