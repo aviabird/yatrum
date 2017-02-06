@@ -16,7 +16,6 @@ export class TripActivityComponent implements OnInit {
 	selectedTrip$: Observable<any>;
 
 	constructor(private store: Store<fromRoot.State>) {
-		console.log("trip activity");
 		this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
 	}
 
