@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import * as fromTripActions from './../actions/trips.action';
 import * as fromRoot from './../reducers/index';
@@ -23,7 +24,8 @@ export class TripsService {
 		private store: Store<fromRoot.State>,
 		private slimLoadingBarService: SlimLoadingBarService,
 		private toastyService: ToastyService,
-		private authSerive: ServerAuthService
+		private authSerive: ServerAuthService,
+		private router: Router
 	) {
 		//TODO: Move this out at a later stage for logged in user
 		let user_data = JSON.parse(localStorage.getItem('user'));
@@ -127,19 +129,23 @@ export class TripsService {
 	 * @param {Trip} Trip object to be saved
 	 * @return {Observable} Observable with created trip object
 	 */
-	saveTrip(trip: Trip): Observable<Trip> | Observable<String> {
-		console.log('we are saving trip', trip);
+	saveTrip(trip: Trip) {
 		const headers = new Headers({
 			'Content-Type': 'application/json',
 			'Authorization': this.auth_token
 			// use Restangular which creates interceptor
 		});
-
+		this.slimLoadingBarService.start();
 		return this.http.post(`${this.apiLink}/trips.json`,
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
-			.map((data: Response) => data.json())
-			.catch((res: Response) => this.catchError(res));
+			.map((data: Response) => {
+				let trip = data.json();
+				this.store.dispatch(new fromTripActions.SaveTripSuccessAction(trip));
+				this.router.navigate(['/user',(trip.user_id)]);
+			})
+			.catch((res: Response) => this.catchError(res))
+			.finally(() => this.slimLoadingBarService.complete());
 	}
 
 	/**
@@ -149,19 +155,23 @@ export class TripsService {
 	 * @return {Observable} Observable with updated trip object
 	 */
 	updateTrip(trip: Trip): Observable<Trip> | Observable<String> {
-		console.log("upadating trip", trip);
 		const tripId = trip.id;
 		const headers = new Headers({
 			'Content-Type': 'application/json',
 			'Authorization': this.auth_token
 			// use Restangular which creates interceptor
 		});
-
+		this.slimLoadingBarService.start();
 		return this.http.patch(`${this.apiLink}/trips/${tripId}.json`,
 			JSON.stringify({ trip: trip }), { headers: headers }
 		)
-			.map((data: Response) => data.json())
-			.catch((res: Response) => this.catchError(res));
+			.map((data: Response) => {
+				let trip = data.json();
+				this.store.dispatch(new fromTripActions.UpdateTripSuccessAction(trip));
+				this.router.navigate(['/user',(trip.user_id)]);
+			})
+			.catch((res: Response) => this.catchError(res))
+			.finally(() => this.slimLoadingBarService.complete());
 	}
 
 	/**

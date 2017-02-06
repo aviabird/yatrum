@@ -38,6 +38,9 @@ import { reducer } from './reducers/index';
 
 //Directives
 import { FileSelectDirective } from 'ng2-file-upload';
+import { Autosize } from 'angular2-autosize/angular2-autosize';
+
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -115,7 +118,8 @@ const myFirebaseAuthConfig = {
     SearchedTripsComponent,
     LoaderComponent,
     ImageUploadComponent,
-    AddPlaceComponent
+    AddPlaceComponent,
+    Autosize
   ],
   imports: [
     BrowserModule,

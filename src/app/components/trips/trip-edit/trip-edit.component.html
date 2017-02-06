@@ -8,17 +8,17 @@
         <input type="text" placeholder="Trip Name" formControlName="name">
       </div>
       <div class="field">
-        <input type="text" placeholder="Describe Trip" formControlName="description">
+        <textarea autosize placeholder="Describe Trip" formControlName="description"></textarea>
       </div>
     </form>
   </div>
 
+  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form twelve wide column ui card">
+    <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
+  </div>
+
   <div class="place-form twelve wide column ui card">
     <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
-  </div>
-  
-  <div *ngFor="let place of trip?.places; let i = index" class="place-form twelve wide column ui card">
-    <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
   </div>
 
 </div>

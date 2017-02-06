@@ -8,7 +8,7 @@ export const ActionTypes = {
 	LOAD_MORE_TRIPS: "Load More [Trips]",
 	LOAD_MORE_TRIPS_SUCCESS: "Load More [Trips] Success",	
 	SELECT_TRIP: "Select [Trip]",
-	EDIT_TRIP: "Edit [Trip]",
+	CLEAR_SELECTED_TRIP: "Clear Selected [Trip]",
 	SELECT_CITY: "Select [City] from [Trip]",
 	LOAD_USER_TRIPS: "Load [User Trips]",
 	LOAD_USER_TRIPS_SUCCESS: "Load [User Trips] Success",
@@ -43,9 +43,9 @@ export class SelectTripAction {
 	type = ActionTypes.SELECT_TRIP;
 	constructor(public payload: string) { }
 }
-export class EditTripAction {
-	type = ActionTypes.EDIT_TRIP;
-	constructor(public payload: Trip) {}
+export class ClearSelectedTripAction {
+	type = ActionTypes.CLEAR_SELECTED_TRIP;
+	constructor() {}
 }
 export class SelectCityFromTripAction {
 	type = ActionTypes.SELECT_CITY;
