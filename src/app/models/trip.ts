@@ -1,3 +1,4 @@
+import { Place } from './place';
 import { Base } from './base';
 import { City } from './city';
 import { UserProfile } from './user-profile';
@@ -10,7 +11,7 @@ export class Trip extends Base {
     endDate:   string;
     description: string;
     name: string;
-    cities: City[];
+    places: Place[];
     user: UserProfile;
     is_liked_by_current_user: boolean;
     trip_likes_count: number;

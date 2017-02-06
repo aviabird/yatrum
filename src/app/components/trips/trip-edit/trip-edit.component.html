@@ -1,4 +1,34 @@
-<div class="ui two column centered grid">
+<div class="trip ui centered grid cards">
+  <div class="trip-form twelve wide column ui card">
+    <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+      <div class="save-button">
+        <button class="ui button" type="submit">Save Trip</button>
+      </div>
+      <div class="field">
+        <input type="text" placeholder="Trip Name" formControlName="name">
+      </div>
+      <div class="field">
+        <input type="text" placeholder="Describe Trip" formControlName="description">
+      </div>
+    </form>
+  </div>
+
+  <div class="place-form twelve wide column ui card">
+    <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
+  </div>
+  
+  <div *ngFor="let place of trip?.places; let i = index" class="place-form twelve wide column ui card">
+    <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!--<div class="ui two column centered grid">
   <div class="column">
     <div class="banner" *ngIf="isEditing">
       <h3>Editing Trip</h3>
@@ -7,14 +37,14 @@
       <h3>Creating Trip</h3>
     </div>
     <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
-      <div class="field ten wide">
+      <div class="field ten wide">-->
         <!-- Trip Basic detail -->
-        <input class="ta-main-input" 
+        <!--<input class="ta-main-input" 
           type="text"  
           id="tripName" 
           placeholder="Trip name" 
           formControlName="name">
-      </div>
+      </div>-->
       <!--Start date of trip not implementing right now -->
       <!--<div class="form-group">
         <label for="startDate">Start Date</label>
@@ -22,8 +52,8 @@
         <p class="help-block">When did you start this trip.</p>
       </div>-->
       <!-- Cities Basic info -->
-      <div class="trip-edit-main-container"> <!--TODO: Remove inline CSS later -->
-        <h2 class="side"> City </h2>
+      <!--<div class="trip-edit-main-container"> TODO: Remove inline CSS later -->
+        <!--<h2 class="side"> City </h2>
         <button type="button" class="circular ui icon button" (click)="addCity()">
           <i class="icon plus"></i>
         </button>
@@ -37,11 +67,11 @@
                     placeholder="Caliornia, SF" 
                     formControlName="name">
                 </div>
-              </div>
+              </div>-->
 
               <!-- Places basic info -->
               <!--TODO: Add provision for places later-->
-              <div style="margin-left:50px;">
+              <!--<div style="margin-left:50px;">
                 <h2 class="side"> Places </h2> 
                 <button type="button" class="circular ui icon button" (click)="addPlace(i)">
                   <i class="icon plus"></i>
@@ -65,9 +95,9 @@
                           placeholder="Caliornia, SF" 
                           formControlName="description"></textarea>
                       </div>
-                      <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>
+                      <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>-->
                       <!-- Media for all the trips go here -->
-                      <h2> Pictures </h2>
+                      <!--<h2> Pictures </h2>
                       <ul class="list-group" formGroupName="pictures">
                         <div *ngFor="let picture of place.controls['pictures'].controls; let k = index">
                           <div class="form-group" formGroupName="{{k}}">
@@ -97,14 +127,14 @@
       </div>
       
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12">-->
           <!--REFACTOR: Switch to ngIf/Else syntax while updating to angular4.0/2.4.1 -->
           <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
-          <button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
+          <!--<button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
           <button type="submit" *ngIf="!isEditing" class="ui primary basic button">Save</button>
           <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
         </div>
       </div>
     </form>
   </div>
-</div>
+</div>-->

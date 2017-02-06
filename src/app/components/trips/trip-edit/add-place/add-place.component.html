@@ -1,0 +1,26 @@
+<form class="ui form" [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="!place" class="save-button">
+    <button class="ui button" type="submit">
+      <i class="plus icon"></i>
+      Save
+    </button>
+  </div>
+  <div *ngIf="place" class="save-button">
+    <button class="ui button" type="submit">
+      <i class="checkmark icon"></i>
+      update
+    </button>
+  </div>  
+  <div class="field">
+    <input type="text" (focus)="focusFunction($event)" formControlName="name" placeholder="search place">
+  </div>
+  <div class="field">
+    <textarea class="" formControlName="description" placeholder="describe this place"></textarea>
+  </div>
+  <div class="field">
+    <textarea class="" formControlName="review" placeholder="add a review"></textarea>
+  </div>  
+  <div class="field">
+    <input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
+  </div>
+</form>

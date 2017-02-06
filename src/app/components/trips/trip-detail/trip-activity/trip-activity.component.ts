@@ -19,8 +19,8 @@ export class TripActivityComponent implements OnInit {
 
 	constructor(private store: Store<fromRoot.State>) {
 		this.selectedTrip$ = this.store.select(fromRoot.getSelectedTrip);
-		this.cities$ = this.store.select(fromRoot.getCitiesFromTrip);
-		this.selectedCity$ = this.store.select(fromRoot.getSelectedCity);
+		// this.cities$ = this.store.select(fromRoot.getCitiesFromTrip);
+		// this.selectedCity$ = this.store.select(fromRoot.getSelectedCity);
 	}
 
 	ngOnInit() {
