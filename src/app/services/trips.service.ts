@@ -168,7 +168,7 @@ export class TripsService {
 			.map((data: Response) => {
 				let trip = data.json();
 				this.store.dispatch(new fromTripActions.UpdateTripSuccessAction(trip));
-				this.router.navigate(['/trips',(trip.id)]);
+				this.router.navigate(['/user',(trip.user_id)]);
 			})
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
