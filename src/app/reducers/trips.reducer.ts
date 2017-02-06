@@ -10,8 +10,6 @@ export interface State {
 	tripIds: string[];
 	trips: { [id: string]: Trip };
 	selectedTripId: string;
-	selectedCityId: string;
-	editingTrip: Trip; 
 }
 
 const trip = <Trip>{}; // empty object
@@ -19,8 +17,6 @@ const initialState = {
 	tripIds: [],
 	trips: {},
 	selectedTripId: null,
-	selectedCityId: null,
-	editingTrip: trip
 }
 
 export function reducer(state = initialState, action: Action ): State {
@@ -93,9 +89,13 @@ export function reducer(state = initialState, action: Action ): State {
 		
 		case ActionTypes.SELECT_TRIP: {
 			return Object.assign({}, state, {
-				selectedTripId: action.payload,
-				selectedCityId: null
+				selectedTripId: action.payload			
 			});
+		}
+		case ActionTypes.CLEAR_SELECTED_TRIP: {
+			return Object.assign({}, state, {
+				selectedTripId: null
+			})
 		}
 		case ActionTypes.SELECT_CITY: {
 			return Object.assign({}, state, {
@@ -104,11 +104,13 @@ export function reducer(state = initialState, action: Action ): State {
 		}
 		case ActionTypes.SAVE_TRIP_SUCCESS: {
 			const trip = action.payload;
-			return Object.assign({}, state, {editingTrip: trip})
-		}
-		case ActionTypes.CLEAR_EDITING_TRIP: {
-			// Removed trip which was being edited
-			return Object.assign({}, state, {editingTrip: trip})
+			const newTrip = {
+				[trip.id]: trip 
+			} 
+			return Object.assign({}, state, {
+				tripIds: [...state.tripIds, trip.id],
+				trips: Object.assign({}, state.trips, newTrip)
+			})
 		}
 		case ActionTypes.SEARCH_TRIPS: {
 			return Object.assign({}, initialState)
@@ -119,6 +121,8 @@ export function reducer(state = initialState, action: Action ): State {
 
 			let newTrips = state.trips;
 			newTrips[updatedTripId] = updatedTrip;
+
+			console.log("updated trips", newTrips[updatedTripId]);
 
 			return Object.assign({}, state, {
 				trips: newTrips
@@ -140,17 +144,4 @@ export function getTripIds(state: State) {
 
 export function getSelectedTripId(state: State) {
     return state.selectedTripId;
-}
-
-export function getSelectedCityId(state: State) {
-    return state.selectedCityId;
-}
-
-// Buggy implementation change when working on editing feature
-export function isEditingTrip(state: State): boolean {
-	return state.editingTrip.hasOwnProperty('id') ? true : false;
-}
-
-export function getEditingTrip(state: State): Trip {
-	return state.editingTrip;
 }

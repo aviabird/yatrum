@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import { Subscription } from 'rxjs/Rx';
 import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
 import { State } from './../../../reducers/index';
@@ -21,7 +22,8 @@ export class TripEditComponent implements OnInit {
   trip = null;
   tripForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>, private route: Router) {
+  constructor(private formBuilder: FormBuilder, private store: Store<State>, 
+    private route: Router, private tripService: TripsService) {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
     this.isNewTrip = this.checkIfTripIsNew();
     if(!this.isNewTrip) {
@@ -31,8 +33,8 @@ export class TripEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
+
 
 
   private checkIfTripIsNew() {
@@ -121,10 +123,12 @@ export class TripEditComponent implements OnInit {
 
   onSubmit() {
     if(this.isNewTrip){
-      this.store.dispatch(new SaveTripAction(this.tripForm.value));
+      this.tripService.saveTrip(this.tripForm.value)
+        .subscribe();
     }
     else
-      this.store.dispatch(new UpdateTripAction(this.tripForm.value));
+      this.tripService.updateTrip(this.tripForm.value)
+        .subscribe();
   }
 
 }
