@@ -15,6 +15,7 @@ export class AddPlaceComponent implements OnInit {
   placeForm: FormGroup;
   @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
   @Input() place;
+  googleSuggestedPlaceName: string = null;
 
 
   constructor(private formBuilder: FormBuilder, private cloudinaryService: CloudinaryIntegrationService) {
@@ -75,7 +76,10 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newPlace.emit(this.placeForm.value);
+    let place = this.placeForm.value;
+    if(this.googleSuggestedPlaceName)
+      place.name = this.googleSuggestedPlaceName;
+    this.newPlace.emit(place);
     if(!this.place) {
       this.placeForm = this.formBuilder.group({
         'name': ['', Validators.required],
@@ -91,9 +95,10 @@ export class AddPlaceComponent implements OnInit {
       types: ['establishment']
     };
     let autocomplete = new google.maps.places.Autocomplete(input);
-
+    let that = this;
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      var place = autocomplete.getPlace();
+      let place = autocomplete.getPlace();
+      that.googleSuggestedPlaceName = place.name;
     });
   }
 
