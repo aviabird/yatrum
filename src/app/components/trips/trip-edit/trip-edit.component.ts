@@ -62,6 +62,7 @@ export class TripEditComponent implements OnInit {
 // if trip is being updated
   private initExistingTrip() {
     return this.formBuilder.group({
+      'id': [this.trip.id, Validators.required],
       'name': [this.trip.name, Validators.required],
       'description': [this.trip.description, Validators.required],
       'places': this.formBuilder.array([]) 
@@ -75,6 +76,7 @@ export class TripEditComponent implements OnInit {
     this.trip.places.forEach((place, placeIndex) => {
       (<FormArray>this.tripForm.controls['places']).push(
         this.formBuilder.group({
+          'id': [place.id, Validators.required],
           'name': [place.name, Validators.required],
           'description': [place.description, Validators.required],
           'review': [place.review, Validators.required],
@@ -91,6 +93,7 @@ export class TripEditComponent implements OnInit {
     place.pictures.forEach((picture) => {
       (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
         this.formBuilder.group({
+          'id': [picture.id, Validators.required],
           'url': [picture.url, Validators.required],
           'description': [picture.description],
           'public_id': [picture.public_id, Validators.required]        
@@ -116,23 +119,12 @@ export class TripEditComponent implements OnInit {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).patchValue(place);
   }  
 
-  emptyPlace() {
-    return  {
-      name:        '',
-      description: '',
-      review:      ''
-    }
-  }
-
   onSubmit() {
     if(this.isNewTrip){
       this.store.dispatch(new SaveTripAction(this.tripForm.value));
     }
     else
-    {
-      this.tripForm.value['id'] = this.trip.id;
       this.store.dispatch(new UpdateTripAction(this.tripForm.value));
-    }
   }
 
 }

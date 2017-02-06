@@ -24,6 +24,7 @@ export class AddPlaceComponent implements OnInit {
   ngOnInit() {
     if(this.place) {
       this.placeForm = this.formBuilder.group({
+        'id': [this.place.id, Validators.required],
         'name': [this.place.name, Validators.required],
         'description': [this.place.description, Validators.required],
         'review': [this.place.review, Validators.required],
@@ -39,19 +40,8 @@ export class AddPlaceComponent implements OnInit {
       })
     }
 
-
-    let input = document.getElementById('place-search');
-    let options = {
-      types: ['establishment']
-    };
-
-    let autocomplete = new google.maps.places.Autocomplete(input);
-
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      var place = autocomplete.getPlace();
-      // console.log(place); 
-    });
   }
+
 
   handleInputChange(e) {
     let file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
@@ -87,8 +77,19 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("my form", this.placeForm.value);
     this.newPlace.emit(this.placeForm.value);
+  }
+
+  focusFunction($event) {
+    let input = $($event.target)[0]; 
+    let options = {
+      types: ['establishment']
+    };
+    let autocomplete = new google.maps.places.Autocomplete(input);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var place = autocomplete.getPlace();
+    });
   }
 
 }

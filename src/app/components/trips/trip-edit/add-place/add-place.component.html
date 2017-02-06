@@ -12,7 +12,7 @@
     </button>
   </div>  
   <div class="field">
-    <input type="text" class="" id="place-search" formControlName="name" placeholder="search place">
+    <input type="text" (focus)="focusFunction($event)" formControlName="name" placeholder="search place">
   </div>
   <div class="field">
     <textarea class="" formControlName="description" placeholder="describe this place"></textarea>
