@@ -74,8 +74,7 @@ $ npm install
 ## Development server frontend
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-You will also need to start the backend server which lives [here](https://github.com/aviabird/yatrum-api).
-Please follow the instructions on the project page and start the rails server as the frontend uses the backend API to connect.
+By default it connects to our dev api. If you want to setup the server locally clone the [api](https://github.com/aviabird/yatrum-api) and setup the rails server, However we only suggest that if you are familiar with Ruby on Rails. Please follow the instructions on the project page as the frontend uses the backend API to connect.
 
 ## Running unit tests
 
