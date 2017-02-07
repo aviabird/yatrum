@@ -1,52 +1,177 @@
-@mixin default-box-shadow() {
-	box-shadow: 0 1px 5px #BBB;
+.banner {
+	box-shadow: 0px 0px 30px #CBD3D8;
+	padding: 0px !important;	
 }
 
-.border-custom {
-	border: 1px solid #4C868F !important;
+.detail-margin {
+	margin-top: 0px;
 }
 
-.trip {
-};
-
-.trip-image {
-	background-image: url("http://www.realgap.co.uk/sites/realgap/files/drupal-images/roads_quote.jpg");
-	height: 20rem;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	@include default-box-shadow();
+.content {
+	color: white;
+	position: absolute;
 }
 
-.trip-detail {
-	margin-top: 30px;
-}
-
-.my-card {
-	width: 100%;
+.trip-name {
+	@extend .content;
+	font-size: 30px;
+	top: 35px;
+	left: 40px;
 }
 
 .trip-user {
-	cursor: pointer;
+	@extend .content;
+	top: 96px;
+	left: 46px;
+	img {
+		position: absolute;
+    left: -6px;
+    top: -14px;
+		width: 48px;
+		border: 1px solid white;
+		border-radius: 100px;
+		background: #00A6B4;
+	}
+	.user-name {
+  	background: #00A6B4;
+  	border-radius: 4px;
+		padding: 10px 10px 10px 52px;
+
+	}
 }
 
-.cover-image {
-	height: 17rem;
-	overflow: hidden;
+.follow-user{
+	@extend .content;
+	bottom: 30px;
+	left: 40px;
+	padding: 12px 32px 12px 24px;
+  border-radius: 4px;
+  font-size: 18px;
+	background: #00A6B4;
 }
 
-.cover-header {
+.like-trip {
+	@extend .content;
+	bottom: 34px;
+	right: 40px;
+}
+
+.image {
+	height: 65vh;
+	background-size: cover;
+  background-position: center;
+	background-image: url("http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg");
+}
+
+.trip-activity {
+	padding: 0 !important;
+}
+
+.activity {
+	margin-bottom: 40px !important;
+	width: 100%;
+}
+
+.marker.icon {
 	position: absolute;
-	color: white;
-	width: 80%;
-	left: 10%;
-	transform: matrix;
-	top: 30%;
-	font-weight: 100;
+	transform: translate(-20%, 18%);
+	color: red;
+	font-size: 5em;
 }
 
-.likeBtn {
+.vertical-line {
 	position: absolute;
-	bottom: 1rem;
-	right: 1rem;
+	border-left: 2px solid #00A6B4;
+  height: 100%;
+  transform: translate(61%, -9%);
 }
+
+.header {
+	background: #00A6B4;
+  color: white;
+	text-align: right;
+	padding: 8px;
+	.place-name {
+		font-size: 22px;
+	}
+	.place-date {
+		padding-top: 8px;
+	}
+}
+
+.place-review {
+	line-height: 30px;
+	padding: 20px;
+  font-size: 18px;
+  color: #939799;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @mixin default-box-shadow() {
+// 	box-shadow: 0 1px 5px #BBB;
+// }
+
+// .border-custom {
+// 	border: 1px solid #4C868F !important;
+// }
+
+// .trip {
+// };
+
+// .trip-image {
+// 	background-image: url("http://www.realgap.co.uk/sites/realgap/files/drupal-images/roads_quote.jpg");
+// 	height: 20rem;
+// 	background-repeat: no-repeat;
+// 	background-size: cover;
+// 	background-position: center;
+// 	@include default-box-shadow();
+// }
+
+// .trip-detail {
+// 	margin-top: 30px;
+// }
+
+// .my-card {
+// 	width: 100%;
+// }
+
+// .trip-user {
+// 	cursor: pointer;
+// }
+
+// .cover-image {
+// 	height: 17rem;
+// 	overflow: hidden;
+// }
+
+// .cover-header {
+// 	position: absolute;
+// 	color: white;
+// 	width: 80%;
+// 	left: 10%;
+// 	transform: matrix;
+// 	top: 30%;
+// 	font-weight: 100;
+// }
+
+// .likeBtn {
+// 	position: absolute;
+// 	bottom: 1rem;
+// 	right: 1rem;
+// }
