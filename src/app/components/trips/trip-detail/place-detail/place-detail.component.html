@@ -1,3 +1,29 @@
-<p>
-  place-detail works!
-</p>
+<div class="ui grid">
+  <div class="one wide column">
+    <i class="marker icon"></i>
+    <div class="vertical-line">
+    </div>
+  </div>
+  <div class="fifteen wide column">
+    <div class="ui card activity">
+      <div class="header">
+        <div class="place-name">
+          {{place.name}}
+        </div>
+        <div class="place-date">
+          5 Feb 17' at 12 pm
+        </div>
+      </div>
+      <div class="place-review">
+        <!--Dubai International is an important contributor to the Dubai economy, as it employs approximately 90,000 people,
+        indirectly supports over 400,000 jobs and contributes over US$26.7 billion to the economy, which represents around
+        27 per cent of Dubai’s GDP and 21% of the employment in Dubai.[15] It is predicted that by 2020, the economic contribution
+        of Dubai’s aviation sector will rise to 37.5% of the city's GDP and by 2030, the economic impact of aviation is projected
+        to grow to $88.1 billion and support 1.95 million jobs in Dubai or 44.7% of the GDP and 35.1% of the total employment-->
+        {{place.description}}
+      </div>
+      <div class="place-images">
+      </div>
+    </div>
+  </div>
+</div>

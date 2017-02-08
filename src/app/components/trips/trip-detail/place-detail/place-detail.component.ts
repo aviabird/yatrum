@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'tr-place-detail',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./place-detail.component.scss']
 })
 export class PlaceDetailComponent implements OnInit {
+
+  @Input() place;
 
   constructor() { }
 
