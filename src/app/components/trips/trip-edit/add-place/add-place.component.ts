@@ -67,6 +67,7 @@ export class AddPlaceComponent implements OnInit {
       .subscribe(data => {
         (<FormArray>this.placeForm.controls['pictures']).push(
           this.formBuilder.group({
+            'id': ['', Validators.required],
             'url': [data.url, Validators.required],
             'description': ['Describe Picture'],
             'public_id': [data.public_id, Validators.required]

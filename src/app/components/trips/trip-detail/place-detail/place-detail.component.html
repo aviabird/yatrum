@@ -23,6 +23,9 @@
         {{place.description}}
       </div>
       <div class="place-images">
+        <span *ngFor="let image of place.pictures" class="">
+          <img [src]="image.url">
+        </span>
       </div>
     </div>
   </div>

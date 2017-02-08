@@ -116,7 +116,18 @@ export class TripEditComponent implements OnInit {
 
 // update existing place
   updatePlace(place, index) {
-    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).patchValue(place);
+    console.log("place", place);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
+    (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).reset([]);
+    
+    place.pictures.forEach((picture) => {
+      (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
+        this.formBuilder.group(picture)
+      )
+    })
+    
+    console.log("trip", this.tripForm.value);  
   }  
 
   onSubmit() {
