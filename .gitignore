@@ -9,7 +9,7 @@
 /bower_components
 
 # environment files
-/src/environments
+# /src/environments
 
 # IDEs and editors
 /.idea
