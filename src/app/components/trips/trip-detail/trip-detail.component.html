@@ -60,7 +60,7 @@
       <div class="trip-name">
         {{trip?.name}}
       </div>
-      <div class="trip-user">
+      <div class="trip-user" [routerLink]="['/user', user.id]">
         <img class="" [src]="'http://downloadicons.net/sites/default/files/cowboy-icon-50115.png'">
         <span class="user-name">
           {{user.name}}
