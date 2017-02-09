@@ -46,15 +46,15 @@ export class AddPlaceComponent implements OnInit {
     let place = this.placeForm.value;
     if(this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
-    console.log("place form",this.placeForm.value);
     this.newPlace.emit(place);
-    if(!this.place) {
-      this.placeForm = this.formBuilder.group({
-        'name': ['', Validators.required],
-        'review': ['', Validators.required],
-        'pictures': this.formBuilder.array([])
-      })
-    }
+
+    this.placeForm.controls['name'].setValue('');
+    this.placeForm.controls['review'].setValue('');
+    let empty = this.formBuilder.array([]);
+    this.placeForm.setControl('pictures', empty);
+
+    console.log("placeForm", this.placeForm.value);
+
   }
 
   focusFunction($event) {
