@@ -18,7 +18,9 @@
     <textarea autosize class="" formControlName="review" placeholder="add a review"></textarea>
   </div>  
   <div class="field">
+    <div *ngFor="let picture of placeForm.controls['pictures'].value">
+      <img [src]="picture.url" class="place-image">
+    </div>
     <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
-    <!--<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">-->
   </div>
 </form>
