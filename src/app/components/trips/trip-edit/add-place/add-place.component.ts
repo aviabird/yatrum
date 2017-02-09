@@ -53,8 +53,6 @@ export class AddPlaceComponent implements OnInit {
     let empty = this.formBuilder.array([]);
     this.placeForm.setControl('pictures', empty);
 
-    console.log("placeForm", this.placeForm.value);
-
   }
 
   focusFunction($event) {
