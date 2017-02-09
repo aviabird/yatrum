@@ -9,14 +9,15 @@ import { Http, Headers, Response } from '@angular/http';
 export class UserService {
 
   private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
-  private authToken: string;
 
-  constructor(private http: Http, private store: Store<State>) { 
-    let user_data = JSON.parse(localStorage.getItem('user'));
-    if (user_data) {
-      this.authToken = user_data.auth_token;
-    }
-  }
+  constructor(private http: Http, private store: Store<State>) {}
+
+	getUserAuthToken() {
+		let user_data = JSON.parse(localStorage.getItem('user'));
+		if (user_data) {
+			return user_data.auth_token;
+		}
+	}
 
   getUserById(id: string) {
     const headers = new Headers({
@@ -43,7 +44,7 @@ export class UserService {
   addTravellerToFollowingList(id: string) {
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': this.authToken    
+      'Authorization': this.getUserAuthToken()    
     })
     return this.http.post(`${this.apiLink}/add_to_user_following_list`, {followed_id: id}, {headers: headers})
       .map(response => response.json());
