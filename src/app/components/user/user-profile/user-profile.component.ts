@@ -37,7 +37,8 @@ export class UserProfileComponent implements OnInit {
   private subscription: Subscription;
   private userIndex: string;
   public loaded: boolean = false;
-  public imageSrc: string = '';
+  public profilePicSrc: string = '';
+  public coverPhotoSrc: string = '';
   public loggedUserId$: Observable<string>;
   private mediaType: string = '';
   public isProfilPicChanged: boolean = false;
@@ -72,14 +73,20 @@ export class UserProfileComponent implements OnInit {
     
   private handleReaderLoaded(e) {
     let reader = e.target;
-    this.imageSrc = reader.result;
+    if(this.isProfilPicChanged)
+      this.profilePicSrc = reader.result;
+    else 
+      this.coverPhotoSrc = reader.result;
     this.loaded = true;
     this.uploadMedia();
   }
 
   private uploadMedia() {
-    this.cloudinaryService.uploadImages(this.imageSrc, this.mediaType);
-  }
+    if(this.isProfilPicChanged)
+      this.cloudinaryService.uploadImages(this.profilePicSrc, this.mediaType);
+    else
+      this.cloudinaryService.uploadImages(this.coverPhotoSrc, this.mediaType);
+}
 
   onUpdateProfilePicture() {
     let isLoggedInUser = false;
@@ -90,7 +97,7 @@ export class UserProfileComponent implements OnInit {
     if(!isLoggedInUser)
       return;
       
-    this.imageSrc = '';
+    this.profilePicSrc = '';
     this.loaded = false;
     this.isProfilPicChanged = true;
     $('#selectMedia').click();
@@ -98,7 +105,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onUpdateCoverPhoto() {
-    this.imageSrc = '';
+    this.coverPhotoSrc = '';
     this.loaded = false;
     this.isProfilPicChanged = false;
     $('#selectMedia').click();
