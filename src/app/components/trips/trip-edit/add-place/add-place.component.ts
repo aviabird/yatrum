@@ -24,14 +24,16 @@ export class AddPlaceComponent implements OnInit {
         'id': [this.place.id, Validators.required],
         'name': [this.place.name, Validators.required],
         'review': [this.place.review, Validators.required],
-        'pictures': this.formBuilder.array(this.place.pictures)
+        'pictures': this.formBuilder.array(this.place.pictures),
+        '_destroy': [this.place._destroy]
       })
     }
     else {
       this.placeForm = this.formBuilder.group({
         'name': ['', Validators.required],
         'review': ['', Validators.required],
-        'pictures': this.formBuilder.array([])
+        'pictures': this.formBuilder.array([]),
+        '_destroy': [false]
       })
     }
 
@@ -51,7 +53,6 @@ export class AddPlaceComponent implements OnInit {
       public_id: picture.public_id,
       '_destroy': true
   });
-    console.log("place form", this.place);
   }
 
   onSubmit() {
@@ -64,7 +65,7 @@ export class AddPlaceComponent implements OnInit {
     this.placeForm.controls['review'].setValue('');
     let empty = this.formBuilder.array([]);
     this.placeForm.setControl('pictures', empty);
-
+    this.placeForm.controls['_destroy'].setValue(false);
   }
 
   focusFunction($event) {

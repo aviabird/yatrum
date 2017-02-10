@@ -81,7 +81,8 @@ export class TripEditComponent implements OnInit {
           'id': [place.id, Validators.required],
           'name': [place.name, Validators.required],
           'review': [place.review, Validators.required],
-          'pictures': this.formBuilder.array([])
+          'pictures': this.formBuilder.array([]),
+          '_destroy': [false]
         })
       )
       this.addPictures(place,placeIndex);
@@ -110,7 +111,8 @@ export class TripEditComponent implements OnInit {
         this.formBuilder.group({
           'name': [place.name, Validators.required],
           'review': [place.review, Validators.required],
-          'pictures': this.formBuilder.array(place.pictures)
+          'pictures': this.formBuilder.array(place.pictures),
+          '_destroy': [false]
         })
       );
   }
@@ -119,6 +121,7 @@ export class TripEditComponent implements OnInit {
   updatePlace(place, index) {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['_destroy'].setValue(place._destroy);
 
     let empty = this.formBuilder.array([]);
 
@@ -130,6 +133,25 @@ export class TripEditComponent implements OnInit {
       )
     })
   }  
+
+// remove place
+
+  removePlace(place, index) {
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['_destroy'].setValue(true);
+
+    let empty = this.formBuilder.array([]);
+
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).setControl('pictures', empty); 
+    
+    place.pictures.forEach((picture) => {
+      (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
+        this.formBuilder.group(picture)
+      )
+    })  
+  }
+
 
   onSubmit() {
     if(this.isNewTrip){
