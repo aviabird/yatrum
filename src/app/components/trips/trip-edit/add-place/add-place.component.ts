@@ -1,5 +1,5 @@
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
@@ -40,6 +40,18 @@ export class AddPlaceComponent implements OnInit {
   imageUploaded(image) {
     (<FormArray>this.placeForm.controls['pictures']).push(
       this.formBuilder.group(image))
+  }
+
+  removeImage(picture, index) {
+    // console.log("place form", this.placeForm.value);
+    (<FormGroup>(<FormArray>this.placeForm.controls['pictures']).controls[index]).setValue({
+      id: picture.id,
+      description: picture.description,
+      url: picture.url,
+      public_id: picture.public_id,
+      '_destroy': true
+  });
+    console.log("place form", this.place);
   }
 
   onSubmit() {

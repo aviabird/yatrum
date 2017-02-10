@@ -48,7 +48,8 @@ export class ImageUploadComponent implements OnInit {
         id: null,
         description: '',
         url: image.url,
-        public_id: image.public_id
+        public_id: image.public_id,
+        _destroy: false
       })
     })
   }

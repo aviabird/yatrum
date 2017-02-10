@@ -97,7 +97,8 @@ export class TripEditComponent implements OnInit {
           'id': [picture.id, Validators.required],
           'url': [picture.url, Validators.required],
           'description': [picture.description],
-          'public_id': [picture.public_id, Validators.required]        
+          'public_id': [picture.public_id, Validators.required],
+          '_destroy': [false]        
         })
       )
     })

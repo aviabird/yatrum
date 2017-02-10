@@ -12,6 +12,19 @@ textarea {
 	resize: none !important;
 }
 
+.images {
+	position: relative;
+}
+
 .place-image {
-	width: 50px;
+	width: 100px;
+	background: rgb(239, 232, 232);
+}
+
+.remove.icon {
+	position: absolute;
+	top: -85px;
+	left: 66px;
+	font-size: 2em;
+	cursor: pointer;
 }

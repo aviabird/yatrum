@@ -18,9 +18,10 @@
     <textarea autosize class="" formControlName="review" placeholder="add a review"></textarea>
   </div>  
   <div class="field">
-    <div *ngFor="let picture of placeForm.controls['pictures'].value">
+    <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
       <img [src]="picture.url" class="place-image">
-    </div>
+      <i class="remove icon" (click)="removeImage(picture, i)"></i>
+    </span>
     <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
   </div>
 </form>
