@@ -19,8 +19,10 @@
   </div>  
   <div class="field">
     <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
-      <img [src]="picture.url" class="place-image">
-      <i class="remove icon" (click)="removeImage(picture, i)"></i>
+      <span *ngIf="!picture._destroy">
+        <img [src]="picture.url" class="place-image">
+        <i class="remove icon" (click)="removeImage(picture, i)"></i>
+      </span>
     </span>
     <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
   </div>
