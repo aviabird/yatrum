@@ -3,9 +3,8 @@
   <div class="sixteen wide column"></div>
   <div class="five wide column">
     <h2 class="ui teal image header">
-      <img src='assets/images/balls.svg' class="image">
       <div class="content">
-        Log-in to your account
+        Log-in
       </div>
     </h2>
     <form class="ui medium form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
@@ -28,7 +27,7 @@
     </form>
 
     <div class="ui message">
-      New to us? <a [routerLink]="['/signup']">Sign Up</a>
+      New to Yatrum? <a [routerLink]="['/signup']">Sign Up</a>
     </div>
   </div>
 </div>
