@@ -15,7 +15,6 @@ import { getSelectedTrip } from '../reducers/index';
 @Injectable()
 export class TripsService {
 	private trips: Trip[] = [];
-	private auth_token: string;
 	private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
 	public total_pages: number;
 	// trips: Trip[];
@@ -26,11 +25,12 @@ export class TripsService {
 		private toastyService: ToastyService,
 		private authSerive: ServerAuthService,
 		private router: Router
-	) {
-		//TODO: Move this out at a later stage for logged in user
+	) {}
+
+	getUserAuthToken() {
 		let user_data = JSON.parse(localStorage.getItem('user'));
 		if (user_data) {
-			this.auth_token = user_data.auth_token;
+			return user_data.auth_token;
 		}
 	}
 
@@ -132,7 +132,7 @@ export class TripsService {
 	saveTrip(trip: Trip) {
 		const headers = new Headers({
 			'Content-Type': 'application/json',
-			'Authorization': this.auth_token
+			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
 		this.slimLoadingBarService.start();
@@ -158,7 +158,7 @@ export class TripsService {
 		const tripId = trip.id;
 		const headers = new Headers({
 			'Content-Type': 'application/json',
-			'Authorization': this.auth_token
+			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
 		this.slimLoadingBarService.start();
@@ -183,7 +183,7 @@ export class TripsService {
 	likeTrip(tripId: string): Observable<Trip> | Observable<String> {
 		const headers = new Headers({
 			'Content-Type': 'application/json',
-			'Authorization': this.auth_token
+			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
 

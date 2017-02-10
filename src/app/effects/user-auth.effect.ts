@@ -36,7 +36,7 @@ export class UserAuthEffects {
     .switchMap((data) => this.serverAuthService.signUp(data.payload))
     .filter(data => data !== null)
     .map((data) => {
-        let userProfile = this.authService.getUserProfile(data);
+        let userProfile = this.serverAuthService.getServerUserProfile(data);
         return new UserAuthActions.LoginSuccessAction(userProfile);
     });   
 
@@ -57,7 +57,7 @@ export class UserAuthEffects {
         return new UpdateLoginFormNotification('Invalid data');
       }
       else {
-        let user = this.serverAuthService.getServerUserProfile(data); 
+        let user = this.serverAuthService.getServerUserProfile(data["user"]);
         return new UserAuthActions.ServerLoginSuccessAction(user);
       }
     });

@@ -9,13 +9,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./image-upload.component.scss']
 })
 export class ImageUploadComponent implements OnInit {
-  @Input() placeIndex: number;
-  @Input() cityIndex: number;
   @Output() imageData = new EventEmitter();
-
-  place: Place;
   cloudImages = [];
-  
 
   constructor(private cloudinaryService: CloudinaryIntegrationService) { }
 
@@ -47,17 +42,15 @@ export class ImageUploadComponent implements OnInit {
   }
 
   private uploadMedia(imageUrl: string) {
-     let cloudUpload$:Observable<any> = this.cloudinaryService.uploadPlacePicture(imageUrl);
-     cloudUpload$.subscribe(image => {
-       this.imageData.emit({
-         placeIndex: this.placeIndex,
-         cityIndex: this.cityIndex,
-         picture: { 
-           url: image.url,
-           public_id: image.public_id
-         }
-       });
-     });
+    let cloudUpload$:Observable<any> = this.cloudinaryService.uploadPlacePicture(imageUrl);
+    cloudUpload$.subscribe(image => {
+      this.imageData.emit({
+        id: null,
+        description: '',
+        url: image.url,
+        public_id: image.public_id
+      })
+    })
   }
 
 }

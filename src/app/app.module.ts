@@ -73,6 +73,9 @@ import { UserSettingsComponent } from './components/user/user-settings/user-sett
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { ImageUploadComponent } from './components/trips/trip-edit/image-upload/image-upload.component';
 import { AddPlaceComponent } from './components/trips/trip-edit/add-place/add-place.component';
+import { PlaceDetailComponent } from './components/trips/trip-detail/place-detail/place-detail.component';
+import { NewPlaceComponent } from './components/trips/trip-edit/new-place/new-place.component';
+import { UpdatePlaceComponent } from './components/trips/trip-edit/update-place/update-place.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -119,7 +122,10 @@ const myFirebaseAuthConfig = {
     LoaderComponent,
     ImageUploadComponent,
     AddPlaceComponent,
-    Autosize
+    Autosize,
+    PlaceDetailComponent,
+    NewPlaceComponent,
+    UpdatePlaceComponent
   ],
   imports: [
     BrowserModule,
