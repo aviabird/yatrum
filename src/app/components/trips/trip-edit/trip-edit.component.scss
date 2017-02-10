@@ -16,6 +16,17 @@ textarea {
 	resize: none !important;
 }
 
+.place-form {
+	padding: 0;
+	.ui.card {
+		width: 100%;
+	}
+	.remove.icon {
+		cursor: pointer;
+		font-size: 2em;
+	}
+}
+
 
 
 // .banner {
