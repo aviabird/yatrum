@@ -119,10 +119,8 @@ export function reducer(state = initialState, action: Action): State {
       const updatedTrip = action.payload;
       const updatedTripId = updatedTrip.id
 
-      let newTrips = state.trips;
+      let newTrips = Object.assign({}, state.trips);
       newTrips[updatedTripId] = updatedTrip;
-
-      console.log("updated trips", newTrips[updatedTripId]);
 
       return Object.assign({}, state, {
         trips: newTrips
