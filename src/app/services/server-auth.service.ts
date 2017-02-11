@@ -83,7 +83,8 @@ export class ServerAuthService {
             isFollowed: null,
             token: data.auth_token,
             created_at: '',
-            updated_at: ''
+            updated_at: '',
+            is_followed_by_current_user: data.is_followed_by_current_user
         }
   }
 
