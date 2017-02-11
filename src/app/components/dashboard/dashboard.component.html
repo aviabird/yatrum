@@ -1,17 +1,30 @@
 <div class="ui centered grid">
-  
-  <div class="search row">
+  <div class="search sixteen wide column">
     <tr-dashboard-search></tr-dashboard-search>
   </div>
-  <div class="row">
-    <div class="create-button">
-      <div class="ui primary animated button" tabindex="0" [routerLink]="['/trips','new']">
-        <div class="visible content">Create Trip</div>
-        <div class="hidden content"><i class="plus icon"></i></div>
+
+  <div class="twelve wide column">
+    <div class="ui centered grid button-collection">
+      <div class="four wide column"></div>
+
+      <div class="trips-type eight wide center aligned column">
+        <!--<button class="ui left attached button">Feeds</button>
+        <button class="right attached ui button">Trending</button>-->
+      </div>
+
+      <div class="create-button four wide right aligned column">
+        <div class="ui animated button" tabindex="0" [routerLink]="['/trips','new']">
+          <div class="visible content">
+            <i class="file big text icon"></i>
+            Publish Trip
+          </div>
+          <div class="hidden content"><i class="plus icon"></i></div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
+
+  <div class="sixteen wide column">
     <tr-dashboard-trips></tr-dashboard-trips>
   </div>
 

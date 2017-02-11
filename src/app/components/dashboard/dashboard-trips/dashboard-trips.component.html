@@ -1,5 +1,5 @@
 <div class="ui centered grid" infinite-scroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
-  <div class="ten wide column">
+  <div class="fourteen wide column">
     <div class="ui stackable two column grid">
       <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
       <div *ngFor="let trip of trips$ | async" [@fadeIn]="'in'" class="column">  

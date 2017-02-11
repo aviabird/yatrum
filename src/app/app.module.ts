@@ -16,6 +16,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastyModule } from 'ng2-toasty';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { MomentModule } from 'angular2-moment';
+
+// Pipes
+import { HumanizePipe } from './pipes/humanize';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -125,7 +129,8 @@ const myFirebaseAuthConfig = {
     Autosize,
     PlaceDetailComponent,
     NewPlaceComponent,
-    UpdatePlaceComponent
+    UpdatePlaceComponent,
+    HumanizePipe
   ],
   imports: [
     BrowserModule,
@@ -152,7 +157,8 @@ const myFirebaseAuthConfig = {
     StoreLogMonitorModule,
     SlimLoadingBarModule.forRoot(),
     ToastyModule.forRoot(),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MomentModule
   ],
   providers: [
     UserAuthService,

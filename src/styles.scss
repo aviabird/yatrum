@@ -7,7 +7,12 @@
 }
 
 body {
+  font-family: 'Helvetica Neue';
   font-weight: 100 !important;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica Neue' !important;
+    font-weight: 400;
+  }
 }
 
 .text-white {
@@ -65,10 +70,22 @@ ng2-slim-loading-bar{
 }
 
 .avatar {
-  border-radius: 5px !important;
+  border-radius: 9999px !important;
 }
 hr {
   border: none;
   border-bottom: 1px solid #eee;
   margin: 1rem 0;
+}
+
+.action-color {
+  background: #E74C3C;
+  color: white;
+  border: none;
+}
+
+.base-color {
+  background: #2C3E50;
+  color: white;
+  border: none;
 }

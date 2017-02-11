@@ -36,30 +36,6 @@ import {
         animate(500)
       ]),
       transition('active => inactive', animate(500))
-    ]),
-    trigger('toggleFollow', [
-      state('inactive', style({
-        background: 'rgba(0, 156, 149, 0.7)'
-      })),
-      state('active', style({
-        background: 'rgba(255, 5, 5, 0.7)'
-      })),
-      transition('inactive => active', [
-        style({
-          transform: "scale(1.2) translateX(-89%)",
-          opacity: 0,
-          background: 'rgba(255, 5, 5, 0.7)',
-          right: '2rem' }),
-        animate(500)
-      ]),
-      transition('active => inactive', [
-        style({
-          transform: "scale(1.2) translateX(-89%)",
-          opacity: 0,
-          background: 'rgba(0, 156, 149, 0.7)',
-          right: '2rem' }),
-        animate(500)
-      ])
     ])
   ]
 })
