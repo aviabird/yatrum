@@ -20,7 +20,8 @@ export const ActionTypes = {
 	CLEAR_EDITING_TRIP: "Clear Editing [Trip]",
 	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store",
 	SEARCH_TRIPS: "Search [Trips]",
-	LIKE_TRIP: "Like [Trip]"
+	LIKE_TRIP: "Like [Trip]",
+	TRIP_USER_FOLLOWED: "[Trip] User Followed"
 }
 
 export class LoadTripsAction {
@@ -94,4 +95,9 @@ export class SearchTrip {
 export class LikeTripAction {
 	type = ActionTypes.LIKE_TRIP;
 	constructor(public payload: string) { }
+}
+
+export class TripUserFollowedAction {
+	type = ActionTypes.TRIP_USER_FOLLOWED;
+	constructor(public payload: any) {}
 }

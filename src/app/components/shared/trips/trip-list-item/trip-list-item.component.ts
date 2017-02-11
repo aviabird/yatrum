@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { LikeTripAction } from './../../../../actions/trips.action';
+import { FollowUserAction } from './../../../../actions/user.action';
 import { Trip } from './../../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -41,7 +42,6 @@ import {
 })
 export class TripListItemComponent implements OnInit {
   @Input() trip: Trip;
-  state: any = {'like': 'inactive', 'follow': 'inactive'};
   loggedInUser$: Observable<UserProfile>;
   userTrip: boolean;
   tripMainPictureUrl: string;
@@ -55,8 +55,14 @@ export class TripListItemComponent implements OnInit {
 
   ngOnInit() {
     this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
-    this.tripMainPicture();
-    this.state.like = (this.trip.is_liked_by_current_user ? 'active' : 'inactive');
+  }
+
+  tripLikeState() {
+    return this.trip.is_liked_by_current_user ? 'active' : 'inactive';
+  }
+
+  tripFollowState() {
+    return this.trip.user.is_followed_by_current_user ? 'active' : 'inactive';
   }
 
   /**
@@ -67,22 +73,12 @@ export class TripListItemComponent implements OnInit {
     return user.id === this.trip.user.id ? true : false;
   }
 
-  // TODO: Refactor this later
-  tripMainPicture(){
-    if (this.trip.places[0].pictures.length > 0) {
-      this.tripMainPictureUrl = this.trip.places[0].pictures[0].url; 
-    } else {
-      this.tripMainPictureUrl = "http://res.cloudinary.com/zeus999/image/upload/h_300/v1483437708/sea-sky-beach-holiday-11_nnbuey.jpg";
-    }
-  }
-
-  toggleLike(status) {
+  toggleLike() {
     this.store.dispatch(new LikeTripAction(this.trip.id))
-    this.state.like = (status === 'inactive' ? 'active' : 'inactive');
   }
 
-  toggleFollowBtn(status) {
-    this.state.follow = (status === 'inactive' ? 'active' : 'inactive');
+  toggleFollowBtn() {
+    this.store.dispatch(new FollowUserAction(this.trip.user_id))
   }
 
   onTagClick(searchQuery) {

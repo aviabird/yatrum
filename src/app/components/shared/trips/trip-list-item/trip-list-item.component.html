@@ -5,11 +5,11 @@
       <img class="ui avatar image" [src]="trip.user?.profile_pic?.url">
     </div> 
     <div class="nine wide column">
-      <h4 class="user-name">
+      <h3 class="user-name">
         {{trip.user.name}}
         <small> shared a</small>
         <a [routerLink]="['/trips',(trip.id)]"> Trip </a>
-      </h4>
+      </h3>
       <p class="postedAt">
         {{trip.created_at | amTimeAgo}}
       </p>
@@ -24,15 +24,15 @@
       </div>
       <!--<a [routerLink]="['/trips', trip.id, 'edit']" *ngIf="belongsToLoggedInUser() | async"><i class="large icon pencil"></i></a>-->
       <a class="ui small button follow-button"
-          [ngClass]="{'active': state.follow == 'active', 'inactive': state.follow == 'inactive'}"
+          [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}"
           *ngIf="!(belongsToLoggedInUser() | async)"
-          (click)="toggleFollowBtn(state.follow)">
-          {{state.follow == "inactive" ? "Follow" : "Following"}}
+          (click)="toggleFollowBtn()">
+          {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
         </a>
     </div>
     
     <div class="sixteen wide column thumbnail-container" [routerLink]="['/trips',(trip.id)]">
-      <img width="100%" class="thumbnail" src="{{tripMainPictureUrl}}">
+      <img width="100%" class="thumbnail" src="{{trip.thumbnail_image_url}}">
     </div>
 
     <!--<div class="sixteen wide column tags">
@@ -56,9 +56,9 @@
     <div class="sixteen wide column icon-group">
       <i class="reply large icon"></i>
       <i class="heart large icon"
-        [ngClass]="{empty: state.like == 'inactive'}"
-        [@toggleLike]='state.like'
-        (click)="toggleLike(state.like)"> </i>
+        [ngClass]="{empty: tripLikeState() == 'inactive'}"
+        [@toggleLike]='tripLikeState()'
+        (click)="toggleLike()"> </i>
     </div>
   </div>
 </div>
