@@ -3,19 +3,24 @@
 }
 
 .trips-type {
-  button {
+  .button {
     background: white;
     box-shadow: none !important;
     font-weight: 400;
     box-shadow: none !important;
-    &:active {
-      background: #E74C3C;
-      color: white;
+    &.active {
+      background: #E74C3C !important;
+      color: white !important;
     }
   }
 
+  .ui.active.button {
+    background: #E74C3C !important;
+    color: white !important;
+  }
+
   button:not(:first-child) {
-        margin-left: -0.2rem;
+    margin-left: -0.2rem;
   }
 }
 
