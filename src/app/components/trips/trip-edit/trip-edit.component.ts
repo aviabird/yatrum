@@ -57,7 +57,7 @@ export class TripEditComponent implements OnInit {
     return this.formBuilder.group({
       'name': ['',Validators.required],
       'description': ['', Validators.required],
-      'places': this.formBuilder.array([]) 
+      'places': this.formBuilder.array([], Validators.required)
     })
   }
 
@@ -67,7 +67,7 @@ export class TripEditComponent implements OnInit {
       'id': [this.trip.id, Validators.required],
       'name': [this.trip.name, Validators.required],
       'description': [this.trip.description, Validators.required],
-      'places': this.formBuilder.array([]) 
+      'places': this.formBuilder.array([],Validators.required) 
     })
   }
 
@@ -154,13 +154,15 @@ export class TripEditComponent implements OnInit {
 
 
   onSubmit() {
-    if(this.isNewTrip){
-      this.tripService.saveTrip(this.tripForm.value)
-        .subscribe();
-    }
-    else
-      this.tripService.updateTrip(this.tripForm.value)
-        .subscribe();
+    console.log("trip form", this.tripForm);
+    window['check'] = this.tripForm;
+    // if(this.isNewTrip){
+    //   this.tripService.saveTrip(this.tripForm.value)
+    //     .subscribe();
+    // }
+    // else
+    //   this.tripService.updateTrip(this.tripForm.value)
+    //     .subscribe();
   }
 
 }
