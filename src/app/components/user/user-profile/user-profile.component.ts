@@ -118,7 +118,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   userFollowState() {
-    return this.selectedUser.isFollowed ? 'active' : 'inactive';
+    return this.selectedUser.is_followed_by_current_user ? 'active' : 'inactive';
   }
 
   onToggleFollow() {

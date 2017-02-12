@@ -31,15 +31,19 @@ export function reducer(state = initialState, action: Action): State {
       const payloadTrips = action.payload;
       const tripIds = payloadTrips.map(trip => trip.id);
 
+      console.log("action.payload", payloadTrips);
+
       const trips = payloadTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
         return Object.assign(trips, {
           [trip.id]: trip
         });
       }, {});
 
+      console.log("trips", state.trips, trips);
+
       return Object.assign({}, state, {
         tripIds: tripIds,
-        trips: trips
+        trips: Object.assign({}, trips)
       })
     }
     case ActionTypes.LOAD_MORE_TRIPS_SUCCESS: {
@@ -60,18 +64,16 @@ export function reducer(state = initialState, action: Action): State {
     }
     case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
       const payloadTrips = action.payload;
-      const newTrips = payloadTrips.filter(trip => {
-        return !state.trips[trip.id]
-      });
+      const tripIds = payloadTrips.map(trip => trip.id);
 
-      const trips = newTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
+      const trips = payloadTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
         return Object.assign(trips, {
           [trip.id]: trip
         });
       }, {});
 
-
       return Object.assign({}, state, {
+        tripIds: tripIds,
         trips: Object.assign({}, state.trips, trips)
       })
     }
@@ -128,6 +130,7 @@ export function reducer(state = initialState, action: Action): State {
     }
     case ActionTypes.TRIP_USER_FOLLOWED: {
       const user = action.payload;
+      console.log("user", action.payload);
 
       if(state.tripIds.length) {
         const newTrips = state.tripIds.map(id => {

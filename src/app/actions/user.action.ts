@@ -44,5 +44,5 @@ export class FollowProfileUserAction {
 
 export class ProfileUserFollowed {
 	type = ActionTypes.PROFILE_USER_FOLLOWED;
-	constructor(public payload: UserProfile) {}
+	constructor(public payload: any) {}
 }

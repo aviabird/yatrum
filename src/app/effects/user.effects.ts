@@ -37,5 +37,9 @@ export class UserEffects {
 		.map((data) => {
 			return new UserActions.ProfileUserFollowed(data)
 		});
+	// @Effect()
+	// 	ProfileUserFollowed$: Observable<Action> = this.action$
+	// 	.ofType(UserActions.ActionTypes.PROFILE_USER_FOLLOWED)
+	// 	.map((action: Action) => new TripsActions.TripUserFollowedAction(action.payload));
 
 }
