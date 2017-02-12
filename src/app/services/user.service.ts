@@ -47,7 +47,20 @@ export class UserService {
       'Authorization': this.getUserAuthToken()    
     })
     return this.http.post(`${this.apiLink}/add_to_user_following_list`, {followed_id: id}, {headers: headers})
-      .map(response => response.json());
+      .map(response => {
+        let data = response.json();
+        return { 
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          profilePic: data.profile_pic,
+          coverPhoto: data.cover_photo,
+          isFollowed: data.is_followed_by_current_user,
+          token: data.auth_token,
+          created_at: '',
+          updated_at: ''
+        }
+      });
   }
 
   getUserFollowers(id: string) {

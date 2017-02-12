@@ -81,6 +81,13 @@ export function reducer(state = initialState, action: Action): State {
         })
       })
 		}
+    case UserActions.PROFILE_USER_FOLLOWED: {
+      return Object.assign({}, state, {
+        selected_user: Object.assign({}, state.selected_user, {
+          user: action.payload
+        })
+      })
+    }
     case UserActions.USER_FOLLOWERS_LOADED: {
       return Object.assign({}, state, {
         selected_user: Object.assign({}, state.selected_user, {

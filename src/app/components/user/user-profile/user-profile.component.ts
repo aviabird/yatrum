@@ -1,4 +1,4 @@
-import { FollowUserAction } from './../../../actions/user.action';
+import { FollowProfileUserAction } from './../../../actions/user.action';
 import { getLoggedInUserId, getSelectedProfileUser, State } from './../../../reducers/index';
 import { UserService } from './../../../services/user.service';
 import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
@@ -122,7 +122,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onToggleFollow() {
-    this.store.dispatch(new FollowUserAction(this.selectedUser.id));
+    this.store.dispatch(new FollowProfileUserAction(this.selectedUser.id));
   }
 
 }

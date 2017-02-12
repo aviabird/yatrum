@@ -1,3 +1,4 @@
+import { UserProfile } from './../models/user-profile';
 import { Action } from '@ngrx/store';
 
 export const ActionTypes = {
@@ -6,6 +7,8 @@ export const ActionTypes = {
 	LOAD_USER_FOLLOWING: "Load [User] Following",
 	USER_FOLLOWING_LOADED: "[User] Following Loaded",
 	FOLLOW_USER: "Follow [User]",
+	FOLLOW_PROFILE_USER: "Follow profile [User]",
+	PROFILE_USER_FOLLOWED: "Profile [User] Followed",
 	UPDATE_USER: "Update [User]"
 }
 
@@ -32,4 +35,14 @@ export class UserFollowingLoadedAction {
 export class FollowUserAction {
 	type = ActionTypes.FOLLOW_USER;
 	constructor(public payload: string) {}	
+}
+
+export class FollowProfileUserAction {
+	type = ActionTypes.FOLLOW_PROFILE_USER;
+	constructor(public payload: string) {}
+}
+
+export class ProfileUserFollowed {
+	type = ActionTypes.PROFILE_USER_FOLLOWED;
+	constructor(public payload: UserProfile) {}
 }
