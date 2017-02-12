@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'tr-trip-edit',
   templateUrl: './trip-edit.component.html',
@@ -57,7 +58,7 @@ export class TripEditComponent implements OnInit {
     return this.formBuilder.group({
       'name': ['',Validators.required],
       'description': ['', Validators.required],
-      'places': this.formBuilder.array([], Validators.required)
+      'places': this.formBuilder.array([])
     })
   }
 
@@ -67,7 +68,7 @@ export class TripEditComponent implements OnInit {
       'id': [this.trip.id, Validators.required],
       'name': [this.trip.name, Validators.required],
       'description': [this.trip.description, Validators.required],
-      'places': this.formBuilder.array([],Validators.required) 
+      'places': this.formBuilder.array([]) 
     })
   }
 

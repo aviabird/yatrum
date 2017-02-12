@@ -43,8 +43,7 @@ import { reducer } from './reducers/index';
 //Directives
 import { FileSelectDirective } from 'ng2-file-upload';
 import { Autosize } from 'angular2-autosize/angular2-autosize';
-
-
+import { TripHasPlaces } from './Validators/trip-has-places.directive';
 
 // Components
 import { AppComponent } from './app.component';
@@ -80,7 +79,6 @@ import { AddPlaceComponent } from './components/trips/trip-edit/add-place/add-pl
 import { PlaceDetailComponent } from './components/trips/trip-detail/place-detail/place-detail.component';
 import { NewPlaceComponent } from './components/trips/trip-edit/new-place/new-place.component';
 import { UpdatePlaceComponent } from './components/trips/trip-edit/update-place/update-place.component';
-import { TripHasPlacesValidatorDirective } from './Validators/trip-has-places-validator.directive';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -132,7 +130,7 @@ const myFirebaseAuthConfig = {
     NewPlaceComponent,
     UpdatePlaceComponent,
     HumanizePipe,
-    TripHasPlacesValidatorDirective
+    TripHasPlaces
   ],
   imports: [
     BrowserModule,
