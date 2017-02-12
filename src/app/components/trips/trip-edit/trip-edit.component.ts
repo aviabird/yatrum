@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -58,7 +58,7 @@ export class TripEditComponent implements OnInit {
     return this.formBuilder.group({
       'name': ['',Validators.required],
       'description': ['', Validators.required],
-      'places': this.formBuilder.array([])
+      'places': this.formBuilder.array([], Validators.required)
     })
   }
 
@@ -68,7 +68,7 @@ export class TripEditComponent implements OnInit {
       'id': [this.trip.id, Validators.required],
       'name': [this.trip.name, Validators.required],
       'description': [this.trip.description, Validators.required],
-      'places': this.formBuilder.array([]) 
+      'places': this.formBuilder.array([], Validators.required) 
     })
   }
 
@@ -164,6 +164,22 @@ export class TripEditComponent implements OnInit {
     // else
     //   this.tripService.updateTrip(this.tripForm.value)
     //     .subscribe();
+  }
+
+  // Validation for trip places
+  validatePlaces(c: FormControl) {
+    let places = c.value;
+    
+    places.forEach(place => {
+      console.log("place", place);
+      if(place._destroy == false)
+        return null;
+    })
+    
+    return {
+      validatePlaces: "Trip must contain at least one place"
+    }
+
   }
 
 }

@@ -5,8 +5,17 @@ import { NG_VALIDATORS, FormControl } from '@angular/forms';
 
 function checkIfTripHasPlaces() {
   return (c: FormControl) => {
-    return null;
-  };
+    let places = c.value;
+    
+    places.forEach(place => {
+      if(place._destroy == false)
+        return null;
+    })
+    
+    return {
+      validatePlaces: "Trip must contain at least one place"
+    };
+  }
 }
 
 @Directive({
