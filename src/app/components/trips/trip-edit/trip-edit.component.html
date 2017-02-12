@@ -5,7 +5,7 @@
         Trip must contain a Name and atleast one place
       </div>
       <div class="save-button">
-        <button class="ui button" type="submit">Save Trip</button>
+        <button class="ui button" [disabled]="!tripForm.valid" type="submit">Save Trip</button>
       </div>
       <div class="field">
         <input type="text" placeholder="Trip Name" formControlName="name">

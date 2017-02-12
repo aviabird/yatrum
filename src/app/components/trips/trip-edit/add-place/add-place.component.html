@@ -3,13 +3,13 @@
     Place must contain a name
   </div>
   <div *ngIf="!place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" [disabled]="!placeForm.valid" type="submit">
       <i class="plus icon"></i>
       Save
     </button>
   </div>
   <div *ngIf="place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" [disabled]="!placeForm.valid" type="submit">
       <i class="checkmark icon"></i>
       update
     </button>
