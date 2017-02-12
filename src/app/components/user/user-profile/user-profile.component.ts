@@ -1,3 +1,4 @@
+import { FollowUserAction } from './../../../actions/user.action';
 import { getLoggedInUserId, getSelectedProfileUser, State } from './../../../reducers/index';
 import { UserService } from './../../../services/user.service';
 import { CloudinaryIntegrationService } from './../../../services/cloudinary-integration.service';
@@ -43,6 +44,7 @@ export class UserProfileComponent implements OnInit {
   private mediaType: string = '';
   public isProfilPicChanged: boolean = false;
   public selectedProfileUser$: Observable<UserProfile>;
+  public selectedUser: UserProfile;
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
@@ -55,6 +57,9 @@ export class UserProfileComponent implements OnInit {
     this.subscription = this.activatedRoute.params.subscribe(
       (params) => this.userIndex = params['id']
     )
+    this.selectedProfileUser$.subscribe(user => {
+      this.selectedUser = user;
+    })
     this.userService.getUserById(this.userIndex);
   }
     
@@ -112,9 +117,12 @@ export class UserProfileComponent implements OnInit {
     this.mediaType = 'cover_photo';
   }
 
-  onFollow() {
-    this.userService.addTravellerToFollowingList(this.userIndex)
-      .subscribe(data => console.log(data));
+  userFollowState() {
+    return this.selectedUser.isFollowed ? 'active' : 'inactive';
+  }
+
+  onToggleFollow() {
+    this.store.dispatch(new FollowUserAction(this.selectedUser.id));
   }
 
 }

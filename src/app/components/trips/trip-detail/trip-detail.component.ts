@@ -1,3 +1,4 @@
+import { UserAuthService } from './../../../services/user-auth.service';
 import { FollowUserAction } from './../../../actions/user.action';
 import { LikeTripAction } from './../../../actions/trips.action';
 import { Trip } from './../../../models/trip';
@@ -19,7 +20,7 @@ export class TripDetailComponent implements OnInit {
   userTrip: boolean;
   user: any = {};
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>, private authService: UserAuthService) {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
   }
@@ -53,6 +54,10 @@ export class TripDetailComponent implements OnInit {
   onToggleLike() {
     this.store.dispatch(new LikeTripAction(this.trip.id));
     // this.trip.is_liked_by_current_user = !this.trip.is_liked_by_current_user;
+  }
+
+  belongsToLoggedInUser() {
+    return this.authService.belongsToLoggedInUser(this.trip.user_id)
   }
 
 }
