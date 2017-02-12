@@ -37,10 +37,13 @@ export class TripDetailComponent implements OnInit {
     })
   }
 
-  onToggleLike() {
-    this.store.dispatch(new LikeTripAction(this.trip.id));
-    this.trip.is_liked_by_current_user = !this.trip.is_liked_by_current_user;
+  tripLikeState() {
+    return this.trip.is_liked_by_current_user ? 'active' : 'inactive';
   }
 
+  onToggleLike() {
+    this.store.dispatch(new LikeTripAction(this.trip.id));
+    // this.trip.is_liked_by_current_user = !this.trip.is_liked_by_current_user;
+  }
   
 }

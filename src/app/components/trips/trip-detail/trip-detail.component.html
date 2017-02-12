@@ -70,8 +70,14 @@
         <i class="add user icon"></i>
         Follow
       </div>
+      <div class="trip-likes">
+        {{trip?.trip_likes_count | humanize}} Likes
+      </div>
       <div class="like-trip">
-        <i class="thumbs up huge icon"></i>
+        <i class="thumbs up huge icon" 
+          [ngClass]="{active: tripLikeState() == 'active'}"
+          (click)="onToggleLike()">
+        </i>
       </div>
     </div>
   </div>
