@@ -51,6 +51,7 @@
   border-radius: 4px;
   font-size: 18px;
 	background: #00A6B4;
+	cursor: pointer;
 }
 
 .trip-likes {
@@ -61,6 +62,7 @@
 }
 
 .like-trip {
+	cursor: pointer;
 	@extend .content;
 	bottom: 34px;
 	right: 40px;

@@ -66,9 +66,11 @@
           {{user.name}}
         </span>
       </div>
-      <div class="follow-user">
-        <i class="add user icon"></i>
-        Follow
+      <div class="follow-user" (click)="onToggleFollow()">
+        <i class="add user icon"
+          [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}">
+        </i>
+        {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
       </div>
       <div class="trip-likes">
         {{trip?.trip_likes_count | humanize}} Likes

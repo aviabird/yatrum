@@ -1,3 +1,4 @@
+import { FollowUserAction } from './../../../actions/user.action';
 import { LikeTripAction } from './../../../actions/trips.action';
 import { Trip } from './../../../models/trip';
 import { UserProfile } from './../../../models/user-profile';
@@ -37,13 +38,21 @@ export class TripDetailComponent implements OnInit {
     })
   }
 
+  tripFollowState() {
+    return this.trip.user.is_followed_by_current_user ? 'active' : 'inactive';
+  }
+
   tripLikeState() {
     return this.trip.is_liked_by_current_user ? 'active' : 'inactive';
   }
+
+  onToggleFollow() {
+    this.store.dispatch(new FollowUserAction(this.trip.user_id))
+  }  
 
   onToggleLike() {
     this.store.dispatch(new LikeTripAction(this.trip.id));
     // this.trip.is_liked_by_current_user = !this.trip.is_liked_by_current_user;
   }
-  
+
 }
