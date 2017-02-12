@@ -78,7 +78,7 @@ export class TripEditComponent implements OnInit {
         this.formBuilder.group({
           'id': [place.id, Validators.required],
           'name': [place.name, Validators.required],
-          'review': [place.review, Validators.required],
+          'review': [place.review],
           'pictures': this.formBuilder.array([]),
           '_destroy': [false]
         })
@@ -108,7 +108,7 @@ export class TripEditComponent implements OnInit {
     (<FormArray>this.tripForm.controls['places']).push(
         this.formBuilder.group({
           'name': [place.name, Validators.required],
-          'review': [place.review, Validators.required],
+          'review': [place.review],
           'pictures': this.formBuilder.array(place.pictures),
           '_destroy': [false]
         })

@@ -23,7 +23,7 @@ export class AddPlaceComponent implements OnInit {
       this.placeForm = this.formBuilder.group({
         'id': [this.place.id, Validators.required],
         'name': [this.place.name, Validators.required],
-        'review': [this.place.review, Validators.required],
+        'review': [this.place.review],
         'pictures': this.formBuilder.array(this.place.pictures),
         '_destroy': [this.place._destroy]
       })
@@ -31,7 +31,7 @@ export class AddPlaceComponent implements OnInit {
     else {
       this.placeForm = this.formBuilder.group({
         'name': ['', Validators.required],
-        'review': ['', Validators.required],
+        'review': [''],
         'pictures': this.formBuilder.array([]),
         '_destroy': [false]
       })
