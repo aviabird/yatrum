@@ -57,7 +57,6 @@ export class TripEditComponent implements OnInit {
   private initNewTrip() {
     return this.formBuilder.group({
       'name': ['',Validators.required],
-      'description': ['', Validators.required],
       'places': this.formBuilder.array([], Validators.required)
     })
   }
@@ -67,7 +66,6 @@ export class TripEditComponent implements OnInit {
     return this.formBuilder.group({
       'id': [this.trip.id, Validators.required],
       'name': [this.trip.name, Validators.required],
-      'description': [this.trip.description, Validators.required],
       'places': this.formBuilder.array([], Validators.required) 
     })
   }
@@ -75,7 +73,6 @@ export class TripEditComponent implements OnInit {
 
 // add places to the tripForm from existing trip
   private addPlaces() {
-    console.log("add places");
     this.trip.places.forEach((place, placeIndex) => {
       (<FormArray>this.tripForm.controls['places']).push(
         this.formBuilder.group({
@@ -155,15 +152,13 @@ export class TripEditComponent implements OnInit {
 
 
   onSubmit() {
-    console.log("trip form", this.tripForm);
-    window['check'] = this.tripForm;
-    // if(this.isNewTrip){
-    //   this.tripService.saveTrip(this.tripForm.value)
-    //     .subscribe();
-    // }
-    // else
-    //   this.tripService.updateTrip(this.tripForm.value)
-    //     .subscribe();
+    if(this.isNewTrip){
+      this.tripService.saveTrip(this.tripForm.value)
+        .subscribe();
+    }
+    else
+      this.tripService.updateTrip(this.tripForm.value)
+        .subscribe();
   }
 
   // Validation for trip places
@@ -171,7 +166,6 @@ export class TripEditComponent implements OnInit {
     let places = c.value;
     
     places.forEach(place => {
-      console.log("place", place);
       if(place._destroy == false)
         return null;
     })
