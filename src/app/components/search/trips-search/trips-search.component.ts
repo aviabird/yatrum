@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { LoadTripsAction, SearchTrip } from './../../../actions/trips.action';
+import { SearchTrip } from './../../../actions/trips.action';
 import { Store } from '@ngrx/store';
 import {
   Component,
@@ -11,6 +11,7 @@ import {
   animate
 } from '@angular/core';
 import * as fromRoot from './../../../reducers/index';
+import { LoadFeedTripsAction } from '../../../actions/trips.action';
 
 @Component({
   selector: 'tr-trips-search',
@@ -37,7 +38,7 @@ export class TripsSearchComponent {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadTripsAction({page: 1}))
+      this.store.dispatch(new LoadFeedTripsAction({page: 1}))
   }
 
 }

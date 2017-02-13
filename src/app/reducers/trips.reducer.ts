@@ -1,4 +1,3 @@
-import { TripsState } from './trips-state';
 import { createSelector } from 'reselect';
 import { Observable } from 'rxjs/Observable';
 import { ActionTypes } from './../actions/trips.action';
@@ -8,6 +7,8 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 
 export interface State {
   tripIds: string[];
+  feedIds: string[];
+  trendingIds: string[];
   trips: { [id: string]: Trip };
   selectedTripId: string;
 }
@@ -15,6 +16,8 @@ export interface State {
 const trip = <Trip>{}; // empty object
 const initialState = {
   tripIds: [],
+  feedIds: [],
+  trendingIds: [], 
   trips: {},
   selectedTripId: null,
 }
@@ -24,23 +27,19 @@ export function reducer(state = initialState, action: Action): State {
     // TODO: CS: Refactor these return objects also make sure this 
     // is consistent in other reducers too.
     // https://www.pivotaltracker.com/story/show/136717477
-    case ActionTypes.LOAD_TRIPS_SUCCESS: {
+    case ActionTypes.LOAD_FEED_TRIPS_SUCCESS: {
       //TODO: Make this method use trips already cached 
       //Only add to store the new trips from backend.
       //Story https://www.pivotaltracker.com/story/show/137695851
-      const payloadTrips = action.payload;
-      const tripIds = payloadTrips.map(trip => trip.id);
-
-      const trips = payloadTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
-        return Object.assign(trips, {
-          [trip.id]: trip
-        });
-      }, {});
-
-      return Object.assign({}, state, {
-        tripIds: tripIds,
-        trips: trips
-      })
+      let newState = pushTrips("feedTrips", action.payload)
+      return Object.assign({}, state, newState)
+    }
+    case ActionTypes.LOAD_TRENDING_TRIPS_SUCCESS: {
+      //TODO: Make this method use trips already cached 
+      //Only add to store the new trips from backend.
+      //Story https://www.pivotaltracker.com/story/show/137695851
+      let newState = pushTrips("trendingTrips", action.payload)
+      return Object.assign({}, state, newState)
     }
     case ActionTypes.LOAD_MORE_TRIPS_SUCCESS: {
       const payloadTrips = action.payload;
@@ -128,9 +127,9 @@ export function reducer(state = initialState, action: Action): State {
     }
     case ActionTypes.TRIP_USER_FOLLOWED: {
       const user = action.payload;
-
-      if(state.tripIds.length) {
-        const newTrips = state.tripIds.map(id => {
+      const tripIds = [...state.tripIds, ...state.feedIds, ...state.trendingIds]
+      if(tripIds.length) {
+        const newTrips = tripIds.map(id => {
           let trip = state.trips[id];
           if (trip.user.id == user.id) {
             trip.user = user;
@@ -160,9 +159,43 @@ export function getTrips(state: State) {
 }
 
 export function getTripIds(state: State) {
-  return state.tripIds;
+  return state.tripIds
+  // return [...state.feedIds, ...state.trendingIds];
 }
+
+export const getFeedIds = (state: State) => state.feedIds;
+export const getTrendingIds = (state: State) => state.trendingIds;
 
 export function getSelectedTripId(state: State) {
   return state.selectedTripId;
+}
+
+function pushTrips(tripType: string, tripsArray: [Trip]) {
+  const payloadTrips = tripsArray;
+  const newTripIds = payloadTrips.map(trip => trip.id);
+
+  const newTrips = payloadTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
+    return Object.assign(trips, {
+      [trip.id]: trip
+    });
+  }, {});
+
+  let returnHash = {}
+
+  switch (tripType) {
+    case "feedTrips":
+      returnHash = {
+        feedIds: newTripIds,
+        trips: newTrips
+      }
+      break;
+    case "trendingTrips":
+      returnHash = {
+        trendingIds: newTripIds,
+        trips: newTrips
+      }
+      break;
+  }
+
+  return returnHash
 }

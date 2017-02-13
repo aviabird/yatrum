@@ -8,8 +8,14 @@
       <div class="four wide column"></div>
 
       <div class="trips-type eight wide center aligned column">
-        <button class="ui left attached big button active">Feeds</button>
-        <button class="right attached ui big button">Trending</button>
+        <button
+          class="ui left attached big button"
+          [ngClass]="{active: isFeedType()}"
+          (click)="selectTripsType('feeds')">Feeds</button>
+        <button
+          class="right attached ui big button"
+          [ngClass]="{active: isTrendingType()}"
+          (click)="selectTripsType('trending')">Trending</button>
       </div>
 
       <div class="create-button four wide right aligned column">
@@ -25,7 +31,10 @@
   </div>
 
   <div class="sixteen wide column">
-    <tr-dashboard-trips></tr-dashboard-trips>
+    <tr-dashboard-trips
+      [tripsType]="tripsType"
+      [trips]="trips$ | async"
+      [hideLoader]="hideLoader"></tr-dashboard-trips>
   </div>
 
 </div>

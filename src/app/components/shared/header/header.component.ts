@@ -1,4 +1,4 @@
-import { SearchTrip, LoadTripsAction } from './../../../actions/trips.action';
+import { SearchTrip } from './../../../actions/trips.action';
 import { Router } from '@angular/router';
 import { ServerLoginSuccessAction, ServerLogoutAction } from './../../../actions/user-auth.action';
 import { ServerAuthService } from './../../../services/server-auth.service';
@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Store } from '@ngrx/store';
 import "rxjs/add/operator/let";
+import { LoadFeedTripsAction } from '../../../actions/trips.action';
 
 
 
@@ -62,7 +63,7 @@ export class HeaderComponent implements OnInit {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadTripsAction({page: 1}))
+      this.store.dispatch(new LoadFeedTripsAction({page: 1}))
   }
 
 }

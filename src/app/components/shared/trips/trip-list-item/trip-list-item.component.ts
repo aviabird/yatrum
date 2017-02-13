@@ -5,7 +5,7 @@ import { Trip } from './../../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../reducers';
-import { SearchTrip, LoadTripsAction } from '../../../../actions/trips.action';
+import { SearchTrip, LoadFeedTripsAction } from '../../../../actions/trips.action';
 import { UserProfile } from '../../../../models/user-profile';
 import { UserAuthService } from '../../../../services/user-auth.service';
 import {
@@ -87,7 +87,7 @@ export class TripListItemComponent implements OnInit {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadTripsAction({page: 1}))
+      this.store.dispatch(new LoadFeedTripsAction({page: 1}))
   }
 
   belongsToLoggedInUser() {

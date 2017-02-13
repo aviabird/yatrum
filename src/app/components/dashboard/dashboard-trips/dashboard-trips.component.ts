@@ -13,6 +13,7 @@ import { Trip } from './../../../models/trip';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './../../../reducers/index';
 import { LoadMoreTripsAction } from './../../../actions/trips.action';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'tr-dashboard-trips',
@@ -29,17 +30,13 @@ import { LoadMoreTripsAction } from './../../../actions/trips.action';
   ]
 })
 export class DashboardTripsComponent implements OnInit {
-  trips$: Observable<Trip[]>;
+  @Input() tripsType: string;
+  @Input() trips: Trip[];
   authentication$: Observable<boolean>;
-  hideLoader: boolean = false;
+  @Input() hideLoader: boolean;
   private page: number = 1;
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
-    this.trips$ =
-      this.store.select(fromRoot.getTripsCollection).do(
-        trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
-      );
-
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);
   }
 

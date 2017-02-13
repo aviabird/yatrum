@@ -3,8 +3,10 @@ import { Trip } from './../models/trip';
 import { Action } from '@ngrx/store';
 
 export const ActionTypes = {
-	LOAD_TRIPS: "Load [Trips]",
-	LOAD_TRIPS_SUCCESS: "Load [Trips] Success",
+	LOAD_FEED_TRIPS: "Load Feed [Trips]",
+	LOAD_FEED_TRIPS_SUCCESS: "Load Feed [Trips] Success",
+	LOAD_TRENDING_TRIPS: "Load Trending [Trips]",
+	LOAD_TRENDING_TRIPS_SUCCESS: "Load Trending [Trips] Success",
 	LOAD_MORE_TRIPS: "Load More [Trips]",
 	LOAD_MORE_TRIPS_SUCCESS: "Load More [Trips] Success",	
 	SELECT_TRIP: "Select [Trip]",
@@ -24,12 +26,20 @@ export const ActionTypes = {
 	TRIP_USER_FOLLOWED: "[Trip] User Followed"
 }
 
-export class LoadTripsAction {
-	type = ActionTypes.LOAD_TRIPS;
+export class LoadFeedTripsAction {
+	type = ActionTypes.LOAD_FEED_TRIPS;
 	constructor(public payload: Object) { }
 }
-export class TripsLoadedAction {
-	type = ActionTypes.LOAD_TRIPS_SUCCESS;
+export class FeedTripsLoadedAction {
+	type = ActionTypes.LOAD_FEED_TRIPS_SUCCESS;
+	constructor(public payload: Trip[]) { }
+}
+export class LoadTrendingTripsAction {
+	type = ActionTypes.LOAD_TRENDING_TRIPS;
+	constructor(public payload: Object) { }
+}
+export class TrendingTripsLoadedAction {
+	type = ActionTypes.LOAD_TRENDING_TRIPS_SUCCESS;
 	constructor(public payload: Trip[]) { }
 }
 export class LoadMoreTripsAction {

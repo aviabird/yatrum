@@ -1,8 +1,8 @@
 <div class="ui centered grid" infinite-scroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
   <div class="fourteen wide column">
+    <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
     <div class="ui stackable two column grid">
-      <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
-      <div *ngFor="let trip of trips$ | async" [@fadeIn]="'in'" class="column">
+      <div *ngFor="let trip of trips" [@fadeIn]="'in'" class="column">
         <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastyService } from 'ng2-toasty';
 import { ServerAuthService } from './server-auth.service';
 import { getSelectedTrip } from '../reducers/index';
+import { FeedTripsLoadedAction } from '../actions/trips.action';
 
 @Injectable()
 export class TripsService {
@@ -46,7 +47,7 @@ export class TripsService {
 				if (!trip) {
 					this.http.get(`${this.apiLink}/trips/${id}`)
 						.map((data: Response) => data.json())
-						.map(trip => this.store.dispatch(new fromTripActions.TripsLoadedAction([trip])))
+						.map(trip => this.store.dispatch(new fromTripActions.FeedTripsLoadedAction([trip])))
 						.subscribe();
 				}
 				this.store.dispatch(new fromTripActions.SelectTripAction(id));
@@ -86,6 +87,24 @@ export class TripsService {
 	getTrips(pageParams): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
 		return this.http.get(`${this.apiLink}/trips.json/?page=${pageParams['page']}`)
+			.map((data: Response) => {
+				let trips_data = data.json();
+				this.total_pages = trips_data.total_pages;
+				return trips_data.trips;
+			})
+			.catch((res: Response) => this.catchError(res))
+			.finally(() => this.slimLoadingBarService.complete());
+	}
+
+	/**
+	 * Get all trips for dashboard page
+	 * @method getTrendingTrips 
+	 * @param 
+	 * @return {Observable} Observable of array of trips
+	 */
+	getTrendingTrips(pageParams): Observable<Trip[]> | Observable<String> {
+		this.slimLoadingBarService.start();
+		return this.http.get(`${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`)
 			.map((data: Response) => {
 				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;

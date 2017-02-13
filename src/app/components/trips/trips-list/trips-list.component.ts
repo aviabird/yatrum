@@ -1,9 +1,9 @@
-import { LoadTripsAction } from './../../../actions/trips.action';
 import * as fromRoot from './../../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Trip } from './../../../models/trip';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { LoadFeedTripsAction } from '../../../actions/trips.action';
 
 @Component({
   selector: 'tr-trips-list',
@@ -21,6 +21,6 @@ export class TripsListComponent {
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTripsAction({page: 1}));
+    this.store.dispatch(new LoadFeedTripsAction({page: 1}));
   }
 }

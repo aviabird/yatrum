@@ -6,16 +6,23 @@ import { TripsService } from './../services/trips.service';
 import { Effect, Actions } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Trip } from '../models/trip';
+import { FeedTripsLoadedAction, LoadTrendingTripsAction } from '../actions/trips.action';
 
 @Injectable() 
 export class TripsEffects {
   constructor(private actions$: Actions, private tripsService: TripsService) {}
 
   @Effect()
-  Trips$: Observable<Action> = this.actions$
-    .ofType(TripsActions.ActionTypes.LOAD_TRIPS)
+  FeedTrips$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_FEED_TRIPS)
     .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrips(action.payload))
-    .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
+    .map((data: Trip[]) => new TripsActions.FeedTripsLoadedAction(data));
+  
+  @Effect()
+  TrendingTrips$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.LOAD_TRENDING_TRIPS)
+    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrendingTrips(action.payload))
+    .map((data: Trip[]) => new TripsActions.TrendingTripsLoadedAction(data));
   
   @Effect()
   MoreTrips$: Observable<Action> = this.actions$
@@ -50,7 +57,7 @@ export class TripsEffects {
   SearchTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.SEARCH_TRIPS)
     .switchMap<Action, Trip[] | String>((searchQuery) => this.tripsService.searchTrips(searchQuery))
-    .map((data: Trip[]) => new TripsActions.TripsLoadedAction(data));
+    .map((data: Trip[]) => new TripsActions.FeedTripsLoadedAction(data));
 
   @Effect()
   LikeTrip$: Observable<Action> = this.actions$
