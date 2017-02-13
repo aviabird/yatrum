@@ -30,5 +30,16 @@ export class UserEffects {
 			.map((data) => {
 				return new TripsActions.TripUserFollowedAction(data)
 			});
+	@Effect()
+		FollowProfileUser$: Observable<Action> = this.action$
+		.ofType(UserActions.ActionTypes.FOLLOW_PROFILE_USER)
+		.switchMap((action: Action) => this.userService.addTravellerToFollowingList(action.payload))
+		.map((data) => {
+			return new UserActions.ProfileUserFollowed(data)
+		});
+	// @Effect()
+	// 	ProfileUserFollowed$: Observable<Action> = this.action$
+	// 	.ofType(UserActions.ActionTypes.PROFILE_USER_FOLLOWED)
+	// 	.map((action: Action) => new TripsActions.TripUserFollowedAction(action.payload));
 
 }

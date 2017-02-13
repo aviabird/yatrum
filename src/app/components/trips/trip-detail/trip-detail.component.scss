@@ -51,16 +51,30 @@
   border-radius: 4px;
   font-size: 18px;
 	background: #00A6B4;
+	cursor: pointer;
+}
+
+.trip-likes {
+	@extend .content;
+	top: 35px;
+	right: 40px;
+	font-size: 16px;
 }
 
 .like-trip {
+	cursor: pointer;
 	@extend .content;
 	bottom: 34px;
 	right: 40px;
 		.icon {
 			box-shadow: 0 8px 14px rgba(0,0,0,0.40);
 		}
+		.icon.active {
+			color: #E74C3C;
+		}
 }
+
+
 
 .image {
 	height: 65vh;

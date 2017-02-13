@@ -1,14 +1,14 @@
 <div class="trip ui centered grid cards">
   <div class="trip-form twelve wide column ui card">
     <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="!tripForm.valid" class="error">
+        Trip must contain a Name and atleast one place
+      </div>
       <div class="save-button">
-        <button class="ui button" type="submit">Save Trip</button>
+        <button class="ui button" [disabled]="!tripForm.valid" type="submit">Save Trip</button>
       </div>
       <div class="field">
         <input type="text" placeholder="Trip Name" formControlName="name">
-      </div>
-      <div class="field">
-        <textarea autosize placeholder="Describe Trip" formControlName="description"></textarea>
       </div>
     </form>
   </div>

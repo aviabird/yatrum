@@ -26,18 +26,7 @@ export class UserService {
     return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
       .map(response => response.json())
       .subscribe(data => {
-        let payload = { 
-          id: data.id,
-          name: data.name,
-          email: data.email,
-          profilePic: data.profile_pic,
-          coverPhoto: data.cover_photo,
-          isFollowed: data.is_followed_by_current_user,
-          token: data.auth_token,
-          created_at: '',
-          updated_at: ''
-        }
-        this.store.dispatch(new SelectedProfileUserAction(payload));
+        this.store.dispatch(new SelectedProfileUserAction(data));
       });
   }
 
@@ -48,6 +37,7 @@ export class UserService {
     })
     return this.http.post(`${this.apiLink}/add_to_user_following_list`, {followed_id: id}, {headers: headers})
       .map(response => response.json());
+
   }
 
   getUserFollowers(id: string) {

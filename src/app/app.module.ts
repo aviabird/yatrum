@@ -43,8 +43,7 @@ import { reducer } from './reducers/index';
 //Directives
 import { FileSelectDirective } from 'ng2-file-upload';
 import { Autosize } from 'angular2-autosize/angular2-autosize';
-
-
+import { TripHasPlaces } from './Validators/trip-has-places.directive';
 
 // Components
 import { AppComponent } from './app.component';
@@ -130,7 +129,8 @@ const myFirebaseAuthConfig = {
     PlaceDetailComponent,
     NewPlaceComponent,
     UpdatePlaceComponent,
-    HumanizePipe
+    HumanizePipe,
+    TripHasPlaces
   ],
   imports: [
     BrowserModule,
