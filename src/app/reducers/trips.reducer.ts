@@ -6,7 +6,6 @@ import { Trip } from './../models/trip';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
 export interface State {
-  tripIds: string[];
   feedIds: string[];
   trendingIds: string[];
   trips: { [id: string]: Trip };
@@ -15,7 +14,6 @@ export interface State {
 
 const trip = <Trip>{}; // empty object
 const initialState = {
-  tripIds: [],
   feedIds: [],
   trendingIds: [], 
   trips: {},
@@ -53,7 +51,8 @@ export function reducer(state = initialState, action: Action): State {
       }, {});
 
       return Object.assign({}, state, {
-        tripIds: [...state.tripIds, ...tripIds],
+        feedIds: [...state.feedIds, ...tripIds],
+        trendingIds: [...state.trendingIds, ...tripIds],
         trips: Object.assign({}, state.trips, trips)
       })
     }
@@ -68,7 +67,7 @@ export function reducer(state = initialState, action: Action): State {
       }, {});
 
       return Object.assign({}, state, {
-        tripIds: tripIds,
+        feedIds: tripIds,
         trips: Object.assign({}, state.trips, trips)
       })
     }
@@ -79,7 +78,8 @@ export function reducer(state = initialState, action: Action): State {
       }
 
       return Object.assign({}, state, {
-        tripIds: [...state.tripIds, trip.id],
+        feedIds: [...state.feedIds, trip.id],
+        trendingIds: [...state.trendingIds, trip.id],
         trips: Object.assign({}, state.trips, newTrip)
       })
     }
@@ -105,7 +105,8 @@ export function reducer(state = initialState, action: Action): State {
         [trip.id]: trip
       }
       return Object.assign({}, state, {
-        tripIds: [...state.tripIds, trip.id],
+        feedIds: [...state.feedIds, trip.id],
+        trendingIds: [...state.trendingIds, trip.id],
         trips: Object.assign({}, state.trips, newTrip)
       })
     }
@@ -125,7 +126,7 @@ export function reducer(state = initialState, action: Action): State {
     }
     case ActionTypes.TRIP_USER_FOLLOWED: {
       const user = action.payload;
-      const tripIds = [...state.tripIds, ...state.feedIds, ...state.trendingIds]
+      const tripIds = [...state.feedIds, ...state.trendingIds]
       if(tripIds.length) {
         const newTrips = tripIds.map(id => {
           let trip = state.trips[id];
@@ -157,8 +158,7 @@ export function getTrips(state: State) {
 }
 
 export function getTripIds(state: State) {
-  return state.tripIds
-  // return [...state.feedIds, ...state.trendingIds];
+  return [...state.feedIds, ...state.trendingIds];
 }
 
 export const getFeedIds = (state: State) => state.feedIds;
