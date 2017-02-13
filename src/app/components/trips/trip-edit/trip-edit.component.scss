@@ -1,10 +1,34 @@
+@import "../../../../_vars.scss";
+
 .trip {
 	margin-top: 30px;
 }
 
+.trip-form {
+	padding: 0 !important;
+}
+
+.trip-title {
+	width: 70% !important;
+	font-size: 3rem !important;
+  font-weight: bold;
+	margin-left: -2rem !important;
+	&:focus {
+		background: none !important;
+	}
+}
+
+.trip-description {
+	font-size: 1.5rem !important;
+	min-height: 3rem !important;
+	text-align: justify;
+}
+
 .save-button {
-	text-align: right;
-	margin-bottom: 13px;
+	float: right;
+	background: $appActionColor;
+	color: white;
+	margin-top: 2.3rem;
 }
 
 input {
@@ -19,6 +43,8 @@ textarea {
 .place-form {
 	margin-top: 30px !important;
 	padding: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
 	.ui.card {
 		width: 100%;
 	}
@@ -28,54 +54,15 @@ textarea {
 	}
 }
 
+.trip-form {
+	background: none !important;
+	box-shadow: none !important;
 
+	input {
+		background: none;
+	}
 
-// .banner {
-//     padding: 2px;
-//     border: 1px solid darkkhaki;
-//     background: silver;
-//     h3 {
-//         margin-left: 10px;
-//     }
-// }
-// .side {
-//     display: inline-block;
-// }
-// // not working this way moved to style.css
-// .trip-name {
-//     border-left: transparent;
-//     border-right: transparent;
-//     border-top: transparent;
-//     border-radius: 0px;
-//     padding-bottom: 2px;
-//     padding-left: 7px;
-//     font-size: 34px;
-// }
-
-// .place-box {
-
-// }
-// .city-box {
-//     padding: 10px;
-//     border: solid 1px lightblue;
-//     // margin-bottom: 22px;
-// }
-
-// .vertical-line {
-//     border-left: 2px solid cadetblue;
-//     height: 35px;
-//     margin: 0 auto;
-//     width: 10px;
-// }
-
-// .add-city-wrapper {
-//     text-align: center;
-//     .add-city-button {
-//         width: 130px;
-//     }
-// }
-
-// .image-showcase {
-//     height: 120px;
-//     width: 120px;
-// }
+	textarea {
+		background: none;
+	}
+}

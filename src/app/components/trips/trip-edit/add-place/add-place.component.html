@@ -1,4 +1,34 @@
 <form class="ui form" [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+  <div class="content form-header">
+    <div class="inline fields">
+      <div class="ten wide field">
+        <i class="marker big icon"></i>
+        <input
+          class="place-name" type="text" (focus)="focusFunction($event)"
+          formControlName="name" placeholder="Add Place">
+      </div>
+      <div class="six wide field place-date-field">
+        <input
+          class="place-date text-right" type="text"
+          formControlName="visitedDate" placeholder="Date visited">
+        <i class="add to calendar big icon"></i>
+      </div>
+    </div>
+  </div>  
+  <div class="field">
+    <textarea
+      class="place-review" autosize class="" formControlName="review"
+      placeholder="What's so cool about this place?'"></textarea>
+  </div>  
+  <div class="field">
+    <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
+      <span *ngIf="!picture._destroy">
+        <img [src]="picture.url" class="place-image">
+        <i class="remove icon" (click)="removeImage(picture, i)"></i>
+      </span>
+    </span>
+    <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
+  </div>
   <div *ngIf="!place" class="save-button">
     <button class="ui button" type="submit">
       <i class="plus icon"></i>
@@ -10,20 +40,5 @@
       <i class="checkmark icon"></i>
       update
     </button>
-  </div>  
-  <div class="field">
-    <input type="text" (focus)="focusFunction($event)" formControlName="name" placeholder="search place">
-  </div>
-  <div class="field">
-    <textarea autosize class="" formControlName="review" placeholder="add a review"></textarea>
-  </div>  
-  <div class="field">
-    <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
-      <span *ngIf="!picture._destroy">
-        <img [src]="picture.url" class="place-image">
-        <i class="remove icon" (click)="removeImage(picture, i)"></i>
-      </span>
-    </span>
-    <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
   </div>
 </form>

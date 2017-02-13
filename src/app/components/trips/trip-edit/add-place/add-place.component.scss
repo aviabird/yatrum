@@ -1,3 +1,5 @@
+@import "../../../../../_vars.scss";
+
 .save-button {
 	text-align: right;
 	margin-bottom: 13px;
@@ -27,4 +29,42 @@ textarea {
 	left: 66px;
 	font-size: 2em;
 	cursor: pointer;
+}
+
+.form-header {
+	color: $appBaseColor;
+	border-radius: 5px 5px 0 0;
+}
+
+.place-name, .place-date {
+	background: none !important;
+	font-size: 1.5rem !important;
+  font-weight: 400;
+	&:focus {
+		background: none !important;
+	}
+}
+
+.place-date {
+	margin-right: -0.5rem !important;
+}
+
+.calendar.icon {
+  cursor: pointer;
+	font-size: 3rem;
+}
+
+.marker.icon {
+	font-size: 3rem;
+	margin-right: -1.5rem !important;
+}
+
+.place-date-field {
+	padding-right: 0 !important;
+}
+
+textarea {
+	font-size: 1.5rem !important;
+	min-height: 3rem !important;
+	background: none !important;
 }
