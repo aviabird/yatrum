@@ -57,6 +57,7 @@ export class TripEditComponent implements OnInit {
   private initNewTrip() {
     return this.formBuilder.group({
       'name': ['',Validators.required],
+      'description': ['', Validators.required],
       'places': this.formBuilder.array([], Validators.required)
     })
   }
@@ -65,6 +66,7 @@ export class TripEditComponent implements OnInit {
   private initExistingTrip() {
     return this.formBuilder.group({
       'id': [this.trip.id, Validators.required],
+      'description': ['', Validators.required],
       'name': [this.trip.name, Validators.required],
       'places': this.formBuilder.array([], Validators.required) 
     })

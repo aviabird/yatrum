@@ -1,6 +1,7 @@
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 @Component({
   selector: 'tr-add-place',
@@ -13,26 +14,30 @@ export class AddPlaceComponent implements OnInit {
   @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
   @Input() place;
   googleSuggestedPlaceName: string = null;
+  options: DatePickerOptions;
 
 
   constructor(private formBuilder: FormBuilder, private cloudinaryService: CloudinaryIntegrationService) {
+    this.options = new DatePickerOptions();
   }
 
   ngOnInit() {
-    if(this.place) {
+    if (this.place) {
       this.placeForm = this.formBuilder.group({
         'id': [this.place.id, Validators.required],
         'name': [this.place.name, Validators.required],
-        'review': [this.place.review],
+        'review': [this.place.review, Validators.required],
         'pictures': this.formBuilder.array(this.place.pictures),
+        'visitedDate': [this.place.visitedDate, Validators.required],
         '_destroy': [this.place._destroy]
       })
     }
     else {
       this.placeForm = this.formBuilder.group({
         'name': ['', Validators.required],
-        'review': [''],
+        'review': ['', Validators.required],
         'pictures': this.formBuilder.array([]),
+        'visitedDate': ['', Validators.required],
         '_destroy': [false]
       })
     }
@@ -52,12 +57,12 @@ export class AddPlaceComponent implements OnInit {
       url: picture.url,
       public_id: picture.public_id,
       '_destroy': true
-  });
+    });
   }
 
   onSubmit() {
     let place = this.placeForm.value;
-    if(this.googleSuggestedPlaceName)
+    if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
     this.newPlace.emit(place);
 
@@ -69,7 +74,7 @@ export class AddPlaceComponent implements OnInit {
   }
 
   focusFunction($event) {
-    let input = $($event.target)[0]; 
+    let input = $($event.target)[0];
     let options = {
       types: ['establishment']
     };
