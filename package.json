@@ -51,7 +51,7 @@
     "rxjs": "^5.0.3",
     "semantic-ui": "^2.2.7",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.7.7"
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
