@@ -11,7 +11,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ToastyService } from 'ng2-toasty';
 import { ServerAuthService } from './server-auth.service';
 import { getSelectedTrip } from '../reducers/index';
-import { FeedTripsLoadedAction } from '../actions/trips.action';
+import { TripsLoadedAction } from '../actions/trips.action';
 
 @Injectable()
 export class TripsService {
@@ -47,7 +47,7 @@ export class TripsService {
 				if (!trip) {
 					this.http.get(`${this.apiLink}/trips/${id}`)
 						.map((data: Response) => data.json())
-						.map(trip => this.store.dispatch(new fromTripActions.FeedTripsLoadedAction([trip])))
+						.map(trip => this.store.dispatch(new fromTripActions.TripsLoadedAction([trip])))
 						.subscribe();
 				}
 				this.store.dispatch(new fromTripActions.SelectTripAction(id));

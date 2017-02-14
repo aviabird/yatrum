@@ -54,7 +54,6 @@ export class TripListItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log("trip", this.trip);
     // this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
   }
 

@@ -4,9 +4,8 @@ import { Action } from '@ngrx/store';
 
 export const ActionTypes = {
 	LOAD_FEED_TRIPS: "Load Feed [Trips]",
-	LOAD_FEED_TRIPS_SUCCESS: "Load Feed [Trips] Success",
 	LOAD_TRENDING_TRIPS: "Load Trending [Trips]",
-	LOAD_TRENDING_TRIPS_SUCCESS: "Load Trending [Trips] Success",
+	LOAD_TRIPS_SUCCESS: "Load [Trips] Success",
 	LOAD_MORE_TRIPS: "Load More [Trips]",
 	LOAD_MORE_TRIPS_SUCCESS: "Load More [Trips] Success",	
 	SELECT_TRIP: "Select [Trip]",
@@ -30,16 +29,12 @@ export class LoadFeedTripsAction {
 	type = ActionTypes.LOAD_FEED_TRIPS;
 	constructor(public payload: Object) { }
 }
-export class FeedTripsLoadedAction {
-	type = ActionTypes.LOAD_FEED_TRIPS_SUCCESS;
-	constructor(public payload: Trip[]) { }
-}
 export class LoadTrendingTripsAction {
 	type = ActionTypes.LOAD_TRENDING_TRIPS;
 	constructor(public payload: Object) { }
 }
-export class TrendingTripsLoadedAction {
-	type = ActionTypes.LOAD_TRENDING_TRIPS_SUCCESS;
+export class TripsLoadedAction {
+	type = ActionTypes.LOAD_TRIPS_SUCCESS;
 	constructor(public payload: Trip[]) { }
 }
 export class LoadMoreTripsAction {
@@ -48,7 +43,7 @@ export class LoadMoreTripsAction {
 }
 export class MoreTripsLoadedAction {
 	type = ActionTypes.LOAD_MORE_TRIPS_SUCCESS;
-	constructor(public payload: Object) {}
+	constructor(public payload: Trip[]) {}
 }
 export class SelectTripAction {
 	type = ActionTypes.SELECT_TRIP;

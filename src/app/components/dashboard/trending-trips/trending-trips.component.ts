@@ -1,4 +1,4 @@
-import { getTrendingTrips, State } from './../../../reducers/index';
+import { State, getTripsCollection } from './../../../reducers/index';
 import { LoadMoreTripsAction, LoadTrendingTripsAction } from './../../../actions/trips.action';
 import { TripsService } from './../../../services/trips.service';
 import { Store } from '@ngrx/store';
@@ -33,7 +33,7 @@ export class TrendingTripsComponent implements OnInit {
   private page: number = 1;
 
   constructor(private store: Store<State>, private tripService: TripsService) {
-    this.trendingTrips$ = this.store.select(getTrendingTrips);
+    this.trendingTrips$ = this.store.select(getTripsCollection);
   }
 
   ngOnInit() {
