@@ -22,7 +22,7 @@
   </div>  
   <div class="field">
     <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
-      <span *ngIf="!picture._destroy">
+      <span class="place-image-field" *ngIf="!picture._destroy">
         <img [src]="picture.url" class="place-image">
         <i class="remove icon" (click)="removeImage(picture, i)"></i>
       </span>
