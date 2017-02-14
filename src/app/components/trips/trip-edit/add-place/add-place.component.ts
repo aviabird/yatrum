@@ -32,6 +32,8 @@ export class AddPlaceComponent implements OnInit {
         'visitedDate': [this.place.visitedDate, Validators.required],
         '_destroy': [this.place._destroy]
       })
+
+      this.datePickerDate = this.place.visitedDate
     }
     else {
       this.placeForm = this.formBuilder.group({
@@ -69,6 +71,7 @@ export class AddPlaceComponent implements OnInit {
 
     this.placeForm.controls['name'].setValue('');
     this.placeForm.controls['review'].setValue('');
+    this.placeForm.controls['visitedDate'].setValue('');
     let empty = this.formBuilder.array([]);
     this.placeForm.setControl('pictures', empty);
     this.placeForm.controls['_destroy'].setValue(false);

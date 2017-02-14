@@ -81,6 +81,7 @@ export class TripEditComponent implements OnInit {
           'id': [place.id, Validators.required],
           'name': [place.name, Validators.required],
           'review': [place.review],
+          'visitedDate': [place.visitedDate],
           'pictures': this.formBuilder.array([]),
           '_destroy': [false]
         })
@@ -111,6 +112,7 @@ export class TripEditComponent implements OnInit {
         this.formBuilder.group({
           'name': [place.name, Validators.required],
           'review': [place.review],
+          'visitedDate': [place.visitedDate],
           'pictures': this.formBuilder.array(place.pictures),
           '_destroy': [false]
         })
