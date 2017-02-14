@@ -80,6 +80,7 @@ import { PlaceDetailComponent } from './components/trips/trip-detail/place-detai
 import { NewPlaceComponent } from './components/trips/trip-edit/new-place/new-place.component';
 import { UpdatePlaceComponent } from './components/trips/trip-edit/update-place/update-place.component';
 import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
+import { TrendingTripsComponent } from './components/dashboard/trending-trips/trending-trips.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -132,7 +133,8 @@ const myFirebaseAuthConfig = {
     UpdatePlaceComponent,
     HumanizePipe,
     TripHasPlaces,
-    AmbassadorComponent
+    AmbassadorComponent,
+    TrendingTripsComponent
   ],
   imports: [
     BrowserModule,
