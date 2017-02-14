@@ -16,9 +16,9 @@ import { LoadMoreTripsAction } from './../../../actions/trips.action';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'tr-dashboard-trips',
-  templateUrl: './dashboard-trips.component.html',
-  styleUrls: ['./dashboard-trips.component.scss'],
+  selector: 'tr-feed-trips',
+  templateUrl: './feed-trips.component.html',
+  styleUrls: ['./feed-trips.component.scss'],
   animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),
@@ -29,7 +29,7 @@ import { Input } from '@angular/core';
     ])
   ]
 })
-export class DashboardTripsComponent implements OnInit {
+export class FeedTripsComponent implements OnInit {
   @Input() tripsType: string;
   @Input() trips: Trip[];
   authentication$: Observable<boolean>;

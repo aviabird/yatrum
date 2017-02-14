@@ -50,7 +50,7 @@ import { AppComponent } from './app.component';
 import { SearchedTripsComponent } from './components/search/searched-trips/searched-trips.component';
 import { TripsSearchComponent } from './components/search/trips-search/trips-search.component';
 import { TripListItemComponent } from './components/shared/trips/trip-list-item/trip-list-item.component';
-import { DashboardTripsComponent } from './components/dashboard/dashboard-trips/dashboard-trips.component';
+import { FeedTripsComponent } from './components/dashboard/feed-trips/feed-trips.component';
 import { DashboardSearchComponent } from './components/dashboard/dashboard-search/dashboard-search.component';
 import { TripsSearchFilterComponent } from './components/shared/search/trips-search-filter/trips-search-filter.component';
 import { DashboardSearchFilterComponent } from './components/shared/search/dashboard-search-filter/dashboard-search-filter.component';
@@ -118,7 +118,7 @@ const myFirebaseAuthConfig = {
     DashboardSearchFilterComponent,
     TripsSearchFilterComponent,
     DashboardSearchComponent,
-    DashboardTripsComponent,
+    FeedTripsComponent,
     TripListItemComponent,
     TripsSearchComponent,
     SearchedTripsComponent,
