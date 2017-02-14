@@ -13,12 +13,21 @@
 
   <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form ten wide right aligned column ui card">
     <div *ngIf="!place._destroy">
+      <h4 class="ui horizontal divider header">
+        <i class="train big icon"></i>
+        {{place.name}}
+      </h4>
+      <strong>Remove</strong>
       <i class="remove icon" (click)="removePlace(place, i)"></i>
       <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
     </div>
   </div>
 
   <div class="place-form ten wide column ui card">
+    <h4 class="ui horizontal divider header">
+      <i class="train big icon"></i>
+      New Place
+    </h4>
     <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
   </div>
 
