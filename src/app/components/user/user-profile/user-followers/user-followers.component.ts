@@ -6,14 +6,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { State, getUserFollowers } from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Rx';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-followers',
   templateUrl: './user-followers.component.html',
   styleUrls: ['./user-followers.component.scss']
 })
-export class UserFollowersComponent implements OnInit {
+export class UserFollowersComponent implements OnInit, OnDestroy{
 
   private subscription: Subscription;
   private userIndex: string;
@@ -28,6 +28,10 @@ export class UserFollowersComponent implements OnInit {
       (params) => this.userIndex = params['id']
     )
     this.store.dispatch(new LoadUserFollowersAction(this.userIndex));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

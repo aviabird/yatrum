@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import {
   Component,
   OnInit,
+  OnDestroy,
   trigger,
   state,
   transition,
@@ -33,9 +34,10 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
     ])
   ]
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
+  private userSubscription: Subscription;
   private userIndex: string;
   public loaded: boolean = false;
   public profilePicSrc: string = '';
@@ -57,7 +59,7 @@ export class UserProfileComponent implements OnInit {
     this.subscription = this.activatedRoute.params.subscribe(
       (params) => this.userIndex = params['id']
     )
-    this.selectedProfileUser$.subscribe(user => {
+    this.userSubscription = this.selectedProfileUser$.subscribe(user => {
       this.selectedUser = user;
     })
     this.userService.getUserById(this.userIndex);
@@ -123,6 +125,11 @@ export class UserProfileComponent implements OnInit {
 
   onToggleFollow() {
     this.store.dispatch(new FollowProfileUserAction(this.selectedUser.id));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
 }

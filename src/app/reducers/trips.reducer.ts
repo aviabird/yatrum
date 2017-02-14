@@ -146,10 +146,6 @@ export function getTrips(state: State) {
   return state.entities;
 }
 
-export function getTripIds(state: State) {
-  return [...state.feedIds, ...state.trendingIds];
-}
-
 export const getFeedIds = (state: State) => state.feedIds;
 export const getTrendingIds = (state: State) => state.trendingIds;
 
@@ -174,14 +170,14 @@ function pushTrips(tripType: string, tripsArray: [Trip]) {
       returnHash = {
         feedIds: newTripIds,
         trendingIds: [],
-        entities: newTrips
+        entities: Object.assign({},newTrips)
       }
       break;
     case "trending":
       returnHash = {
         trendingIds: newTripIds,
         feedIds: [],
-        entities: newTrips
+        entities: Object.assign({},newTrips)
       }
       break;
   }

@@ -34,9 +34,6 @@ export class TrendingTripsComponent implements OnInit {
 
   constructor(private store: Store<State>, private tripService: TripsService) {
     this.trendingTrips$ = this.store.select(getTrendingTrips);
-    this.trendingTrips$.subscribe((trips) => {
-      console.log("trips", trips);
-    })
   }
 
   ngOnInit() {

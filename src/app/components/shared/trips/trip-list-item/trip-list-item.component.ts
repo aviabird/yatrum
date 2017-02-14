@@ -55,7 +55,7 @@ export class TripListItemComponent implements OnInit {
 
   ngOnInit() {
     console.log("trip", this.trip);
-    this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
+    // this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
   }
 
   tripLikeState() {
@@ -70,9 +70,9 @@ export class TripListItemComponent implements OnInit {
    * returns true if the user is owner of the trip
    * {user} Auth user object
    */
-  tripOfAuthUser(user) {
-    return user.id === this.trip.user.id ? true : false;
-  }
+  // tripOfAuthUser(user) {
+  //   return user.id === this.trip.user.id ? true : false;
+  // }
 
   toggleLike() {
     this.store.dispatch(new LikeTripAction(this.trip.id))

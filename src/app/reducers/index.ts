@@ -75,7 +75,7 @@ export const getSelectedTrip = createSelector(getTrips, getSelectedTripId, (trip
 // =============== user-auth states and compose methods ===============================================
 
 export function getUserState(state: State): fromUserReducer.State {
-	return state.user;
+	return state && state.user;
 }
 
 export const getUserProfile = compose(fromUserReducer.getUserProfile, getUserState);

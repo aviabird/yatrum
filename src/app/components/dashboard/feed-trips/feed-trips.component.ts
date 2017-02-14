@@ -1,7 +1,9 @@
+import { Subscription } from 'rxjs/Rx';
 import { TripsService } from './../../../services/trips.service';
 import {
   Component,
   OnInit,
+  OnDestroy,
   trigger,
   state,
   transition,
@@ -10,7 +12,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 import * as fromRoot from './../../../reducers/index';
 import { LoadMoreTripsAction, LoadFeedTripsAction } from './../../../actions/trips.action';
 import { Input } from '@angular/core';
@@ -29,16 +31,14 @@ import { Input } from '@angular/core';
     ])
   ]
 })
-export class FeedTripsComponent implements OnInit {
+export class FeedTripsComponent implements OnInit, OnDestroy {
   // @Input() hideLoader: boolean;
+  subscription: Subscription;
   feedTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
-    this.feedTrips$ = this.store.select(fromRoot.getFeedTrips);
-    this.feedTrips$.subscribe((trips) => {
-      console.log("trips", trips);
-    })
+    this.feedTrips$ = this.store.select(fromRoot.getFeedTrips); 
   }
 
   ngOnInit() {
@@ -50,6 +50,9 @@ export class FeedTripsComponent implements OnInit {
     let total_pages = this.tripService.total_pages;
     if(this.page <=  total_pages)
       this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: "feeds"}));
+  }
+
+  ngOnDestroy() {
   }
 
 }

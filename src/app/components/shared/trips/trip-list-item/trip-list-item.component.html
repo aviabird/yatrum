@@ -2,16 +2,16 @@
 
   <div class="ui grid content">
     <div class="two wide column">
-      <img class="ui avatar image" [src]="trip.user?.profile_pic?.url">
+      <img class="ui avatar image" [src]="trip?.user.profile_pic?.url">
     </div> 
     <div class="nine wide column">
       <h3 class="user-name">
-        {{trip.user.name}}
+        {{trip?.user.name}}
         <small> shared a</small>
         <a [routerLink]="['/trips',(trip.id)]"> Trip </a>
       </h3>
       <p class="postedAt">
-        {{trip.created_at | amTimeAgo}}
+        {{trip?.created_at | amTimeAgo}}
       </p>
     </div>
     <div class="five wide right aligned column">

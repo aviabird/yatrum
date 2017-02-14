@@ -6,28 +6,23 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-trips',
   templateUrl: './user-trips.component.html',
   styleUrls: ['./user-trips.component.scss']
 })
-export class UserTripsComponent implements OnInit {
+export class UserTripsComponent implements OnInit, OnDestroy {
   private subscription: Subscription
   userTrips$: Observable<Trip[]>;
   userIndex: string;
   hideLoader: boolean = false;
-  trips: Trip[];
 
   constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
     this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(
       trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
     );
-    this.userTrips$.subscribe(data => {
-      this.trips = data;
-      console.log("trips", this.trips);
-    })
    }
 
   ngOnInit() {
@@ -35,6 +30,10 @@ export class UserTripsComponent implements OnInit {
       (params) => this.userIndex = params['id']
     )
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

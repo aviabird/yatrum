@@ -1,22 +1,24 @@
+import { Subscription } from 'rxjs/Rx';
 import { TripsService } from './../services/trips.service';
 import * as fromTripActions from './../actions/trips.action';
 import * as fromRoot from './../reducers/index';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../models/trip';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
 
 @Injectable()
-export class CanActivateViaAuthGuard implements CanActivate{
+export class CanActivateViaAuthGuard implements CanActivate, OnDestroy{
   isAuthenticated: boolean;
+  subscritpion: Subscription;
 
   constructor(private store: Store<fromRoot.State>, private router: Router) {
   }
 
   canActivate() {
-    this.store
+    this.subscritpion = this.store
       .select(fromRoot.getAuthStatus)
       .subscribe(isAuthenticated => {
         this.isAuthenticated = isAuthenticated;
@@ -27,4 +29,9 @@ export class CanActivateViaAuthGuard implements CanActivate{
     
     return this.isAuthenticated;
   }
+
+  ngOnDestroy() {
+    this.subscritpion.unsubscribe();
+  }
+
 }
