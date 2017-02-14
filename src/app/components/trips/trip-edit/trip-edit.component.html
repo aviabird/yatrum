@@ -1,143 +1,25 @@
 <div class="trip ui centered grid cards">
-  <div class="trip-form twelve wide column ui card">
+  <div class="trip-form ten wide column ui card">
     <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
-      <div *ngIf="!tripForm.valid" class="error">
-        Trip must contain a Name and atleast one place
-      </div>
-      <div class="save-button">
-        <button class="ui button" [disabled]="!tripForm.valid" type="submit">Save Trip</button>
+      <div class="field">
+        <input class="trip-title" type="text" placeholder="Title" formControlName="name">
+        <button class="ui big button save-button" type="submit">Publish</button>
       </div>
       <div class="field">
-        <input type="text" placeholder="Trip Name" formControlName="name">
+        <textarea class="trip-description" autosize placeholder="Where is it about?" formControlName="description"></textarea>
       </div>
     </form>
   </div>
 
-  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form twelve wide column">
-    <div *ngIf="!place._destroy" class="ui card">
+  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form ten wide right aligned column ui card">
+    <div *ngIf="!place._destroy">
       <i class="remove icon" (click)="removePlace(place, i)"></i>
       <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
     </div>
   </div>
 
-  <div class="place-form twelve wide column ui card">
+  <div class="place-form ten wide column ui card">
     <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
   </div>
 
 </div>
-
-
-
-
-
-
-<!--<div class="ui two column centered grid">
-  <div class="column">
-    <div class="banner" *ngIf="isEditing">
-      <h3>Editing Trip</h3>
-    </div>
-    <div class="banner" *ngIf="!isEditing">
-      <h3>Creating Trip</h3>
-    </div>
-    <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
-      <div class="field ten wide">-->
-        <!-- Trip Basic detail -->
-        <!--<input class="ta-main-input" 
-          type="text"  
-          id="tripName" 
-          placeholder="Trip name" 
-          formControlName="name">
-      </div>-->
-      <!--Start date of trip not implementing right now -->
-      <!--<div class="form-group">
-        <label for="startDate">Start Date</label>
-        <ng2-datepicker formControlName="startDate"></ng2-datepicker>
-        <p class="help-block">When did you start this trip.</p>
-      </div>-->
-      <!-- Cities Basic info -->
-      <!--<div class="trip-edit-main-container"> TODO: Remove inline CSS later -->
-        <!--<h2 class="side"> City </h2>
-        <button type="button" class="circular ui icon button" (click)="addCity()">
-          <i class="icon plus"></i>
-        </button>
-        <ul class="list-group" formArrayName="cities">
-          <div *ngFor="let city of tripForm.controls['cities'].controls; let i = index">
-            <div class="city-box" formGroupName="{{i}}">
-              <div class="fields">
-                <div class="field eight wide">
-                  <label for="description">City name</label>
-                  <input type="text" 
-                    placeholder="Caliornia, SF" 
-                    formControlName="name">
-                </div>
-              </div>-->
-
-              <!-- Places basic info -->
-              <!--TODO: Add provision for places later-->
-              <!--<div style="margin-left:50px;">
-                <h2 class="side"> Places </h2> 
-                <button type="button" class="circular ui icon button" (click)="addPlace(i)">
-                  <i class="icon plus"></i>
-                </button>
-                <ul class="list-group" formArrayName="places">
-                  <div *ngFor="let place of city.controls['places'].controls; let j = index">
-                    <div class="place-box" formGroupName="{{j}}">
-                      <div><i class="map pin icon"></i></div>
-                      <div class="fields">
-                        <div class="field eight wide">
-                          <label for="name">Place Name</label>
-                          <input type="text" 
-                            placeholder="Caliornia, SF" 
-                            formControlName="name">
-                        </div>
-                      </div>
-                      <div class="field eight wide">
-                        <label for="description">Place Description/Review</label>
-                        <textarea type="text" 
-                          row="2"
-                          placeholder="Caliornia, SF" 
-                          formControlName="description"></textarea>
-                      </div>
-                      <tr-image-upload [placeIndex]="j" [cityIndex]="i" (imageData)="imageUploaded($event)"></tr-image-upload>-->
-                      <!-- Media for all the trips go here -->
-                      <!--<h2> Pictures </h2>
-                      <ul class="list-group" formGroupName="pictures">
-                        <div *ngFor="let picture of place.controls['pictures'].controls; let k = index">
-                          <div class="form-group" formGroupName="{{k}}">
-                            <div class="col-sm-5">
-                              <input #image type="text" formControlName="url" [hidden]="true">
-                              <img class="image-showcase" src="{{image.value}}">
-                            </div>
-                          </div>
-                        </div>
-                      </ul>
-                    </div>
-                  </div>
-                </ul>
-              </div>
-            </div>
-            <div class="vertical-line"></div>
-          </div>
-          <div class="add-city-wrapper">
-            <div class="ui primary animated button add-city-button" tabindex="0" (click)="addCity()">
-              <div class="visible content">Add City</div>
-              <div class="hidden content">
-                <i class="plus icon"></i>
-              </div>
-            </div>
-          </div>
-        </ul>
-      </div>
-      
-      <div class="row">
-        <div class="col-xs-12">-->
-          <!--REFACTOR: Switch to ngIf/Else syntax while updating to angular4.0/2.4.1 -->
-          <!--Link: https://medium.com/aviabird/ngif-else-lands-in-angular-2-0-a242940e54ff#.675yug6u4 -->
-          <!--<button class="ui secondary basic button" (click)="onCancel()">Cancel</button>
-          <button type="submit" *ngIf="!isEditing" class="ui primary basic button">Save</button>
-          <button type="submit" *ngIf="isEditing" class="ui primary basic button"  >Update</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>-->

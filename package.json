@@ -41,7 +41,7 @@
     "humanize-num": "^1.1.5",
     "jquery": "^3.1.1",
     "jshashes": "^1.0.6",
-    "ng2-datepicker": "^1.4.7",
+    "ng2-datepicker": "^1.4.10",
     "ng2-file-upload": "^1.1.4-2",
     "ng2-slim-loading-bar": "^2.0.7",
     "ng2-toasty": "^2.2.2",

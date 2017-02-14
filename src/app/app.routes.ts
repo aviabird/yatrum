@@ -1,3 +1,4 @@
+import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
 import { SignupComponent } from './components/shared/auth/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { UserRoutes } from './components/user/user.routes';
@@ -19,5 +20,6 @@ export const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent},
 	{ path: 'instagram_authentication_callback_url', component: InstagramAuthenticationCallbackComponent },
-	{ path: 'search', component: SearchComponent}
+	{ path: 'search', component: SearchComponent},
+	{ path: 'ambassadors', component: AmbassadorComponent}
 ];
