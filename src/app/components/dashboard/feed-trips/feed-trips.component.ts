@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './../../../reducers/index';
-import { LoadMoreTripsAction } from './../../../actions/trips.action';
+import { LoadMoreTripsAction, LoadFeedTripsAction } from './../../../actions/trips.action';
 import { Input } from '@angular/core';
 
 @Component({
@@ -30,24 +30,26 @@ import { Input } from '@angular/core';
   ]
 })
 export class FeedTripsComponent implements OnInit {
-  @Input() tripsType: string;
-  @Input() trips: Trip[];
-  authentication$: Observable<boolean>;
-  @Input() hideLoader: boolean;
+  // @Input() hideLoader: boolean;
+  feedTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
-    this.authentication$ = this.store.select(fromRoot.getAuthStatus);
+    this.feedTrips$ = this.store.select(fromRoot.getFeedTrips);
+    this.feedTrips$.subscribe((trips) => {
+      console.log("trips", trips);
+    })
   }
 
   ngOnInit() {
+    this.store.dispatch(new LoadFeedTripsAction({page: 1, tripsType: "feeds"}));
   }
 
   onScroll() {
     this.page++;
     let total_pages = this.tripService.total_pages;
     if(this.page <=  total_pages)
-      this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: this.tripsType}));
+      this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: "feeds"}));
   }
 
 }

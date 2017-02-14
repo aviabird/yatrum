@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Store } from '@ngrx/store';
 import "rxjs/add/operator/let";
-import { LoadFeedTripsAction } from '../../../actions/trips.action';
 
 
 
@@ -55,15 +54,6 @@ export class HeaderComponent implements OnInit {
     // Firebase authentication    
     // this.store.dispatch(new LogoutAction);
     this.store.dispatch(new ServerLogoutAction);
-  }
-
-  onSearch(searchQuery){
-    this.router.navigate(['/search']);
-    
-    if(searchQuery != "")
-      this.store.dispatch(new SearchTrip(searchQuery))
-    else
-      this.store.dispatch(new LoadFeedTripsAction({page: 1, tripsType: "feeds"}))
   }
 
 }

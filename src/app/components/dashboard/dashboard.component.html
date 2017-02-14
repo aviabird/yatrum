@@ -10,12 +10,16 @@
       <div class="trips-type eight wide center aligned column">
         <button
           class="ui left attached big button"
-          [ngClass]="{active: isFeedType()}"
-          (click)="selectTripsType('feeds')">Feeds</button>
+          [routerLink]="['feeds']"
+          routerLinkActive="active">
+            Feeds
+        </button>
         <button
           class="right attached ui big button"
-          [ngClass]="{active: isTrendingType()}"
-          (click)="selectTripsType('trending')">Trending</button>
+          [routerLink]="['trending']"
+          routerLinkActive="active">
+            Trending
+        </button>
       </div>
 
       <div class="create-button four wide right aligned column">
@@ -31,10 +35,7 @@
   </div>
 
   <div class="sixteen wide column">
-    <tr-feed-trips
-      [tripsType]="tripsType"
-      [trips]="trips$ | async"
-      [hideLoader]="hideLoader"></tr-feed-trips>
+    <router-outlet></router-outlet>
   </div>
 
 </div>

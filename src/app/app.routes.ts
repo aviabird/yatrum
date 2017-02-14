@@ -1,3 +1,4 @@
+import { DashboardRoutes } from './components/dashboard/dashboard.routes';
 import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
 import { SignupComponent } from './components/shared/auth/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
@@ -16,7 +17,7 @@ export const routes: Routes = [
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 	{ path: 'trips', component: TripsComponent, children: TripRoutes },
 	{ path: 'user', component: UserComponent, children: UserRoutes },
-	{ path: 'dashboard', component: DashboardComponent },
+	{ path: 'dashboard', component: DashboardComponent, children: DashboardRoutes },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent},
 	{ path: 'instagram_authentication_callback_url', component: InstagramAuthenticationCallbackComponent },
