@@ -1,3 +1,4 @@
+@import "./_vars.scss";
 
 /* You can add global styles to this file, and also import other style files */
 @media (min-width: 1200px) {
@@ -88,4 +89,14 @@ hr {
   background: #2C3E50;
   color: white;
   border: none;
+}
+
+.place-date {
+  input {
+		border: none !important;
+    color: $appBaseColor !important;
+    background: none !important;
+    margin-right: -0.5rem !important;
+    text-align: right;
+	}
 }

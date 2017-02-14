@@ -62,6 +62,7 @@ textarea {
 	background: none !important;
 	font-size: 1.5rem !important;
   font-weight: 400;
+	
 	&:focus {
 		background: none !important;
 	}
@@ -83,6 +84,9 @@ textarea {
 
 .place-date-field {
 	padding-right: 0 !important;
+	input {
+		display: none !important;
+	}
 }
 
 textarea {

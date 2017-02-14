@@ -9,9 +9,15 @@
       </div>
       <div class="six wide field place-date-field">
         <input
-          class="place-date text-right" type="text"
-          formControlName="visitedDate" placeholder="Date visited">
+          [(ngModel)]="datePickerDate"
+          formControlName="visitedDate">
+
+        <material-datepicker
+          class="place-date text-right"
+          [(date)]="datePickerDate"
+          dateFormat="DD-MM-YYYY"></material-datepicker>
         <i class="add to calendar big icon"></i>
+
       </div>
     </div>
   </div>  

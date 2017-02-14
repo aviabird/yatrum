@@ -11,12 +11,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
-import { DatePickerModule } from 'ng2-datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastyModule } from 'ng2-toasty';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MomentModule } from 'angular2-moment';
+import { DatepickerModule } from 'angular2-material-datepicker'
 
 // Pipes
 import { HumanizePipe } from './pipes/humanize';
@@ -148,7 +148,6 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(InstagramEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
-    DatePickerModule,
     //TODO: Fix this when AOT error is resolved
     // StoreDevtoolsModule.instrumentStore({
     //   monitor: useLogMonitor({
@@ -160,7 +159,8 @@ const myFirebaseAuthConfig = {
     SlimLoadingBarModule.forRoot(),
     ToastyModule.forRoot(),
     InfiniteScrollModule,
-    MomentModule
+    MomentModule,
+    DatepickerModule
   ],
   providers: [
     UserAuthService,

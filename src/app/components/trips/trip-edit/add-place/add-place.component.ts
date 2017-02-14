@@ -1,7 +1,6 @@
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 @Component({
   selector: 'tr-add-place',
@@ -14,11 +13,13 @@ export class AddPlaceComponent implements OnInit {
   @Output() newPlace: EventEmitter<Object> = new EventEmitter<Object>();
   @Input() place;
   googleSuggestedPlaceName: string = null;
-  options: DatePickerOptions;
+  datePickerDate: Date;
 
 
-  constructor(private formBuilder: FormBuilder, private cloudinaryService: CloudinaryIntegrationService) {
-    this.options = new DatePickerOptions();
+  constructor(
+    private formBuilder: FormBuilder,
+    private cloudinaryService: CloudinaryIntegrationService) {
+    
   }
 
   ngOnInit() {
