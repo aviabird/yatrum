@@ -33,7 +33,7 @@ export class SearchedTripsComponent implements OnInit {
   hideLoader: boolean = false;
 
   constructor(private store: Store<fromRoot.State>) {
-    this.trips$ = this.store.select(fromRoot.getTripsCollection).do(
+    this.trips$ = this.store.select(fromRoot.getFeedTrips).do(
         trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
       );
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);

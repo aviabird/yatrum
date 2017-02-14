@@ -40,14 +40,14 @@ export class TrendingTripsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTrendingTripsAction({page: 1, tripsType: "feeds"}));
+    this.store.dispatch(new LoadTrendingTripsAction({page: 1, tripsType: "trending"}));
   }
-
+  
   onScroll() {
     this.page++;
     let total_pages = this.tripService.total_pages;
     if(this.page <=  total_pages)
-      this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: "feeds"}));
+      this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: "trending"}));
   }
 
 }

@@ -77,7 +77,7 @@ export function reducer(state = initialState, action: Action): State {
 
       return Object.assign({}, state, {
         selected_user: Object.assign({}, state.selected_user, {
-          tripIds: [...state.selected_user.tripIds, ...trip_ids]
+          tripIds: trip_ids
         })
       })
 		}

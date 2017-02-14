@@ -43,6 +43,23 @@ export function reducer(state = initialState, action: Action): State {
       let newState = pushMoreTrips(action.payload.tripsType, action.payload.trips, state)
       return Object.assign({}, state, newState)
     }
+    case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
+      const payloadTrips = action.payload;
+      const tripIds = payloadTrips.map(trip => trip.id);
+
+      const trips = payloadTrips.reduce((trips: { [id: string]: Trip }, trip: Trip) => {
+        return Object.assign(trips, {
+          [trip.id]: trip
+        });
+      }, {});
+
+      return Object.assign({}, state, {
+        feedIds: [],
+        trendingIds: [], 
+        entities: trips     
+      })
+
+    }
     case ActionTypes.ADD_TRIP_TO_STORE: {
       const trip = action.payload;
       const newTrip = {
@@ -156,12 +173,14 @@ function pushTrips(tripType: string, tripsArray: [Trip]) {
     case "feeds":
       returnHash = {
         feedIds: newTripIds,
+        trendingIds: [],
         entities: newTrips
       }
       break;
     case "trending":
       returnHash = {
         trendingIds: newTripIds,
+        feedIds: [],
         entities: newTrips
       }
       break;
@@ -186,14 +205,14 @@ function pushMoreTrips(tripType: string, tripsArray: [Trip], state) {
   switch (tripType) {
     case "feeds":
       returnHash = {
-        feedIds: newTripIds,
-        entities: trips
+        feedIds: [...state.feedIds, ...newTripIds],
+        entities: Object.assign({}, state.entities, trips)
       }
       break;
     case "trending":
       returnHash = {
-        trendingIds: newTripIds,
-        entities: trips
+        trendingIds: [...state.trendingIds, ...newTripIds],
+        entities: Object.assign({}, state.entities, trips)
       }
       break;
   }
