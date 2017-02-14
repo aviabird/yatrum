@@ -21,13 +21,13 @@
       placeholder="What's so cool about this place?'"></textarea>
   </div>  
   <div class="field">
+    <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
     <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
       <span class="place-image-field" *ngIf="!picture._destroy">
         <img [src]="picture.url" class="place-image">
         <i class="remove icon" (click)="removeImage(picture, i)"></i>
       </span>
     </span>
-    <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
   </div>
   <div *ngIf="!place" class="save-button">
     <button class="ui button" type="submit">

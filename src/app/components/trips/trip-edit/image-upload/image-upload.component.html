@@ -1,1 +1,2 @@
-<input type="file" (change)="handleOnChange($event)" multiple />
+<input #fileInput [hidden]="true" type="file" (change)="handleOnChange($event)" multiple />
+<i class="photo big icon" (click)="showImageBrowseDlg()"></i>
