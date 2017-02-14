@@ -86,7 +86,16 @@ export class TripsService {
 	 */
 	getTrips(pageParams): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
-		return this.http.get(`${this.apiLink}/trips.json/?page=${pageParams['page']}`)
+		let url: string;
+		switch(pageParams['tripsType']) {
+			case "feeds": 
+				url = `${this.apiLink}/trips.json/?page=${pageParams['page']}`;
+				break;
+			case "trending":
+				url = `${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`;
+				break;
+		}
+		return this.http.get(url)
 			.map((data: Response) => {
 				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;

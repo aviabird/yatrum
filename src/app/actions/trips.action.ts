@@ -48,7 +48,7 @@ export class LoadMoreTripsAction {
 }
 export class MoreTripsLoadedAction {
 	type = ActionTypes.LOAD_MORE_TRIPS_SUCCESS;
-	constructor(public payload: Trip[]) {}
+	constructor(public payload: Object) {}
 }
 export class SelectTripAction {
 	type = ActionTypes.SELECT_TRIP;

@@ -47,7 +47,7 @@ export class DashboardTripsComponent implements OnInit {
     this.page++;
     let total_pages = this.tripService.total_pages;
     if(this.page <=  total_pages)
-      this.store.dispatch(new LoadMoreTripsAction({page: this.page}));
+      this.store.dispatch(new LoadMoreTripsAction({page: this.page, tripsType: this.tripsType}));
   }
 
 }

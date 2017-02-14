@@ -32,7 +32,7 @@ export class DashboardSearchComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>, private router: Router) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadFeedTripsAction({page: 1}));
+    this.store.dispatch(new LoadFeedTripsAction({page: 1, tripsType: "feeds"}));
   }
 
   onSearch(searchQuery){
@@ -41,7 +41,7 @@ export class DashboardSearchComponent implements OnInit {
     if(searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery));
     else
-      this.store.dispatch(new LoadFeedTripsAction({page: 1}));
+      this.store.dispatch(new LoadFeedTripsAction({page: 1, tripsType: "feeds"}));
   }
 
 }

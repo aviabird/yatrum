@@ -10,6 +10,7 @@ import { FeedTripsLoadedAction, LoadTrendingTripsAction } from '../actions/trips
 
 @Injectable() 
 export class TripsEffects {
+  tripsType: string;
   constructor(private actions$: Actions, private tripsService: TripsService) {}
 
   @Effect()
@@ -21,14 +22,17 @@ export class TripsEffects {
   @Effect()
   TrendingTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_TRENDING_TRIPS)
-    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrendingTrips(action.payload))
+    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrips(action.payload))
     .map((data: Trip[]) => new TripsActions.TrendingTripsLoadedAction(data));
   
   @Effect()
   MoreTrips$: Observable<Action> = this.actions$
     .ofType(TripsActions.ActionTypes.LOAD_MORE_TRIPS)
-    .switchMap<Action, Trip[] | String>((action: Action) => this.tripsService.getTrips(action.payload))
-    .map((data: Trip[]) => new TripsActions.MoreTripsLoadedAction(data));
+    .switchMap<Action, Trip[] | String>((action: Action) => {
+      this.tripsType = action.payload['tripsType'];
+      return this.tripsService.getTrips(action.payload)
+    })
+    .map((data: Trip[]) => new TripsActions.MoreTripsLoadedAction({trips: data, tripsType: this.tripsType}));
 
   @Effect()
   UserTrips$: Observable<Action> = this.actions$

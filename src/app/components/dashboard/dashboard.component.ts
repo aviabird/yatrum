@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
     this.trips$ =
-      this.store.select(fromRoot.getTripsCollection).do(
+      this.store.select(fromRoot.getFeedTrips).do(
         trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
       );
   }
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
           this.store.select(fromRoot.getFeedTrips).do(
             trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
           );
-        this.store.dispatch(new LoadFeedTripsAction({page: 1}));
+        this.store.dispatch(new LoadFeedTripsAction({page: 1, tripsType: this.tripsType}));
         break;
       case "trending":
         this.tripsType = "trending";
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
           this.store.select(fromRoot.getTrendingTrips).do(
             trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
           );
-        this.store.dispatch(new LoadTrendingTripsAction({page: 1}));
+        this.store.dispatch(new LoadTrendingTripsAction({page: 1, tripsType: this.tripsType}));
         break;
     }
   }
