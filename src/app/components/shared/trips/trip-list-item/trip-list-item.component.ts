@@ -44,7 +44,7 @@ export class TripListItemComponent implements OnInit {
   @Input() trip: Trip;
   loggedInUser$: Observable<UserProfile>;
   userTrip: boolean;
-  tripMainPictureUrl: string;
+
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
@@ -55,6 +55,14 @@ export class TripListItemComponent implements OnInit {
 
   ngOnInit() {
     // this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
+  }
+
+  formatImageUrl(rawUrl) {
+    let sizeFormatString = '/c_limit,q_51,w_614';
+    let splitUrlArray = rawUrl.split('/upload')
+    let firstPart = splitUrlArray[0] + '/upload';
+    let seconPart = sizeFormatString + splitUrlArray[1];
+    return `${firstPart}${seconPart}`;
   }
 
   tripLikeState() {
