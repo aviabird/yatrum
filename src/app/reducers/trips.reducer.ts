@@ -31,7 +31,7 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, newState)
     }
     case ActionTypes.LOAD_MORE_TRIPS_SUCCESS: {
-      let newState = pushMoreTrips(action.payload.tripsType, action.payload.trips, state)
+      let newState = pushMoreTrips(action.payload, state)
       return Object.assign({}, state, newState)
     }
     case ActionTypes.LOAD_USER_TRIPS_SUCCESS: {
@@ -163,7 +163,7 @@ function pushTrips(tripsArray: [Trip]) {
 
 }
 
-function pushMoreTrips(tripType: string, tripsArray: [Trip], state) {
+function pushMoreTrips(tripsArray: [Trip], state) {
   const payloadTrips = tripsArray;
   const newTrips = payloadTrips.filter(trip => !state.entities[trip.id]);
   const newTripIds = payloadTrips.map(trip => trip.id);
