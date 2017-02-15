@@ -15,7 +15,7 @@ export class CloudinaryIntegrationService {
   private cloudinaryApiLink: string = `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}`;
   private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
   private auth_token: string;
-  private user$: Observable<any>;
+  // private user$: Observable<any>;
   private toUpdateMediaPublicId: string = null;
 
   constructor(
@@ -40,12 +40,12 @@ export class CloudinaryIntegrationService {
   }
 
   uploadImages(image, mediaType) {
-    this.user$ = this.store.select(getSelectedProfileUser);
+    // this.user$ = this.store.select(getSelectedProfileUser);
     
-    this.user$.subscribe(user => {
-      this.toUpdateMediaPublicId = user.profilePic.public_id;
-      console.log("public id", this.toUpdateMediaPublicId);
-    })
+    // this.user$.subscribe(user => {
+    //   this.toUpdateMediaPublicId = user.profile_pic.public_id;
+    //   console.log("public id", this.toUpdateMediaPublicId);
+    // })
     let params = this.createUploadParams(image);
     this.upload(params)
       .subscribe(data => {
