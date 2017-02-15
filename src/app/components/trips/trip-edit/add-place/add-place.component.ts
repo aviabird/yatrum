@@ -56,7 +56,6 @@ export class AddPlaceComponent implements OnInit {
   }
 
   removeImage(picture, index) {
-    // console.log("place form", this.placeForm.value);
     (<FormGroup>(<FormArray>this.placeForm.controls['pictures']).controls[index]).setValue({
       id: picture.id,
       description: picture.description,
@@ -70,7 +69,6 @@ export class AddPlaceComponent implements OnInit {
     let place = this.placeForm.value;
     if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
-    console.log(place);
     this.newPlace.emit(place);
 
     this.placeForm.controls['name'].setValue('');
