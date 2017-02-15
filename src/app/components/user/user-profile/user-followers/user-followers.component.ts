@@ -17,7 +17,7 @@ export class UserFollowersComponent implements OnInit, OnDestroy{
 
   private subscription: Subscription;
   private userIndex: string;
-  private followersList$: Observable<Array<UserProfile>>
+  public followersList$: Observable<Array<UserProfile>>
 
   constructor(private store: Store<State>, private route: ActivatedRoute, private userService: UserService) { 
     this.followersList$ = this.store.select(getUserFollowers);

@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+/aot
 
 # dependencies
 /node_modules

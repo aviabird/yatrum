@@ -12,7 +12,7 @@
         "favicon.ico"
       ],
       "index": "index.html",
-      "main": "main.ts",
+      "main": "main.jit.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "tr",
@@ -22,7 +22,7 @@
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/semantic-ui/dist/semantic.min.css",
+      "../node_modules/semantic-ui/dist/semantic.min.css",
         "../node_modules/ng2-toasty/bundles/style.css"
       ],
       "scripts": [

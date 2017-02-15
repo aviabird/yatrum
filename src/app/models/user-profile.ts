@@ -14,4 +14,5 @@ export class UserProfile extends Base {
   isFollowed: boolean;
   token: string;
   is_followed_by_current_user: Boolean;
+  profile_pic: any;
 }

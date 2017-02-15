@@ -2,6 +2,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

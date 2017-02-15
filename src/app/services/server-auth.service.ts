@@ -79,6 +79,7 @@ export class ServerAuthService {
             name: data.name,
             email: data.email,
             profilePic: data.profile_pic,
+            profile_pic: data.profile_pic,
             coverPhoto: data.cover_photo,
             isFollowed: null,
             token: data.auth_token,

@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   inputs: ["message", "noOfParas"]
 })
 export class LoaderComponent{
-  private message: string = "Loading";
-  private noOfParas: number = 2;
+  public message: string = "Loading";
+  public noOfParas: number = 2;
 
   createRange(len=20) {
     let arr = [];

@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
+declare var $: any;
 
 @Component({
   selector: 'tr-user-profile',
@@ -38,7 +39,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   private userSubscription: Subscription;
-  private userIndex: string;
+  public userIndex: string;
   public loaded: boolean = false;
   public profilePicSrc: string = '';
   public coverPhotoSrc: string = '';

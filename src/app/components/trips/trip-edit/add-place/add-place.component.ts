@@ -2,6 +2,9 @@ import { CloudinaryIntegrationService } from './../../../../services/cloudinary-
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
+declare var $: any;
+declare var google: any;
+
 @Component({
   selector: 'tr-add-place',
   templateUrl: './add-place.component.html',

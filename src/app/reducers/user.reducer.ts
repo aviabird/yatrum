@@ -21,10 +21,10 @@ export interface State {
 
 const initialState = {
   //TODO: Provision this dummy object creation to user model
-  user: new UserProfile,
+  user: new UserProfile(),
   auth: null,
   selected_user: {
-    user: new UserProfile,
+    user: new UserProfile(),
     tripIds: [],
     followers: null, // change this to followers ids at later stage 
     following: null  // change this to following ids at later stage
