@@ -1,5 +1,5 @@
 .banner {
-	box-shadow: 0px 0px 30px rgba(black,0.3);
+	// box-shadow: 0px 0px 30px rgba(black,0.3);
 	padding: 0px !important;	
 }
 
@@ -24,7 +24,7 @@
 	@extend .content;
 	top: 96px;
 	left: 46px;
-	box-shadow: 0 8px 14px rgba(0,0,0,0.40);
+	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
 	img {
 		position: absolute;
     left: -6px;
@@ -47,7 +47,7 @@
 	bottom: 30px;
 	left: 40px;
 	padding: 12px 32px 12px 24px;
-	box-shadow: 0 8px 14px rgba(0,0,0,0.40);
+	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
   border-radius: 4px;
   font-size: 18px;
 	background: #00A6B4;
@@ -66,9 +66,9 @@
 	@extend .content;
 	bottom: 34px;
 	right: 40px;
-		.icon {
-			box-shadow: 0 8px 14px rgba(0,0,0,0.40);
-		}
+		// .icon {
+		// 	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
+		// }
 		.icon.active {
 			color: #E74C3C;
 		}
