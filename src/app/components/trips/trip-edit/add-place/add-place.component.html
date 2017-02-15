@@ -15,7 +15,8 @@
         <material-datepicker
           class="place-date text-right"
           [(date)]="datePickerDate"
-          dateFormat="DD-MM-YYYY"></material-datepicker>
+          dateFormat="DD-MM-YYYY"
+          placeholder=""></material-datepicker>
         <i class="add to calendar big icon"></i>
 
       </div>
@@ -36,13 +37,13 @@
     </span>
   </div>
   <div *ngIf="!place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" type="button">
       <i class="plus icon"></i>
       Save
     </button>
   </div>
   <div *ngIf="place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" type="button">
       <i class="checkmark icon"></i>
       update
     </button>
