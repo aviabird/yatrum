@@ -1,6 +1,9 @@
 <div class="content">
-  <img class="right floated mini ui image" [src]="comment?.user?.profile_pic.url">
-  <div class="header">
+  <img
+    class="right floated mini ui image"
+    [src]="comment?.user?.profile_pic.url"
+    [routerLink]="['/user', comment?.user?.id]">
+  <div class="header" [routerLink]="['/user', comment?.user?.id]">
     {{comment.user.name}}
   </div>
   <div class="meta">
@@ -12,7 +15,6 @@
 </div>
 <div class="extra content ui grid">
   <div class="ui five buttons wide right aligned column">
-    <div class="ui basic green button">Follow</div>
     <div
       *ngIf="authUser.id == comment.user_id"
       (click)="onCommentDelete(comment.id)"
