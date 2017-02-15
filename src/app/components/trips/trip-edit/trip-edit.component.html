@@ -1,9 +1,9 @@
 <div class="trip ui centered grid cards">
   <div class="trip-form ten wide column ui card">
-    <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+    <form class="ui form" [formGroup]="tripForm">
       <div class="field">
         <input class="trip-title" type="text" placeholder="Title" formControlName="name">
-        <button class="ui big button save-button" type="submit">Publish</button>
+        <button class="ui big button save-button" (click)="onSubmit()" type="button">Publish</button>
       </div>
       <div class="field">
         <textarea class="trip-description" autosize placeholder="Where is it about?" formControlName="description"></textarea>

@@ -1,4 +1,4 @@
-<form class="ui form" [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+<form class="ui form" [formGroup]="placeForm">
   <div class="content form-header">
     <div class="inline fields">
       <div class="ten wide field">
@@ -27,13 +27,13 @@
     </span>
   </div>
   <div *ngIf="!place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" (click)="onSubmit()" type="button">
       <i class="plus icon"></i>
       Save
     </button>
   </div>
   <div *ngIf="place" class="save-button">
-    <button class="ui button" type="submit">
+    <button class="ui button" (click)="onSubmit()" type="button">
       <i class="checkmark icon"></i>
       update
     </button>
