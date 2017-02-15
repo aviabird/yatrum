@@ -1,0 +1,31 @@
+<form class="card sixteen wide column" [formGroup]="commentForm" (ngSubmit)="onCommentSave()" *ngIf="userIsAuthenticated | async">
+  <div class="content">
+    <img aria-hidden=true [src]="authUser.profile_pic.url" class="right floated mini ui image"/>
+    <div class="header">
+      {{authUser.name}}
+    </div>
+    <div class="meta">
+    </div>
+    <div class="description">
+      <textarea
+        type="text"
+        id="message"
+        class="input-group-field"
+        formControlName="message"
+        placeholder="Add Comment"
+        (keypress)="onKeyPressed($event.keyCode)">
+      </textarea>
+      <input type="hidden" formControlName="user_id" [ngModel]="authUser.id">
+      <input type="hidden" formControlName="trip_id" [ngModel]="trip.id">
+    </div>
+  </div>
+  <div class="extra content ui grid">
+    <div class="ui five buttons wide right aligned column">
+      <div class="ui basic green button" *ngIf="commentForm.valid">Send</div>
+      <div
+        (click)="onCancel()"
+        *ngIf="commentForm.valid"
+        class="ui basic red button">Delete</div>
+    </div>
+  </div>
+</form>
