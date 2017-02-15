@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
@@ -22,7 +23,8 @@ export class AddPlaceComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private cloudinaryService: CloudinaryIntegrationService) {
+    private cloudinaryService: CloudinaryIntegrationService,
+    private toastyService: ToastyService) {
     
   }
 
@@ -66,6 +68,10 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.placeForm.valid) {
+      this.toastyService.warning({ title: "Invalid Place", msg: "Place must contain Name, Review and Date" });
+      return;
+    }
     let place = this.placeForm.value;
     if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;

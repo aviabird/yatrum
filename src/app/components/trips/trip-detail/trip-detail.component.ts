@@ -72,6 +72,16 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     return this.authService.belongsToLoggedInUser(this.trip.user_id)
   }
 
+  formatImageUrl(rawUrl) {
+    if(!rawUrl) return;
+
+    let sizeFormatString = '/c_limit,q_65,w_900';
+    let splitUrlArray = rawUrl.split('/upload')
+    let firstPart = splitUrlArray[0] + '/upload';
+    let seconPart = sizeFormatString + splitUrlArray[1];
+    return `${firstPart}${seconPart}`;
+  }
+
   ngOnDestroy() {
     this.tripSubs.unsubscribe();
     this.loggedSubs.unsubscribe();

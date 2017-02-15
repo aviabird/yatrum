@@ -71,13 +71,20 @@
 		}
 }
 
-
-
 .image {
+	background: black;
 	height: 65vh;
-	background-size: cover;
-  background-position: center;
-	background-image: url("http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg");
+	img {
+		opacity: 0.7;
+		object-fit: cover;
+		object-position: center;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.comments-card {
+	padding: 0 !important;
 }
 
 .trip-activity {

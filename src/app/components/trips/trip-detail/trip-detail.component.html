@@ -4,6 +4,7 @@
   <div class="row">
     <div class="ten wide column banner">
       <div class="image">
+        <img [src]="formatImageUrl(trip.thumbnail_image_url)">
       </div>
       <div class="trip-name">
         {{trip?.name}}
@@ -41,7 +42,7 @@
   </div>
   
   <div class="row">
-    <div class="card ten wide column">
+    <div class="card ten wide column comments-card">
       <div *ngFor="let comment of comments$ | async" class="ui cards grid">
         <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
       </div>

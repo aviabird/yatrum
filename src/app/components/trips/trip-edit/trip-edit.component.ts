@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { TripsService } from './../../../services/trips.service';
 import { Subscription } from 'rxjs/Rx';
 import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
@@ -24,7 +25,8 @@ export class TripEditComponent implements OnInit {
   tripForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>, 
-    private route: Router, private tripService: TripsService) {
+    private route: Router, private tripService: TripsService,
+    private toastyService: ToastyService) {
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
     this.isNewTrip = this.checkIfTripIsNew();
     if(!this.isNewTrip) {
@@ -57,7 +59,7 @@ export class TripEditComponent implements OnInit {
   private initNewTrip() {
     return this.formBuilder.group({
       'name': ['',Validators.required],
-      'description': ['', Validators.required],
+      'description': [''],
       'places': this.formBuilder.array([], Validators.required)
     })
   }
@@ -66,7 +68,7 @@ export class TripEditComponent implements OnInit {
   private initExistingTrip() {
     return this.formBuilder.group({
       'id': [this.trip.id, Validators.required],
-      'description': ['', Validators.required],
+      'description': [''],
       'name': [this.trip.name, Validators.required],
       'places': this.formBuilder.array([], Validators.required) 
     })
@@ -158,6 +160,11 @@ export class TripEditComponent implements OnInit {
 
 
   onSubmit() {
+    if(!this.tripForm.valid) {
+      this.toastyService.warning({ title: "Invalid Trip", msg: "Trip must contain Name and atleast One Place" });
+      return;
+    }
+
     if(this.isNewTrip){
       this.tripService.saveTrip(this.tripForm.value)
         .subscribe();
