@@ -91,12 +91,18 @@ hr {
   border: none;
 }
 
-.place-date {
+
+p-calendar {
   input {
-		border: none !important;
-    color: $appBaseColor !important;
     background: none !important;
-    margin-right: -0.5rem !important;
+    border: none !important;
     text-align: right;
-	}
+  }
+
+  button {
+    background: none !important;
+    border: none !important;
+    color: black !important;
+    font-size: 3rem !important;
+  }
 }
