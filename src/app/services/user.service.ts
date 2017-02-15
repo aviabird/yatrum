@@ -20,9 +20,11 @@ export class UserService {
 	}
 
   getUserById(id: string) {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    })
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
     return this.http.post(`${this.apiLink}/users/get_user_by_id`, {user_id: id}, {headers: headers})
       .map(response => response.json())
       .subscribe(data => {

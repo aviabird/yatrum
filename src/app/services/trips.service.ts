@@ -45,7 +45,14 @@ export class TripsService {
 		let subs = this.store.select(getSelectedTrip)
 			.do(trip => {
 				if (!trip) {
-					this.http.get(`${this.apiLink}/trips/${id}`)
+
+					const headers = new Headers({
+						'Content-Type': 'application/json',
+						'Authorization': this.getUserAuthToken()
+						// use Restangular which creates interceptor
+					});
+
+					this.http.get(`${this.apiLink}/trips/${id}`, {headers: headers})
 						.map((data: Response) => data.json())
 						.map(trip => this.store.dispatch(new fromTripActions.TripsLoadedAction([trip])))
 						.subscribe();
@@ -86,6 +93,13 @@ export class TripsService {
 	 */
 	getTrips(pageParams): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
+
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
+
 		let url: string;
 		switch(pageParams['tripsType']) {
 			case "feeds": 
@@ -95,7 +109,7 @@ export class TripsService {
 				url = `${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`;
 				break;
 		}
-		return this.http.get(url)
+		return this.http.get(url, {headers: headers})
 			.map((data: Response) => {
 				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;
@@ -145,7 +159,12 @@ export class TripsService {
 	 */
 	getUserTrips(id: string): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
-		return this.http.get(`${this.apiLink}/users/${id}/trips.json`)
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
+		return this.http.get(`${this.apiLink}/users/${id}/trips.json`, {headers: headers})
 			.map((data: Response) => data.json())
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
