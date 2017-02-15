@@ -8,17 +8,7 @@
           formControlName="name" placeholder="Add Place">
       </div>
       <div class="six wide field place-date-field">
-        <input
-          [(ngModel)]="datePickerDate"
-          formControlName="visitedDate">
-
-        <material-datepicker
-          class="place-date text-right"
-          [(date)]="datePickerDate"
-          dateFormat="DD-MM-YYYY"
-          placeholder=""></material-datepicker>
-        <i class="add to calendar big icon"></i>
-
+        <p-calendar formControlName="visited_date" [showIcon]="true"></p-calendar> 
       </div>
     </div>
   </div>  
@@ -37,13 +27,13 @@
     </span>
   </div>
   <div *ngIf="!place" class="save-button">
-    <button class="ui button" type="button">
+    <button class="ui button" type="submit">
       <i class="plus icon"></i>
       Save
     </button>
   </div>
   <div *ngIf="place" class="save-button">
-    <button class="ui button" type="button">
+    <button class="ui button" type="submit">
       <i class="checkmark icon"></i>
       update
     </button>

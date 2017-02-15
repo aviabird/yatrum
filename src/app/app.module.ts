@@ -16,7 +16,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastyModule } from 'ng2-toasty';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MomentModule } from 'angular2-moment';
-import { DatepickerModule } from 'angular2-material-datepicker'
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { CalendarModule } from 'primeng/primeng';
 
 // Pipes
 import { HumanizePipe } from './pipes/humanize';
@@ -160,7 +161,8 @@ const myFirebaseAuthConfig = {
     ToastyModule.forRoot(),
     InfiniteScrollModule,
     MomentModule,
-    DatepickerModule
+    DatepickerModule,
+    CalendarModule
   ],
   providers: [
     UserAuthService,

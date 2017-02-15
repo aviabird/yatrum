@@ -1,6 +1,7 @@
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import * as moment from 'moment/moment';
 
 declare var $: any;
 declare var google: any;
@@ -32,18 +33,17 @@ export class AddPlaceComponent implements OnInit {
         'name': [this.place.name, Validators.required],
         'review': [this.place.review, Validators.required],
         'pictures': this.formBuilder.array(this.place.pictures),
-        'visitedDate': [this.place.visitedDate, Validators.required],
+        'visited_date': [moment(this.place.visited_date).format('L'), Validators.required],
         '_destroy': [this.place._destroy]
       })
 
-      this.datePickerDate = this.place.visitedDate
     }
     else {
       this.placeForm = this.formBuilder.group({
         'name': ['', Validators.required],
         'review': ['', Validators.required],
         'pictures': this.formBuilder.array([]),
-        'visitedDate': ['', Validators.required],
+        'visited_date': ['', Validators.required],
         '_destroy': [false]
       })
     }
@@ -70,11 +70,12 @@ export class AddPlaceComponent implements OnInit {
     let place = this.placeForm.value;
     if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
+    console.log(place);
     this.newPlace.emit(place);
 
     this.placeForm.controls['name'].setValue('');
     this.placeForm.controls['review'].setValue('');
-    this.placeForm.controls['visitedDate'].setValue('');
+    this.placeForm.controls['visited_date'].setValue('');
     let empty = this.formBuilder.array([]);
     this.placeForm.setControl('pictures', empty);
     this.placeForm.controls['_destroy'].setValue(false);
