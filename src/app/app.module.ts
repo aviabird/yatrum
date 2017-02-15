@@ -16,7 +16,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastyModule } from 'ng2-toasty';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MomentModule } from 'angular2-moment';
-import { DatepickerModule } from 'angular2-material-datepicker'
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { CalendarModule } from 'primeng/primeng';
 
 // Pipes
 import { HumanizePipe } from './pipes/humanize';
@@ -82,6 +83,9 @@ import { AmbassadorComponent } from './components/misc/ambassador/ambassador.com
 import { TrendingTripsComponent } from './components/dashboard/trending-trips/trending-trips.component';
 import { ChangePasswordComponent } from './components/user/user-settings/change-password/change-password.component';
 import { EqualValidator } from './Validators/equal-validator.directive';
+import { CommentEffects } from './effects/comments.effects';
+import { TripCommentComponent } from './components/trips/trip-detail/trip-comment/trip-comment.component';
+import { NewTripCommentComponent } from './components/trips/trip-detail/new-trip-comment/new-trip-comment.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -136,7 +140,9 @@ const myFirebaseAuthConfig = {
     AmbassadorComponent,
     TrendingTripsComponent,
     ChangePasswordComponent,
-    EqualValidator
+    EqualValidator,
+    TripCommentComponent,
+    NewTripCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -150,6 +156,7 @@ const myFirebaseAuthConfig = {
     EffectsModule.run(UserAuthEffects),
     EffectsModule.run(TripsEffects),
     EffectsModule.run(InstagramEffects),
+    EffectsModule.run(CommentEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
     //TODO: Fix this when AOT error is resolved
@@ -164,7 +171,8 @@ const myFirebaseAuthConfig = {
     ToastyModule.forRoot(),
     InfiniteScrollModule,
     MomentModule,
-    DatepickerModule
+    DatepickerModule,
+    CalendarModule
   ],
   providers: [
     UserAuthService,

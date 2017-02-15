@@ -8,16 +8,7 @@
           formControlName="name" placeholder="Add Place">
       </div>
       <div class="six wide field place-date-field">
-        <input
-          [(ngModel)]="datePickerDate"
-          formControlName="visitedDate">
-
-        <material-datepicker
-          class="place-date text-right"
-          [(date)]="datePickerDate"
-          dateFormat="DD-MM-YYYY"></material-datepicker>
-        <i class="add to calendar big icon"></i>
-
+        <p-calendar formControlName="visited_date" [showIcon]="true"></p-calendar> 
       </div>
     </div>
   </div>  

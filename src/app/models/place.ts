@@ -4,7 +4,7 @@ import { Media } from './media';
 
 export interface Place extends Base {
     name: string; // restaurant, tourist attraction, airport, etc
-    visitedDate: Date;
+    visited_date: Date;
     description: string;
     review: string; 
     pictures: Picture[];

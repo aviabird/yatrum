@@ -3,11 +3,13 @@ import { UserAuthService } from './../../../services/user-auth.service';
 import { FollowUserAction } from './../../../actions/user.action';
 import { LikeTripAction } from './../../../actions/trips.action';
 import { Trip } from './../../../models/trip';
-import { UserProfile } from './../../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Comment } from '../../../models/comment';
+import { LoadCommentsAction } from '../../../actions/comment.action';
+import { UserProfile } from '../../../models/user-profile';
 
 @Component({
   selector: 'tr-trip-detail',
@@ -17,21 +19,27 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class TripDetailComponent implements OnInit, OnDestroy {
   trip$: Observable<any>;
   loggedInUser$: Observable<UserProfile>;
-  trip: Trip;
+  trip: Trip = new Trip();
+  comments$: Observable<Comment[]>;
   userTrip: boolean;
-  user: any = {};
+  user: UserProfile = new UserProfile();
   tripSubs: Subscription;
   loggedSubs: Subscription;
 
   constructor(private store: Store<fromRoot.State>, private authService: UserAuthService) {
+    this.trip.user = this.user;
     this.trip$ = this.store.select(fromRoot.getSelectedTrip);
+    this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
   }
 
   ngOnInit() {
     this.tripSubs = this.trip$.subscribe(trip => {
-      this.trip = trip;
-      this.user = trip.user;
+      if (trip) {
+        this.trip = trip;
+        this.user = trip.user;
+        this.store.dispatch(new LoadCommentsAction(trip.id));
+      }
     });
     
     this.loggedSubs = this.loggedInUser$.subscribe(user => {

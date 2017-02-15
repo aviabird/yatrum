@@ -81,7 +81,7 @@ export class TripEditComponent implements OnInit {
           'id': [place.id, Validators.required],
           'name': [place.name, Validators.required],
           'review': [place.review],
-          'visitedDate': [place.visitedDate],
+          'visited_date': [place.visited_date],
           'pictures': this.formBuilder.array([]),
           '_destroy': [false]
         })
@@ -112,7 +112,7 @@ export class TripEditComponent implements OnInit {
         this.formBuilder.group({
           'name': [place.name, Validators.required],
           'review': [place.review],
-          'visitedDate': [place.visitedDate],
+          'visited_date': [place.visited_date],
           'pictures': this.formBuilder.array(place.pictures),
           '_destroy': [false]
         })
@@ -124,6 +124,7 @@ export class TripEditComponent implements OnInit {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['_destroy'].setValue(place._destroy);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['visited_date'].setValue(place.visited_date);
 
     let empty = this.formBuilder.array([]);
 
@@ -142,6 +143,7 @@ export class TripEditComponent implements OnInit {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['_destroy'].setValue(true);
+    (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['visited_date'].setValue(place.visited_date);
 
     let empty = this.formBuilder.array([]);
 

@@ -12,6 +12,7 @@ import { ToastyService } from 'ng2-toasty';
 import { ServerAuthService } from './server-auth.service';
 import { getSelectedTrip } from '../reducers/index';
 import { TripsLoadedAction } from '../actions/trips.action';
+import { Comment } from '../models/comment';
 
 @Injectable()
 export class TripsService {
@@ -26,7 +27,7 @@ export class TripsService {
 		private toastyService: ToastyService,
 		private authSerive: ServerAuthService,
 		private router: Router
-	) {}
+	) { }
 
 	getUserAuthToken() {
 		let user_data = JSON.parse(localStorage.getItem('user'));
@@ -52,14 +53,14 @@ export class TripsService {
 						// use Restangular which creates interceptor
 					});
 
-					this.http.get(`${this.apiLink}/trips/${id}`, {headers: headers})
+					this.http.get(`${this.apiLink}/trips/${id}`, { headers: headers })
 						.map((data: Response) => data.json())
 						.map(trip => this.store.dispatch(new fromTripActions.TripsLoadedAction([trip])))
 						.subscribe();
 				}
 				this.store.dispatch(new fromTripActions.SelectTripAction(id));
 			}).subscribe();
-		
+
 		subs.unsubscribe();
 		return true;
 
@@ -101,15 +102,15 @@ export class TripsService {
 		});
 
 		let url: string;
-		switch(pageParams['tripsType']) {
-			case "feeds": 
+		switch (pageParams['tripsType']) {
+			case "feeds":
 				url = `${this.apiLink}/trips.json/?page=${pageParams['page']}`;
 				break;
 			case "trending":
 				url = `${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`;
 				break;
 		}
-		return this.http.get(url, {headers: headers})
+		return this.http.get(url, { headers: headers })
 			.map((data: Response) => {
 				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;
@@ -164,7 +165,7 @@ export class TripsService {
 			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
-		return this.http.get(`${this.apiLink}/users/${id}/trips.json`, {headers: headers})
+		return this.http.get(`${this.apiLink}/users/${id}/trips.json`, { headers: headers })
 			.map((data: Response) => data.json())
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
@@ -189,7 +190,7 @@ export class TripsService {
 			.map((data: Response) => {
 				let trip = data.json();
 				this.store.dispatch(new fromTripActions.SaveTripSuccessAction(trip));
-				this.router.navigate(['/user',(trip.user_id)]);
+				this.router.navigate(['/user', (trip.user_id)]);
 			})
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
@@ -215,7 +216,7 @@ export class TripsService {
 			.map((data: Response) => {
 				let trip = data.json();
 				this.store.dispatch(new fromTripActions.UpdateTripSuccessAction(trip));
-				this.router.navigate(['/user',(trip.user_id)]);
+				this.router.navigate(['/user', (trip.user_id)]);
 			})
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
@@ -239,6 +240,62 @@ export class TripsService {
 		)
 			.map((data: Response) => data.json())
 			.catch((res: Response) => this.catchError(res));
+	}
+
+	/**
+	 * Get Trip Comments
+	 * @method getComments
+	 * @param {string} tripId of trip
+	 * @return {Observable} Observable with Comments
+	 */
+	getComments(tripId: string) {
+		return this.http.get(`${this.apiLink}/trips/${tripId}/comments`)
+			.map((data: Response) => data.json())
+			.catch((res: Response) => this.catchError(res));
+	}
+
+	/**
+	 * Add Comment 
+	 * @method addComment
+	 * @param {Comment} comment
+	 * @return {Observable} Observable with Comment
+	 */
+	addComment(comment: Comment) {
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
+
+		return this.http.post(
+			`${this.apiLink}/trips/add_comments`,
+			{ comment: comment },
+			{ headers: headers }
+		)
+		.map((data: Response) => data.json())
+		.catch((res: Response) => this.catchError(res));
+	}
+
+	/**
+	 * Delete Comment 
+	 * @method deleteComment
+	 * @param {Comment} comment
+	 * @return {Observable} Observable with Comment
+	 */
+	deleteComment(comment: Comment) {
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
+
+		return this.http.post(
+			`${this.apiLink}/trips/comments`,
+			{ id: comment.id, user_id: comment.user_id },
+			{ headers: headers }
+		)
+		.map((data: Response) => comment)
+		.catch((res: Response) => this.catchError(res));
 	}
 
 	catchError(response: Response): Observable<String> {

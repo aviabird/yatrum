@@ -9,6 +9,7 @@ import * as fromUserReducer from './user.reducer';
 import * as fromTripsReducer from './trips.reducer';
 import * as fromNotificationReducer from './notification.reducer';
 import * as fromInstagramReducer from './instagram.reducers';
+import * as fromCommentReducr from './comments.reducer';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
 import { environment } from '../../environments/environment';
 
@@ -17,13 +18,15 @@ export interface State {
 	trips: fromTripsReducer.State;
 	notifications: fromNotificationReducer.State;
 	instagramMedia: fromInstagramReducer.State;
+	comments: fromCommentReducr.State;
 }
 
 const reducers = {
 	user: fromUserReducer.reducer,
 	trips: fromTripsReducer.reducer,
 	notifications: fromNotificationReducer.reducer,
-	instagramMedia: fromInstagramReducer.reducer
+	instagramMedia: fromInstagramReducer.reducer,
+	comments: fromCommentReducr.reducer
 }
 
 export const developmentReducer: ActionReducer<State> = combineReducers(reducers);
@@ -101,3 +104,20 @@ function getInstagramState(state: State): fromInstagramReducer.State {
 }
 
 export const getInstagramMedia = createSelector(getInstagramState, fromInstagramReducer.getInstagramMedia);
+
+// ************************************
+// Comment State Funcations
+// ************************************
+export const getCommentState = (appState: State) => appState.comments;
+
+export const getCommentEntities = createSelector(getCommentState, fromCommentReducr.getEntities);
+export const getCommentIds = createSelector(getCommentState, fromCommentReducr.getIds);
+
+export const getComments = createSelector(getCommentEntities, getCommentIds, (comments, ids) => {
+  return ids.map(id => comments[id]);
+});
+
+export const getSelectedTripComments = createSelector(getComments, getSelectedTripId, (comments, trip_id) => {
+  return comments.filter(comment => comment.trip_id == trip_id)
+})
+// ------------------------------------
