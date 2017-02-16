@@ -1,4 +1,11 @@
 <tr-loader message="Loading Trips" noOfParas="4" [hidden]="hideLoader"></tr-loader>
-<div *ngFor="let trip of userTrips$ | async">
-	<tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+
+<div *ngIf="(userTrips$ | async)?.length">
+  <div *ngFor="let trip of userTrips$ | async">
+    <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+  </div>
+</div>
+
+<div *ngIf="!(userTrips$ | async)?.length">
+  <h2>You Haven't Created Any Trips Yet</h2>
 </div>

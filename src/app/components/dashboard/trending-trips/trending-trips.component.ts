@@ -28,11 +28,14 @@ import { Component,
   ]
 })
 export class TrendingTripsComponent implements OnInit {
-
+  hideLoader: boolean = false;
   trendingTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<State>, private tripService: TripsService) {
+    
+    this.tripService.loading.subscribe(response => this.hideLoader = !response);
+
     this.trendingTrips$ = this.store.select(getTripsCollection);
   }
 

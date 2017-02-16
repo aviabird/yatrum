@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import { Store } from '@ngrx/store';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
@@ -32,10 +33,14 @@ export class SearchedTripsComponent implements OnInit {
 	authentication$: Observable<boolean>;
   hideLoader: boolean = false;
 
-  constructor(private store: Store<fromRoot.State>) {
-    this.trips$ = this.store.select(fromRoot.getTripsCollection).do(
-        trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
-      );
+  constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
+
+    this.tripService.loading.subscribe(response => {
+      this.hideLoader = !response;
+    })
+
+    this.trips$ = this.store.select(fromRoot.getTripsCollection)
+
     this.authentication$ = this.store.select(fromRoot.getAuthStatus);
   }
 

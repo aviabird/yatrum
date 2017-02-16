@@ -33,11 +33,13 @@ import { Input } from '@angular/core';
 })
 export class FeedTripsComponent implements OnInit, OnDestroy {
   // @Input() hideLoader: boolean;
+  hideLoader: boolean = false;
   subscription: Subscription;
   feedTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
+    this.tripService.loading.subscribe(response => this.hideLoader = !response);
     this.feedTrips$ = this.store.select(fromRoot.getTripsCollection); 
   }
 

@@ -1,3 +1,5 @@
+import { Response } from '@angular/http';
+import { TripsService } from './../../../../services/trips.service';
 import { LoadUserTripsAction } from './../../../../actions/trips.action';
 import * as fromRoot from './../../../../reducers/index';
 import { UserProfile } from './../../../../models/user-profile';
@@ -18,11 +20,19 @@ export class UserTripsComponent implements OnInit, OnDestroy {
   userTrips$: Observable<Trip[]>;
   userIndex: string;
   hideLoader: boolean = false;
+  loading: boolean;
+  constructor(private store: Store<fromRoot.State>, 
+              private route: ActivatedRoute, 
+              private tripService: TripsService) {
+    
+    this.tripService.loading.subscribe(response => {
+      this.hideLoader = !response;
+    })
 
-  constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) {
-    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(
-      trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
-    );
+    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection)
+    // .do(
+    //   trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
+    // );
    }
 
   ngOnInit() {
