@@ -50,7 +50,15 @@ export class UserAuthEffects {
   @Effect()
   server_login$: Observable<Action> = this.actions$
     .ofType(UserAuthActions.ActionTypes.SERVER_LOGIN)
-    .switchMap((data) => this.serverAuthService.login(data.payload))
+    .switchMap((action: Action) => {
+      if(action.payload.socialLogin){
+        return this.serverAuthService.socialLogin(action.payload.data)
+      }
+      else{
+        return this.serverAuthService.login(action.payload.data)
+      }
+
+    })
     .filter(data => data !== null)
     .map((data) => {
       if (typeof(data) === typeof('string')){

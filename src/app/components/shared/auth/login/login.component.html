@@ -7,6 +7,7 @@
         Log-in
       </div>
     </h2>
+
     <form class="ui medium form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
       <div class="ui stacked segment">
         <div class="field">
@@ -23,8 +24,14 @@
         </div>
         <button type="submit" class="ui fluid large teal submit button">Sign in</button>
       </div>
-
     </form>
+    
+    <div class="ui message">
+      <button class="ui google plus button" (click)="socialLogin('google')">
+        <i class="google plus icon"></i>
+        SignIn With Google
+      </button>
+    </div>
 
     <div class="ui message">
       New to Yatrum? <a [routerLink]="['/signup']">Sign Up</a>

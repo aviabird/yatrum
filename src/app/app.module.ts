@@ -85,6 +85,13 @@ import { CommentEffects } from './effects/comments.effects';
 import { TripCommentComponent } from './components/trips/trip-detail/trip-comment/trip-comment.component';
 import { NewTripCommentComponent } from './components/trips/trip-detail/new-trip-comment/new-trip-comment.component';
 
+// Satellizer Module
+import { Ng2UiAuthModule, CustomConfig } from 'ng2-ui-auth';
+import { MyAuthConfig } from './auth-config';
+
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
   authDomain: "travel-app-frontend.firebaseapp.com",
@@ -146,6 +153,7 @@ const myFirebaseAuthConfig = {
     CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
+    Ng2UiAuthModule.forRoot(MyAuthConfig),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(reducer),
     EffectsModule.run(UserEffects),

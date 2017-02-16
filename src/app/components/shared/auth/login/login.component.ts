@@ -37,12 +37,19 @@ export class LoginComponent implements OnInit {
     this.initForm()
   }
 
+  socialLogin(provider: string){
+    let payload = { data: provider, socialLogin: true }
+    this.store.dispatch(new ServerLoginAction(payload));        
+  }
+
+
   onSubmit() {
     let values = this.signInForm.value;
+    let payload = { data: values, socialLogin: false }
     console.log('user object', values);
     // First clear the login form message
     this.store.dispatch(new UpdateLoginFormNotification(''));
-    this.store.dispatch(new ServerLoginAction(values));
+    this.store.dispatch(new ServerLoginAction(payload));
   }
 
   initForm() {
