@@ -29,6 +29,8 @@ import { UserAuthService } from './services/user-auth.service';
 import { ServerAuthService } from './services/server-auth.service';
 import { CloudinaryIntegrationService } from './services/cloudinary-integration.service';
 import { UserService } from './services/user.service';
+import { TripFormService } from './services/forms/trip-form.service';
+import { PlaceFormService } from './services/forms/place-form.service';
 
 // Guards
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
@@ -180,7 +182,9 @@ const myFirebaseAuthConfig = {
     TripsResolveGuard,
     InstagramIntegrationService,
     CloudinaryIntegrationService,
-    CanActivateViaAuthGuard
+    CanActivateViaAuthGuard,
+    PlaceFormService,
+    TripFormService
   ],
   bootstrap: [AppComponent]
 })
