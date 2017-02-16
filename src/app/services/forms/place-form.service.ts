@@ -9,7 +9,7 @@ export class PlaceFormService {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  initForm(place?) {
+  initPlace(place?) {
     if (place) {
       return this.formBuilder.group({
         'id': [place.id, Validators.required],

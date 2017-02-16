@@ -81,10 +81,10 @@ export class AddPlaceComponent implements OnInit {
 
   private initForm() {
     if (this.place) {
-      this.placeForm = this.placeFormService.initForm(this.place);
+      this.placeForm = this.placeFormService.initPlace(this.place);
     }
     else {
-      this.placeForm = this.placeFormService.initForm();
+      this.placeForm = this.placeFormService.initPlace();
     }
   }
 
