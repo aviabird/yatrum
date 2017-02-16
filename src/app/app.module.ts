@@ -21,6 +21,7 @@ import { CalendarModule } from 'primeng/primeng';
 
 // Pipes
 import { HumanizePipe } from './pipes/humanize';
+import { ThumbnailPipe } from './pipes/thumbnail';
 
 // Services 
 import { TripsService } from './services/trips.service';
@@ -134,6 +135,7 @@ const myFirebaseAuthConfig = {
     NewPlaceComponent,
     UpdatePlaceComponent,
     HumanizePipe,
+    ThumbnailPipe,
     TripHasPlaces,
     AmbassadorComponent,
     TrendingTripsComponent,
