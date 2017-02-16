@@ -20,13 +20,11 @@ export class AddPlaceComponent implements OnInit {
   googleSuggestedPlaceName: string = null;
   datePickerDate: Date;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private cloudinaryService: CloudinaryIntegrationService,
     private toastyService: ToastyService,
     private placeFormService: PlaceFormService) {
-    
   }
 
   ngOnInit() {

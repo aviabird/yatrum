@@ -47,33 +47,21 @@ export class TripEditComponent implements OnInit {
   }
 
   private initForm() {
-    if(this.isNewTrip){
-      this.tripForm = this.initNewTrip();
-    }
+    if(this.isNewTrip)
+      this.initNewTrip();
     else
-    {
-      this.tripForm = this.initExistingTrip();
-      this.addPlaces()
-    }
+      this.initExistingTrip();
   }
 
 // if trip is being newly created
   private initNewTrip() {
-    return this.formBuilder.group({
-      'name': ['',Validators.required],
-      'description': [''],
-      'places': this.formBuilder.array([], Validators.required)
-    })
+    this.tripForm = this.tripFormService.initTrip(); 
   }
 
 // if trip is being updated
   private initExistingTrip() {
-    return this.formBuilder.group({
-      'id': [this.trip.id, Validators.required],
-      'description': [''],
-      'name': [this.trip.name, Validators.required],
-      'places': this.formBuilder.array([], Validators.required) 
-    })
+    this.tripForm = this.tripFormService.initTrip(this.trip);
+    this.addPlaces();
   }
 
 
