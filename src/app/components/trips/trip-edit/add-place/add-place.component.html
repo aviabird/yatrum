@@ -21,7 +21,7 @@
     <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
     <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
       <span class="place-image-field" *ngIf="!picture._destroy">
-        <img [src]="picture.url" class="place-image">
+        <img [src]="picture.url | thumbnail:'w_150,q_75'" class="place-image">
         <i class="remove icon" (click)="removeImage(picture, i)"></i>
       </span>
     </span>

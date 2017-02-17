@@ -1,3 +1,4 @@
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Observable } from 'rxjs/Observable';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { Place } from './../../../../models/place';
@@ -13,9 +14,19 @@ import {
 export class ImageUploadComponent implements OnInit {
   @Output() imageData = new EventEmitter();
   @ViewChild('fileInput') fileInput: ElementRef;
-  cloudImages = [];
+  imagesToUpload = [];
+  totalImagesToUpload: number = 0;
 
-  constructor(private cloudinaryService: CloudinaryIntegrationService, private renderer: Renderer) { }
+  constructor(private cloudinaryService: CloudinaryIntegrationService,
+    private slimLoadingBarService: SlimLoadingBarService,
+    private renderer: Renderer) {
+    this.cloudinaryService.uploading.subscribe(response => {
+      if(response)
+        this.slimLoadingBarService.start();
+      else
+        this.slimLoadingBarService.complete();  
+    });
+  }
 
   ngOnInit() {
   }
@@ -23,6 +34,7 @@ export class ImageUploadComponent implements OnInit {
   handleOnChange(event) {
     let files: any = event.dataTransfer ? event.dataTransfer.files : event.target.files;
     let files_list = [];
+    this.totalImagesToUpload = 0;
     let pattern = /image-*/;
     for (let i = 0; i < files.length; i++) {
       files_list.push(files[i]);
@@ -32,6 +44,7 @@ export class ImageUploadComponent implements OnInit {
         alert('Remove non image format files');
         return;
       }
+      this.totalImagesToUpload++;
       let reader = new FileReader();
       reader.onload = this.handleReaderLoaded.bind(this);
       reader.readAsDataURL(file);
@@ -42,10 +55,11 @@ export class ImageUploadComponent implements OnInit {
     let reader = e.target;
     let imageUrl = reader.result;
     this.uploadMedia(imageUrl);
+
   }
 
   private uploadMedia(imageUrl: string) {
-    let cloudUpload$: Observable<any> = this.cloudinaryService.uploadPlacePicture(imageUrl);
+    let cloudUpload$: Observable<any> = this.cloudinaryService.uploadPlacePicture(imageUrl, this.totalImagesToUpload);
     cloudUpload$.subscribe(image => {
       this.imageData.emit({
         id: null,

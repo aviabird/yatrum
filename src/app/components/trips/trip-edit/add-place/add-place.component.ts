@@ -1,8 +1,8 @@
+import { PlaceFormService } from './../../../../services/forms/place-form.service';
 import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import * as moment from 'moment/moment';
 
 declare var $: any;
 declare var google: any;
@@ -20,36 +20,15 @@ export class AddPlaceComponent implements OnInit {
   googleSuggestedPlaceName: string = null;
   datePickerDate: Date;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private cloudinaryService: CloudinaryIntegrationService,
-    private toastyService: ToastyService) {
-    
+    private toastyService: ToastyService,
+    private placeFormService: PlaceFormService) {
   }
 
   ngOnInit() {
-    if (this.place) {
-      this.placeForm = this.formBuilder.group({
-        'id': [this.place.id, Validators.required],
-        'name': [this.place.name, Validators.required],
-        'review': [this.place.review, Validators.required],
-        'pictures': this.formBuilder.array(this.place.pictures),
-        'visited_date': [moment(this.place.visited_date).format('L'), Validators.required],
-        '_destroy': [this.place._destroy]
-      })
-
-    }
-    else {
-      this.placeForm = this.formBuilder.group({
-        'name': ['', Validators.required],
-        'review': ['', Validators.required],
-        'pictures': this.formBuilder.array([]),
-        'visited_date': ['', Validators.required],
-        '_destroy': [false]
-      })
-    }
-
+    this.initForm();
   }
 
   imageUploaded(image) {
@@ -96,6 +75,15 @@ export class AddPlaceComponent implements OnInit {
       let place = autocomplete.getPlace();
       that.googleSuggestedPlaceName = place.name;
     });
+  }
+
+  private initForm() {
+    if (this.place) {
+      this.placeForm = this.placeFormService.initPlace(this.place);
+    }
+    else {
+      this.placeForm = this.placeFormService.initPlace();
+    }
   }
 
 }
