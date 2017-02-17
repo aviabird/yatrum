@@ -21,7 +21,7 @@ export class TripFormService {
     }
     
     return this.formBuilder.group({
-      'id': [id, Validators.required],
+      'id': [id],
       'description': [description],
       'name': [name, Validators.required],
       'places': this.formBuilder.array([], Validators.required) 

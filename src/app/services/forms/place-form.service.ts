@@ -12,7 +12,7 @@ export class PlaceFormService {
   initPlace(place?) {
     if (place) {
       return this.formBuilder.group({
-        'id': [place.id, Validators.required],
+        'id': [place.id],
         'name': [place.name, Validators.required],
         'review': [place.review, Validators.required],
         'pictures': this.formBuilder.array(place.pictures),
@@ -23,6 +23,7 @@ export class PlaceFormService {
     }
     else {
       return this.formBuilder.group({
+        'id': [''],
         'name': ['', Validators.required],
         'review': ['', Validators.required],
         'pictures': this.formBuilder.array([]),
