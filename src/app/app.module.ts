@@ -91,6 +91,7 @@ import { NewTripCommentComponent } from './components/trips/trip-detail/new-trip
 // Satellizer Module
 import { Ng2UiAuthModule, CustomConfig } from 'ng2-ui-auth';
 import { MyAuthConfig } from './auth-config';
+import { OtherDetailsComponent } from './components/user/user-settings/other-details/other-details.component';
 
 
 
@@ -149,7 +150,8 @@ const myFirebaseAuthConfig = {
     AmbassadorComponent,
     TrendingTripsComponent,
     TripCommentComponent,
-    NewTripCommentComponent
+    NewTripCommentComponent,
+    OtherDetailsComponent
   ],
   imports: [
     BrowserModule,
