@@ -1,4 +1,4 @@
-import { Secrets } from './secrets';
+import { Secrets } from './secret';
 import { environment } from './../environments/environment';
 import { CustomConfig } from 'ng2-ui-auth';
 
