@@ -112,13 +112,13 @@ export class TripsService {
 				url = `${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`;
 				break;
 		}
-    // Loading Trips
-    this.loading.next(true);
-    
+		// Loading Trips
+		this.loading.next(true);
+		
 		return this.http.get(url, { headers: headers })
-      .map((data: Response) => {
-        this.loading.next(false);
-    		let trips_data = data.json();
+			.map((data: Response) => {
+				this.loading.next(false);
+				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;
 				return trips_data.trips;
 			})
@@ -176,14 +176,14 @@ export class TripsService {
 			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
-    this.loading.next(true);
+    	this.loading.next(true);
 
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`, { headers: headers })
-      .map((data: Response) => {
-        console.log("check");
-        this.loading.next(false);
-        return data.json()
-      })
+      		.map((data: Response) => {
+				console.log("check");
+				this.loading.next(false);
+				return data.json()
+      		})
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete())
 	}

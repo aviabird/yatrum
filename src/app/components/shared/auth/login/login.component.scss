@@ -1,0 +1,15 @@
+.fixwidth {
+    width: 200px !important;
+}
+
+.center-line {
+    position: relative;
+    margin: 25px 0;
+    .text {
+        position: absolute;
+        top: -10px;
+        left: 47%;
+        background-color: #efeeee;
+        padding: 0 2px;
+    }
+}
