@@ -70,6 +70,15 @@ $ cd yatrum
 ```
 $ npm install
 ```
+##### Additional Settings
+
+For Social login to work you need to create an app on faceook and google and note down the client id and secret id of individual app.
+Below are instructions for creating app on inidviudal social media site
+
+1. <strong>Google</strong> : [Creating App Engine Project and Application](https://developers.google.com/ad-exchange/rtb/open-bidder/google-app-guide)
+2. <strong>Facebook</strong> : [Creating a New Facebook App](https://developers.facebook.com/docs/apps/register)
+
+Once you have created the app,rename `secret.ts.example` file in `app` folder to `secret.ts` and replace the dummy string with client id of respective social app.
 
 ## Development server frontend
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
