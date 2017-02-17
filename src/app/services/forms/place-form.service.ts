@@ -16,7 +16,7 @@ export class PlaceFormService {
         'name': [place.name, Validators.required],
         'review': [place.review, Validators.required],
         'pictures': this.formBuilder.array(place.pictures),
-        'visited_date': [moment(place.visited_date).format('L'), Validators.required],
+        'visited_date': [moment().format('L'), Validators.required],
         '_destroy': [place._destroy]
       })
 
@@ -27,7 +27,7 @@ export class PlaceFormService {
         'name': ['', Validators.required],
         'review': ['', Validators.required],
         'pictures': this.formBuilder.array([]),
-        'visited_date': ['', Validators.required],
+        'visited_date': [moment().format('L'), Validators.required],
         '_destroy': [false]
       })
     }

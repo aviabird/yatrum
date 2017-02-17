@@ -31,15 +31,16 @@ export class TripEditComponent implements OnInit {
     private toastyService: ToastyService,
     private tripFormService: TripFormService,
     private placeFormService: PlaceFormService) {
-    this.trip$ = this.store.select(fromRoot.getSelectedTrip);
-    this.isNewTrip = this.checkIfTripIsNew();
-    if(!this.isNewTrip) {
-      this.trip$.subscribe(trip => this.trip = trip);
-    }
-    this.initForm();
+      this.trip$ = this.store.select(fromRoot.getSelectedTrip);
+      this.isNewTrip = this.checkIfTripIsNew();
+      if(!this.isNewTrip) {
+        this.trip$.subscribe(trip => this.trip = trip);
+      }
+      this.initForm();
   }
 
   ngOnInit() {
+    this.tripForm.valueChanges.subscribe((value) => console.log("tripForm", this.tripForm.value));
   }
 
   private checkIfTripIsNew() {
@@ -55,7 +56,8 @@ export class TripEditComponent implements OnInit {
 
 // if trip is being newly created
   private initNewTrip() {
-    this.tripForm = this.tripFormService.initTrip(); 
+    this.tripForm = this.tripFormService.initTrip();
+    this.addNewPlace();
   }
 
 // if trip is being updated
@@ -89,11 +91,6 @@ export class TripEditComponent implements OnInit {
     })
   }
 
-// add a new place
-  addNewPlace(place) {
-    (<FormArray>this.tripForm.controls['places']).push(this.placeFormService.initPlace(place));
-  }
-
 // update existing place
   updatePlace(place, index) {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
@@ -113,7 +110,6 @@ export class TripEditComponent implements OnInit {
   }  
 
 // remove place
-
   removePlace(place, index) {
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
@@ -131,6 +127,10 @@ export class TripEditComponent implements OnInit {
     })  
   }
 
+
+  addNewPlace() {
+    (<FormArray>this.tripForm.controls['places']).push(this.placeFormService.initPlace());
+  }
 
   onSubmit() {
     if(!this.tripForm.valid) {

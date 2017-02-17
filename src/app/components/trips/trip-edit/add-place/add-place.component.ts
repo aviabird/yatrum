@@ -29,6 +29,13 @@ export class AddPlaceComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.placeForm.valueChanges
+      .debounceTime(2000)
+      .subscribe(value => {
+        if(this.placeForm.valid) {
+          this.onSubmit();
+        }
+      });
   }
 
   imageUploaded(image) {
@@ -47,13 +54,10 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onSubmit() {
-    if(!this.placeForm.valid) {
-      this.toastyService.warning({ title: "Invalid Place", msg: "Place must contain Name, Review and Date" });
-      return;
-    }
     let place = this.placeForm.value;
     if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
+
     this.newPlace.emit(place);
 
     this.placeForm.controls['name'].setValue('');
@@ -78,12 +82,7 @@ export class AddPlaceComponent implements OnInit {
   }
 
   private initForm() {
-    if (this.place) {
-      this.placeForm = this.placeFormService.initPlace(this.place);
-    }
-    else {
-      this.placeForm = this.placeFormService.initPlace();
-    }
+    this.placeForm = this.placeFormService.initPlace(this.place);
   }
 
 }
