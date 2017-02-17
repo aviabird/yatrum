@@ -25,6 +25,7 @@
 npm-debug.log
 testem.log
 /typings
+secrets.ts
 
 # e2e
 /e2e/*.js
