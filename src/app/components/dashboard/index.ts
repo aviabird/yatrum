@@ -26,8 +26,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-    InfiniteScrollModule,
-    BrowserModule
+    InfiniteScrollModule
   ]
 })
 export class DashboardModule {}
