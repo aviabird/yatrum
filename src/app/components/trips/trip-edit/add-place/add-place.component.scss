@@ -54,8 +54,9 @@ textarea {
 }
 
 .form-header {
-	color: $appBaseColor;
+	color: #A8B0B8;
 	border-radius: 5px 5px 0 0;
+	background-color: #303E52;
 }
 
 .place-name, .place-date {
@@ -82,12 +83,12 @@ textarea {
 	margin-right: -1.5rem !important;
 }
 
-.place-date-field {
-	padding-right: 0 !important;
-	input {
-		display: none !important;
-	}
-}
+// .place-date-field {
+// 	padding-right: 0 !important;
+// 	input {
+// 		display: none !important;
+// 	}
+// }
 
 textarea {
 	font-size: 1.5rem !important;
