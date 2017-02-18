@@ -1,7 +1,7 @@
 import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
-import { SignupComponent } from './components/shared/auth/signup/signup.component';
-import { LoginComponent } from './components/shared/auth/login/login.component';
-import { InstagramAuthenticationCallbackComponent } from './components/shared/instagram-authentication-callback/instagram-authentication-callback.component';
+import { SignupComponent } from './shared/auth/signup/signup.component';
+import { LoginComponent } from './shared/auth/login/login.component';
+import { InstagramAuthenticationCallbackComponent } from './shared/instagram-authentication-callback/instagram-authentication-callback.component';
 import { RouterModule, Routes } from "@angular/router";
 
 

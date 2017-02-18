@@ -1,5 +1,5 @@
-import { ServerAuthService } from './../../../../services/server-auth.service';
-import * as fromRoot from './../../../../reducers/index';
+import { ServerAuthService } from './../../../services/server-auth.service';
+import * as fromRoot from './../../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';

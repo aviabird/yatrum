@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SharedModule } from '../shared/index';
+import { SharedModule } from '../../shared/index';
 import { TripsComponent } from './trips.component';
 import { TripRoutes } from './trips.routes';
 import { TripDetailComponent } from './trip-detail/trip-detail.component';

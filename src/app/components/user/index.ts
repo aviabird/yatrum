@@ -8,7 +8,7 @@ import { UserFollowersComponent } from './user-profile/user-followers/user-follo
 import { UserFollowingComponent } from './user-profile/user-following/user-following.component';
 import { UserMediaComponent } from './user-profile/user-media/user-media.component';
 import { UserTripsComponent } from './user-profile/user-trips/user-trips.component';
-import { SharedModule } from '../shared/index';
+import { SharedModule } from '../../shared/index';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 const routes: Routes = [
