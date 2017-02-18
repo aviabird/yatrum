@@ -21,7 +21,7 @@
           class="place-review" autosize class="" formControlName="review"
           placeholder="What's so cool about this place?'"></textarea>
       </div>  
-      <div class="field">
+      <div class="field place-images">
         <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
         <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
           <span class="place-image-field" *ngIf="!picture._destroy">
