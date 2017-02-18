@@ -41,10 +41,7 @@ textarea {
 }
 
 .place-form {
-	.remove.icon {
-		cursor: pointer;
-		font-size: 2em;
-	}
+	margin-bottom: 30px;
 }
 
 .trip-form {
@@ -57,5 +54,19 @@ textarea {
 
 	textarea {
 		background: none;
+	}
+}
+
+
+.add-place {
+	margin-top: 8px;
+	padding: 0 !important;
+  color: #F12732;
+	.icon {
+		font-size: 4rem;
+    width: 100%;
+		background: #efeeee;
+    padding-top: 23px;
+    padding-bottom: 51px;
 	}
 }

@@ -24,6 +24,7 @@ textarea {
 
 .place {
 	padding: 0px !important;
+	border-radius: 0 !important;
 }
 
 .place-image-field {
@@ -63,7 +64,6 @@ textarea {
 
 .form-header {
 	color: #A8B0B8;
-	border-radius: 5px 5px 0 0;
 	background-color: #303E52;
 	padding: 10px 10px 1px 10px !important;
 }
@@ -90,6 +90,26 @@ textarea {
 
 textarea {
 	font-size: 1.5rem !important;
-	min-height: 3rem !important;
+	min-height: 15rem !important;
 	background: none !important;
+	line-height: 30px;
+  color: #939799 !important;
+}
+
+.street-view {
+	padding: 0 !important;
+  color: #F12732;
+	.icon {
+		font-size: 5rem;
+		padding-top: 30px;
+		padding-bottom: 50px;
+    width: 100%;
+		background: #EFEEEE;
+	}
+	.vertical-bar {
+		left: 47%;
+    border-right: 1px solid #B3B5B7;
+    position: absolute;
+		height: 100%;
+	}
 }
