@@ -9,13 +9,8 @@ input {
 	border: none !important;
 }
 
-textarea {
-	border: none !important;
-	resize: none !important;
-}
-
 .place-images {
-	padding: 20px;
+	padding: 0 20px 20px 20px;
 }
 
 .images {
@@ -94,6 +89,8 @@ textarea {
 	background: none !important;
 	line-height: 30px;
   color: #939799 !important;
+	border: none !important;
+	resize: none !important;
 }
 
 .street-view {
@@ -104,7 +101,8 @@ textarea {
 		padding-top: 30px;
 		padding-bottom: 50px;
     width: 100%;
-		background: #EFEEEE;
+		background: #FAFAFA;
+		cursor: pointer;
 	}
 	.vertical-bar {
 		left: 47%;

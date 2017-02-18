@@ -9,9 +9,12 @@
 }
 
 .trip-title {
+	color: #939799 !important;
+  font-weight: 700;
+	min-height: 2em !important;
+	height: 2em !important;
 	width: 70% !important;
 	font-size: 3rem !important;
-  font-weight: bold;
 	margin-left: -2rem !important;
 	&:focus {
 		background: none !important;
@@ -25,6 +28,7 @@
 }
 
 .save-button {
+	border-radius: 0 !important;
 	float: right;
 	background: $appActionColor;
 	color: white;
@@ -42,6 +46,26 @@ textarea {
 
 .place-form {
 	margin-bottom: 30px;
+	position: relative;
+	.remove-icon-background {
+		background: white;
+    width: 2.2em;
+    position: absolute;
+    right: -2px;
+    z-index: 1;
+    height: 2.2em;
+    border-radius: 20px;
+    top: 10px;
+	}
+	.icon {
+		font-size: 4em !important;
+		color: #F12732;
+    position: absolute;
+    right: -23px;
+    top: 16px;
+    z-index: 1;
+		cursor: pointer;
+	}
 }
 
 .trip-form {
@@ -63,9 +87,10 @@ textarea {
 	padding: 0 !important;
   color: #F12732;
 	.icon {
+		cursor: pointer;
 		font-size: 4rem;
     width: 100%;
-		background: #efeeee;
+		background: #FAFAFA;
     padding-top: 23px;
     padding-bottom: 51px;
 	}
