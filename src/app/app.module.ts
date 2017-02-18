@@ -14,13 +14,10 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastyModule } from 'ng2-toasty';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-import { MomentModule } from 'angular2-moment';
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { CalendarModule } from 'primeng/primeng';
 
 // Pipes
-import { HumanizePipe } from './pipes/humanize';
 import { ThumbnailPipe } from './pipes/thumbnail';
 
 // Services 
@@ -53,13 +50,9 @@ import { TripHasPlaces } from './Validators/trip-has-places.directive';
 import { AppComponent } from './app.component';
 import { SearchedTripsComponent } from './components/search/searched-trips/searched-trips.component';
 import { TripsSearchComponent } from './components/search/trips-search/trips-search.component';
-import { TripListItemComponent } from './components/shared/trips/trip-list-item/trip-list-item.component';
-import { FeedTripsComponent } from './components/dashboard/feed-trips/feed-trips.component';
-import { DashboardSearchComponent } from './components/dashboard/dashboard-search/dashboard-search.component';
 import { TripsSearchFilterComponent } from './components/shared/search/trips-search-filter/trips-search-filter.component';
 import { DashboardSearchFilterComponent } from './components/shared/search/dashboard-search-filter/dashboard-search-filter.component';
 import { SearchFilterComponent } from './components/shared/search/search-filter/search-filter.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SearchComponent } from './components/search/search.component';
 import { TripEditComponent } from './components/trips/trip-edit/trip-edit.component';
 import { SignupComponent } from './components/shared/auth/signup/signup.component';
@@ -76,14 +69,12 @@ import { UserMediaComponent } from './components/user/user-profile/user-media/us
 import { UserTripsComponent } from './components/user/user-profile/user-trips/user-trips.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserSettingsComponent } from './components/user/user-settings/user-settings.component';
-import { LoaderComponent } from './components/shared/loader/loader.component';
 import { ImageUploadComponent } from './components/trips/trip-edit/image-upload/image-upload.component';
 import { AddPlaceComponent } from './components/trips/trip-edit/add-place/add-place.component';
 import { PlaceDetailComponent } from './components/trips/trip-detail/place-detail/place-detail.component';
 import { NewPlaceComponent } from './components/trips/trip-edit/new-place/new-place.component';
 import { UpdatePlaceComponent } from './components/trips/trip-edit/update-place/update-place.component';
 import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
-import { TrendingTripsComponent } from './components/dashboard/trending-trips/trending-trips.component';
 import { CommentEffects } from './effects/comments.effects';
 import { TripCommentComponent } from './components/trips/trip-detail/trip-comment/trip-comment.component';
 import { NewTripCommentComponent } from './components/trips/trip-detail/new-trip-comment/new-trip-comment.component';
@@ -91,6 +82,8 @@ import { NewTripCommentComponent } from './components/trips/trip-detail/new-trip
 // Satellizer Module
 import { Ng2UiAuthModule, CustomConfig } from 'ng2-ui-auth';
 import { MyAuthConfig } from './auth-config';
+import { DashboardModule } from './components/dashboard/index';
+import { SharedModule } from './components/shared/index';
 
 
 
@@ -127,27 +120,20 @@ const myFirebaseAuthConfig = {
     UserFollowersComponent,
     UserFollowingComponent,
     SearchComponent,
-    DashboardComponent,
     SearchFilterComponent,
     DashboardSearchFilterComponent,
     TripsSearchFilterComponent,
-    DashboardSearchComponent,
-    FeedTripsComponent,
-    TripListItemComponent,
     TripsSearchComponent,
     SearchedTripsComponent,
-    LoaderComponent,
     ImageUploadComponent,
     AddPlaceComponent,
     Autosize,
     PlaceDetailComponent,
     NewPlaceComponent,
     UpdatePlaceComponent,
-    HumanizePipe,
     ThumbnailPipe,
     TripHasPlaces,
     AmbassadorComponent,
-    TrendingTripsComponent,
     TripCommentComponent,
     NewTripCommentComponent
   ],
@@ -177,10 +163,10 @@ const myFirebaseAuthConfig = {
     StoreLogMonitorModule,
     SlimLoadingBarModule.forRoot(),
     ToastyModule.forRoot(),
-    InfiniteScrollModule,
-    MomentModule,
     DatepickerModule,
-    CalendarModule
+    CalendarModule,
+    SharedModule,
+    DashboardModule
   ],
   providers: [
     UserAuthService,
