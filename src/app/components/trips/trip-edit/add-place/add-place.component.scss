@@ -18,6 +18,10 @@ textarea {
 	position: relative;
 }
 
+.place {
+	padding: 0px !important;
+}
+
 .place-image-field {
 	&:hover {
 		.remove.icon {
@@ -57,25 +61,18 @@ textarea {
 	color: #A8B0B8;
 	border-radius: 5px 5px 0 0;
 	background-color: #303E52;
+	padding: 10px 10px 1px 10px !important;
 }
 
-.place-name, .place-date {
+.place-name {
 	background: none !important;
 	font-size: 1.5rem !important;
   font-weight: 400;
+	color: #A8B0B8 !important;
 	
 	&:focus {
 		background: none !important;
 	}
-}
-
-.place-date {
-	margin-right: -0.5rem !important;
-}
-
-.calendar.icon {
-  cursor: pointer;
-	font-size: 3rem;
 }
 
 .marker.icon {
@@ -83,12 +80,9 @@ textarea {
 	margin-right: -1.5rem !important;
 }
 
-// .place-date-field {
-// 	padding-right: 0 !important;
-// 	input {
-// 		display: none !important;
-// 	}
-// }
+.place-date-field {
+	position: relative;	
+}
 
 textarea {
 	font-size: 1.5rem !important;
