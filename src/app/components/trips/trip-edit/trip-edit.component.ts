@@ -25,6 +25,7 @@ export class TripEditComponent implements OnInit {
   isNewTrip: boolean; 
   trip = null;
   tripForm: FormGroup;
+  totalPlaces: number = 0;
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>, 
     private route: Router, private tripService: TripsService,
@@ -70,6 +71,7 @@ export class TripEditComponent implements OnInit {
 // add places to the tripForm from existing trip
   private addPlaces() {
     this.trip.places.forEach((place, placeIndex) => {
+      this.totalPlaces++;
       (<FormArray>this.tripForm.controls['places']).push(this.placeFormService.initPlace(place))
       this.addPictures(place,placeIndex);
     }) 
@@ -111,6 +113,11 @@ export class TripEditComponent implements OnInit {
 
 // remove place
   removePlace(place, index) {
+    if(this.totalPlaces == 1) {
+      this.toastyService.warning({ title: "Invalid Trip", msg: "Cannot Delete Last Place" });
+      return;
+    }
+    this.totalPlaces--;
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['name'].setValue(place.name);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['review'].setValue(place.review);
     (<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['_destroy'].setValue(true);
@@ -127,8 +134,8 @@ export class TripEditComponent implements OnInit {
     })  
   }
 
-
   addNewPlace() {
+    this.totalPlaces++;
     (<FormArray>this.tripForm.controls['places']).push(this.placeFormService.initPlace());
   }
 

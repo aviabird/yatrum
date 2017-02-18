@@ -12,7 +12,7 @@
   </div>
 
   <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form twelve wide right aligned column">
-    <div *ngIf="!place._destroy">
+    <div *ngIf="!place._destroy" class="place">
       <div class="remove-icon-background"></div>
       <i class="remove circle icon" (click)="removePlace(place, i)"></i>
       <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>

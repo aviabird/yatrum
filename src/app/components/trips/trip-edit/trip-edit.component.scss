@@ -22,6 +22,7 @@
 }
 
 .trip-description {
+	color: #939799 !important;
 	font-size: 1.5rem !important;
 	min-height: 3rem !important;
 	text-align: justify;
@@ -45,24 +46,28 @@ textarea {
 }
 
 .place-form {
-	margin-bottom: 30px;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
 	position: relative;
+	.place {
+		margin-bottom: 50px;
+	}
 	.remove-icon-background {
 		background: white;
     width: 2.2em;
     position: absolute;
-    right: -2px;
+    right: -13px;
     z-index: 1;
     height: 2.2em;
     border-radius: 20px;
-    top: 10px;
+    top: -6px;
 	}
 	.icon {
 		font-size: 4em !important;
-		color: #F12732;
+		color: #CBCBCB;
     position: absolute;
-    right: -23px;
-    top: 16px;
+    right: -35px;
+    top: -5px;
     z-index: 1;
 		cursor: pointer;
 	}
