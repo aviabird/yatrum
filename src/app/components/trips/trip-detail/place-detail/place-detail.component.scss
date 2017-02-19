@@ -1,32 +1,44 @@
+@import '../../../../../_vars.scss';
+
 .activity {
 	margin-bottom: 40px !important;
 	width: 100%;
+	box-shadow: 0 0px 15px 0 #D4D4D5 !important;
 }
 
-.marker.icon {
+.street.view.icon {
 	position: absolute;
-	transform: translate(-20%, 18%);
+	transform: translate(20%, 34%);
 	color: red;
 	font-size: 5em;
+	z-index: 99;
 }
 
 .vertical-line {
 	position: absolute;
-	border-left: 2px solid #00A6B4;
-  height: 100%;
-  transform: translate(61%, -9%);
+	border-left: 2px solid rgb(183, 191, 192);
+	height: 97.4%;
+	left: 58%;
+  top: 2%;
+	margin: 0 auto;
 }
 
 .header {
-	background: #00A6B4;
+	background: $appBaseColor;
   color: white;
-	text-align: right;
-	padding: 8px;
+	padding: 18px 3px 8px 19px;
+	font-size: 22px;
+	
 	.place-name {
-		font-size: 22px;
+		float: right;
 	}
+	
 	.place-date {
-		padding-top: 8px;
+		float: left;
+	}
+
+	.icon {
+		margin-top: -3%;
 	}
 }
 
@@ -35,11 +47,12 @@
 	padding: 20px;
   font-size: 18px;
   color: #939799;
+	text-align: justify;
 }
 
 .place-images {
 	img {
-		padding: 20px;
-		width: 50%;
+		width: 100%;
+    margin-bottom: -1%;
 	}
 }

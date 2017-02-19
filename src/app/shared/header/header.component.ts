@@ -1,9 +1,9 @@
-import { SearchTrip } from './../../../actions/trips.action';
+import { SearchTrip } from './../../actions/trips.action';
 import { Router } from '@angular/router';
-import { ServerLoginSuccessAction, ServerLogoutAction } from './../../../actions/user-auth.action';
-import { ServerAuthService } from './../../../services/server-auth.service';
-import { UserProfile } from './../../../models/user-profile';
-import * as fromRoot from './../../../reducers/index';
+import { ServerLoginSuccessAction, ServerLogoutAction } from './../../actions/user-auth.action';
+import { ServerAuthService } from './../../services/server-auth.service';
+import { UserProfile } from './../../models/user-profile';
+import * as fromRoot from './../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';

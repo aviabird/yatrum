@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { LikeTripAction } from './../../../../actions/trips.action';
-import { FollowUserAction } from './../../../../actions/user.action';
-import { Trip } from './../../../../models/trip';
+import { LikeTripAction } from './../../../actions/trips.action';
+import { FollowUserAction } from './../../../actions/user.action';
+import { Trip } from './../../../models/trip';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../../../reducers';
-import { SearchTrip, LoadFeedTripsAction } from '../../../../actions/trips.action';
-import { UserProfile } from '../../../../models/user-profile';
-import { UserAuthService } from '../../../../services/user-auth.service';
+import * as fromRoot from '../../../reducers';
+import { SearchTrip, LoadFeedTripsAction } from '../../../actions/trips.action';
+import { UserProfile } from '../../../models/user-profile';
+import { UserAuthService } from '../../../services/user-auth.service';
 import {
   Component, OnInit, trigger, state,
   style, animate, Input, transition,

@@ -17,6 +17,8 @@ import * as fromRoot from './../../../reducers/index';
 import { LoadMoreTripsAction, LoadFeedTripsAction } from './../../../actions/trips.action';
 import { Input } from '@angular/core';
 
+
+
 @Component({
   selector: 'tr-feed-trips',
   templateUrl: './feed-trips.component.html',

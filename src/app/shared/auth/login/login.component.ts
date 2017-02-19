@@ -1,12 +1,12 @@
-import { ServerLoginAction } from './../../../../actions/user-auth.action';
-import { UpdateLoginFormNotification } from './../../../../actions/notification.action';
-import * as fromRoot from './../../../../reducers/index';
+import * as fromRoot from './../../../reducers/index';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
+import { UpdateLoginFormNotification } from '../../../actions/notification.action';
+import { ServerLoginAction } from '../../../actions/user-auth.action';
 
 @Component({
   selector: 'tr-login',
