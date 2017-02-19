@@ -15,6 +15,7 @@
           {{user.name}}
         </span>
       </div>
+      <hr class="header-divider">
       <div *ngIf="!(belongsToLoggedInUser() | async)" class="follow-user" (click)="onToggleFollow()">
         <i class="add user icon"
           [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}">
