@@ -1,8 +1,7 @@
 @import '../../../../_vars.scss';
 
 .banner {
-	padding: 0px !important;	
-	box-shadow: 5px 5px 50px #777;
+	padding: 0px !important;
 }
 
 .detail-margin {
@@ -43,13 +42,12 @@
 		font-weight: 400;
     text-shadow: 0px 0px 2px #073c5f;
     font-size: 1.1rem;
-		box-shadow: 5px 5px 10px #555;
 	}
 }
 
 .follow-user{
 	@extend .content;
-	bottom: 30px;
+	bottom: 10px;
 	left: 40px;
 	padding: 12px 32px 12px 24px;
   border-radius: 4px;
@@ -69,7 +67,7 @@
 .like-trip {
 	cursor: pointer;
 	@extend .content;
-	bottom: 25px;
+	bottom: 5px;
 	right: 25px;
 	.icon.active {
 		color: $appActionColor;
@@ -78,9 +76,7 @@
 
 .image {
 	background: black;
-	height: 500px;
-	box-shadow: 10px 10px 10px #888;
-	filter: blur(1px);
+	height: 400px;
 	img {
 		opacity: 0.7;
 		object-fit: cover;
@@ -101,7 +97,7 @@
 .header-divider {
 	position: absolute;
 	width: 92%;
-	bottom: 104px;
+	bottom: 64px;
 	margin: 0 4%;
-	border-bottom-color: #666;
+	border-bottom-color: #aaa;
 }

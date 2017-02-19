@@ -15,6 +15,8 @@ input {
 
 .images {
 	position: relative;
+	float: left;
+	margin: 0 2% 2% 0;
 }
 
 .place {
@@ -32,8 +34,8 @@ input {
 
 .place-image {
 	background: rgb(239, 232, 232);
-	height: 100px;
-	width: 150px;
+	height: 150px;
+	width: 200px;
 	object-fit: cover;
 	background: #efe8e8;
 	z-index: 999;
@@ -42,13 +44,14 @@ input {
 .remove.icon {
 	position: absolute;
 	font-size: 2.5em;
-	transform: translate(-209%, 48%);
 	background-color: rgba(250, 250, 250, 0.85);
 	border-radius: 999px;
 	transition-duration: 0.3s;
 	opacity: 0;
 	height: 50px;
 	width: 50px;
+	left: 37%;
+	top: 31%;
 	box-shadow: 0px 0px 10px black;
 	&:before {
 		top: 30%;
@@ -110,4 +113,9 @@ textarea {
     position: absolute;
 		height: 100%;
 	}
+}
+
+tr-image-upload {
+	float: left;
+	margin: 0 2% 2% 0;
 }
