@@ -11,7 +11,7 @@
       <tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>
 
       <div *ngIf="(trips$ | async)?.length">
-        <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column" [@fadeIn]="'in'">
+        <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column">
           <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
         </div>
       </div>
