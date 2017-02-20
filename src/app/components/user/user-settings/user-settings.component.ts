@@ -1,6 +1,10 @@
+import { UserProfile } from './../../../models/user-profile';
+import { UserService } from './../../../services/user.service';
+import { getUserProfile, State } from './../../../reducers/index';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 import { InstagramIntegrationService } from './../../../services/instagram-integration.service';
 import { environment as env } from './../../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,13 +16,20 @@ export class UserSettingsComponent implements OnInit {
 
   isInstagramAuthStatusPresent: boolean = false;
   isInstagramAuthenticated: boolean = false;
+  user$: Observable<UserProfile>
 
-  constructor(private instaService: InstagramIntegrationService) { 
-    instaService.isUserInstagramAuthenticated()
-      .subscribe(data => {
-        this.isInstagramAuthenticated = data['instagram_authenticated'];
-        this.isInstagramAuthStatusPresent = true;
-      });
+  constructor(private instaService: InstagramIntegrationService, 
+              private store: Store<State>, 
+              private userService: UserService) { 
+    // instaService.isUserInstagramAuthenticated()
+    //   .subscribe(data => {
+    //     this.isInstagramAuthenticated = data['instagram_authenticated'];
+    //     this.isInstagramAuthStatusPresent = true;
+    //   });
+
+    // =======================================================
+    // Select UserProfile
+    this.user$ = this.store.select(getUserProfile);
   }
 
   ngOnInit() {
@@ -27,5 +38,4 @@ export class UserSettingsComponent implements OnInit {
   onLoginWithInstagram() {
     window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;
   }
-
 }

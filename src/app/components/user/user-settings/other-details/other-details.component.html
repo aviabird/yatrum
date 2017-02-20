@@ -1,3 +1,42 @@
-<p>
-  other-details works!
-</p>
+<div class="ui middle aligned center aligned grid">
+  <div class="sixteen wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="five wide column">
+    <h2 class="ui teal image header">
+      <div class="content">
+        Other Details
+      </div>
+    </h2>
+      <form class="ui medium form" #f="ngForm" novalidate (ngSubmit)="updateSocialLinks(f.value)">
+        <div class="ui stacked segment">
+          <div class="form-group field">
+            <label for="">Facebook Url</label>
+            <input type="text" class="form-control" name="facebook_url" [(ngModel)]="user.facebook_url">
+          </div>
+
+          <div class="form-group field">
+            <label for="">Twitter Url</label>
+            <input type="text" class="form-control" name="twitter_url" [(ngModel)]="user.twitter_url">
+          </div>
+          <div class="form-group field">
+            <label for="">Instagram Url</label>
+            <input type="text" class="form-control" name="instagram_url" [(ngModel)]="user.instagram_url">
+          </div>
+          <div class="form-group field">
+            <label for="">Website Url</label>
+            <input type="text" class="form-control" name="website_url" [(ngModel)]="user.website_url">
+          </div>
+          <div class="form-group field">
+            <label for="">Blog Url</label>
+            <input type="text" class="form-control" name="blog_url" [(ngModel)]="user.blog_url">
+          </div>
+          <div class="field">
+            <button type="submit" class="ui fluid large teal submit button">Change Password</button>
+          </div>
+        </div>
+      </form>
+    <div class="ui message">
+      Have a Nice Day!!! 
+    </div>
+  </div>
+</div>

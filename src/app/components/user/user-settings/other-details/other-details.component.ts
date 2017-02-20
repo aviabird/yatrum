@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from './../../../../services/user.service';
+import { UserProfile } from './../../../../models/user-profile';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'tr-other-details',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./other-details.component.scss']
 })
 export class OtherDetailsComponent implements OnInit {
-
-  constructor() { }
+  @Input() user: UserProfile;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
+  updateSocialLinks(data: any){
+   console.log("data is", data);
+   this.userService.updateSocialLinks(data).subscribe(response => {
+     console.log(response);
+   });
+  }
+
 
 }

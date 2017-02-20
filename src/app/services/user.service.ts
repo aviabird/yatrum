@@ -51,5 +51,11 @@ export class UserService {
     return this.http.post(`${this.apiLink}/user_following`, {user_id: id})
       .map(response => response.json());
   }
-   
+
+  updateSocialLinks(data: any){
+    return this.http.post(`${this.apiLink}/users/update_social_links`, {user: data})
+      .map(response => response.json());
+  }
+
+
 }

@@ -1,4 +1,4 @@
-<div *ngIf="!isInstagramAuthStatusPresent">
+<!--<div *ngIf="!isInstagramAuthStatusPresent">
 	Checking for Instagram Authentication
 </div>
 
@@ -14,4 +14,5 @@
 			You are Authenticated With Instagram
 		<div>
 	</div>
-</div>
+</div>-->
+<tr-other-details [user]="(user$ | async)"></tr-other-details>

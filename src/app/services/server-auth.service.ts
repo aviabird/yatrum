@@ -88,7 +88,12 @@ export class ServerAuthService {
       token: data.auth_token,
       created_at: '',
       updated_at: '',
-      is_followed_by_current_user: data.is_followed_by_current_user
+      is_followed_by_current_user: data.is_followed_by_current_user,
+      facebook_url:                 data.facebook_url,
+      twitter_url:                  data.twitter_url,
+      instagram_url:                data.instagram_url,
+      website_url:                  data.website_url,
+      blog_url:                     data.blog_url
     }
   }
 
