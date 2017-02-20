@@ -31,7 +31,6 @@ import { SharedModule } from './shared/index';
 import { CanActivateViaAuthGuard } from './guards/auth.guard';
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
 import { InstagramAuthenticationCallbackComponent } from './shared/instagram-authentication-callback/instagram-authentication-callback.component';
-import { OtherDetailsComponent } from './components/user/user-settings/other-details/other-details.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -51,7 +50,6 @@ const myFirebaseAuthConfig = {
     Autosize,
     TripHasPlaces,
     AmbassadorComponent,
-    OtherDetailsComponent,
     InstagramAuthenticationCallbackComponent
   ],
   imports: [
