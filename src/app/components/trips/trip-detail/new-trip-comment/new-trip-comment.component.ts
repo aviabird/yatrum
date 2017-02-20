@@ -48,6 +48,12 @@ export class NewTripCommentComponent implements OnInit {
         user_id: [this.authUser.id, Validators.required],
         trip_id: [this.trip.id, Validators.required]
       });
+    } else {
+      this.commentForm = this.formBuilder.group({
+        message: ['', Validators.required],
+        user_id: ['', Validators.required],
+        trip_id: ['', Validators.required]
+      });
     }
   }
 

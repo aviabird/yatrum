@@ -3,40 +3,15 @@
 
   <div class="row">
     <div class="ten wide column banner">
-      <div class="image">
-        <img [src]="formatImageUrl(trip.thumbnail_image_url)">
-      </div>
-      <div class="trip-name">
-        {{trip?.name}}
-      </div>
-      <div class="trip-user" [routerLink]="['/user', user.id]">
-        <img class="" [src]="user.profile_pic?.url">
-        <span class="user-name">
-          {{user.name}}
-        </span>
-      </div>
-      <hr class="header-divider">
-      <div *ngIf="!(belongsToLoggedInUser() | async)" class="follow-user" (click)="onToggleFollow()">
-        <i class="add user icon"
-          [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}">
-        </i>
-        {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
-      </div>
-      <div class="trip-likes">
-        {{trip?.trip_likes_count | humanize}} Likes
-      </div>
-      <div class="like-trip">
-        <i class="thumbs up huge icon" 
-          [ngClass]="{active: tripLikeState() == 'active'}"
-          (click)="onToggleLike()">
-        </i>
-      </div>
+      <tr-trip-detail-header
+        [trip]="trip$ | async"
+        [tripUser]="tripUser"></tr-trip-detail-header>
     </div>
   </div>
 
   <div class="row">
     <div class="ten wide column trip-activity">
-      <div *ngFor="let place of trip?.places">
+      <div *ngFor="let place of (trip$ | async)?.places">
         <tr-place-detail [place]="place"></tr-place-detail>
       </div>
     </div>
@@ -50,7 +25,7 @@
 
       <hr>
       
-      <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip" class="ui cards grid"></tr-new-trip-comment>
+      <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip$ | async" class="ui cards grid"></tr-new-trip-comment>
     </div>
   </div>
 
