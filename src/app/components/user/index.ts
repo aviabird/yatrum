@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user.routes';
@@ -31,6 +34,10 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CustomFormsModule
   ]
 })
 export class UserModule {}
