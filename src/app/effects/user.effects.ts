@@ -27,9 +27,8 @@ export class UserEffects {
 		FollowUser$: Observable<Action> = this.action$
 			.ofType(UserActions.ActionTypes.FOLLOW_USER)
 			.switchMap((action: Action) => this.userService.addTravellerToFollowingList(action.payload))
-			.map((data) => {
-				return new TripsActions.TripUserFollowedAction(data)
-			});
+			.map((data) => new TripsActions.TripUserFollowedAction(data));
+			
 	@Effect()
 		FollowProfileUser$: Observable<Action> = this.action$
 		.ofType(UserActions.ActionTypes.FOLLOW_PROFILE_USER)
