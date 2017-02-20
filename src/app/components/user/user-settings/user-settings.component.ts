@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {
-
+  selectedLinkvalue: string = 'changePassword'; //DefaultValue
   isInstagramAuthStatusPresent: boolean = false;
   isInstagramAuthenticated: boolean = false;
   user$: Observable<UserProfile>
@@ -43,5 +43,9 @@ export class UserSettingsComponent implements OnInit {
 
   onLoginWithInstagram() {
     window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;
+  }
+
+  changeSelectedLinkTo(value: string){
+    this.selectedLinkvalue = value;
   }
 }

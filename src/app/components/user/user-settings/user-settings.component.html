@@ -1,5 +1,25 @@
-<tr-change-password></tr-change-password>
-<tr-other-details [user]="(user$ | async)" (updateLinksClicked)="updateSocialLinks($event)"></tr-other-details>
+<div class="ui middle aligned center aligned grid">
+  <div class="sixteen wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="five wide column">
+  <div class="two ui buttons">
+    <button class="ui button " 
+      (click)="changeSelectedLinkTo('changePassword')" 
+      [ngClass]="{'active': (selectedLinkvalue === 'changePassword')}">Change Password</button>
+    
+    <button class="ui button" 
+      (click)="changeSelectedLinkTo('otherDetails')" 
+      [ngClass]="{'active': (selectedLinkvalue === 'otherDetails')}">Other Details</button>
+  </div>
+  </div>
+</div>
+
+<tr-change-password *ngIf="(selectedLinkvalue === 'changePassword')"></tr-change-password>
+
+<tr-other-details [user]="(user$ | async)" 
+  (updateLinksClicked)="updateSocialLinks($event)"
+  *ngIf="(selectedLinkvalue === 'otherDetails')">
+</tr-other-details>
 
 <!--<div *ngIf="!isInstagramAuthStatusPresent">
 	Checking for Instagram Authentication
