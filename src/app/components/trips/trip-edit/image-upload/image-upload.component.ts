@@ -2,14 +2,14 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Observable } from 'rxjs/Observable';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { Place } from './../../../../models/place';
-import {
-  Component, OnInit, Input, Output, EventEmitter, Renderer, ElementRef, ViewChild
+import { Component, OnInit, Input, Output, EventEmitter, Renderer, ElementRef, ViewChild, ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'tr-image-upload',
   templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.scss']
+  styleUrls: ['./image-upload.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageUploadComponent implements OnInit {
   @Output() imageData = new EventEmitter();

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-search-filter',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ``
 })
 export class SearchFilterComponent implements OnInit {

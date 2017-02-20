@@ -6,7 +6,7 @@ import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Comment } from '../../../models/comment';
 import { LoadCommentsAction } from '../../../actions/comment.action';
 import { UserProfile } from '../../../models/user-profile';
@@ -15,6 +15,7 @@ import { UserProfile } from '../../../models/user-profile';
   selector: 'tr-trip-detail',
   templateUrl: './trip-detail.component.html',
   styleUrls: ['./trip-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripDetailComponent implements OnInit, OnDestroy {
   trip$: Observable<any>;

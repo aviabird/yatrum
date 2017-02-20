@@ -10,13 +10,15 @@ import { Component,
   state,
   transition,
   style,
-  animate  
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'tr-trending-trips',
   templateUrl: './trending-trips.component.html',
   styleUrls: ['./trending-trips.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),

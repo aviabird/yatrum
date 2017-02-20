@@ -5,7 +5,7 @@ import { TripsService } from './../../../services/trips.service';
 import { Subscription } from 'rxjs/Rx';
 import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
 import { State } from './../../../reducers/index';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,8 @@ import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@ang
 @Component({
   selector: 'tr-trip-edit',
   templateUrl: './trip-edit.component.html',
-  styleUrls: ['./trip-edit.component.scss']
+  styleUrls: ['./trip-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TripEditComponent implements OnInit {

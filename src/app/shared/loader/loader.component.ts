@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ["message", "noOfParas"]
 })
 export class LoaderComponent{

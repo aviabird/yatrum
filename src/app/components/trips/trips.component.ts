@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'tr-trips',
 	templateUrl: './trips.component.html',
-	styleUrls: ['./trips.component.scss']
+	styleUrls: ['./trips.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripsComponent{
 	constructor() {}

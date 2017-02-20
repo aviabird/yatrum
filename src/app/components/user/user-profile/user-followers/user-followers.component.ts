@@ -6,12 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { State, getUserFollowers } from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Rx';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-followers',
   templateUrl: './user-followers.component.html',
-  styleUrls: ['./user-followers.component.scss']
+  styleUrls: ['./user-followers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserFollowersComponent implements OnInit, OnDestroy{
 

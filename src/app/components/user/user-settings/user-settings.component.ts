@@ -1,11 +1,12 @@
 import { InstagramIntegrationService } from './../../../services/instagram-integration.service';
 import { environment as env } from './../../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-settings',
   templateUrl: './user-settings.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {

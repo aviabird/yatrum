@@ -2,7 +2,7 @@ import { PlaceFormService } from './../../../../services/forms/place-form.servic
 import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 declare var $: any;
 declare var google: any;
@@ -10,7 +10,8 @@ declare var google: any;
 @Component({
   selector: 'tr-add-place',
   templateUrl: './add-place.component.html',
-  styleUrls: ['./add-place.component.scss']
+  styleUrls: ['./add-place.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlaceComponent implements OnInit {
 

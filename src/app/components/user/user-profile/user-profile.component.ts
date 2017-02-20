@@ -19,12 +19,14 @@ import {
   animate
 } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 declare var $: any;
 
 @Component({
   selector: 'tr-user-profile',
   templateUrl: './user-profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-profile.component.scss'],
   animations: [
     trigger('flyInDown', [

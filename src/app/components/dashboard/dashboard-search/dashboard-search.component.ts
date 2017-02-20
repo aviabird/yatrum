@@ -8,7 +8,8 @@ import {
   state,
   transition,
   style,
-  animate
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import * as fromRoot from './../../../reducers/index';
 import { LoadFeedTripsAction } from '../../../actions/trips.action';
@@ -17,6 +18,7 @@ import { LoadFeedTripsAction } from '../../../actions/trips.action';
   selector: 'tr-dashboard-search',
   templateUrl: './dashboard-search.component.html',
   styleUrls: ['./dashboard-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('flyInDown', [
       state('in', style({ })),
