@@ -1,7 +1,7 @@
 import * as fromRoot from './../../../reducers/index';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
@@ -11,6 +11,7 @@ import { ServerLoginAction } from '../../../actions/user-auth.action';
 @Component({
   selector: 'tr-login',
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {

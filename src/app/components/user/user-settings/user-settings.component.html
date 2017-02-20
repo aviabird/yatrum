@@ -1,3 +1,6 @@
+<tr-change-password></tr-change-password>
+<tr-other-details [user]="(user$ | async)" (updateLinksClicked)="updateSocialLinks($event)"></tr-other-details>
+
 <!--<div *ngIf="!isInstagramAuthStatusPresent">
 	Checking for Instagram Authentication
 </div>
@@ -15,4 +18,3 @@
 		<div>
 	</div>
 </div>-->
-<tr-other-details [user]="(user$ | async)" (updateLinksClicked)="updateSocialLinks($event)"></tr-other-details>

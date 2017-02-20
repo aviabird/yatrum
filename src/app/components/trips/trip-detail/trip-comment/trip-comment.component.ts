@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './../../../../reducers/index';
 import { DeleteCommentAction } from '../../../../actions/comment.action';
@@ -9,7 +9,8 @@ import { Comment } from '../../../../models/comment';
   selector: 'tr-trip-comment',
   templateUrl: './trip-comment.component.html',
   styleUrls: ['./trip-comment.component.scss'],
-  inputs: ["comment", "authUser"]
+  inputs: ["comment", "authUser"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripCommentComponent implements OnInit {
   comment: Comment;

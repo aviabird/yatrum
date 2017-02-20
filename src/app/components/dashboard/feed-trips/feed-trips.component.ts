@@ -8,7 +8,8 @@ import {
   state,
   transition,
   style,
-  animate
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
@@ -23,6 +24,7 @@ import { Input } from '@angular/core';
   selector: 'tr-feed-trips',
   templateUrl: './feed-trips.component.html',
   styleUrls: ['./feed-trips.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),

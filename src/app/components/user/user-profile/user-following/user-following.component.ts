@@ -6,11 +6,12 @@ import { Store } from '@ngrx/store';
 import { UserProfile } from './../../../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-following',
   templateUrl: './user-following.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-following.component.scss']
 })
 export class UserFollowingComponent implements OnInit, OnDestroy {

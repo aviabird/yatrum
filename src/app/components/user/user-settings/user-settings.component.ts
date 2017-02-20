@@ -6,11 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { InstagramIntegrationService } from './../../../services/instagram-integration.service';
 import { environment as env } from './../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-settings',
   templateUrl: './user-settings.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {
@@ -37,16 +38,8 @@ export class UserSettingsComponent implements OnInit {
   }
 
   updateSocialLinks(data: any){
-   console.log("data is", data);
-
-  //  this.userService.updateSocialLinks(data).subscribe(response => {
-  //    console.log(response);
-  //  });
-
    this.store.dispatch(new UpdateUser(data));
-
   }
-
 
   onLoginWithInstagram() {
     window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;

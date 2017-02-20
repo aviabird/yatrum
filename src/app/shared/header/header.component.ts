@@ -5,7 +5,7 @@ import { ServerAuthService } from './../../services/server-auth.service';
 import { UserProfile } from './../../models/user-profile';
 import * as fromRoot from './../../reducers/index';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Store } from '@ngrx/store';
 import "rxjs/add/operator/let";
@@ -15,6 +15,7 @@ import "rxjs/add/operator/let";
 @Component({
   selector: 'tr-header',
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {

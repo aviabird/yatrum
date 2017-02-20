@@ -8,11 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-user-trips',
   templateUrl: './user-trips.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-trips.component.scss']
 })
 export class UserTripsComponent implements OnInit, OnDestroy {

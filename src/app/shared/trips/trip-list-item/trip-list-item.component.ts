@@ -8,6 +8,7 @@ import * as fromRoot from '../../../reducers';
 import { SearchTrip, LoadFeedTripsAction } from '../../../actions/trips.action';
 import { UserProfile } from '../../../models/user-profile';
 import { UserAuthService } from '../../../services/user-auth.service';
+import { ChangeDetectionStrategy } from '@angular/core';
 import {
   Component, OnInit, trigger, state,
   style, animate, Input, transition,
@@ -17,6 +18,7 @@ import {
   selector: 'tr-trip-list-item',
   templateUrl: './trip-list-item.component.html',
   styleUrls: ['./trip-list-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('flyInUp', [
       state('in', style({ transform: "translateY(0)" })),

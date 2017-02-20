@@ -12,11 +12,13 @@ import {
 } from '@angular/core';
 import * as fromRoot from './../../../reducers/index';
 import { LoadFeedTripsAction } from '../../../actions/trips.action';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tr-trips-search',
   templateUrl: './trips-search.component.html',
   styleUrls: ['./trips-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('flyInDown', [
       state('in', style({ })),

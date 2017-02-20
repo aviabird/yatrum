@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { CalendarModule } from 'primeng/primeng';
+import { TripDetailHeaderComponent } from './trip-detail/trip-detail-header/trip-detail-header.component';
 
 const routes: Routes = [
   { path: 'trips', component: TripsComponent, children: TripRoutes },
@@ -36,7 +37,8 @@ const routes: Routes = [
     AddPlaceComponent,
     ImageUploadComponent,
     NewPlaceComponent,
-    UpdatePlaceComponent
+    UpdatePlaceComponent,
+    TripDetailHeaderComponent
   ],
   imports: [
     RouterModule.forChild(routes),

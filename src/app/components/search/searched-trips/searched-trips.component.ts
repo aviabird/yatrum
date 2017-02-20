@@ -12,12 +12,14 @@ import {
   animate
 } from '@angular/core';
 import * as fromRoot from './../../../reducers/index';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
   selector: 'tr-searched-trips',
   templateUrl: './searched-trips.component.html',
   styleUrls: ['./searched-trips.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),

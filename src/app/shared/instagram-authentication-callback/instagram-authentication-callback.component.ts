@@ -1,11 +1,12 @@
 import { InstagramIntegrationService } from './../../services/instagram-integration.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'tr-instagram-authentication-callback',
 	templateUrl: './instagram-authentication-callback.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styleUrls: ['./instagram-authentication-callback.component.css']
 })
 export class InstagramAuthenticationCallbackComponent implements OnInit {

@@ -15,6 +15,7 @@ import { UserTripsComponent } from './user-profile/user-trips/user-trips.compone
 import { SharedModule } from '../../shared/index';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { OtherDetailsComponent } from './user-settings/other-details/other-details.component';
+import { ChangePasswordComponent } from './user-settings/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'user', component: UserComponent, children: UserRoutes },
@@ -30,7 +31,8 @@ const routes: Routes = [
     UserMediaComponent,
     UserSettingsComponent,
     OtherDetailsComponent,
-    UserTripsComponent
+    UserTripsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     RouterModule.forChild(routes),
