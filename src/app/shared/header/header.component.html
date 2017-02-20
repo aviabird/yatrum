@@ -1,0 +1,32 @@
+<div class="ui fixed menu my-header">
+  <a class="item" [routerLink]="['/dashboard']">
+    <div>&nbsp;</div>
+    <img class="logo" src="assets/images/logo.png">
+    <div class="title">
+      <div class="title1">Yatrum</div>
+    </div>
+  </a>
+  
+  <div class="right menu">
+    <!--<div class="ui right aligned category search item">
+      <div class="ui icon input">
+        <input class="prompt" type="text" placeholder="Search..." (keyup.enter)="onSearch($event.target.value)">
+        <i class="search link icon"></i>
+      </div>
+      <div class="results"></div>
+    </div>-->
+    <div class="ui simple dropdown item text-white" *ngIf="(authentication$ | async)">
+      <img class="ui avatar image" [src]="(user$ | async).profilePic?.url" [routerLink]="['/user', (user$ | async).id, 'trips' ]" >
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" [routerLink]="['/trips','new']">Create Trip</a>
+        <a class="item" [routerLink]="['/user', (user$ | async).id, 'trips' ]">Profile</a>
+        <a class="item" [routerLink]="['/user','settings']">Settings</a>
+        <a class="item" (click)="logout()">LogOut</a>
+      </div>
+    </div>
+    <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
+    <div>&nbsp;</div>
+  </div>
+  <ng2-slim-loading-bar [height]="'4px'" [color]="'#11e18b'"></ng2-slim-loading-bar>
+</div>

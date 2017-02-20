@@ -1,3 +1,4 @@
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { FollowProfileUserAction } from './../../../actions/user.action';
 import { getLoggedInUserId, getSelectedProfileUser, State } from './../../../reducers/index';
 import { UserService } from './../../../services/user.service';
@@ -18,12 +19,14 @@ import {
   animate
 } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 declare var $: any;
 
 @Component({
   selector: 'tr-user-profile',
   templateUrl: './user-profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user-profile.component.scss'],
   animations: [
     trigger('flyInDown', [
@@ -51,9 +54,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
+              private slimLoadingBarService :SlimLoadingBarService,
               private userService: UserService) {
     this.loggedUserId$ = this.store.select(getLoggedInUserId);
     this.selectedProfileUser$ = this.store.select(getSelectedProfileUser);
+
+    this.cloudinaryService.uploading.subscribe(response => {
+      if(response)
+        this.slimLoadingBarService.start();
+      else
+        this.slimLoadingBarService.complete();  
+    });
+
   }
 
   ngOnInit() {

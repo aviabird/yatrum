@@ -1,110 +1,32 @@
-<!--<div class="ui centered grid">
-  <div class="twelve wide column trip">
-    <div class="ui column grid">
-      <div class="sixteen wide column">
-        <div class="ui segment">
-
-          <h1 class="cover-header text-center">
-            {{trip?.name}}
-          </h1>-->
-          <!--TODO: Activate this only after checking if the user is an owner of this trip -->
-          <!--<div *ngIf="userTrip" class="trip-edit"> 
-            <a [routerLink]="['/trips', trip.id, 'edit']"><i class="large icon pencil">Edit</i></a>
-          </div>
-          <div class="cover-image">
-            <img src='http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg'>
-            <div class="ui labeled button likeBtn" tabindex="0">
-              <div class="ui red button" (click)="onToggleLike()">
-                <i class="heart icon"></i>
-                {{ trip?.is_liked_by_current_user ? "Unlike" : "Like"}}
-              </div>
-              <a class="ui basic red left pointing label">
-                {{trip?.trip_likes_count}}
-              </a>
-            </div>
-          </div>
-          
-          <div class="ui section divider"></div>
-          
-          <a class="ui teal ribbon label">Follow</a>
-          
-          <span>
-            <a class="ui teal image label" [routerLink]="['/user', user.id]">
-              <img [src]="user.profile_pic?.url">
-              {{user.name}}
-              <div class="detail">Enterprenuer</div>
-            </a>
-            <span class="ui red tag label"> 2.5K Followers</span>
-          </span>
-          
-          <p></p>
-        </div>
-      </div>
-      <div class="sixteen wide column">
-        <div class="ui segment">
-          <a class="ui blue ribbon label">Day 1</a>
-          <tr-trip-activity></tr-trip-activity>
-        </div>
-      </div>
-    </div>
-  </div>  
-</div>-->
-
 <div class="ui centered grid">
   <div class="detail-margin row"></div>
 
   <div class="row">
     <div class="ten wide column banner">
-      <div class="image">
-      </div>
-      <div class="trip-name">
-        {{trip?.name}}
-      </div>
-      <div class="trip-user" [routerLink]="['/user', user.id]">
-        <img class="" [src]="user.profile_pic?.url">
-        <span class="user-name">
-          {{user.name}}
-        </span>
-      </div>
-      <div *ngIf="!(belongsToLoggedInUser() | async)" class="follow-user" (click)="onToggleFollow()">
-        <i class="add user icon"
-          [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}">
-        </i>
-        {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
-      </div>
-      <div class="trip-likes">
-        {{trip?.trip_likes_count | humanize}} Likes
-      </div>
-      <div class="like-trip">
-        <i class="thumbs up huge icon" 
-          [ngClass]="{active: tripLikeState() == 'active'}"
-          (click)="onToggleLike()">
-        </i>
-      </div>
+      <tr-trip-detail-header
+        [trip]="trip$ | async"
+        [tripUser]="tripUser"></tr-trip-detail-header>
     </div>
   </div>
 
   <div class="row">
     <div class="ten wide column trip-activity">
-      <div *ngFor="let place of trip?.places">
+      <div *ngFor="let place of (trip$ | async)?.places">
         <tr-place-detail [place]="place"></tr-place-detail>
       </div>
     </div>
   </div>
   
   <div class="row">
-    <div class="card ten wide column">
+    <div class="card ten wide column comments-card">
       <div *ngFor="let comment of comments$ | async" class="ui cards grid">
         <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
       </div>
 
       <hr>
       
-      <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip" class="ui cards grid"></tr-new-trip-comment>
+      <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip$ | async" class="ui cards grid"></tr-new-trip-comment>
     </div>
   </div>
 
 </div>
-
-
-

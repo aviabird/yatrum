@@ -1,5 +1,5 @@
 import { ToastyService } from 'ng2-toasty';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { SelectedProfileUserAction, UserUpdateSuccessAction } from './../actions/user-auth.action';
 import { State, getSelectedProfileUser } from './../reducers/index';
 import { Store } from '@ngrx/store';
@@ -15,8 +15,11 @@ export class CloudinaryIntegrationService {
   private cloudinaryApiLink: string = `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}`;
   private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
   private auth_token: string;
-  private user$: Observable<any>;
+  // private user$: Observable<any>;
   private toUpdateMediaPublicId: string = null;
+  private totalImagesToUpload: number = 0;
+  private imagesUploaded: number = 0;
+  public uploading = new Subject();
 
   constructor(
     private http: Http,
@@ -30,7 +33,9 @@ export class CloudinaryIntegrationService {
     }
   }
 
-  uploadPlacePicture(url: string): Observable<any> {
+  uploadPlacePicture(url: string, totalImages): Observable<any> {
+    this.totalImagesToUpload = totalImages;
+    this.uploading.next(true);
     let cloudUpload$:Observable<any>;
     let params = this.createUploadParams(url);
     return this.upload(params)
@@ -40,12 +45,13 @@ export class CloudinaryIntegrationService {
   }
 
   uploadImages(image, mediaType) {
-    this.user$ = this.store.select(getSelectedProfileUser);
+    this.totalImagesToUpload = 1;
+    // this.user$ = this.store.select(getSelectedProfileUser);
     
-    this.user$.subscribe(user => {
-      this.toUpdateMediaPublicId = user.profilePic.public_id;
-      console.log("public id", this.toUpdateMediaPublicId);
-    })
+    // this.user$.subscribe(user => {
+    //   this.toUpdateMediaPublicId = user.profile_pic.public_id;
+    //   console.log("public id", this.toUpdateMediaPublicId);
+    // })
     let params = this.createUploadParams(image);
     this.upload(params)
       .subscribe(data => {
@@ -94,11 +100,17 @@ export class CloudinaryIntegrationService {
   }
 
   upload(params) {
-    console.log("upload", params);
     this.slimLoadingBarService.start();
     return this.http.post(`${this.cloudinaryApiLink}/image/upload`, params)
       .map(
-        data => data.json(),
+        data => {
+          this.imagesUploaded++;
+          if(this.imagesUploaded == this.totalImagesToUpload) {
+            this.imagesUploaded = 0;
+            this.uploading.next(false);
+          } 
+          return data.json();
+        },
         error => this.toastyService.error({ title: "Server Error", msg: "Something went wrong !!!" })
       ).finally(() => this.slimLoadingBarService.complete());
   }

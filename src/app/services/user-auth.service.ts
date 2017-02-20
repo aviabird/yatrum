@@ -7,6 +7,7 @@ import { Injectable, OnInit } from '@angular/core';
 import * as fromRoot from './../reducers/index';
 import { UserProfile } from '../models/user-profile';
 
+
 @Injectable()
 export class UserAuthService {
   authUser: Observable<UserProfile>;
@@ -56,5 +57,4 @@ export class UserAuthService {
   redirectToLogin() {
     this.router.navigate(['/login']);
   }
-
 }

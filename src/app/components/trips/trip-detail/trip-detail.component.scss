@@ -1,6 +1,7 @@
+@import '../../../../_vars.scss';
+
 .banner {
-	// box-shadow: 0px 0px 30px rgba(black,0.3);
-	padding: 0px !important;	
+	padding: 0px !important;
 }
 
 .detail-margin {
@@ -12,145 +13,10 @@
 	position: absolute;
 }
 
-.trip-name {
-	@extend .content;
-	font-size: 30px;
-	top: 35px;
-	left: 40px;
-	text-shadow: 0 8px 14px rgba(0,0,0,0.63);
-}
-
-.trip-user {
-	@extend .content;
-	top: 96px;
-	left: 46px;
-	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
-	img {
-		position: absolute;
-    left: -6px;
-    top: -14px;
-		width: 48px;
-		border: 1px solid white;
-		border-radius: 100px;
-		background: #00A6B4;
-	}
-	.user-name {
-  	background: #00A6B4;
-  	border-radius: 4px;
-		padding: 10px 10px 10px 52px;
-
-	}
-}
-
-.follow-user{
-	@extend .content;
-	bottom: 30px;
-	left: 40px;
-	padding: 12px 32px 12px 24px;
-	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
-  border-radius: 4px;
-  font-size: 18px;
-	background: #00A6B4;
-	cursor: pointer;
-}
-
-.trip-likes {
-	@extend .content;
-	top: 35px;
-	right: 40px;
-	font-size: 16px;
-}
-
-.like-trip {
-	cursor: pointer;
-	@extend .content;
-	bottom: 34px;
-	right: 40px;
-		.icon.active {
-			color: #E74C3C;
-		}
-}
-
-
-
-.image {
-	height: 65vh;
-	background-size: cover;
-  background-position: center;
-	background-image: url("http://wallpaperlayer.com/img/2015/1/blurred-city-lights-7598-7892-hd-wallpapers.jpg");
+.comments-card {
+	padding: 0 !important;
 }
 
 .trip-activity {
 	padding: 0 !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// @mixin default-box-shadow() {
-// 	box-shadow: 0 1px 5px #BBB;
-// }
-
-// .border-custom {
-// 	border: 1px solid #4C868F !important;
-// }
-
-// .trip {
-// };
-
-// .trip-image {
-// 	background-image: url("http://www.realgap.co.uk/sites/realgap/files/drupal-images/roads_quote.jpg");
-// 	height: 20rem;
-// 	background-repeat: no-repeat;
-// 	background-size: cover;
-// 	background-position: center;
-// 	@include default-box-shadow();
-// }
-
-// .trip-detail {
-// 	margin-top: 30px;
-// }
-
-// .my-card {
-// 	width: 100%;
-// }
-
-// .trip-user {
-// 	cursor: pointer;
-// }
-
-// .cover-image {
-// 	height: 17rem;
-// 	overflow: hidden;
-// }
-
-// .cover-header {
-// 	position: absolute;
-// 	color: white;
-// 	width: 80%;
-// 	left: 10%;
-// 	transform: matrix;
-// 	top: 30%;
-// 	font-weight: 100;
-// }
-
-// .likeBtn {
-// 	position: absolute;
-// 	bottom: 1rem;
-// 	right: 1rem;
-// }

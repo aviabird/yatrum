@@ -3,7 +3,7 @@ import { environment } from './../../environments/environment';
 import * as fromTripActions from './../actions/trips.action';
 import * as fromRoot from './../reducers/index';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { Trip } from './../models/trip';
 import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -19,6 +19,8 @@ export class TripsService {
 	private trips: Trip[] = [];
 	private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
 	public total_pages: number;
+  public loading = new Subject();
+
 	// trips: Trip[];
 	constructor(
 		private http: Http,
@@ -110,8 +112,12 @@ export class TripsService {
 				url = `${this.apiLink}/trending/trips.json/?page=${pageParams['page']}`;
 				break;
 		}
+		// Loading Trips
+		this.loading.next(true);
+		
 		return this.http.get(url, { headers: headers })
 			.map((data: Response) => {
+				this.loading.next(false);
 				let trips_data = data.json();
 				this.total_pages = trips_data.total_pages;
 				return trips_data.trips;
@@ -146,8 +152,13 @@ export class TripsService {
 	 */
 	searchTrips(searchQuery): Observable<Trip[]> | Observable<String> {
 		this.slimLoadingBarService.start();
+    this.loading.next(true);
+
 		return this.http.post(`${this.apiLink}/trips/search`, { keywords: searchQuery })
-			.map((data: Response) => data.json())
+			.map((data: Response) => {
+          this.loading.next(false);
+          return data.json()
+      })
 			.catch((res: Response) => this.catchError(res))
 			.finally(() => this.slimLoadingBarService.complete());
 	}
@@ -165,10 +176,16 @@ export class TripsService {
 			'Authorization': this.getUserAuthToken()
 			// use Restangular which creates interceptor
 		});
+    	this.loading.next(true);
+
 		return this.http.get(`${this.apiLink}/users/${id}/trips.json`, { headers: headers })
-			.map((data: Response) => data.json())
+      		.map((data: Response) => {
+				console.log("check");
+				this.loading.next(false);
+				return data.json()
+      		})
 			.catch((res: Response) => this.catchError(res))
-			.finally(() => this.slimLoadingBarService.complete());
+			.finally(() => this.slimLoadingBarService.complete())
 	}
 
 	/**

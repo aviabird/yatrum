@@ -10,13 +10,15 @@ import { Component,
   state,
   transition,
   style,
-  animate  
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'tr-trending-trips',
   templateUrl: './trending-trips.component.html',
   styleUrls: ['./trending-trips.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),
@@ -28,11 +30,14 @@ import { Component,
   ]
 })
 export class TrendingTripsComponent implements OnInit {
-
+  hideLoader: boolean = false;
   trendingTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<State>, private tripService: TripsService) {
+    
+    this.tripService.loading.subscribe(response => this.hideLoader = !response);
+
     this.trendingTrips$ = this.store.select(getTripsCollection);
   }
 

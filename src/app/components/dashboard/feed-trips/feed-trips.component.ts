@@ -8,7 +8,8 @@ import {
   state,
   transition,
   style,
-  animate
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from './../../../models/trip';
@@ -17,10 +18,13 @@ import * as fromRoot from './../../../reducers/index';
 import { LoadMoreTripsAction, LoadFeedTripsAction } from './../../../actions/trips.action';
 import { Input } from '@angular/core';
 
+
+
 @Component({
   selector: 'tr-feed-trips',
   templateUrl: './feed-trips.component.html',
   styleUrls: ['./feed-trips.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeIn', [
       state('in', style({ opacity: 1 })),
@@ -33,11 +37,13 @@ import { Input } from '@angular/core';
 })
 export class FeedTripsComponent implements OnInit, OnDestroy {
   // @Input() hideLoader: boolean;
+  hideLoader: boolean = false;
   subscription: Subscription;
   feedTrips$: Observable<Trip[]>;
   private page: number = 1;
 
   constructor(private store: Store<fromRoot.State>, private tripService: TripsService) {
+    this.tripService.loading.subscribe(response => this.hideLoader = !response);
     this.feedTrips$ = this.store.select(fromRoot.getTripsCollection); 
   }
 

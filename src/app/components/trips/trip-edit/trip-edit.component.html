@@ -1,9 +1,9 @@
 <div class="trip ui centered grid cards">
-  <div class="trip-form ten wide column ui card">
-    <form class="ui form" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+  <div class="trip-form twelve wide column ui card">
+    <form class="ui form" [formGroup]="tripForm">
       <div class="field">
-        <input class="trip-title" type="text" placeholder="Title" formControlName="name">
-        <button class="ui big button save-button" type="submit">Publish</button>
+        <textarea class="trip-title" autosize type="text" placeholder="Title" formControlName="name"></textarea>
+        <button class="ui big button save-button" (click)="onSubmit()" type="button">Publish</button>
       </div>
       <div class="field">
         <textarea class="trip-description" autosize placeholder="Where is it about?" formControlName="description"></textarea>
@@ -11,24 +11,19 @@
     </form>
   </div>
 
-  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form ten wide right aligned column ui card">
-    <div *ngIf="!place._destroy">
-      <h4 class="ui horizontal divider header">
-        <i class="train big icon"></i>
-        {{place.name}}
-      </h4>
-      <strong>Remove</strong>
-      <i class="remove icon" (click)="removePlace(place, i)"></i>
+  <div *ngFor="let place of tripForm.value.places; let i = index" class="place-form twelve wide right aligned column">
+    <div *ngIf="!place._destroy" class="place">
+      <div class="remove-icon-background"></div>
+      <i class="remove circle icon" (click)="removePlace(place, i)"></i>
       <tr-add-place [place]="place" (newPlace)="updatePlace($event, i)"></tr-add-place>
     </div>
   </div>
-
-  <div class="place-form ten wide column ui card">
-    <h4 class="ui horizontal divider header">
-      <i class="train big icon"></i>
-      New Place
-    </h4>
-    <tr-add-place (newPlace)="addNewPlace($event)"></tr-add-place>
+  <div class="twelve wide column">
+    <div class="ui grid">
+      <div class="two wide column add-place" (click)="addNewPlace()">
+        <i class="add circle icon"></i>
+      </div>
+    </div>
   </div>
 
 </div>

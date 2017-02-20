@@ -5,12 +5,13 @@ import * as fromRoot from './../../../../reducers/index';
 import { Store } from '@ngrx/store';
 import { Trip } from './../../../../models/trip';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'tr-trip-activity',
 	templateUrl: './trip-activity.component.html',
-	styleUrls: ['./trip-activity.component.scss']
+	styleUrls: ['./trip-activity.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripActivityComponent implements OnInit {
 	selectedTrip$: Observable<any>;

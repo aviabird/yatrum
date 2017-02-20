@@ -9,34 +9,36 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
-
+import { AuthService } from 'ng2-ui-auth';
 
 @Injectable()
 export class ServerAuthService {
   authUser: Observable<UserProfile>;
   // @LocalStorage() public token:Object = {};
-  private apiLink:string = environment.API_ENDPOINT; // "http://localhost:3000";
+  private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private http: Http,
-              private store: Store<fromRoot.State>,
-              private router: Router) {}
+    private store: Store<fromRoot.State>,
+    private router: Router,
+    private auth: AuthService //Satellizer AuthService
+  ) { }
 
   getLoggedInUser(auth_token): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': auth_token
     })
-    return this.http.post(`${this.apiLink}/users/show.json`, {}, {headers: headers})
+    return this.http.post(`${this.apiLink}/users/show.json`, {}, { headers: headers })
       .map(data => this.getServerUserProfile(data.json()))
   }
 
-   // returns an observable with user object
+  // returns an observable with user object
   login(data): Observable<Object> {
     const headers = new Headers({
-      'Content-Type': 'application/json' 
+      'Content-Type': 'application/json'
     });
-    return this.http.post(`${this.apiLink}/authenticate.json`, 
-      JSON.stringify(data), {headers: headers}
+    return this.http.post(`${this.apiLink}/authenticate.json`,
+      JSON.stringify(data), { headers: headers }
     ).map((res: Response) => {
       // Setting token after login
       this.setTokenInLocalStorage(res.json())
@@ -51,22 +53,22 @@ export class ServerAuthService {
   /**
    * signUp method
    */
-  signUp(data): Observable<Object>|any {
+  signUp(data): Observable<Object> | any {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
     console.log('in signup method');
     return this.http.post(`${this.apiLink}/users/create.json`,
-      JSON.stringify(data), {headers: headers})
-        .map((resp: Response) => resp.json())
-        .catch((res: Response) => this.catchError(res));
+      JSON.stringify(data), { headers: headers })
+      .map((resp: Response) => resp.json())
+      .catch((res: Response) => this.catchError(res));
   }
 
   catchError(response: Response): Observable<String> {
-      console.log('in catch error method');
-      // not returning throw as it raises an error on the parent observable 
-      // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
-      return Observable.of('server error');
+    console.log('in catch error method');
+    // not returning throw as it raises an error on the parent observable 
+    // MORE INFO at https://youtu.be/3LKMwkuK0ZE?t=24m29s    
+    return Observable.of('server error');
   }
 
   signOut(): Observable<String> {
@@ -75,18 +77,19 @@ export class ServerAuthService {
   }
 
   getServerUserProfile(data): UserProfile {
-    return { id: data.id,
-            name: data.name,
-            email: data.email,
-            profilePic: data.profile_pic,
-            profile_pic: data.profile_pic,
-            coverPhoto: data.cover_photo,
-            isFollowed: null,
-            token: data.auth_token,
-            created_at: '',
-            updated_at: '',
-            is_followed_by_current_user: data.is_followed_by_current_user
-        }
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      profilePic: data.profile_pic,
+      profile_pic: data.profile_pic,
+      coverPhoto: data.cover_photo,
+      isFollowed: null,
+      token: data.auth_token,
+      created_at: '',
+      updated_at: '',
+      is_followed_by_current_user: data.is_followed_by_current_user
+    }
   }
 
   setTokenInLocalStorage(user_data): void {
@@ -100,6 +103,19 @@ export class ServerAuthService {
 
   redirectToLogin() {
     this.router.navigate(['/login']);
+  }
+
+  socialLogin(provider: string): Observable<any> {
+    return this.auth.authenticate(provider)
+      .map((res: Response) => {
+        // Setting token after login
+        this.setTokenInLocalStorage(res.json())
+        return res.json();
+      }).catch((res: Response) => this.catchError(res));
+    // catch should be handled here with the http observable 
+    // so that only the inner obs dies and not the effect Observable
+    // otherwise no further login requests will be fired
+    // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
 
 }

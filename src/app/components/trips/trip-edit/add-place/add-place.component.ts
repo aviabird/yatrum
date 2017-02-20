@@ -1,7 +1,8 @@
+import { PlaceFormService } from './../../../../services/forms/place-form.service';
+import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import * as moment from 'moment/moment';
+import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 declare var $: any;
 declare var google: any;
@@ -9,7 +10,8 @@ declare var google: any;
 @Component({
   selector: 'tr-add-place',
   templateUrl: './add-place.component.html',
-  styleUrls: ['./add-place.component.scss']
+  styleUrls: ['./add-place.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlaceComponent implements OnInit {
 
@@ -19,35 +21,22 @@ export class AddPlaceComponent implements OnInit {
   googleSuggestedPlaceName: string = null;
   datePickerDate: Date;
 
-
   constructor(
     private formBuilder: FormBuilder,
-    private cloudinaryService: CloudinaryIntegrationService) {
-    
+    private cloudinaryService: CloudinaryIntegrationService,
+    private toastyService: ToastyService,
+    private placeFormService: PlaceFormService) {
   }
 
   ngOnInit() {
-    if (this.place) {
-      this.placeForm = this.formBuilder.group({
-        'id': [this.place.id, Validators.required],
-        'name': [this.place.name, Validators.required],
-        'review': [this.place.review, Validators.required],
-        'pictures': this.formBuilder.array(this.place.pictures),
-        'visited_date': [moment(this.place.visited_date).format('L'), Validators.required],
-        '_destroy': [this.place._destroy]
-      })
-
-    }
-    else {
-      this.placeForm = this.formBuilder.group({
-        'name': ['', Validators.required],
-        'review': ['', Validators.required],
-        'pictures': this.formBuilder.array([]),
-        'visited_date': ['', Validators.required],
-        '_destroy': [false]
-      })
-    }
-
+    this.initForm();
+    this.placeForm.valueChanges
+      .debounceTime(2000)
+      .subscribe(value => {
+        if(this.placeForm.valid) {
+          this.onSubmit();
+        }
+      });
   }
 
   imageUploaded(image) {
@@ -69,6 +58,7 @@ export class AddPlaceComponent implements OnInit {
     let place = this.placeForm.value;
     if (this.googleSuggestedPlaceName)
       place.name = this.googleSuggestedPlaceName;
+
     this.newPlace.emit(place);
 
     this.placeForm.controls['name'].setValue('');
@@ -90,6 +80,10 @@ export class AddPlaceComponent implements OnInit {
       let place = autocomplete.getPlace();
       that.googleSuggestedPlaceName = place.name;
     });
+  }
+
+  private initForm() {
+    this.placeForm = this.placeFormService.initPlace(this.place);
   }
 
 }

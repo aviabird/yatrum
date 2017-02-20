@@ -1,10 +1,11 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

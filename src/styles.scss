@@ -67,6 +67,7 @@ ng2-slim-loading-bar{
   .slim-loading-bar-progress{
     position: absolute;
     top: 0px;
+    left: 0px;
   }
 }
 
@@ -91,12 +92,25 @@ hr {
   border: none;
 }
 
-.place-date {
+
+p-calendar {
   input {
-		border: none !important;
-    color: $appBaseColor !important;
     background: none !important;
-    margin-right: -0.5rem !important;
-    text-align: right;
-	}
+    border: none !important;
+    color: #A8B0B8 !important;
+    font-size: 1.4rem !important;
+    width: 80% !important;
+    padding-right: 0px !important;
+  }
+
+  button {
+    position: absolute;
+    left: 0;
+    background: none !important;
+    border: none !important;
+    color: #A8B0B8 !important;
+    font-size: 2.5rem !important;
+    width: 20% !important;
+  }
+
 }

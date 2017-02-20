@@ -1,2 +1,4 @@
 <input #fileInput [hidden]="true" type="file" (change)="handleOnChange($event)" multiple />
-<i class="photo big icon" (click)="showImageBrowseDlg()"></i>
+<span class="ui card add-photo" (click)="showImageBrowseDlg()">
+	<i class="add circle icon"></i>
+</span>

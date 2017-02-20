@@ -1,41 +1,37 @@
-<form class="ui form" [formGroup]="placeForm" (ngSubmit)="onSubmit()">
-  <div class="content form-header">
-    <div class="inline fields">
-      <div class="ten wide field">
-        <i class="marker big icon"></i>
-        <input
-          class="place-name" type="text" (focus)="focusFunction($event)"
-          formControlName="name" placeholder="Add Place">
+<div class="ui grid">
+  <div class="two wide column street-view">
+    <i class="street view icon"></i>
+    <div class="vertical-bar"></div>
+  </div>
+  <div class="fourteen wide column ui card place">
+    <form class="ui form" [formGroup]="placeForm">
+      <div class="content form-header">
+        <div class="inline fields">
+          <div class="twelve wide field">
+            <i class="marker big icon"></i>
+            <input
+              class="place-name" type="text" (focus)="focusFunction($event)"
+              formControlName="name" placeholder="Add Place">
+          </div>
+          <div class="four wide field place-date-field">
+            <p-calendar formControlName="visited_date" [showIcon]="true"></p-calendar> 
+          </div>
+        </div>
+      </div>  
+      <div class="field">
+        <textarea
+          class="place-review" autosize class="" formControlName="review"
+          placeholder="What's so cool about this place?"></textarea>
+      </div>  
+      <div class="field place-images">
+        <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
+        <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
+          <span class="place-image-field" *ngIf="!picture._destroy">
+            <img [src]="picture.url | thumbnail:'w_150,q_75'" class="place-image">
+            <i class="remove icon" (click)="removeImage(picture, i)"></i>
+          </span>
+        </span>
       </div>
-      <div class="six wide field place-date-field">
-        <p-calendar formControlName="visited_date" [showIcon]="true"></p-calendar> 
-      </div>
-    </div>
-  </div>  
-  <div class="field">
-    <textarea
-      class="place-review" autosize class="" formControlName="review"
-      placeholder="What's so cool about this place?'"></textarea>
-  </div>  
-  <div class="field">
-    <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
-    <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">
-      <span class="place-image-field" *ngIf="!picture._destroy">
-        <img [src]="picture.url" class="place-image">
-        <i class="remove icon" (click)="removeImage(picture, i)"></i>
-      </span>
-    </span>
+    </form>
   </div>
-  <div *ngIf="!place" class="save-button">
-    <button class="ui button" type="submit">
-      <i class="plus icon"></i>
-      Save
-    </button>
-  </div>
-  <div *ngIf="place" class="save-button">
-    <button class="ui button" type="submit">
-      <i class="checkmark icon"></i>
-      update
-    </button>
-  </div>
-</form>
+</div>

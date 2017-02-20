@@ -1,0 +1,54 @@
+<div class="ui middle aligned center aligned grid">
+  <div class="sixteen wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="five wide column">
+    <h2 class="ui teal image header">
+      <div class="content">
+        Log-in
+      </div>
+    </h2>
+
+    <form class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <button type="button" class="ui google plus button fixwidth" (click)="socialLogin('google')">
+            <i class="google plus icon"></i>
+            Google login
+          </button>
+        </div>
+        <div class="field">
+          <button type="button" class="ui facebook button fixwidth" (click)="socialLogin('facebook')">
+            <i class="facebook icon"></i>
+            Facebook login
+          </button>
+        </div>
+      </div>
+    </form>
+    
+    <div class="ui divider center-line">
+      <p class="text">or</p>
+    </div>
+
+    <form class="ui medium form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address" formControlName="email" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password" formControlName="password" autocomplete="off">
+          </div>
+        </div>
+        <button type="submit" class="ui fluid large teal submit button">Sign in</button>
+      </div>
+    </form>
+
+    <div class="ui message">
+      New to Yatrum? <a [routerLink]="['/signup']">Sign Up</a>
+    </div>
+  </div>
+</div>
