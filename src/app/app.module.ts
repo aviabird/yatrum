@@ -20,7 +20,6 @@ import { TripHasPlaces } from './Validators/trip-has-places.directive';
 // Components
 import { AppComponent } from './app.component';
 import { AmbassadorComponent } from './components/misc/ambassador/ambassador.component';
-
 // Satellizer Module
 import { Ng2UiAuthModule, CustomConfig } from 'ng2-ui-auth';
 import { MyAuthConfig } from './auth-config';

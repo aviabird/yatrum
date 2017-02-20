@@ -52,4 +52,20 @@ export class UserService {
       .map(response => response.json());
   }
    
+
+  // TODO: need to change the dirty implematation
+  changePassword(current_password, new_password, confirm_password){
+    console.log("Inside change password method", current_password, new_password, confirm_password)
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()    
+    })
+
+    return this.http.post(`${this.apiLink}/update_password`, { 
+      current_password: current_password,
+      password: new_password,
+      password_confirmation: confirm_password,
+    }, { headers: headers }).map(response => response.json());
+  }
 }
