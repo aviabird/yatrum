@@ -1,6 +1,6 @@
 import { UserService } from './../../../../services/user.service';
 import { UserProfile } from './../../../../models/user-profile';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tr-other-details',
@@ -9,16 +9,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OtherDetailsComponent implements OnInit {
   @Input() user: UserProfile;
-  constructor(private userService: UserService) { }
+  @Output() updateLinksClicked =  new EventEmitter();
+  constructor() { }
 
   ngOnInit() {
   }
-  updateSocialLinks(data: any){
-   console.log("data is", data);
-   this.userService.updateSocialLinks(data).subscribe(response => {
-     console.log(response);
-   });
+  onSubmitLinks(data: any){
+    this.updateLinksClicked.emit(data);
   }
-
-
 }

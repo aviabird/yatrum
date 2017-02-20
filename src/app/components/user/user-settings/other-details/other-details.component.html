@@ -7,7 +7,7 @@
         Other Details
       </div>
     </h2>
-      <form class="ui medium form" #f="ngForm" novalidate (ngSubmit)="updateSocialLinks(f.value)">
+      <form class="ui medium form" #f="ngForm" novalidate (ngSubmit)="onSubmitLinks(f.value)">
         <div class="ui stacked segment">
           <div class="form-group field">
             <label for="">Facebook Url</label>
@@ -31,12 +31,9 @@
             <input type="text" class="form-control" name="blog_url" [(ngModel)]="user.blog_url">
           </div>
           <div class="field">
-            <button type="submit" class="ui fluid large teal submit button">Change Password</button>
+            <button type="submit" class="ui fluid large teal submit button">Save Social Links</button>
           </div>
         </div>
       </form>
-    <div class="ui message">
-      Have a Nice Day!!! 
-    </div>
   </div>
 </div>

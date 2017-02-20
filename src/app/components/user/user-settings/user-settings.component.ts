@@ -1,3 +1,4 @@
+import { UpdateUser } from './../../../actions/user.action';
 import { UserProfile } from './../../../models/user-profile';
 import { UserService } from './../../../services/user.service';
 import { getUserProfile, State } from './../../../reducers/index';
@@ -34,6 +35,18 @@ export class UserSettingsComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  updateSocialLinks(data: any){
+   console.log("data is", data);
+
+  //  this.userService.updateSocialLinks(data).subscribe(response => {
+  //    console.log(response);
+  //  });
+
+   this.store.dispatch(new UpdateUser(data));
+
+  }
+
 
   onLoginWithInstagram() {
     window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${env.CLIENT_ID}&redirect_uri=${env.REDIRECT_URI}&response_type=code`;

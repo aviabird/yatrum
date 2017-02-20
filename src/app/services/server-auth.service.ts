@@ -76,6 +76,12 @@ export class ServerAuthService {
     return Observable.of('ok logged out');
   }
 
+
+  /**
+   * TODO: Make a new Response Parser Service 
+   * and Shift the below method to ResponseParserService
+   * - VoidZero
+   */
   getServerUserProfile(data): UserProfile {
     return {
       id: data.id,

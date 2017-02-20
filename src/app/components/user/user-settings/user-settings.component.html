@@ -15,4 +15,4 @@
 		<div>
 	</div>
 </div>-->
-<tr-other-details [user]="(user$ | async)"></tr-other-details>
+<tr-other-details [user]="(user$ | async)" (updateLinksClicked)="updateSocialLinks($event)"></tr-other-details>

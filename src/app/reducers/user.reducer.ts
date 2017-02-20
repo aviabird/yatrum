@@ -52,6 +52,7 @@ export function reducer(state = initialState, action: Action): State {
         auth: true
       })
     }
+
     case userAuthActions.SERVER_LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
         user: initialState.user,
@@ -102,6 +103,13 @@ export function reducer(state = initialState, action: Action): State {
         })
       })
     }
+
+    case UserActions.UPDATE_USER_SUCCESS: {
+      return Object.assign({}, state, {
+        user: action.payload
+      })
+    }
+
     default: {
       return state;
     }

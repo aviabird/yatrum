@@ -53,7 +53,13 @@ export class UserService {
   }
 
   updateSocialLinks(data: any){
-    return this.http.post(`${this.apiLink}/users/update_social_links`, {user: data})
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': this.getUserAuthToken()
+			// use Restangular which creates interceptor
+		});
+
+    return this.http.post(`${this.apiLink}/users/update_social_links`, { user: data }, { headers: headers })
       .map(response => response.json());
   }
 
