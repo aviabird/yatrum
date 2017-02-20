@@ -46,15 +46,15 @@
     <div class="sixteen wide column trip-status">
       <div>
         {{trip.trip_likes_count | humanize}} Likes
-        <div class="right">
+        <!--<div class="right">
           0 Shares, 0 Views
-        </div>
+        </div>-->
       </div>
     </div>
 
     <hr class="image-bottom-border">
     <div class="sixteen wide column icon-group">
-      <i class="reply large icon"></i>
+      <!--<i class="reply large icon"></i>-->
       <i class="heart large icon"
         [ngClass]="{empty: tripLikeState() == 'inactive'}"
         [@toggleLike]='tripLikeState()'

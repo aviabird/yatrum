@@ -1,14 +1,31 @@
 @import "../../../../../_vars.scss";
 
-.photo.icon {
-  height: 50px;
-  width: 50px;
-  color: $appBaseColor;
-  cursor: pointer;
+// .photo.icon {
+//   height: 50px;
+//   width: 50px;
+//   color: $appBaseColor;
+//   cursor: pointer;
 
-  &:before {
-    top: 22%;
-    position: relative;
-    left: 3%;
+//   &:before {
+//     top: 22%;
+//     position: relative;
+//     left: 3%;
+//   }
+// }
+
+.add-photo {
+  cursor: pointer;
+  text-align: center;
+  width: 200px;;
+  height: 150px;
+  border-radius: 0px !important;
+  position: relative;
+  margin: 0 !important;
+  .icon {
+    font-size: 3.5rem;  
+    position: absolute;
+    color: #CBCBCB;
+    left: calc(50% - 2rem);
+    top: calc(50% - 1rem);
   }
 }

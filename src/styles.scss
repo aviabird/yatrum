@@ -97,14 +97,20 @@ p-calendar {
   input {
     background: none !important;
     border: none !important;
-    text-align: right;
+    color: #A8B0B8 !important;
+    font-size: 1.4rem !important;
+    width: 80% !important;
+    padding-right: 0px !important;
   }
 
   button {
+    position: absolute;
+    left: 0;
     background: none !important;
     border: none !important;
-    color: black !important;
-    font-size: 3rem !important;
+    color: #A8B0B8 !important;
+    font-size: 2.5rem !important;
+    width: 20% !important;
   }
 
 }
