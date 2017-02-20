@@ -59,14 +59,6 @@ export class TripListItemComponent implements OnInit {
     // this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
   }
 
-  formatImageUrl(rawUrl) {
-    let sizeFormatString = '/c_limit,q_51,w_614';
-    let splitUrlArray = rawUrl.split('/upload')
-    let firstPart = splitUrlArray[0] + '/upload';
-    let seconPart = sizeFormatString + splitUrlArray[1];
-    return `${firstPart}${seconPart}`;
-  }
-
   tripLikeState() {
     return this.trip.is_liked_by_current_user ? 'active' : 'inactive';
   }

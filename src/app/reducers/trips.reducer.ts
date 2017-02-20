@@ -108,7 +108,7 @@ export function reducer(state = initialState, action: Action): State {
         const newTrips = state.tripIds.map(id => {
           let trip = state.entities[id];
           if (trip.user.id == user.id) {
-            trip.user = user;
+            trip = Object.assign({}, trip, {user: user})
           }
           return trip;
         })
@@ -118,7 +118,7 @@ export function reducer(state = initialState, action: Action): State {
             [trip.id]: trip
           });
         }, {});
-        
+
         return Object.assign({}, state, {
           entities: trips
         })
