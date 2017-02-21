@@ -10,43 +10,42 @@ export const ActionTypes = {
 	FOLLOW_PROFILE_USER: "Follow profile [User]",
 	PROFILE_USER_FOLLOWED: "Profile [User] Followed",
 	UPDATE_USER: "Update [User]",
-  UPDATE_USER_SUCCESS: "Update [User] Success"
-
+	UPDATE_USER_SUCCESS: "Update [User] Success"
 }
 
 export class LoadUserFollowersAction {
 	type = ActionTypes.LOAD_USER_FOLLOWERS;
-	constructor(public payload: string) {}
+	constructor(public payload: string) { }
 }
 
 export class UserFollowersLoadedAction {
 	type = ActionTypes.USER_FOLLOWERS_LOADED;
-	constructor(public payload: any) {}
+	constructor(public payload: any) { }
 }
 
 export class LoadUserFollowingAction {
 	type = ActionTypes.LOAD_USER_FOLLOWING;
-	constructor(public payload: string) {}
+	constructor(public payload: string) { }
 }
 
 export class UserFollowingLoadedAction {
 	type = ActionTypes.USER_FOLLOWING_LOADED;
-	constructor(public payload: any) {}	
+	constructor(public payload: any) { }
 }
 
 export class FollowUserAction {
 	type = ActionTypes.FOLLOW_USER;
-	constructor(public payload: string) {}	
+	constructor(public payload: string) { }
 }
 
 export class FollowProfileUserAction {
 	type = ActionTypes.FOLLOW_PROFILE_USER;
-	constructor(public payload: string) {}
+	constructor(public payload: string) { }
 }
 
 export class ProfileUserFollowed {
 	type = ActionTypes.PROFILE_USER_FOLLOWED;
-	constructor(public payload: any) {}
+	constructor(public payload: any) { }
 
 }
 /**
@@ -68,12 +67,12 @@ export class ProfileUserFollowed {
  * 
  */
 export class UpdateUser {
-  type = ActionTypes.UPDATE_USER;
-  constructor(public payload: any) {}
+	type = ActionTypes.UPDATE_USER;
+	constructor(public payload: any) { }
 }
 
 
 export class UpdateUserSuccess {
-  type = ActionTypes.UPDATE_USER_SUCCESS;
-  constructor(public payload: UserProfile) {}
+	type = ActionTypes.UPDATE_USER_SUCCESS;
+	constructor(public payload: UserProfile) { }
 }

@@ -52,8 +52,8 @@ export class TripListItemComponent implements OnInit {
     private store: Store<fromRoot.State>,
     private authService: UserAuthService
   ) {
-    this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);    
-   }
+    this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
+  }
 
   ngOnInit() {
     // this.loggedInUser$.subscribe(user => this.userTrip = this.tripOfAuthUser(user));
@@ -76,7 +76,8 @@ export class TripListItemComponent implements OnInit {
   // }
 
   toggleLike() {
-    this.store.dispatch(new LikeTripAction(this.trip.id))
+    this.trip.is_liked_by_current_user = !this.trip.is_liked_by_current_user
+    setTimeout(() => { this.store.dispatch(new LikeTripAction(this.trip.id)) }, 500)
   }
 
   toggleFollowBtn() {
@@ -85,11 +86,11 @@ export class TripListItemComponent implements OnInit {
 
   onTagClick(searchQuery) {
     this.router.navigate(['/search']);
-    
-    if(searchQuery != "")
+
+    if (searchQuery != "")
       this.store.dispatch(new SearchTrip(searchQuery))
     else
-      this.store.dispatch(new LoadFeedTripsAction({page: 1}))
+      this.store.dispatch(new LoadFeedTripsAction({ page: 1 }))
   }
 
   belongsToLoggedInUser() {

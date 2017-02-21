@@ -110,6 +110,12 @@ export function reducer(state = initialState, action: Action): State {
       })
     }
 
+    case userAuthActions.UNSELECT_PROFILE_USER: {
+      return Object.assign({}, state, {
+        selected_user: {}
+      })
+    }
+
     default: {
       return state;
     }

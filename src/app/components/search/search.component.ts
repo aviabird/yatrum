@@ -8,7 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    document.body.scrollTop = 0;
+  }
 
   ngOnInit() {
   }
