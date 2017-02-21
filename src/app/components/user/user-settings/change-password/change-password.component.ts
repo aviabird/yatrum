@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  private oldPassword: string;
-  private password: string;
-  private confirmPassword: string
+  public oldPassword: string;
+  public password: string;
+  public confirmPassword: string
   constructor(private userService: UserService) { }
 
   ngOnInit() {

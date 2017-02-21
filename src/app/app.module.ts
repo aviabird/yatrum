@@ -13,7 +13,6 @@ import { routes } from './app.routes';
 import { reducer } from './reducers/index';
 
 //Directives
-import { FileSelectDirective } from 'ng2-file-upload';
 import { Autosize } from 'angular2-autosize/angular2-autosize';
 import { TripHasPlaces } from './Validators/trip-has-places.directive';
 
@@ -45,7 +44,6 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    FileSelectDirective,
     Autosize,
     TripHasPlaces,
     AmbassadorComponent,
