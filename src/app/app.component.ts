@@ -1,5 +1,4 @@
 import { Component, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,14 +10,8 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   title = 'Travel app';
 
-  constructor(private router: Router) { }
+  constructor() { }
   
   ngOnInit() {
-      this.router.events.subscribe((evt) => {
-          if (!(evt instanceof NavigationEnd)) {
-              return;
-          }
-          document.body.scrollTop = 0;
-      });
   }
 }

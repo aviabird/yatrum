@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   private mediaType: string = '';
   public isProfilPicChanged: boolean = false;
   public selectedProfileUser$: Observable<UserProfile>;
-  public selectedUser: UserProfile;
+  public selectedUser = new UserProfile();
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
@@ -70,12 +70,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
-      (params) => this.userIndex = params['id']
+      (params) => {
+        this.userIndex = params['id']
+        this.userService.getUserById(this.userIndex);
+      }
     )
     this.userSubscription = this.selectedProfileUser$.subscribe(user => {
-      this.selectedUser = user;
+      if (user) this.selectedUser = user;
     })
-    this.userService.getUserById(this.userIndex);
   }
     
   handleInputChange(e) {

@@ -45,7 +45,7 @@
     "jshashes": "^1.0.6",
     "moment": "^2.17.1",
     "ng2-file-upload": "^1.1.4-2",
-    "ng2-slim-loading-bar": "^2.0.7",
+    "ng2-slim-loading-bar": "^2.4.0",
     "ng2-toasty": "^2.2.2",
     "ng2-ui-auth": "^6.1.2",
     "ng2-validation": "^3.0.1",

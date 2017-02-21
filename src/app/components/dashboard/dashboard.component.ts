@@ -8,6 +8,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class DashboardComponent {
 
-  constructor() {}
+  constructor() {
+    document.body.scrollTop = 0;
+  }
 
 }

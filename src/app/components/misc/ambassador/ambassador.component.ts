@@ -10,6 +10,7 @@ export class AmbassadorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    document.body.scrollTop = 0;
   }
 
 }

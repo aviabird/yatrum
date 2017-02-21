@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers/index';
+import { UnSelectProfileUserAction } from '../../actions/user-auth.action';
 
 @Component({
   selector: 'tr-user',
@@ -6,11 +9,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
+    document.body.scrollTop = 0;
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new UnSelectProfileUserAction());
   }
 
 }

@@ -17,24 +17,19 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
   styleUrls: ['./user-trips.component.scss']
 })
 export class UserTripsComponent implements OnInit, OnDestroy {
-  private subscription: Subscription
+  private subscription: Subscription;
   userTrips$: Observable<Trip[]>;
   userIndex: string;
-  hideLoader: boolean = false;
-  loading: boolean;
-  constructor(private store: Store<fromRoot.State>, 
-              private route: ActivatedRoute, 
-              private tripService: TripsService) {
-    
-    this.tripService.loading.subscribe(response => {
-      this.hideLoader = !response;
-    })
+  hideLoader$: Observable<boolean>;
 
+  constructor(
+    private store: Store<fromRoot.State>,
+    private route: ActivatedRoute,
+    private tripService: TripsService)
+  {
+    this.hideLoader$ = this.tripService.loading.select(response => !response)
     this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection)
-    // .do(
-    //   trips => { trips.length ? this.hideLoader = true : this.hideLoader = false }
-    // );
-   }
+  }
 
   ngOnInit() {
     this.subscription = this.route.parent.params.subscribe(
