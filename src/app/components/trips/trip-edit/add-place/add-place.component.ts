@@ -50,6 +50,7 @@ export class AddPlaceComponent implements OnInit {
       description: picture.description,
       url: picture.url,
       public_id: picture.public_id,
+      user_id: picture.user_id,
       '_destroy': true
     });
   }

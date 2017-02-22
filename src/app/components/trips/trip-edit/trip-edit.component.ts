@@ -85,6 +85,7 @@ export class TripEditComponent implements OnInit {
       (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
         this.formBuilder.group({
           'id': [picture.id, Validators.required],
+          'user_id': [picture.user_id, Validators.required],
           'url': [picture.url, Validators.required],
           'description': [picture.description],
           'public_id': [picture.public_id, Validators.required],

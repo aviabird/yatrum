@@ -1,9 +1,12 @@
+import { State, getLoggedInUserId } from './../../../../reducers/index';
+import { Store } from '@ngrx/store';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Observable } from 'rxjs/Observable';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { Place } from './../../../../models/place';
 import { Component, OnInit, Input, Output, EventEmitter, Renderer, ElementRef, ViewChild, ChangeDetectionStrategy
 } from '@angular/core';
+
 
 @Component({
   selector: 'tr-image-upload',
@@ -16,16 +19,22 @@ export class ImageUploadComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   imagesToUpload = [];
   totalImagesToUpload: number = 0;
-
+  loggedInUserId: string;
   constructor(private cloudinaryService: CloudinaryIntegrationService,
     private slimLoadingBarService: SlimLoadingBarService,
-    private renderer: Renderer) {
+    private renderer: Renderer,
+    private store: Store<State>) {
+
     this.cloudinaryService.uploading.subscribe(response => {
       if(response)
         this.slimLoadingBarService.start();
       else
         this.slimLoadingBarService.complete();  
     });
+
+    /**Get Looged In User Id to pass to picture */
+    this.store.select(getLoggedInUserId)
+      .subscribe(id => this.loggedInUserId = id);
   }
 
   ngOnInit() {
@@ -66,6 +75,7 @@ export class ImageUploadComponent implements OnInit {
         description: '',
         url: image.url,
         public_id: image.public_id,
+        user_id: this.loggedInUserId,
         _destroy: false
       })
     })
@@ -75,6 +85,11 @@ export class ImageUploadComponent implements OnInit {
     let event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
+  }
+
+  // TODO: Destroy Subscription
+  ngOnDestory(){
+    
   }
 
 }
