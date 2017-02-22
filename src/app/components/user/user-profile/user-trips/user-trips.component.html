@@ -2,7 +2,7 @@
 {{hideLoader}}
 <div *ngIf="hideLoader$ | async">
   <div *ngFor="let trip of userTrips$ | async">
-    <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+    <tr-trip-list-item [trip]="trip" [isFollowable]="false"></tr-trip-list-item>
   </div>
 
   <div *ngIf="!(userTrips$ | async)?.length">

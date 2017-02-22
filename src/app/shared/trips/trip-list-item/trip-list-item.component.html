@@ -25,7 +25,7 @@
       <!--<a [routerLink]="['/trips', trip.id, 'edit']" *ngIf="belongsToLoggedInUser() | async"><i class="large icon pencil"></i></a>-->
       <a class="ui small button follow-button"
           [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}"
-          *ngIf="!(belongsToLoggedInUser() | async)"
+          *ngIf="!(belongsToLoggedInUser() | async) && isFollowable"
           (click)="toggleFollowBtn()">
           {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
         </a>

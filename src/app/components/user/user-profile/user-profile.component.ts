@@ -41,7 +41,6 @@ declare var $: any;
 export class UserProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
-  private userSubscription: Subscription;
   public userIndex: string;
   public loaded: boolean = false;
   public profilePicSrc: string = '';
@@ -50,14 +49,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   private mediaType: string = '';
   public isProfilPicChanged: boolean = false;
   public selectedProfileUser$: Observable<UserProfile>;
-  public selectedUser = new UserProfile();
+  public selectedUser;
 
   constructor(private store: Store<State>, private activatedRoute: ActivatedRoute, 
               private cloudinaryService: CloudinaryIntegrationService,
               private slimLoadingBarService :SlimLoadingBarService,
               private userService: UserService) {
     this.loggedUserId$ = this.store.select(getLoggedInUserId);
-    this.selectedProfileUser$ = this.store.select(getSelectedProfileUser);
+    this.selectedProfileUser$ = this.store.select(getSelectedProfileUser)
+      .do((user) => this.selectedUser = user);
 
     this.cloudinaryService.uploading.subscribe(response => {
       if(response)
@@ -75,9 +75,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.userService.getUserById(this.userIndex);
       }
     )
-    this.userSubscription = this.selectedProfileUser$.subscribe(user => {
-      if (user) this.selectedUser = user;
-    })
   }
     
   handleInputChange(e) {
@@ -144,7 +141,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.userSubscription.unsubscribe();
   }
 
 }

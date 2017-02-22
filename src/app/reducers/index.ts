@@ -13,6 +13,9 @@ import * as fromCommentReducr from './comments.reducer';
 import { UpdateLoginFormNotification } from './../actions/notification.action';
 import { environment } from '../../environments/environment';
 
+import { storeFreeze } from 'ngrx-store-freeze';
+
+
 export interface State {
 	user: fromUserReducer.State;
 	trips: fromTripsReducer.State;

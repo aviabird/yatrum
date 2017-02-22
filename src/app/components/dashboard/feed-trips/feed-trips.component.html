@@ -5,7 +5,7 @@
     <!--<tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>-->
     <div class="ui stackable two column grid">
       <div *ngFor="let trip of feedTrips$ | async" class="column">
-        <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+        <tr-trip-list-item [trip]="trip" [isFollowable]="true"></tr-trip-list-item>
       </div>
     </div>
   </div>
