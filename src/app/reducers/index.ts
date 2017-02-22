@@ -82,6 +82,7 @@ export const getSelectedProfileUser = compose(fromUserReducer.getSelectedProfile
 export const getUserTripIds = compose(fromUserReducer.getUserTripIds, getUserState);
 export const getUserFollowers = compose(fromUserReducer.getUserFollowers, getUserState);
 export const getUserFollowing = compose(fromUserReducer.getUserFollowing, getUserState);
+export const getUserPictures = compose(fromUserReducer.getUserPictures, getUserState);
 
 export const getUserTripsCollection = createSelector(getTrips, getUserTripIds, (trips, ids) => {
 	return ids.map(id => trips[id]);

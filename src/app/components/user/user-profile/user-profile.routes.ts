@@ -1,3 +1,4 @@
+import { CanActivateViaAuthGuard } from './../../../guards/auth.guard';
 import { UserFollowingComponent } from './user-following/user-following.component';
 import { UserFollowersComponent } from './user-followers/user-followers.component';
 import { UserMediaComponent } from './user-media/user-media.component';
