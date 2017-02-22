@@ -6,21 +6,23 @@
 	box-shadow: 0 0px 15px 0 #D4D4D5 !important;
 }
 
-.street.view.icon {
-	position: absolute;
-	transform: translate(20%, 34%);
-	color: red;
-	font-size: 5em;
-	z-index: 99;
-}
-
-.vertical-line {
-	position: absolute;
-	border-left: 2px solid rgb(183, 191, 192);
-	height: 97.4%;
-	left: 58%;
-  top: 2%;
-	margin: 0 auto;
+.street-view {
+	padding: 0 !important;
+  color: #F12732;
+	.icon {
+		font-size: 5rem;
+		padding-top: 30px;
+		padding-bottom: 50px;
+    width: 100%;
+		background: #FAFAFA;
+		cursor: pointer;
+	}
+	.vertical-bar {
+		left: 47%;
+    border-right: 1px solid #B3B5B7;
+    position: absolute;
+		height: 100%;
+	}
 }
 
 .header {

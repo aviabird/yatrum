@@ -21,7 +21,7 @@ input {
 
 .place {
 	padding: 0px !important;
-	border-radius: 0 !important;
+	border-radius: 5px 0 0 0 !important;
 }
 
 .place-image-field {
@@ -64,6 +64,7 @@ input {
 	color: #A8B0B8;
 	background-color: #303E52;
 	padding: 10px 10px 1px 10px !important;
+	border-radius: 5px 0 0 0;
 }
 
 .place-name {
