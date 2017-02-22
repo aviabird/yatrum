@@ -48,4 +48,12 @@ export class UserEffects {
         console.log("userProfile is ", userProfile);
         return new UserActions.UpdateUserSuccess(userProfile);
       })
+
+	@Effect()
+		UserPictures$: Observable<Action> = this.action$
+			.ofType(UserActions.ActionTypes.LOAD_USER_PICTURES)
+			.switchMap((action: Action) => this.userService.getUserPictures(action.payload))
+			.map((data) => new UserActions.UserPicturesLoadedAction(data));
+
+
 }

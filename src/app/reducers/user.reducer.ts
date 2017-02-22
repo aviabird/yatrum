@@ -11,6 +11,7 @@ interface selectedUser {
   tripIds: string[],
   followers: UserProfile[],
   following: UserProfile[]
+  pictures: any;
 }
 
 export interface State {
@@ -27,7 +28,8 @@ const initialState = {
     user: new UserProfile(),
     tripIds: [],
     followers: null, // change this to followers ids at later stage 
-    following: null  // change this to following ids at later stage
+    following: null,  // change this to following ids at later stage
+    pictures: null
   }, 
 };
 
@@ -104,6 +106,14 @@ export function reducer(state = initialState, action: Action): State {
       })
     }
 
+    case UserActions.USER_PICTURES_LOADED: {
+      return Object.assign({}, state, {
+        selected_user: Object.assign({}, state.selected_user, {
+          pictures: action.payload
+        })
+      })
+    }
+
     case UserActions.UPDATE_USER_SUCCESS: {
       return Object.assign({}, state, {
         user: action.payload
@@ -149,4 +159,8 @@ export function getUserFollowers(state: State) {
 
 export function getUserFollowing(state: State) {
   return state.selected_user.following;
+}
+
+export function getUserPictures(state: State) {
+  return state.selected_user.pictures;
 }
