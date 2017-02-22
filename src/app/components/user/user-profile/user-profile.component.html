@@ -5,13 +5,13 @@
 		<div class="profile-info" [@flyInDown]="'in'">
 			<div class="profile-image-div text-white">
 				<div class="profile-image-text" [ngClass]="{'logged-in-user': (loggedUserId$ | async) == userIndex}" (click)="onUpdateProfilePicture()" >
-					<img *ngIf="!profilePicSrc" class="ui centered image profile-image" [src]="selectedUser.profile_pic?.url">
+					<img *ngIf="!profilePicSrc" class="ui centered image profile-image" [src]="(selectedProfileUser$ | async).profile_pic?.url">
 					<img *ngIf="profilePicSrc" class="ui centered image profile-image" [src]="profilePicSrc">
 					<div class="update-icon-text" *ngIf="(loggedUserId$ | async) == userIndex">
 						<i class="big photo icon"></i>
 					</div>
 				</div>
-				<h1 class="profile-name">{{selectedUser.name}}</h1>
+				<h1 class="profile-name">{{(selectedProfileUser$ | async).name}}</h1>
 				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
 			</div>
 			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onToggleFollow()">
@@ -24,7 +24,7 @@
 				<input type="file" id="selectMedia" name="file" accept="image/*" (change)="handleInputChange($event)">
 			</div>
 		</div>
-		<img *ngIf="!coverPhotoSrc" class="cover-image" [src]="selectedUser.cover_photo?.url">
+		<img *ngIf="!coverPhotoSrc" class="cover-image" [src]="(selectedProfileUser$ | async).cover_photo?.url">
 		<img *ngIf="coverPhotoSrc" class="cover-image" [src]="coverPhotoSrc">
 		<div class="cover-update-text" *ngIf="(loggedUserId$ | async) == userIndex" (click)="onUpdateCoverPhoto()">
 			<i class="big photo icon"></i>

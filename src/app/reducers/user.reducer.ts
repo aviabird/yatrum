@@ -136,7 +136,7 @@ export function getAuthStatus (state: State): any {
 }
 
 export function getSelectedProfileUser (state: State): UserProfile {
-  return state.selected_user.user;
+  return state.selected_user.user || new UserProfile();
 }
 
 export function getUserTripIds(state: State) {

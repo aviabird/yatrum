@@ -12,7 +12,7 @@
 
       <div *ngIf="(trips$ | async)?.length">
         <div [routerLink]="['/trips', trip.id]" *ngFor="let trip of trips$ | async" class="column">
-          <tr-trip-list-item [trip]="trip"></tr-trip-list-item>
+          <tr-trip-list-item [trip]="trip" [isFollowable]="true"></tr-trip-list-item>
         </div>
       </div>
 

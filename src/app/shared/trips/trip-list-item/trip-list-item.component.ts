@@ -44,6 +44,8 @@ import {
 })
 export class TripListItemComponent implements OnInit {
   @Input() trip: Trip;
+  @Input() isFollowable: boolean = false;
+  @Input() isEditable: boolean = false;
   loggedInUser$: Observable<UserProfile>;
   userTrip: boolean;
 
