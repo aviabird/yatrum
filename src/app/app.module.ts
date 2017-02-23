@@ -30,6 +30,9 @@ import { CanActivateViaAuthGuard } from './guards/auth.guard';
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
 import { InstagramAuthenticationCallbackComponent } from './shared/instagram-authentication-callback/instagram-authentication-callback.component';
 
+/**Action Cable */
+import { Ng2Cable, Broadcaster } from 'ng2-cable/js/index';
+
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
   authDomain: "travel-app-frontend.firebaseapp.com",
@@ -72,7 +75,9 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     CanActivateViaAuthGuard,
-    TripsResolveGuard
+    TripsResolveGuard,
+    Ng2Cable,
+    Broadcaster
   ],
   bootstrap: [AppComponent]
 })
