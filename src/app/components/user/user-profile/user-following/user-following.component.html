@@ -14,7 +14,12 @@
       </div>
     </div>
     <div class="two wide column">
-      <i class="big teal check square icon"></i>
+      <div *ngIf="(loggedUserId$ | async) != follower?.id" class="follow" (click)="onToggleFollow(following?.id)">
+				<button class="ui facebook button">
+					<i class="plus icon"></i>
+					{{ following?.is_followed_by_current_user ? "Following" : "Follow"}}
+				</button>
+			</div>
     </div>
   </div>
 </div>

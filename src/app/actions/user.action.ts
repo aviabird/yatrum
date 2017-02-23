@@ -12,7 +12,11 @@ export const ActionTypes = {
 	UPDATE_USER: "Update [User]",
 	UPDATE_USER_SUCCESS: "Update [User] Success",
   LOAD_USER_PICTURES: "Load [User] Pictures",
-  USER_PICTURES_LOADED: "[User] Pictues Loaded"
+  USER_PICTURES_LOADED: "[User] Pictues Loaded",
+	FOLLOW_USER_FOLLOWERS: "Follow [User] Profile Followers",
+	FOLLOW_USER_FOLLOWING: "Follow [User] Profile Following",
+	USER_FOLLOWERS_FOLLOWED: "[User] Followers Followed",
+	USER_FOLLOWING_FOLLOWED: "[User] Following Followed",
 }
 export class LoadUserFollowersAction {
 	type = ActionTypes.LOAD_USER_FOLLOWERS;
@@ -49,6 +53,20 @@ export class ProfileUserFollowed {
 	constructor(public payload: any) { }
 
 }
+
+// Refactor this actions after the refactoring of User reducer
+
+export class FollowUserFollowersAction {
+	type = ActionTypes.FOLLOW_USER_FOLLOWERS;
+	constructor(public payload: Object) {};	 
+}
+
+export class FollowUserFollowingAction {
+	type = ActionTypes.FOLLOW_USER_FOLLOWING;
+	constructor(public payload: Object) {};
+}
+
+
 /**
  * Author: VoidZero
  * 

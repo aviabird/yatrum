@@ -55,5 +55,17 @@ export class UserEffects {
 			.switchMap((action: Action) => this.userService.getUserPictures(action.payload))
 			.map((data) => new UserActions.UserPicturesLoadedAction(data));
 
+	@Effect()
+		FollowUserFollowers$: Observable<Action> = this.action$
+		.ofType(UserActions.ActionTypes.FOLLOW_USER_FOLLOWERS)
+		.switchMap((action: Action) => this.userService.updateUserFollowers(action.payload))
+		.map((data) => new UserActions.UserFollowersLoadedAction(data));
+
+	@Effect()
+		FollowUserFollowing$: Observable<Action> = this.action$
+		.ofType(UserActions.ActionTypes.FOLLOW_USER_FOLLOWING)
+		.switchMap((action: Action) => this.userService.updateUserFollowing(action.payload))
+		.map((data) => new UserActions.UserFollowingLoadedAction(data));
+
 
 }

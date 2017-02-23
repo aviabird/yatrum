@@ -107,5 +107,29 @@ export class UserService {
     return Observable.of('server error');
   }
 
+  updateUserFollowers(params) {
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+    })
+
+    return this.http.post(`${this.apiLink}/update_user_followers`, params, { headers: headers })
+      .map(response => response.json())
+      .catch((res: Response) => this.catchError(res));
+  }
+
+  updateUserFollowing(params) {
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+    })
+
+    return this.http.post(`${this.apiLink}/update_user_following`, params, { headers: headers })
+      .map(response => response.json())
+      .catch((res: Response) => this.catchError(res));
+  }
+
 
 }
