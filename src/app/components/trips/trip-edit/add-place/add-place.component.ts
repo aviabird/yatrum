@@ -3,6 +3,7 @@ import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import * as moment from 'moment/moment';
 
 declare var $: any;
 declare var google: any;
@@ -61,13 +62,6 @@ export class AddPlaceComponent implements OnInit {
       place.name = this.googleSuggestedPlaceName;
 
     this.newPlace.emit(place);
-
-    this.placeForm.controls['name'].setValue('');
-    this.placeForm.controls['review'].setValue('');
-    this.placeForm.controls['visited_date'].setValue('');
-    let empty = this.formBuilder.array([]);
-    this.placeForm.setControl('pictures', empty);
-    this.placeForm.controls['_destroy'].setValue(false);
   }
 
   focusFunction($event) {

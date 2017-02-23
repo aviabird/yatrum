@@ -42,7 +42,7 @@ export class TripEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tripForm.valueChanges.subscribe((value) => console.log("tripForm", this.tripForm.value));
+    // this.tripForm.valueChanges.subscribe((value) => console.log("tripForm", this.tripForm.value));
   }
 
   private checkIfTripIsNew() {
