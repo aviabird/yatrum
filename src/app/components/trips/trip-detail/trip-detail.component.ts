@@ -28,12 +28,12 @@ export class TripDetailComponent implements OnInit, OnDestroy {
       this.store.select(fromRoot.getSelectedTrip)
       .do(trip => {
         if(trip) {
-          // this.store.dispatch(new LoadCommentsAction(trip.id));
+          this.store.dispatch(new LoadCommentsAction(trip.id));
           this.tripUser = trip.user
         }
       });
 
-    // this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
+    this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
   }
 
