@@ -50,12 +50,21 @@ export class UserService {
   }
 
   getUserFollowers(id: string) {
-    return this.http.post(`${this.apiLink}/user_followers`, { user_id: id })
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+    })
+
+    return this.http.post(`${this.apiLink}/user_followers`, { user_id: id }, {headers: headers})
       .map(response => response.json());
   }
 
   getUserFollowing(id: string) {
-    return this.http.post(`${this.apiLink}/user_following`, { user_id: id })
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+    })
+    return this.http.post(`${this.apiLink}/user_following`, { user_id: id }, {headers: headers})
       .map(response => response.json());
   }
 

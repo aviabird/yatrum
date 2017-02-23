@@ -1,5 +1,5 @@
 .follower-list {
-	padding: 10px;
+	padding: 25px 10px 10px 10px;
   border-bottom: 1px solid #eee;
 }
 
@@ -17,4 +17,20 @@
 	font-weight: 400;
 	font-size: 1.3rem;
   margin-bottom: 9px;
+}
+
+.follow-user {
+	position: relative;
+}
+
+.follow {
+	position: absolute;
+	top: 0;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.avatar.image {
+	width: 4em !important;
+	height: auto !important;
 }

@@ -3,7 +3,7 @@
     <div class="two wide column">
       <img class="ui avatar image" [src]="follower?.profile_pic.url">
     </div>
-    <div class="twelve wide column">
+    <div class="ten wide column">
       <div class="name">
         {{follower?.name}}
       </div>
@@ -13,7 +13,7 @@
         <span class="info">{{follower?.total_following}} Following</span>
       </div>
     </div>
-    <div class="two wide column">
+    <div class="four wide column follow-user">
 			<div *ngIf="(loggedUserId$ | async) != follower?.id" class="follow" (click)="onToggleFollow(follower?.id)">
 				<button class="ui facebook button">
 					<i class="plus icon"></i>
