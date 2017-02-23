@@ -1,5 +1,5 @@
 <tr-loader message="Loading Trips" noOfParas="4" [hidden]="hideLoader$ | async"></tr-loader>
-{{hideLoader}}
+
 <div *ngIf="hideLoader$ | async">
   <div *ngFor="let trip of userTrips$ | async">
     <tr-trip-list-item [trip]="trip" [isFollowable]="false"></tr-trip-list-item>
