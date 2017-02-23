@@ -1,7 +1,7 @@
 <div class="ui grid cards">
   <div *ngFor="let picture of userPictures$ | async" class="seven wide column card">
     <div class="image">
-      <img [src]="picture.url | thumbnail:'c_limit,q_75,w_300'">
+      <img [src]="picture.url | thumbnail:'c_limit,q_50,w_300'">
     </div>
   </div>
 </div>
