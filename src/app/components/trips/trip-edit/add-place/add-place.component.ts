@@ -3,7 +3,6 @@ import { ToastyService } from 'ng2-toasty';
 import { CloudinaryIntegrationService } from './../../../../services/cloudinary-integration.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import * as moment from 'moment/moment';
 
 declare var $: any;
 declare var google: any;

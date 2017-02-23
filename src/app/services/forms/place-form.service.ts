@@ -1,7 +1,6 @@
 import { FormBuilder, Validators } from '@angular/forms';
 import { Place } from './../../models/place';
 import { Injectable } from '@angular/core';
-import * as moment from 'moment/moment';
 
 
 @Injectable()
@@ -27,7 +26,7 @@ export class PlaceFormService {
         'name': ['', Validators.required],
         'review': ['', Validators.required],
         'pictures': this.formBuilder.array([]),
-        'visited_date': [moment().format(), Validators.required],
+        'visited_date': [new Date(), Validators.required],
         '_destroy': [false]
       })
     }

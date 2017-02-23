@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'tr-place-detail',
@@ -9,10 +10,17 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class PlaceDetailComponent implements OnInit {
 
   @Input() place;
+  date: string;
+  time: string;
+
 
   constructor() { }
 
   ngOnInit() {
+    let date = this.place.visited_date;
+    date = new Date(date);
+    this.date = moment(date).format("D MMM YY");
+    this.time = moment(date).format('LT');
   }
 
 }
