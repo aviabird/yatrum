@@ -1,3 +1,4 @@
+import { UserService } from './../../../../services/user.service';
 import { LoadUserPicturesAction } from './../../../../actions/user.action';
 import { Response } from '@angular/http';
 import { LoadMediaAction } from './../../../../actions/instagram.action';
@@ -20,10 +21,11 @@ export class UserMediaComponent implements OnInit {
   userPictures$: Observable<any>;
   userIndex: string;
   hideLoader$: Observable<boolean>;
-
+  current_page = 1;
 
   constructor(private store: Store<fromRoot.State>,
-              private route: ActivatedRoute,) { 
+              private route: ActivatedRoute,
+              private userService: UserService) { 
     // this.hideLoader$ = this.tripService.loading.select(response => !response)
     this.userPictures$ = this.store.select(fromRoot.getUserPictures)
     this.instagramMedia$ = this.store.select(fromRoot.getInstagramMedia);
@@ -37,6 +39,14 @@ export class UserMediaComponent implements OnInit {
     this.subscription = this.route.parent.params.subscribe(
       (params) => this.userIndex = params['id']
     )
-    this.store.dispatch(new LoadUserPicturesAction(this.userIndex));
+    this.store.dispatch(new LoadUserPicturesAction({user_id: this.userIndex, page: 1}));
   }
+
+  onScroll() {
+    this.current_page++;
+    let total_pages = this.userService.total_pictures_pages;
+    if(this.current_page <= total_pages)
+      this.store.dispatch(new LoadUserPicturesAction({user_id: this.userIndex, page: this.current_page}));
+  }
+
 }

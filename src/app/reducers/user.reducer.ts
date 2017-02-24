@@ -10,8 +10,8 @@ interface selectedUser {
   user: UserProfile,
   tripIds: string[],
   followers: UserProfile[],
-  following: UserProfile[]
-  pictures: any;
+  following: UserProfile[],
+  pictures: Object[]
 }
 
 export interface State {
@@ -29,7 +29,7 @@ const initialState = {
     tripIds: [],
     followers: null, // change this to followers ids at later stage 
     following: null,  // change this to following ids at later stage
-    pictures: null
+    pictures: []
   }, 
 };
 
@@ -109,7 +109,7 @@ export function reducer(state = initialState, action: Action): State {
     case UserActions.USER_PICTURES_LOADED: {
       return Object.assign({}, state, {
         selected_user: Object.assign({}, state.selected_user, {
-          pictures: action.payload
+          pictures: [...state.selected_user.pictures, ...action.payload]
         })
       })
     }

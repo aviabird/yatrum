@@ -11,6 +11,7 @@ import { Http, Headers, Response } from '@angular/http';
 @Injectable()
 export class UserService {
 
+  public total_pictures_pages: number = 0;
   private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private http: Http, private store: Store<State>,
@@ -95,11 +96,12 @@ export class UserService {
     }, { headers: headers }).map(response => response.json());
   }
 
-  getUserPictures(id: string) {
-    return this.http.post(`${this.apiLink}/user_pictures`, { user_id: id })
+  getUserPictures(params) {
+    return this.http.post(`${this.apiLink}/user_pictures`, params)
       .map(response => {
-        console.log(response.json().user_pictures)
-        return response.json().user_pictures
+        let data = response.json();
+        this.total_pictures_pages = data.total_pages;
+        return data.user_pictures;
       });
   }
 
