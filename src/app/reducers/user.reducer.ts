@@ -109,10 +109,18 @@ export function reducer(state = initialState, action: Action): State {
     case UserActions.USER_PICTURES_LOADED: {
       return Object.assign({}, state, {
         selected_user: Object.assign({}, state.selected_user, {
-          pictures: [...state.selected_user.pictures, ...action.payload]
+          pictures: action.payload
         })
       })
     }
+
+    case UserActions.MORE_USER_PICTURES_LOADED: {
+      return Object.assign({}, state, {
+        selected_user: Object.assign({}, state.selected_user, {
+          pictures: [...state.selected_user.pictures, ...action.payload]
+        })
+      })
+    }    
 
     case UserActions.UPDATE_USER_SUCCESS: {
       return Object.assign({}, state, {

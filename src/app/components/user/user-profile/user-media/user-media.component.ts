@@ -1,5 +1,5 @@
 import { UserService } from './../../../../services/user.service';
-import { LoadUserPicturesAction } from './../../../../actions/user.action';
+import { LoadUserPicturesAction, LoadMoreUserPicturesAction } from './../../../../actions/user.action';
 import { Response } from '@angular/http';
 import { LoadMediaAction } from './../../../../actions/instagram.action';
 import * as fromRoot from './../../../../reducers/index';
@@ -46,7 +46,7 @@ export class UserMediaComponent implements OnInit {
     this.current_page++;
     let total_pages = this.userService.total_pictures_pages;
     if(this.current_page <= total_pages)
-      this.store.dispatch(new LoadUserPicturesAction({user_id: this.userIndex, page: this.current_page}));
+      this.store.dispatch(new LoadMoreUserPicturesAction({user_id: this.userIndex, page: this.current_page}));
   }
 
 }
