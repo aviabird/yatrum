@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user.routes';
@@ -40,7 +41,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    InfiniteScrollModule
   ]
 })
 export class UserModule {}

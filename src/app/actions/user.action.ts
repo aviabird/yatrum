@@ -97,7 +97,7 @@ export class UpdateUserSuccess {
 
 export class LoadUserPicturesAction {
 	type = ActionTypes.LOAD_USER_PICTURES;
-	constructor(public payload: string) { }
+	constructor(public payload: Object) { }
 }
 
 export class UserPicturesLoadedAction {
