@@ -124,3 +124,9 @@
 	text-align: center;
 	margin: 1rem auto;
 }
+
+.cover-image {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
