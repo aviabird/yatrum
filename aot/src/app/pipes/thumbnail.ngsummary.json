@@ -1,1 +1,0 @@
-{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"class"},"type":{"summaryKind":0,"type":{"reference":{"__symbol":0},"diDeps":[],"lifecycleHooks":[]},"name":"thumbnail","pure":true}}],"symbols":[{"__symbol":0,"name":"ThumbnailPipe","filePath":"/Users/rawat/Documents/pankaj/angular2apps/travel-app/src/app/pipes/thumbnail.d.ts"}]}
