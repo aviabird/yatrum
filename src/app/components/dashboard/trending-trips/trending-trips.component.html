@@ -1,7 +1,7 @@
 <tr-loader message="Loading Trips" noOfParas="4" [hidden]="hideLoader"></tr-loader>
 
 <div class="ui stackable two column grid container" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
-  <div class="row">
+  <div class="row freez-width">
     <!--<tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>-->
     <!--<div class="ui stackable two column grid">-->
       <div *ngFor="let trip of trendingTrips$ | async" class="column">
