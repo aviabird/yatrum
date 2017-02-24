@@ -1,8 +1,11 @@
-<tr-loader message="Loading Trips" noOfParas="4" [hidden]="hideLoader"></tr-loader>
+<div class="ui centered grid">
+  <div class="eight wide column">
+    <tr-loader message="Loading Trips" noOfParas="4" [hidden]="hideLoader"></tr-loader>
+  </div>
+</div>
 
 <div class="ui centered grid" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
   <div class="fourteen wide column">
-    <!--<tr-loader message="Loading Trips" noOfParas="2" [hidden]="hideLoader"></tr-loader>-->
     <div class="ui stackable two column grid">
       <div *ngFor="let trip of feedTrips$ | async" class="column">
         <tr-trip-list-item [trip]="trip" [isFollowable]="true"></tr-trip-list-item>
