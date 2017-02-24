@@ -38,6 +38,7 @@ export class TripsService {
     }
   }
 
+
 	/**
 	 * Get details of a particular trip
 	 * @method getTrip
@@ -314,6 +315,29 @@ export class TripsService {
       .map((data: Response) => comment)
       .catch((res: Response) => this.catchError(res));
   }
+
+	/**
+	 * Increase trip view count 
+	 * @method increase_view_count
+	 * @param {string} id 
+	 * @return {Observable} Observable with status
+	 */
+  increase_view_count(id: string){
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+      // use Restangular which creates interceptor
+    });
+
+    return this.http.post(
+      `${this.apiLink}/trips/increase_view_count`,
+      { id: id },
+      { headers: headers }
+    )
+      .map((data: Response) => data.status)
+      .catch((res: Response) => this.catchError(res));    
+  }
+
 
   catchError(response: Response): Observable<String> {
     if (response.status == 401) {

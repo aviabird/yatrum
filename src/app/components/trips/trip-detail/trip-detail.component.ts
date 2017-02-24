@@ -1,3 +1,4 @@
+import { TripsService } from './../../../services/trips.service';
 import { Subscription } from 'rxjs/Rx';
 import { FollowUserAction } from './../../../actions/user.action';
 import { LikeTripAction } from './../../../actions/trips.action';
@@ -23,7 +24,8 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   comments$: Observable<Comment[]>;
   routeSubs: Subscription;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>,
+              private tripService: TripsService) {
     this.trip$ =
       this.store.select(fromRoot.getSelectedTrip)
       .do(trip => {
@@ -35,6 +37,9 @@ export class TripDetailComponent implements OnInit, OnDestroy {
 
     this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
+
+    this.tripService.increase_view_count()
+
   }
 
   ngOnInit() {

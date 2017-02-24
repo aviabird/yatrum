@@ -22,7 +22,9 @@ export const ActionTypes = {
 	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store",
 	SEARCH_TRIPS: "Search [Trips]",
 	LIKE_TRIP: "Like [Trip]",
-	TRIP_USER_FOLLOWED: "[Trip] User Followed"
+	TRIP_USER_FOLLOWED: "[Trip] User Followed",
+  INCREASE_TRIP_VIEW_COUNT: "Increase [TRIP] View Count",
+  INCREASE_TRIP_VIEW_COUNT_SUCCESS: "Increase [TRIP] View Count Success"
 }
 
 export class LoadFeedTripsAction {
