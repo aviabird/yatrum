@@ -10,7 +10,8 @@ import { Component, ViewContainerRef, ChangeDetectionStrategy } from '@angular/c
 export class AppComponent {
   title = 'Travel app';
 
-  constructor() { }
+  constructor() {
+   }
   
   ngOnInit() {
   }
