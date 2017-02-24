@@ -16,4 +16,5 @@ export class Trip extends Base {
     is_liked_by_current_user: boolean;
     trip_likes_count: number;
     thumbnail_image_url: string;
+    view_count: number;
 }

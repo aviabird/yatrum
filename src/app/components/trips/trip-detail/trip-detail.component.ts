@@ -1,7 +1,7 @@
 import { environment } from './../../../../environments/environment';
 import { Subscription } from 'rxjs/Rx';
 import { FollowUserAction } from './../../../actions/user.action';
-import { LikeTripAction } from './../../../actions/trips.action';
+import { LikeTripAction, IncreaseViewCountAction } from './../../../actions/trips.action';
 import { Trip } from './../../../models/trip';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from './../../../reducers/index';
@@ -43,6 +43,8 @@ export class TripDetailComponent implements OnInit, OnDestroy {
           if (trip) {
             this.selectedTripId = trip.id; 
             this.store.dispatch(new LoadCommentsAction(trip.id));
+            // Increase Trip View Count in Backend
+            this.store.dispatch(new IncreaseViewCountAction(trip.id));
             this.tripUser = trip.user
           }
         });
@@ -65,5 +67,4 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ng2cable.unsubscribe();
   }
-
 }
