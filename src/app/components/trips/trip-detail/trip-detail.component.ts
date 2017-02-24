@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { TripsService } from './../../../services/trips.service';
 import { Subscription } from 'rxjs/Rx';
 import { FollowUserAction } from './../../../actions/user.action';
@@ -29,13 +30,14 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   routeSubs: Subscription;
   // For Temp purpose
   selectedTripId: any;
+  private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
 
   constructor(private store: Store<fromRoot.State>,
     private ng2cable: Ng2Cable,
     private broadcaster: Broadcaster,
     private tripsService: TripsService) {
     
-    this.ng2cable.subscribe('http://localhost:3000/cable', 'CommentsChannel');
+    this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
     
     this.trip$ =
       this.store.select(fromRoot.getSelectedTrip)
@@ -53,7 +55,6 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     // init listener
     this.broadcaster.on<string>('CreateComments').subscribe(
       message => {
-        console.log("New Message Arrived", this.selectedTripId, message);
         this.store.dispatch(new LoadCommentsAction(this.selectedTripId));
       }
     );
@@ -62,7 +63,9 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  // Unsubscribe from the channel
   ngOnDestroy() {
+    this.ng2cable.unsubscribe();
   }
 
 }
