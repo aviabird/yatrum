@@ -7,7 +7,14 @@
   margin-bottom: 30px;
 }
 
+.action-row {
+  @media only screen and (min-width: 500px) {
+    margin-top: 10px;
+  }
+}
+
 .trips-type {
+  text-align: center;
   .button {
     background: white;
     box-shadow: none !important;
@@ -30,6 +37,7 @@
 }
 
 .create-button {
+  text-align: center;  
   .button {
     background: white;
     color: #E74C3C;
