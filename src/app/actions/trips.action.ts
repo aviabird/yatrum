@@ -22,7 +22,9 @@ export const ActionTypes = {
 	ADD_TRIP_TO_STORE: "Add [Trip] to Local Store",
 	SEARCH_TRIPS: "Search [Trips]",
 	LIKE_TRIP: "Like [Trip]",
-	TRIP_USER_FOLLOWED: "[Trip] User Followed"
+	TRIP_USER_FOLLOWED: "[Trip] User Followed",
+  INCREASE_VIEW_COUNT: "Increase View Count",
+  INCREASE_VIEW_COUNT_SUCCESS: "Increase View Count Success"
 }
 
 export class LoadFeedTripsAction {
@@ -105,4 +107,14 @@ export class LikeTripAction {
 export class TripUserFollowedAction {
 	type = ActionTypes.TRIP_USER_FOLLOWED;
 	constructor(public payload: any) {}
+}
+
+export class IncreaseViewCountAction {
+  type = ActionTypes.INCREASE_VIEW_COUNT;
+  constructor(public payload: any) { }
+}
+
+export class IncreaseViewCountSuccessAction {
+  type = ActionTypes.INCREASE_VIEW_COUNT_SUCCESS;
+  constructor(){ }
 }

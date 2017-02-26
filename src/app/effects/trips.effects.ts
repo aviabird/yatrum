@@ -67,4 +67,9 @@ export class TripsEffects {
     .switchMap<Action, Trip>((action) => this.tripsService.likeTrip(action.payload))
     .map((data) => new TripsActions.UpdateTripSuccessAction(data));
 
+  @Effect()
+  IncreaseViewCount$: Observable<Action> = this.actions$
+    .ofType(TripsActions.ActionTypes.INCREASE_VIEW_COUNT)
+    .switchMap<Action, Trip>((action) => this.tripsService.increase_view_count(action.payload))
+    .map(() => new TripsActions.IncreaseViewCountSuccessAction());
 }

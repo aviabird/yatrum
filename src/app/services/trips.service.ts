@@ -1,3 +1,7 @@
+/**
+ * TODO: ALL Observable<any> must be changed to concreate Observable of some type - VoidZero
+ *  
+ */
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import * as fromTripActions from './../actions/trips.action';
@@ -37,6 +41,7 @@ export class TripsService {
       return user_data.auth_token;
     }
   }
+
 
 	/**
 	 * Get details of a particular trip
@@ -265,7 +270,7 @@ export class TripsService {
 	 * @param {string} tripId of trip
 	 * @return {Observable} Observable with Comments
 	 */
-  getComments(tripId: string) {
+  getComments(tripId: string): Observable<any> {
     return this.http.get(`${this.apiLink}/trips/${tripId}/comments`)
       .map((data: Response) => data.json())
       .catch((res: Response) => this.catchError(res));
@@ -277,7 +282,7 @@ export class TripsService {
 	 * @param {Comment} comment
 	 * @return {Observable} Observable with Comment
 	 */
-  addComment(comment: Comment) {
+  addComment(comment: Comment): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': this.getUserAuthToken()
@@ -299,7 +304,7 @@ export class TripsService {
 	 * @param {Comment} comment
 	 * @return {Observable} Observable with Comment
 	 */
-  deleteComment(comment: Comment) {
+  deleteComment(comment: Comment): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': this.getUserAuthToken()
@@ -314,6 +319,28 @@ export class TripsService {
       .map((data: Response) => comment)
       .catch((res: Response) => this.catchError(res));
   }
+
+	/**
+	 * Increase trip view count 
+	 * @method increase_view_count
+	 * @param {string} id 
+	 * @return {Observable} Observable with status
+	 */
+  increase_view_count(id: any): Observable<any> {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+      // use Restangular which creates interceptor
+    });
+
+    return this.http.post(
+      `${this.apiLink}/trips/increase_view_count`,
+      { id: id }, { headers: headers }
+      )
+      .map((data: Response) => data.status)
+      .catch((res: Response) => this.catchError(res));    
+  }
+
 
   catchError(response: Response): Observable<String> {
     if (response.status == 401) {
