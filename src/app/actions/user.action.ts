@@ -13,6 +13,8 @@ export const ActionTypes = {
 	UPDATE_USER_SUCCESS: "Update [User] Success",
   LOAD_USER_PICTURES: "Load [User] Pictures",
   USER_PICTURES_LOADED: "[User] Pictues Loaded",
+  LOAD_MORE_USER_PICTURES: "Load More [User] Pictures",
+  MORE_USER_PICTURES_LOADED: "More [User] Pictues Loaded",	
 	FOLLOW_USER_FOLLOWERS: "Follow [User] Profile Followers",
 	FOLLOW_USER_FOLLOWING: "Follow [User] Profile Following",
 	USER_FOLLOWERS_FOLLOWED: "[User] Followers Followed",
@@ -97,10 +99,20 @@ export class UpdateUserSuccess {
 
 export class LoadUserPicturesAction {
 	type = ActionTypes.LOAD_USER_PICTURES;
-	constructor(public payload: string) { }
+	constructor(public payload: Object) { }
+}
+
+export class LoadMoreUserPicturesAction {
+	type = ActionTypes.LOAD_MORE_USER_PICTURES;
+	constructor(public payload: Object) { }
 }
 
 export class UserPicturesLoadedAction {
 	type = ActionTypes.USER_PICTURES_LOADED;
+	constructor(public payload: any) { }
+}
+
+export class MoreUserPicturesLoadedAction {
+	type = ActionTypes.MORE_USER_PICTURES_LOADED;
 	constructor(public payload: any) { }
 }

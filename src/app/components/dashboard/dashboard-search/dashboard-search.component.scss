@@ -6,7 +6,11 @@
 
 .search-box-cover-div {
 	position: relative;
-	height: 27rem;
+	// add a media query for less than 500px width
+	@media only screen and (max-width: 767px) {
+		height: 12rem !important;	 	
+	}
+	height: 18rem;
 	overflow: hidden;
 	&:hover {
 		.cover-update-text {

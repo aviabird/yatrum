@@ -74,25 +74,7 @@ export class TripEditComponent implements OnInit {
     this.trip.places.forEach((place, placeIndex) => {
       this.totalPlaces++;
       (<FormArray>this.tripForm.controls['places']).push(this.placeFormService.initPlace(place))
-      this.addPictures(place,placeIndex);
     }) 
-  }
-
-
-// add pictures to the tripForm from existing trip
-  private addPictures(place, index) {
-    place.pictures.forEach((picture) => {
-      (<FormArray>(<FormGroup>(<FormArray>this.tripForm.controls['places']).controls[index]).controls['pictures']).push(
-        this.formBuilder.group({
-          'id': [picture.id, Validators.required],
-          'user_id': [picture.user_id, Validators.required],
-          'url': [picture.url, Validators.required],
-          'description': [picture.description],
-          'public_id': [picture.public_id, Validators.required],
-          '_destroy': [false]        
-        })
-      )
-    })
   }
 
 // update existing place

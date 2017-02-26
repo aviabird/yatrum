@@ -1,13 +1,10 @@
-<div class="ui centered grid">
   <div class="search sixteen wide column">
     <tr-dashboard-search></tr-dashboard-search>
   </div>
 
-  <div class="fourteen wide column">
-    <div class="ui centered grid button-collection">
-      <div class="four wide column"></div>
-
-      <div class="trips-type eight wide center aligned column">
+  <div class="doubling stackable three column ui grid container action-row">
+      <div class="column"></div>
+      <div class="column trips-type">
         <button
           class="ui left attached big button"
           [routerLink]="['feeds']"
@@ -22,7 +19,7 @@
         </button>
       </div>
 
-      <div class="create-button four wide right aligned column">
+      <div class="column create-button">
         <div class="ui animated big button" tabindex="0" [routerLink]="['/trips','new']">
           <div class="visible content">
             <i class="file text icon"></i>
@@ -31,11 +28,10 @@
           <div class="hidden content"><i class="plus icon"></i></div>
         </div>
       </div>
-    </div>
   </div>
 
   <div class="sixteen wide column">
     <router-outlet></router-outlet>
   </div>
 
-</div>
+<!--</div>-->

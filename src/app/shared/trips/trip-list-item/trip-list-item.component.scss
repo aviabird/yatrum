@@ -1,5 +1,10 @@
 .my-card {
 	margin: 2rem auto;
+  @media only screen and (max-width: 767px) {
+    // The card should take the full width of the screen in case
+    // of a mobile phone
+    margin: 2rem -2rem !important;
+  }
 	border-radius: 5px;
 	background: white;
 

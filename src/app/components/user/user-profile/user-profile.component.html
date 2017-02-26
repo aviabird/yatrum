@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<h1 class="profile-name">{{(selectedProfileUser$ | async).name}}</h1>
-				<h4 class="profile-bio">Designer and Developer living Pune, IN</h4>
+				<h4 class="profile-bio"></h4>
 			</div>
 			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onToggleFollow()">
 				<button class="ui facebook button">
