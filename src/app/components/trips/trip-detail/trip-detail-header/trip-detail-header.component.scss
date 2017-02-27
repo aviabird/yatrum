@@ -11,6 +11,7 @@
 	top: 35px;
 	left: 40px;
 	text-shadow: 0px 3px 10px #000;
+	text-transform: capitalize;
 }
 
 .image {
@@ -83,5 +84,6 @@
 		font-weight: 400;
     text-shadow: 0px 0px 2px #073c5f;
     font-size: 1.1rem;
+		text-transform: capitalize;
 	}
 }

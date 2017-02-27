@@ -72,14 +72,15 @@
 
 .user-name {
   color: #827B7B;
-  font-family: 'Helvetica Neue' !important;
-  font-weight: 400;
+  // font-family: 'Helvetica Neue' !important;
+  // font-weight: 400;
+  text-transform: capitalize;
   margin-bottom: 0;
   
   small {
     color: rgba(128, 128, 128, 0.61);
-    font-family: 'Helvetica Neue' !important;
-    font-weight: 400;
+    // font-family: 'Helvetica Neue' !important;
+    // font-weight: 400;
   }
 
   a{
