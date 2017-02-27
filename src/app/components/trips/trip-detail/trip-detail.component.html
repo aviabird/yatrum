@@ -10,8 +10,10 @@
         ></tr-trip-detail-header>
     </div>
     <div class="two wide column">
-      <share-buttons [url]="postUrl" [image]="(trip$ | async)?.thumbnail_image_url" 
+      <share-buttons [url]="tripUrl"
+        [image]="(trip$ | async)?.thumbnail_image_url" 
         [title]="(trip$ | async)?.name" 
+        [tags]="tripTags"
         [description]="(trip$ | async)?.description"
         [linkedIn]=false
         [tumblr]=false
