@@ -3,7 +3,9 @@
   background: #2C3E50;
   border-radius: 0;
   color: white;
-  padding: 0 5rem;
+  @media only screen and (min-width: 767px) {
+    padding: 0 5rem;  
+	}
   box-shadow: none !important;
   width: 100%;
 

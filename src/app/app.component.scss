@@ -36,6 +36,11 @@ ul {
    padding: 20px 50px;
    background: white;
 }
+.display-prop {
+  @media only screen and (max-width: 500px) {
+		display: none;
+	}
+}
 #sticky-social {
    left: 0;
    position: fixed;
