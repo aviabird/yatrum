@@ -30,8 +30,7 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   // For Temp purpose
   selectedTripId: any;
   private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
-  public postUrl =  window.location.href; //"http://yatrum.com/trips/19"
-
+  public postUrl = "http://yatrum.com/trips/19" //window.location.href;
   constructor(private store: Store<fromRoot.State>,
     private ng2cable: Ng2Cable,
     private broadcaster: Broadcaster) {

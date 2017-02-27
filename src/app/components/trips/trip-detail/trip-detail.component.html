@@ -10,12 +10,16 @@
         ></tr-trip-detail-header>
     </div>
     <div class="two wide column">
-      
-      <button ceiboShare [facebook]="{ u: postUrl }" class="ui button">Facebook</button>
-      <button ceiboShare  [twitter]="{ url:postUrl,
-                                       text:'Checkout this trip on Yatrum', 
-                                       hashtags:'yatrum'}" 
-      class="ui button">Twitter</button>
+      <share-buttons [url]="postUrl" [image]="(trip$ | async)?.thumbnail_image_url" 
+        [title]="(trip$ | async)?.name" 
+        [description]="(trip$ | async)?.description"
+        [linkedIn]=false
+        [tumblr]=false
+        [google]=false
+        [pinterest]=false
+        [stumbleUpOn]=false
+        [reddit]=false
+        [whatsApp]=false></share-buttons>
     </div>
   </div>
 
