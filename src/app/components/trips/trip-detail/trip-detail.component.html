@@ -5,7 +5,23 @@
     <div class="ten wide column banner">
       <tr-trip-detail-header
         [trip]="trip$ | async"
-        [tripUser]="tripUser"></tr-trip-detail-header>
+        [tripUser]="tripUser"
+        [url]="postUrl"
+        ></tr-trip-detail-header>
+    </div>
+    <div class="two wide column">
+      <share-buttons [url]="tripUrl"
+        [image]="(trip$ | async)?.thumbnail_image_url" 
+        [title]="(trip$ | async)?.name" 
+        [tags]="tripTags"
+        [description]="(trip$ | async)?.description"
+        [linkedIn]=false
+        [tumblr]=false
+        [google]=false
+        [pinterest]=false
+        [stumbleUpOn]=false
+        [reddit]=false
+        [whatsApp]=false></share-buttons>
     </div>
   </div>
 
