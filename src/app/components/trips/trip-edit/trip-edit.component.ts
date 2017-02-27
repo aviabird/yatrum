@@ -27,6 +27,10 @@ export class TripEditComponent implements OnInit {
   trip = null;
   tripForm: FormGroup;
   totalPlaces: number = 0;
+  tags;
+  autocompleteTags: string[] = ['Ski and snowboarding holidays', 'Journeys by rail', 'Cruises','Safaris and wildlife','Arts and culture',
+                                'Camping', 'Golf','Spa holidays', 'Solo Travel', 'Great drives', 'Food and wine holidays',
+                                'Walking holidays', 'Activity and Adventure', 'Festivals and events', 'Cycling'];
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>, 
     private route: Router, private tripService: TripsService,
@@ -42,7 +46,8 @@ export class TripEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.tripForm.valueChanges.subscribe((value) => console.log("tripForm", this.tripForm.value));
+    this.tripForm.valueChanges.subscribe((form) => console.log("form",form));
+    // console.log("tripForm", this.tripForm.value);
   }
 
   private checkIfTripIsNew() {
@@ -124,6 +129,8 @@ export class TripEditComponent implements OnInit {
   }
 
   onSubmit() {
+    this.addTagsToTrips();
+
     if(!this.tripForm.valid) {
       this.toastyService.warning({ title: "Invalid Trip", msg: "Trip must contain Name and atleast One Place" });
       return;
@@ -136,6 +143,12 @@ export class TripEditComponent implements OnInit {
     else
       this.tripService.updateTrip(this.tripForm.value)
         .subscribe();
+  }
+
+  private addTagsToTrips() {
+    let tags = this.tags.map(tag => tag.display)
+    let tagsArray = this.formBuilder.array(tags);
+    this.tripForm.setControl('tag_list', tagsArray);
   }
 
   // Validation for trip places

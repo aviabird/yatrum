@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { TagInputModule } from 'ng2-tag-input';
 import { SharedModule } from '../../shared/index';
 import { TripsComponent } from './trips.component';
 import { TripRoutes } from './trips.routes';
@@ -47,7 +47,8 @@ const routes: Routes = [
     FormsModule,
     CustomFormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    TagInputModule
   ]
 })
 export class TripsModule {}
