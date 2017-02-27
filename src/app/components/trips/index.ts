@@ -20,6 +20,9 @@ import { CustomFormsModule } from 'ng2-validation';
 import { CalendarModule } from 'primeng/primeng';
 import { TripDetailHeaderComponent } from './trip-detail/trip-detail-header/trip-detail-header.component';
 
+// Social Share
+import { CeiboShare } from 'ng2-social-share';
+
 const routes: Routes = [
   { path: 'trips', component: TripsComponent, children: TripRoutes },
 ];
@@ -38,7 +41,8 @@ const routes: Routes = [
     ImageUploadComponent,
     NewPlaceComponent,
     UpdatePlaceComponent,
-    TripDetailHeaderComponent
+    TripDetailHeaderComponent,
+    CeiboShare
   ],
   imports: [
     RouterModule.forChild(routes),

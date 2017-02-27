@@ -10,13 +10,13 @@ import { UserProfile } from '../../../../models/user-profile';
 @Component({
   selector: 'tr-trip-detail-header',
   templateUrl: './trip-detail-header.component.html',
-   changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./trip-detail-header.component.scss']
 })
 export class TripDetailHeaderComponent implements OnInit {
   @Input() trip: Trip;
   @Input() tripUser: UserProfile;
-
+  @Input() url: string;
   constructor(
     private store: Store<fromRoot.State>,
     private authService: UserAuthService

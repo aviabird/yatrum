@@ -5,7 +5,17 @@
     <div class="ten wide column banner">
       <tr-trip-detail-header
         [trip]="trip$ | async"
-        [tripUser]="tripUser"></tr-trip-detail-header>
+        [tripUser]="tripUser"
+        [url]="postUrl"
+        ></tr-trip-detail-header>
+    </div>
+    <div class="two wide column">
+      
+      <button ceiboShare [facebook]="{ u: postUrl }" class="ui button">Facebook</button>
+      <button ceiboShare  [twitter]="{ url:postUrl,
+                                       text:'Checkout this trip on Yatrum', 
+                                       hashtags:'yatrum'}" 
+      class="ui button">Twitter</button>
     </div>
   </div>
 
