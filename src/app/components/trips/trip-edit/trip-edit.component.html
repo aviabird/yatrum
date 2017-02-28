@@ -9,7 +9,7 @@
         <textarea class="trip-description" autosize placeholder="Where is it about?" formControlName="description"></textarea>
       </div>
       <div class="field">
-        <tag-input [(ngModel)]="tags" [onlyFromAutocomplete]="true" [ngModelOptions]="{standalone: true}">
+        <tag-input [(ngModel)]="tags" modelAsStrings="true" [onlyFromAutocomplete]="true" [ngModelOptions]="{standalone: true}">
           <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="autocompleteTags"></tag-input-dropdown>
         </tag-input>
       </div>

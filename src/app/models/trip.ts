@@ -17,4 +17,5 @@ export class Trip extends Base {
     trip_likes_count: number;
     thumbnail_image_url: string;
     view_count: number;
+    tag_list: string[];
 }

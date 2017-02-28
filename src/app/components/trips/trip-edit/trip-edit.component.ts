@@ -27,7 +27,7 @@ export class TripEditComponent implements OnInit {
   trip = null;
   tripForm: FormGroup;
   totalPlaces: number = 0;
-  tags;
+  tags: string[];
   autocompleteTags: string[] = ['Ski and snowboarding holidays', 'Journeys by rail', 'Cruises','Safaris and wildlife','Arts and culture',
                                 'Camping', 'Golf','Spa holidays', 'Solo Travel', 'Great drives', 'Food and wine holidays',
                                 'Walking holidays', 'Activity and Adventure', 'Festivals and events', 'Cycling'];
@@ -47,7 +47,6 @@ export class TripEditComponent implements OnInit {
 
   ngOnInit() {
     this.tripForm.valueChanges.subscribe((form) => console.log("form",form));
-    // console.log("tripForm", this.tripForm.value);
   }
 
   private checkIfTripIsNew() {
@@ -70,6 +69,7 @@ export class TripEditComponent implements OnInit {
 // if trip is being updated
   private initExistingTrip() {
     this.tripForm = this.tripFormService.initTrip(this.trip);
+    this.tags = this.tripForm.value.tag_list;
     this.addPlaces();
   }
 
@@ -146,8 +146,7 @@ export class TripEditComponent implements OnInit {
   }
 
   private addTagsToTrips() {
-    let tags = this.tags.map(tag => tag.display)
-    let tagsArray = this.formBuilder.array(tags);
+    let tagsArray = this.formBuilder.array(this.tags);
     this.tripForm.setControl('tag_list', tagsArray);
   }
 
