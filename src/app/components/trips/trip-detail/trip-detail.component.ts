@@ -30,7 +30,10 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   // For Temp purpose
   selectedTripId: any;
   private apiLink: string = environment.API_ENDPOINT; // "http://localhost:3000";
-
+  // Note: Localhost url dosen work in Facebook as facebook tries to visit and parse the url
+  // So, use the commented dummy url for test prupose if required - voidzero
+  public tripUrl = window.location.href; //"http://yatrum.com/trips/19"
+  public tripTags: String[] = ['yatrum', 'travel'];
   constructor(private store: Store<fromRoot.State>,
     private ng2cable: Ng2Cable,
     private broadcaster: Broadcaster) {

@@ -20,6 +20,10 @@ import { CustomFormsModule } from 'ng2-validation';
 import { CalendarModule } from 'primeng/primeng';
 import { TripDetailHeaderComponent } from './trip-detail/trip-detail-header/trip-detail-header.component';
 
+/**Social Share Button  */
+import { ShareButtonsModule } from "ng2-sharebuttons";
+
+
 const routes: Routes = [
   { path: 'trips', component: TripsComponent, children: TripRoutes },
 ];
@@ -48,7 +52,8 @@ const routes: Routes = [
     CustomFormsModule,
     ReactiveFormsModule,
     CalendarModule,
-    TagInputModule
+    TagInputModule,
+    ShareButtonsModule.forRoot()
   ]
 })
-export class TripsModule {}
+export class TripsModule { }

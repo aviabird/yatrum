@@ -1,63 +1,65 @@
 <div class="ui middle aligned center aligned grid">
   <div class="sixteen wide column"></div>
   <div class="sixteen wide column"></div>
-  <div class="five wide column">
-    <h2 class="ui teal image header">
-      <div class="content">
-        Sign Up
-      </div>
-    </h2>
+  <div class="sixteen wide column">
+    <div class="signup-text text-center">
+      <h2 class="ui teal image header">
+        <div class="content">
+          Sign Up
+        </div>
+      </h2>
+    </div>
     <form class="ui medium form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
       <div class="ui stacked segment">
         <div class="field"
           [ngClass]="{'has-error': (signUpForm.get('name').invalid && signUpForm.get('name').touched)}">
           <!--<label for="name" class="col-sm-2 control-label">Name</label>-->
-          <div class="col-sm-4">
+          <!--<div class="col-sm-4">-->
             <input type="text" 
               class="form-control" 
               id="name" 
               placeholder="Name"
               formControlName="name">
-            <span *ngIf="signUpForm.get('name').invalid && signUpForm.get('name').touched && signUpForm.get('name').hasError('required') "> 
+            <span class="error" *ngIf="signUpForm.get('name').invalid && signUpForm.get('name').touched && signUpForm.get('name').hasError('required') "> 
               Name is required
             </span>
-          </div>
+          <!--</div>-->
           
         </div>
         <div class="field"
           [ngClass]="{'has-error': (signUpForm.get('email').invalid && signUpForm.get('email').touched)}">
           <!--<label for="email" class="col-sm-2 control-label">Email</label>-->
-          <div class="col-sm-4">
+          <!--<div class="col-sm-4">-->
             <input type="email" 
               class="form-control" 
               id="email" 
               placeholder="Email"
               formControlName="email">
-            <span *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched && signUpForm.get('email').hasError('required') "> 
+            <span class="error" *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched && signUpForm.get('email').hasError('required') "> 
               <!--&& signUpForm.get('name').touched) && signUpForm.get('name').hasError('required')">-->
               Email is required
             </span>
-          </div>
+          <!--</div>-->
           
         </div>
         <div class="field"
           [ngClass]="{'has-error': (signUpForm.get('password').invalid && signUpForm.get('password').touched)}">
           <!--<label for="inputPassword3" class="col-sm-2 control-label">Password</label>-->
-          <div class="col-sm-4">
+          <!--<div class="col-sm-4">-->
             <input type="password" 
               class="form-control" 
               id="password" 
               placeholder="Password"
               formControlName="password">
-            <span *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched && signUpForm.get('password').hasError('required')">
+            <span class="error" *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched && signUpForm.get('password').hasError('required')">
               Can't be empty
             </span>
-          </div>
+          <!--</div>-->
         </div>
         <div class="field"
           [ngClass]="{'has-error': (signUpForm.get('password_confirmation').invalid && signUpForm.get('password_confirmation').touched)}">
           <!--<label for="inputPassword3" class="col-sm-2 control-label">Password Confirmation</label>-->
-          <div class="col-sm-4">
+          <!--<div class="col-sm-4">-->
             <input type="password" 
               class="form-control" 
               id="password_confirmation" 
@@ -66,12 +68,12 @@
             <span *ngIf="signUpForm.get('password_confirmation').touched && signUpForm.hasError('nomatch')">
               Password should match
             </span>
-            <span *ngIf="signUpForm.get('password_confirmation').invalid && signUpForm.get('password_confirmation').touched && signUpForm.get('password_confirmation').hasError('required')">
+            <span class="error" *ngIf="signUpForm.get('password_confirmation').invalid && signUpForm.get('password_confirmation').touched && signUpForm.get('password_confirmation').hasError('required')">
               Can't be empty
             </span>
-          </div>
+          <!--</div>-->
         </div>
-        <div *ngIf="(formErrorMessage$ | async)?.length > 0" class="has-error col-sm-offset-2">
+        <div class="error" *ngIf="(formErrorMessage$ | async)?.length > 0" class="has-error col-sm-offset-2">
           <label>
             {{ formErrorMessage$ | async }}
           </label>

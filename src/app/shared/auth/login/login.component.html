@@ -1,14 +1,16 @@
 <div class="ui middle aligned center aligned grid">
   <div class="sixteen wide column"></div>
   <div class="sixteen wide column"></div>
-  <div class="five wide column">
-    <h2 class="ui teal image header">
-      <div class="content">
-        Log-in
-      </div>
-    </h2>
+  <div class="">
+    <div class="login-text text-center">
+      <h2 class="ui teal image header">
+        <div class="content">
+          Log-in
+        </div>
+      </h2>
+    </div>
 
-    <form class="ui form">
+    <form class="ui form text-center">
       <div class="two fields">
         <div class="field">
           <button type="button" class="ui google plus button fixwidth" (click)="socialLogin('google')">
@@ -47,7 +49,7 @@
       </div>
     </form>
 
-    <div class="ui message">
+    <div class="ui message text-center">
       New to Yatrum? <a [routerLink]="['/signup']">Sign Up</a>
     </div>
   </div>

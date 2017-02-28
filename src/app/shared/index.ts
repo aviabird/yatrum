@@ -73,7 +73,7 @@ const routes: Routes = [
     ToastyModule,
     SlimLoadingBarModule,
     DatepickerModule,
-    CalendarModule,
+    CalendarModule
   ]
 })
 export class SharedModule {}
