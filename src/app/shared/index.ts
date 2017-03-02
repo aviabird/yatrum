@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchFilterComponent } from './search/search-filter/search-filter.component';
 import { TripsSearchFilterComponent } from './search/trips-search-filter/trips-search-filter.component';
@@ -28,10 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // components
-    LoginComponent,
     LoaderComponent,
     TripListItemComponent,
-    SignupComponent,
     HeaderComponent,
     SearchFilterComponent,
     TripsSearchFilterComponent,
@@ -54,10 +50,8 @@ const routes: Routes = [
   ],
   exports: [
     // components
-    LoginComponent,
     LoaderComponent,
     TripListItemComponent,
-    SignupComponent,
     HeaderComponent,
     SearchFilterComponent,
     TripsSearchFilterComponent,
