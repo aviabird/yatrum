@@ -60,7 +60,7 @@
 <div class="ui grid">
   <div class="card ten wide column comments-card">
     <div *ngFor="let comment of comments$ | async" class="ui cards grid">
-      <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
+      <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card fourteen wide right floated column"></tr-trip-comment>
     </div>
 
     <hr>
