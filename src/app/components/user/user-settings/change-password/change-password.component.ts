@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { UserService } from './../../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +12,9 @@ export class ChangePasswordComponent implements OnInit {
   public oldPassword: string;
   public password: string;
   public confirmPassword: string
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private toastyService: ToastyService) { }
 
   ngOnInit() {
   }
@@ -21,9 +24,16 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.changePassword(this.oldPassword, 
       this.password,
       this.confirmPassword
-    ).subscribe(response => {
-      console.log(response);
-    });
+    ).subscribe(
+      response => {
+      this.toastyService.success({ title: "Success", msg: "You Successfully Updated your Password" });
+      return;
+    },
+    err => {
+      console.log("Inside Error")
+      this.toastyService.warning({ title: "Error", msg: "Password Update Failed" });
+      return;
+      }
+    );
   }
-
 }
