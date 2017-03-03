@@ -56,8 +56,8 @@
   </div>
 </div>
 
-<!--
-<div class="row">
+
+<div class="ui grid">
   <div class="card ten wide column comments-card">
     <div *ngFor="let comment of comments$ | async" class="ui cards grid">
       <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
@@ -67,4 +67,4 @@
     
     <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip$ | async" class="ui cards grid"></tr-new-trip-comment>
   </div>
-</div>-->
+</div>

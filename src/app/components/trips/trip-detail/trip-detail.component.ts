@@ -42,13 +42,13 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     private authService: ServerAuthService) {
     
     document.body.scrollTop = 0;    
-    // this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
+    this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
     this.trip$ =     
       this.store.select(fromRoot.getSelectedTrip)
         .do(trip => {
           if (trip) {
             this.selectedTripId = trip.id; 
-            // this.store.dispatch(new LoadCommentsAction(trip.id));
+            this.store.dispatch(new LoadCommentsAction(trip.id));
             // Increase Trip View Count in Backend
             this.store.dispatch(new IncreaseViewCountAction(trip.id));
             this.trip = trip;
@@ -56,15 +56,15 @@ export class TripDetailComponent implements OnInit, OnDestroy {
           }
         });
 
-    // this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
+    this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
 
     // init listener
-    // this.broadcaster.on<string>('CreateComments').subscribe(
-    //   message => {
-    //     this.store.dispatch(new LoadCommentsAction(this.selectedTripId));
-    //   }
-    // );
+    this.broadcaster.on<string>('CreateComments').subscribe(
+      message => {
+        this.store.dispatch(new LoadCommentsAction(this.selectedTripId));
+      }
+    );
   }
 
   ngOnInit() {
@@ -86,6 +86,6 @@ export class TripDetailComponent implements OnInit, OnDestroy {
 
   // Unsubscribe from the channel
   ngOnDestroy() {
-    // this.ng2cable.unsubscribe();
+    this.ng2cable.unsubscribe();
   }
 }
