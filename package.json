@@ -26,13 +26,9 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
-    "@ngrx/store-devtools": "^3.2.2",
-    "@ngrx/store-log-monitor": "^3.0.2",
     "angular2-autosize": "^1.0.1",
     "angular2-image-upload": "^0.2.1",
     "angular2-infinite-scroll": "^0.2.9",
-    "angular2-localstorage": "^0.4.0",
-    "angular2-material-datepicker": "^0.5.0",
     "angular2-moment": "^1.2.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
@@ -75,6 +71,8 @@
     "ts-node": "1.2.1",
     "tslint": "^4.0.0",
     "typescript": "~2.0.3",
-    "webdriver-manager": "10.2.5"
+    "webdriver-manager": "10.2.5",
+    "@ngrx/store-devtools": "^3.2.2",
+    "@ngrx/store-log-monitor": "^3.0.2"
   }
 }
