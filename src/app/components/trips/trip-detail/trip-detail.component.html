@@ -15,7 +15,7 @@
   <div class="right floated five wide column" style="text-align: center">
     <div class="author">
       <div class="avatar" [routerLink]="['/user', tripUser.id]">
-        <img [src]="tripUser.profile_pic?.url">
+        <img [src]="tripUser.profile_pic?.url" alt="">
       </div>
       <div class="name">
         {{tripUser.name}}

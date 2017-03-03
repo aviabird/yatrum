@@ -54,6 +54,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               private cloudinaryService: CloudinaryIntegrationService,
               private slimLoadingBarService :SlimLoadingBarService,
               private userService: UserService) {
+    document.body.scrollTop = 0;
     this.loggedUserId$ = this.store.select(getLoggedInUserId);
     this.selectedProfileUser$ = this.store.select(getSelectedProfileUser)
       .do((user) => this.selectedUser = user);

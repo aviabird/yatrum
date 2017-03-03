@@ -41,6 +41,7 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     private broadcaster: Broadcaster,
     private authService: ServerAuthService) {
     
+    document.body.scrollTop = 0;    
     // this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
     this.trip$ =     
       this.store.select(fromRoot.getSelectedTrip)
