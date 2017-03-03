@@ -15,7 +15,6 @@ import { LoaderComponent } from './loader/loader.component';
 import { TripListItemComponent } from './trips/trip-list-item/trip-list-item.component';
 import { MomentModule } from 'angular2-moment';
 import { ToastyModule } from 'ng2-toasty';
-import { DatepickerModule } from 'angular2-material-datepicker';
 import { CalendarModule } from 'primeng/primeng';
 import { HumanizePipe } from '../pipes/humanize';
 import { ThumbnailPipe } from '../pipes/thumbnail';
@@ -45,7 +44,6 @@ const routes: Routes = [
     MomentModule,
     SlimLoadingBarModule.forRoot(),
     ToastyModule.forRoot(),
-    DatepickerModule,
     CalendarModule
   ],
   exports: [
@@ -66,7 +64,6 @@ const routes: Routes = [
     MomentModule,
     ToastyModule,
     SlimLoadingBarModule,
-    DatepickerModule,
     CalendarModule
   ]
 })
