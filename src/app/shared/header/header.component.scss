@@ -1,18 +1,18 @@
 .my-header {
-  box-shadow: 0 1px 5px #BBB !important;
-  background: #2C3E50;
+  transition: background-color 500ms ease-out;
+  background: transparent;
   border-radius: 0;
   color: white;
   @media only screen and (min-width: 767px) {
     padding: 0 5rem;  
 	}
-  box-shadow: none !important;
   width: 100%;
+  border: none !important;
+  box-shadow: none !important;
 
   a, a:hover {
   	color: white;
   }
-
   .title {
   	font-size: 1.5rem;
   	font-weight: 100;
@@ -52,4 +52,18 @@
     margin-right: 0.5rem !important;
   }
 
+  .item::before {
+    background: none !important;
+  }
+
+}
+
+.page-scroll-header {
+  background-color: white !important;
+  // opacity: 0.98;
+  color: black + 50 !important;
+  border-bottom: 1px solid #E78B90 !important;
+  .title1, .title2 {
+    color: black + 50 !important;
+  }
 }

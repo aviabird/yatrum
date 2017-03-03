@@ -1,33 +1,18 @@
-<div class="image">
-  <img [src]="trip?.thumbnail_image_url | thumbnail:'c_limit,q_30,w_900'">
-</div>
-<div class="trip-name">
-  {{trip?.name}}
-</div>
-<div class="trip-user" [routerLink]="['/user', tripUser.id]">
-  <img class="" [src]="tripUser.profile_pic?.url">
-  <span class="user-name">
-    {{tripUser.name}}
-  </span>
-</div>
-
-<hr class="header-divider">
-
-<div *ngIf="!(belongsToLoggedInUser() | async)"
-  class="follow-user" (click)="onToggleFollow()">
-
-  <i class="add user icon"
-    [ngClass]="{'active': tripFollowState() == 'active', 'inactive': tripFollowState() == 'inactive'}">
-  </i>
-  {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
-</div>
-<div class="trip-likes">
-  {{trip?.trip_likes_count | humanize}} Likes
-  {{ trip?.view_count | humanize }} Views
-</div>
-<div class="like-trip">
-  <i class="thumbs up huge icon" 
-    [ngClass]="{active: tripLikeState() == 'active'}"
-    (click)="onToggleLike()">
-  </i>
+<div class="header">
+  <img class="trip-image" [src]="trip?.thumbnail_image_url | thumbnail:'c_limit,q_50,w_1200'">
+  <div class="trip-name">
+    <h1>{{trip?.name}}</h1>
+  </div>
+  <div class="trip-info">
+    <div>
+      {{ trip?.view_count | humanize }} Views
+    </div>
+    <hr>
+    <div class="like-trip">
+      <i class="thumbs up huge icon" (click)="onToggleLike()"
+        [ngClass]="tripLikeState()"
+      ></i>
+      {{trip?.trip_likes_count | humanize}} Likes
+    </div>
+  </div>
 </div>

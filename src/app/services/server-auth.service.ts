@@ -21,7 +21,9 @@ export class ServerAuthService {
     private store: Store<fromRoot.State>,
     private router: Router,
     private auth: AuthService //Satellizer AuthService
-  ) { }
+  ) {
+    this.authUser = this.store.select(fromRoot.getUserProfile)
+  }
 
   getLoggedInUser(auth_token): Observable<any> {
     const headers = new Headers({
@@ -95,11 +97,11 @@ export class ServerAuthService {
       created_at: '',
       updated_at: '',
       is_followed_by_current_user: data.is_followed_by_current_user,
-      facebook_url:                 data.facebook_url,
-      twitter_url:                  data.twitter_url,
-      instagram_url:                data.instagram_url,
-      website_url:                  data.website_url,
-      blog_url:                     data.blog_url
+      facebook_url: data.facebook_url,
+      twitter_url: data.twitter_url,
+      instagram_url: data.instagram_url,
+      website_url: data.website_url,
+      blog_url: data.blog_url
     }
   }
 
@@ -113,7 +115,7 @@ export class ServerAuthService {
   }
 
   redirectToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   socialLogin(provider: string): Observable<any> {

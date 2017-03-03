@@ -23,6 +23,7 @@ export class UserSettingsComponent implements OnInit {
   constructor(private instaService: InstagramIntegrationService, 
               private store: Store<State>, 
               private userService: UserService) { 
+    document.body.scrollTop = 0;
     // instaService.isUserInstagramAuthenticated()
     //   .subscribe(data => {
     //     this.isInstagramAuthenticated = data['instagram_authenticated'];

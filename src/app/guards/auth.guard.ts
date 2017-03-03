@@ -12,13 +12,13 @@ import { Router, CanActivate } from '@angular/router';
 @Injectable()
 export class CanActivateViaAuthGuard implements CanActivate, OnDestroy{
   isAuthenticated: boolean;
-  subscritpion: Subscription;
+  subscription: Subscription;
 
   constructor(private store: Store<fromRoot.State>, private router: Router) {
   }
 
   canActivate() {
-    this.subscritpion = this.store
+    this.subscription = this.store
       .select(fromRoot.getAuthStatus)
       .subscribe(isAuthenticated => {
         this.isAuthenticated = isAuthenticated;
@@ -31,7 +31,7 @@ export class CanActivateViaAuthGuard implements CanActivate, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscritpion.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

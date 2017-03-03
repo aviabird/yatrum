@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchFilterComponent } from './search/search-filter/search-filter.component';
 import { TripsSearchFilterComponent } from './search/trips-search-filter/trips-search-filter.component';
@@ -17,7 +15,6 @@ import { LoaderComponent } from './loader/loader.component';
 import { TripListItemComponent } from './trips/trip-list-item/trip-list-item.component';
 import { MomentModule } from 'angular2-moment';
 import { ToastyModule } from 'ng2-toasty';
-import { DatepickerModule } from 'angular2-material-datepicker';
 import { CalendarModule } from 'primeng/primeng';
 import { HumanizePipe } from '../pipes/humanize';
 import { ThumbnailPipe } from '../pipes/thumbnail';
@@ -28,10 +25,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // components
-    LoginComponent,
     LoaderComponent,
     TripListItemComponent,
-    SignupComponent,
     HeaderComponent,
     SearchFilterComponent,
     TripsSearchFilterComponent,
@@ -49,15 +44,12 @@ const routes: Routes = [
     MomentModule,
     SlimLoadingBarModule.forRoot(),
     ToastyModule.forRoot(),
-    DatepickerModule,
     CalendarModule
   ],
   exports: [
     // components
-    LoginComponent,
     LoaderComponent,
     TripListItemComponent,
-    SignupComponent,
     HeaderComponent,
     SearchFilterComponent,
     TripsSearchFilterComponent,
@@ -72,7 +64,6 @@ const routes: Routes = [
     MomentModule,
     ToastyModule,
     SlimLoadingBarModule,
-    DatepickerModule,
     CalendarModule
   ]
 })

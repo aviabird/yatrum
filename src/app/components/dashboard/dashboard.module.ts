@@ -12,7 +12,7 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, children: DashboardRoutes },
+  { path: '', component: DashboardComponent, children: DashboardRoutes },
 ];
 
 @NgModule({

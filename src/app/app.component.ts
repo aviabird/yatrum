@@ -5,7 +5,7 @@ import { Component, ViewContainerRef, ChangeDetectionStrategy } from '@angular/c
   selector: 'app-root',
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'Travel app';
@@ -15,4 +15,5 @@ export class AppComponent {
   
   ngOnInit() {
   }
+
 }

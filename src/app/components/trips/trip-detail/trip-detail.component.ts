@@ -1,3 +1,4 @@
+import { ServerAuthService } from './../../../services/server-auth.service';
 import { environment } from './../../../../environments/environment';
 import { Subscription } from 'rxjs/Rx';
 import { FollowUserAction } from './../../../actions/user.action';
@@ -23,6 +24,7 @@ import { Broadcaster } from 'ng2-cable/js/index';
 })
 export class TripDetailComponent implements OnInit, OnDestroy {
   trip$: Observable<Trip>;
+  trip: Trip;
   tripUser = new UserProfile();
   loggedInUser$: Observable<UserProfile>;
   comments$: Observable<Comment[]>;
@@ -36,38 +38,54 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   public tripTags: String[] = ['yatrum', 'travel'];
   constructor(private store: Store<fromRoot.State>,
     private ng2cable: Ng2Cable,
-    private broadcaster: Broadcaster) {
+    private broadcaster: Broadcaster,
+    private authService: ServerAuthService) {
     
-    this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
-    
-    this.trip$ =
+    document.body.scrollTop = 0;    
+    // this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
+    this.trip$ =     
       this.store.select(fromRoot.getSelectedTrip)
         .do(trip => {
           if (trip) {
             this.selectedTripId = trip.id; 
-            this.store.dispatch(new LoadCommentsAction(trip.id));
+            // this.store.dispatch(new LoadCommentsAction(trip.id));
             // Increase Trip View Count in Backend
             this.store.dispatch(new IncreaseViewCountAction(trip.id));
+            this.trip = trip;
             this.tripUser = trip.user
           }
         });
 
-    this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
+    // this.comments$ = this.store.select(fromRoot.getSelectedTripComments);
     this.loggedInUser$ = this.store.select(fromRoot.getUserProfile);
 
     // init listener
-    this.broadcaster.on<string>('CreateComments').subscribe(
-      message => {
-        this.store.dispatch(new LoadCommentsAction(this.selectedTripId));
-      }
-    );
+    // this.broadcaster.on<string>('CreateComments').subscribe(
+    //   message => {
+    //     this.store.dispatch(new LoadCommentsAction(this.selectedTripId));
+    //   }
+    // );
   }
 
   ngOnInit() {
   }
 
+  tripFollowState() {
+    if (!this.trip) return 'inactive';
+    return this.trip.user.is_followed_by_current_user ? 'active' : 'inactive';
+  }
+
+  onToggleFollow() {
+    this.store.dispatch(new FollowUserAction(this.trip.user_id))
+  }  
+
+  belongsToLoggedInUser() {
+    return this.authService.belongsToLoggedInUser(this.tripUser.id)
+  }
+
+
   // Unsubscribe from the channel
   ngOnDestroy() {
-    this.ng2cable.unsubscribe();
+    // this.ng2cable.unsubscribe();
   }
 }

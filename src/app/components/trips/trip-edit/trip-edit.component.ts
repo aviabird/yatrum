@@ -37,6 +37,7 @@ export class TripEditComponent implements OnInit {
     private toastyService: ToastyService,
     private tripFormService: TripFormService,
     private placeFormService: PlaceFormService) {
+      document.body.scrollTop = 0;
       this.trip$ = this.store.select(fromRoot.getSelectedTrip);
       this.isNewTrip = this.checkIfTripIsNew();
       if(!this.isNewTrip) {

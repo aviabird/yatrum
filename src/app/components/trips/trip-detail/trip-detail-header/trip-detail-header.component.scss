@@ -1,89 +1,52 @@
 @import '../../../../../_vars.scss';
 
-.content {
-	color: white;
-	position: absolute;
+.header	{
+	height: 100%;
+	position: relative;
+	background: #707070;
+}
+
+.trip-image {
+	height: 100%;
+	width: 100%;
+	filter: brightness(50%);
+	object-fit: cover;
+	object-position: center;
 }
 
 .trip-name {
-	@extend .content;
-	font-size: 30px;
-	top: 35px;
-	left: 40px;
-	text-shadow: 0px 3px 10px #000;
-	text-transform: capitalize;
-}
-
-.image {
-	background: black;
-	height: 400px;
-	img {
-		opacity: 0.7;
-		object-fit: cover;
-		object-position: center;
-		height: 100%;
-		width: 100%;
-	}
-}
-
-.header-divider {
 	position: absolute;
-	width: 92%;
-	bottom: 64px;
-	margin: 0 4%;
-	border-bottom-color: #aaa;
-}
-
-.follow-user{
-	@extend .content;
-	bottom: 10px;
-	left: 40px;
-	padding: 12px 32px 12px 24px;
-  border-radius: 4px;
-  font-size: 18px;
-	background: $appActionColor;
-	cursor: pointer;
-}
-
-.trip-likes {
-	@extend .content;
-	top: 35px;
-	right: 40px;
-	font-size: 16px;
-	text-shadow: 0px 2px 6px #000;
-}
-
-.like-trip {
-	cursor: pointer;
-	@extend .content;
-	bottom: 5px;
-	right: 25px;
-	.icon.active {
-		color: $appActionColor;
-	}
-}
-
-.trip-user {
-	@extend .content;
-	top: 96px;
-	left: 46px;
-	// box-shadow: 0 8px 14px rgba(0,0,0,0.40);
-	img {
-		position: absolute;
-    left: -6px;
-    top: -14px;
-		width: 48px;
-		border: 1px solid white;
-		border-radius: 100px;
-		background: $appActionColor;
-	}
-	.user-name {
-  	background: $appLightBlue;
-  	border-radius: 4px;
-		padding: 10px 10px 10px 52px;
+	top: 40%;
+  font-weight: 400;
+  font-size: 2.8em;
+  text-shadow: -2px 2px 0px rgba(0, 0, 0, 0.3), -2px 4px 2px rgba(0, 0, 0, 0.1);
+	color: white;
+	text-align: center;
+	width: 70%;
+	left: 15%;
+	h1 {
 		font-weight: 400;
-    text-shadow: 0px 0px 2px #073c5f;
-    font-size: 1.1rem;
-		text-transform: capitalize;
 	}
+}
+
+.trip-info {
+	position: absolute;
+	width: 8rem;
+	text-align: right;
+  right: 0;
+  bottom: 0;
+  color: white;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	i {
+		font-size: 2em;
+		cursor: pointer;
+		&.active {
+			color: $appActionColor;
+		}
+		&.inactive {
+			color: white;
+		}
+	}
+
 }
