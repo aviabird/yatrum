@@ -17,6 +17,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "tr",
       "mobile": false,
+      "compress": true,
       "styles": [
         "styles.scss",
         "../node_modules/primeng/resources/themes/omega/theme.css",

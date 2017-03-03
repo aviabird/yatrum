@@ -25,7 +25,7 @@
         <a class="item" (click)="logout()">LogOut</a>
       </div>
     </div>
-    <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/login']">Login</a>
+    <a *ngIf="!(authentication$ | async)" class="item" [routerLink]="['/auth/login']">Login</a>
     <div>&nbsp;</div>
   </div>
   <ng2-slim-loading-bar [height]="'2px'" [color]="'#E74C3C'"></ng2-slim-loading-bar>

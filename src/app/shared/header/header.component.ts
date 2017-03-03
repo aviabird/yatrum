@@ -6,7 +6,6 @@ import { UserProfile } from './../../models/user-profile';
 import * as fromRoot from './../../reducers/index';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Store } from '@ngrx/store';
 import "rxjs/add/operator/let";
 
@@ -29,7 +28,7 @@ export class HeaderComponent implements OnInit {
   startPos: Number = 0;
   changePos: Number = 100;
 
-  constructor(private af: AngularFire,
+  constructor(
     private store: Store<fromRoot.State>,
     private serverAuthService: ServerAuthService,
     private router: Router
@@ -61,15 +60,7 @@ export class HeaderComponent implements OnInit {
       }
   }
 
-  login() {
-    // Firebase authentication
-    // this.store.dispatch(new LoginAction);
-    // this.store.dispatch(new ServerLoginAction);
-  }
-
   logout() {
-    // Firebase authentication    
-    // this.store.dispatch(new LogoutAction);
     this.store.dispatch(new ServerLogoutAction());
   }
 
