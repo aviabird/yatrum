@@ -35,7 +35,7 @@ import {
         transform: "scale(1.0)"
       })),
       transition('inactive => active', [
-        style({ transform: "scale(3.0)", opacity: 0, color: 'red' }),
+        style({ transform: "scale(3.0)", opacity: 0, color: '#E78B90' }),
         animate(500)
       ]),
       transition('active => inactive', animate(500))

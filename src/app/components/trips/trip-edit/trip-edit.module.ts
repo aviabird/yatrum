@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { CalendarModule } from 'primeng/primeng';
 import { SharedModule } from '../../../shared/index';
+import { TagInputModule } from 'ng2-tag-input';
 
 /**Required Components */
 import { TripEditComponent } from './../trip-edit/trip-edit.component';
@@ -40,7 +41,8 @@ const routes: Routes = [
     FormsModule,
     CustomFormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    TagInputModule
     ]
 })
 export class TripEditModule { }

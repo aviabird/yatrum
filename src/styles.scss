@@ -114,3 +114,14 @@ p-calendar {
   }
 
 }
+
+.tag-input {
+  .ng2-tag-input {
+    border-bottom: none !important;
+    input {
+      border: none !important;
+      background: #fafafa !important;
+      font-size: 20px !important;
+    }
+  }
+}

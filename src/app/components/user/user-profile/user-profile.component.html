@@ -9,12 +9,11 @@
 						<i class="big photo icon"></i>
 					</div>
 				</div>
-				<h1 class="profile-name">{{(selectedProfileUser$ | async).name}}</h1>
+				<h3 class="profile-name">{{(selectedProfileUser$ | async).name}}</h3>
 				<h4 class="profile-bio"></h4>
 			</div>
 			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onToggleFollow()">
-				<button class="ui facebook button">
-					<i class="plus icon"></i>
+				<button class="ui button">
 					{{userFollowState() == "inactive" ? "Follow" : "Following"}}
 				</button>
 			</div>

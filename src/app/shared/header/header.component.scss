@@ -2,7 +2,6 @@
   transition: background-color 500ms ease-out;
   background: transparent;
   border-radius: 0;
-  color: white;
   @media only screen and (min-width: 767px) {
     padding: 0 5rem;  
 	}
@@ -59,11 +58,16 @@
 }
 
 .page-scroll-header {
-  background-color: white !important;
+  background-color: #fafafa !important;
   // opacity: 0.98;
   color: black + 50 !important;
   border-bottom: 1px solid #E78B90 !important;
   .title1, .title2 {
     color: black + 50 !important;
   }
+}
+
+
+.avatar {
+  border: 2px solid #E78B90;
 }

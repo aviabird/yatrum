@@ -28,27 +28,15 @@
       </div>
     </div>
     <hr>
-    <div class="trip-tags">
+    <div *ngIf="(trip$ | async)?.tag_list.length > 0" class="trip-tags">
       <h3>Categories</h3>
       <div class="tag-list">
-        <span class="tag">
-          Food
+        <span *ngFor="let tag of (trip$ | async)?.tag_list" class="tag">
+          {{tag}}
         </span>
-        <span class="tag">
-          Health
-        </span>
-        <span class="tag">
-          Lifestyle
-        </span>
-        <span class="tag">
-          Breakfast
-        </span>
-        <span class="tag">
-          Travel
-        </span>                                
       </div>
+      <hr>
     </div>
-    <hr>
     <div class="social-share">
       <h3>Social Share</h3>
       <share-buttons [url]="tripUrl"

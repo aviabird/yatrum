@@ -17,8 +17,13 @@
 }
 
 .follow {
+	.ui.button {
+		background: #E78B90;
+    color: white;
+    padding: 11px;
+		font-size: 1.2rem;
+	}
 	text-align: center;
-	margin-top: 2rem;
 }
 
 .profile-info {
@@ -49,6 +54,8 @@
 }
 
 .profile-image {
+	border-radius: 50px !important;
+  border: 3px solid #E78B90;
 	border-radius: 5px;
 	width: 100px;
 	background: rgba(0, 0, 0, 0.14);
@@ -74,8 +81,8 @@
 .cover-update-text {
 	color: white;
 	position: absolute;
-	top: 23px;
-	left: 15px;
+	top: 30%;
+	left: 7%;
 	z-index: 1;
 	text-align: center;
 	opacity: 0;
@@ -114,6 +121,7 @@
 }
 
 .profile-name {
+	margin-top: 12px;
 	font-weight: 100;
 	text-align: center;
 	margin-bottom: 0;
@@ -127,6 +135,7 @@
 }
 
 .cover-image {
+	filter: brightness(50%);
 	height: 100%;
 	width: 100%;
 	object-fit: cover;

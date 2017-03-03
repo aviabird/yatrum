@@ -25,6 +25,7 @@
 
 	.avatar {
 		width: 100%;
+    border: 2px solid #E78B90;
     height: auto;
 		background: rgb(250, 250, 250);
     margin-right: -1.5rem;
@@ -53,11 +54,13 @@
 	}
 
 	.active {
-		color: red;
+		color: #E78B90;
 	}
 
 	.tags a {
 		margin-bottom: 5px;
+    background: #E78B90;
+    color: white;
 	}
 
 	.follow-ribbon {
@@ -96,19 +99,19 @@
 
 .follow-button {
   &.active {
-    background: #E74C3C;
+    background: #E78B90;
     color: white !important;
     border: none;
     &:hover {
-      background: #E74C3C;
+      background: #E78B90;
       color: white !important;
       border: none;
     }
   }
   &.inactive {
     background: white !important;
-    color: #E74C3C !important;
-    border: 1px solid #E74C3C;
+    color: #E78B90 !important;
+    border: 1px solid #E78B90;
   }
 }
 
