@@ -115,7 +115,7 @@ export class ServerAuthService {
   }
 
   redirectToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   socialLogin(provider: string): Observable<any> {
