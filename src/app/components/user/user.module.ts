@@ -19,7 +19,7 @@ import { OtherDetailsComponent } from './user-settings/other-details/other-detai
 import { ChangePasswordComponent } from './user-settings/change-password/change-password.component';
 
 const routes: Routes = [
-  { path: 'user', component: UserComponent, children: UserRoutes },
+  { path: '', component: UserComponent, children: UserRoutes },
 ];
 
 @NgModule({
