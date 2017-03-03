@@ -6,6 +6,5 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 export const UserRoutes = [
 	{ path: 'settings', component: UserSettingsComponent, canActivate: [ CanActivateViaAuthGuard ] },
 	{ path: ':id', component: UserProfileComponent, children: UserProfileRoutes }
-	// { path: ':id', component: UserProfileComponent }
 ]
 

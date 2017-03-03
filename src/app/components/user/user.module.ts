@@ -5,33 +5,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { UserComponent } from './user.component';
-import { UserRoutes } from './user.routes';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserFollowersComponent } from './user-profile/user-followers/user-followers.component';
-import { UserFollowingComponent } from './user-profile/user-following/user-following.component';
-import { UserMediaComponent } from './user-profile/user-media/user-media.component';
-import { UserTripsComponent } from './user-profile/user-trips/user-trips.component';
+// import { UserRoutes } from './user.routes';
 import { SharedModule } from '../../shared/index';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
-import { OtherDetailsComponent } from './user-settings/other-details/other-details.component';
-import { ChangePasswordComponent } from './user-settings/change-password/change-password.component';
 
 const routes: Routes = [
-  { path: '', component: UserComponent, children: UserRoutes },
+  { path: '', component: UserComponent },
+	{ path: 'settings', loadChildren: './user-settings/user-settings.module#UserSettingsModule' },
+  { path: ':id', loadChildren: './user-profile/user-profile.module#UserProfileModule'},
 ];
 
 @NgModule({
   declarations: [
     // components
-    UserComponent,
-    UserProfileComponent,
-    UserFollowersComponent,
-    UserFollowingComponent,
-    UserMediaComponent,
-    UserSettingsComponent,
-    OtherDetailsComponent,
-    UserTripsComponent,
-    ChangePasswordComponent
+    UserComponent
   ],
   imports: [
     RouterModule.forChild(routes),

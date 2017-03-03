@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Services 
 import { ServiceModule } from './services/index';
@@ -29,9 +29,6 @@ import { SharedModule } from './shared/index';
 import { CanActivateViaAuthGuard } from './guards/auth.guard';
 import { TripsResolveGuard } from './guards/trips-resolve.guard';
 import { InstagramAuthenticationCallbackComponent } from './shared/instagram-authentication-callback/instagram-authentication-callback.component';
-
-/**Action Cable */
-import { Ng2Cable, Broadcaster } from 'ng2-cable/js/index';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRiL-DZLnvLoj37YZNqQyYcOaOecXFOus",
@@ -57,7 +54,7 @@ const myFirebaseAuthConfig = {
     Ng2UiAuthModule.forRoot(MyAuthConfig),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     StoreModule.provideStore(reducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    // StoreDevtoolsModule.instrumentOnlyWithExtension(),
     RouterModule.forRoot(routes),
     //TODO: Fix this when AOT error is resolved
     // StoreDevtoolsModule.instrumentStore({
@@ -66,7 +63,7 @@ const myFirebaseAuthConfig = {
     //     position: 'right'
     //   })
     // }),
-    StoreLogMonitorModule,
+    // StoreLogMonitorModule,
     
     ComponentsModule,
     SharedModule,
@@ -75,9 +72,7 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     CanActivateViaAuthGuard,
-    TripsResolveGuard,
-    Ng2Cable,
-    Broadcaster
+    TripsResolveGuard
   ],
   bootstrap: [AppComponent]
 })
