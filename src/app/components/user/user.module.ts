@@ -1,11 +1,10 @@
 // Inbuilt Angular Modules
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user.routes';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -38,7 +37,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-    BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
