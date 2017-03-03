@@ -14,7 +14,6 @@ import { AddPlaceComponent } from './trip-edit/add-place/add-place.component';
 import { ImageUploadComponent } from './trip-edit/image-upload/image-upload.component';
 import { NewPlaceComponent } from './trip-edit/new-place/new-place.component';
 import { UpdatePlaceComponent } from './trip-edit/update-place/update-place.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { CalendarModule } from 'primeng/primeng';
@@ -25,7 +24,7 @@ import { ShareButtonsModule } from "ng2-sharebuttons";
 
 
 const routes: Routes = [
-  { path: 'trips', component: TripsComponent, children: TripRoutes },
+  { path: '', component: TripsComponent, children: TripRoutes },
 ];
 
 @NgModule({
@@ -47,7 +46,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-    BrowserModule,
     FormsModule,
     CustomFormsModule,
     ReactiveFormsModule,
