@@ -1,4 +1,4 @@
-import { UserAuthService } from './../../../services/user-auth.service';
+import { ServerAuthService } from './../../../services/server-auth.service';
 import { environment } from './../../../../environments/environment';
 import { Subscription } from 'rxjs/Rx';
 import { FollowUserAction } from './../../../actions/user.action';
@@ -39,7 +39,7 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromRoot.State>,
     private ng2cable: Ng2Cable,
     private broadcaster: Broadcaster,
-    private authService: UserAuthService) {
+    private authService: ServerAuthService) {
     
     // this.ng2cable.subscribe(`${this.apiLink}/cable`, 'CommentsChannel');
     this.trip$ =     
