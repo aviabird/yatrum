@@ -16,11 +16,18 @@ import "rxjs/add/operator/let";
   selector: 'tr-header',
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  host: {
+    '(window:scroll)': 'updateHeader($event)'
+  }
 })
 export class HeaderComponent implements OnInit {
   user$: Observable<UserProfile>;
   authentication$: Observable<any>;
+  isScrolled = false;
+  currPos: Number = 0;
+  startPos: Number = 0;
+  changePos: Number = 100;
 
   constructor(private af: AngularFire,
     private store: Store<fromRoot.State>,
@@ -43,6 +50,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  updateHeader(evt) {
+      this.currPos = (window.pageYOffset || evt.target.scrollTop) - (evt.target.clientTop || 0);
+      if(this.currPos >= this.changePos ) {
+          this.isScrolled = true;
+      } else {
+          this.isScrolled = false;
+      }
   }
 
   login() {

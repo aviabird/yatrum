@@ -1,28 +1,18 @@
-<div class="ui grid">
-  <div class="two wide column street-view">
-    <i class="street view icon"></i>
-    <div class="vertical-bar"></div>
-  </div>
-  <div class="fourteen wide column">
-    <div class="ui card activity">
-      <div class="header">
-        <div class="place-name">
-          {{place.name}}
-          <i class="marker big icon"></i>
-        </div>
-        <div class="place-date">
-          <i class="checked calendar big icon"></i>
-          {{date}} at {{time}}
-        </div>
-      </div>
-      <div class="place-review">
-        {{place.review}}
-      </div>
-      <div class="place-images">
-        <span *ngFor="let image of place.pictures" class="">
-          <img [src]="image.url | thumbnail:'c_limit,q_30,w_500'">
-        </span>
-      </div>
+<div class="content">
+  <div class="header ui grid">
+    <div class="place-name twelve wide column">
+      {{place.name}}
     </div>
+    <div class="place-date four wide column">
+      {{date}}
+    </div>
+  </div>
+  <div class="place-review ">
+    {{place.review}}
+  </div>
+  <div class="place-images">
+    <span *ngFor="let image of place.pictures" class="">
+      <img class="image" [src]="image.url | thumbnail:'c_limit,q_30,w_500'">
+    </span>
   </div>
 </div>

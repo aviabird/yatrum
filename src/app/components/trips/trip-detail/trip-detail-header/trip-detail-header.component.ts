@@ -25,18 +25,10 @@ export class TripDetailHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  tripFollowState() {
-    if (!this.trip) return 'inactive';
-    return this.trip.user.is_followed_by_current_user ? 'active' : 'inactive';
-  }
   tripLikeState() {
     if (!this.trip) return 'inactive';
     return this.trip.is_liked_by_current_user ? 'active' : 'inactive';
   }
-
-  onToggleFollow() {
-    this.store.dispatch(new FollowUserAction(this.trip.user_id))
-  }  
 
   onToggleLike() {
     this.store.dispatch(new LikeTripAction(this.trip.id));

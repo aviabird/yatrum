@@ -1,6 +1,6 @@
 .search-box-cover {
 	width: 100%;
-	margin-top: -1%;
+	// margin-top: -1%;
 	border: none;
 }
 
@@ -8,9 +8,9 @@
 	position: relative;
 	// add a media query for less than 500px width
 	@media only screen and (max-width: 767px) {
-		height: 12rem !important;	 	
+		height: 20rem !important;	 	
 	}
-	height: 18rem;
+	height: 30rem;
 	overflow: hidden;
 	&:hover {
 		.cover-update-text {
@@ -26,7 +26,7 @@
 .search-box {
   position: absolute;
 	transform: translateZ;
-	top: 10%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%);
 	z-index: 1;

@@ -1,15 +1,56 @@
-<div class="ui centered grid">
-  <div class="detail-margin row"></div>
+<div class="header-trip">
+  <tr-trip-detail-header [trip]="trip$ | async"></tr-trip-detail-header>
+</div>
 
-  <div class="row">
-    <div class="ten wide column banner">
-      <tr-trip-detail-header
-        [trip]="trip$ | async"
-        [tripUser]="tripUser"
-        [url]="postUrl"
-        ></tr-trip-detail-header>
+<div class="ui centered grid">
+  <div class="ten wide column trip-activity">
+    <div *ngFor="let place of (trip$ | async)?.places">
+      <tr-place-detail [place]="place"></tr-place-detail>
+      <div class="ui divider">
+        <div class="star">✻</div>
+      </div>
     </div>
-    <div class="two wide column">
+  </div>
+
+  <div class="right floated five wide column" style="text-align: center">
+    <div class="author">
+      <div class="avatar" [routerLink]="['/user', tripUser.id]">
+        <img [src]="tripUser.profile_pic?.url">
+      </div>
+      <div class="name">
+        {{tripUser.name}}
+      </div>
+      <div *ngIf="!(belongsToLoggedInUser() | async)"
+        class="follow-user" (click)="onToggleFollow()">
+        <button class="ui button">
+          {{tripFollowState() == "inactive" ? "Follow" : "Following"}}
+        </button>
+      </div>
+    </div>
+    <hr>
+    <div class="trip-tags">
+      <h3>Categories</h3>
+      <div class="tag-list">
+        <span class="tag">
+          Food
+        </span>
+        <span class="tag">
+          Health
+        </span>
+        <span class="tag">
+          Lifestyle
+        </span>
+        <span class="tag">
+          Breakfast
+        </span>
+        <span class="tag">
+          Travel
+        </span>                                
+      </div>
+    </div>
+    <hr>
+    <div class="social-share">
+      <h3>Social Share</h3>
       <share-buttons [url]="tripUrl"
         [image]="(trip$ | async)?.thumbnail_image_url" 
         [title]="(trip$ | async)?.name" 
@@ -21,27 +62,21 @@
         [pinterest]=false
         [stumbleUpOn]=false
         [reddit]=false
-        [whatsApp]=false></share-buttons>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="ten wide column trip-activity">
-      <div *ngFor="let place of (trip$ | async)?.places">
-        <tr-place-detail [place]="place"></tr-place-detail>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="card ten wide column comments-card">
-      <div *ngFor="let comment of comments$ | async" class="ui cards grid">
-        <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
-      </div>
-
-      <hr>
-      
-      <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip$ | async" class="ui cards grid"></tr-new-trip-comment>
+        [whatsApp]=false>
+      </share-buttons>
     </div>
   </div>
 </div>
+
+<!--
+<div class="row">
+  <div class="card ten wide column comments-card">
+    <div *ngFor="let comment of comments$ | async" class="ui cards grid">
+      <tr-trip-comment [comment]="comment" [authUser]="loggedInUser$ | async" class="card sixteen wide column"></tr-trip-comment>
+    </div>
+
+    <hr>
+    
+    <tr-new-trip-comment [authUser]="loggedInUser$ | async" [trip]="trip$ | async" class="ui cards grid"></tr-new-trip-comment>
+  </div>
+</div>-->
