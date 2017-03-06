@@ -10,6 +10,25 @@
 					</div>
 				</div>
 				<h3 class="profile-name">{{(selectedProfileUser$ | async).name}}</h3>
+				<div class="social-links">
+					<a *ngIf="(selectedProfileUser$ | async).facebook_url" [href]="(selectedProfileUser$ | async).facebook_url" target="_blank">
+						<i class="facebook square icon"></i>
+					</a>
+					<a *ngIf="(selectedProfileUser$ | async).twitter_url" [href]="(selectedProfileUser$ | async).twitter_url" target="_blank">
+						<i class="twitter square icon"></i>
+					</a>
+					<a *ngIf="(selectedProfileUser$ | async).instagram_url" [href]="(selectedProfileUser$ | async).instagram_url" target="_blank">
+						<i class="instagram icon"></i>
+					</a>							
+					<a *ngIf="(selectedProfileUser$ | async).blog_url" [href]="(selectedProfileUser$ | async).blog_url" target="_blank">
+						<i class="rss square icon"></i>
+					</a>
+				</div>
+				<div class="personal-links">
+					<a *ngIf="(selectedProfileUser$ | async).website_url" [href]="(selectedProfileUser$ | async).website_url" target="_blank">
+						<button class="ui button">website</button>
+					</a>
+				</div>				
 				<h4 class="profile-bio"></h4>
 			</div>
 			<div *ngIf="(loggedUserId$ | async) != userIndex" class="follow" (click)="onToggleFollow()">

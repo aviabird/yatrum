@@ -7,7 +7,7 @@
 
 .profile-cover-div {
 	position: relative;
-	height: 30rem;
+	height: 35rem;
 	overflow: hidden;
 	&:hover {
 		.cover-update-text {
@@ -139,4 +139,23 @@
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+}
+
+.social-links {
+	margin-top: 12px;
+	margin-bottom: 12px;
+	font-size: 1.7em !important;
+	text-align: center;
+	cursor: pointer;
+	i {
+		color: white;
+	}
+}
+
+.personal-links {
+	text-align: center;
+	button {
+		background-color: white;
+		padding: 5px 10px;
+	}
 }

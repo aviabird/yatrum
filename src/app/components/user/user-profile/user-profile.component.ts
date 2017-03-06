@@ -75,6 +75,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.userService.getUserById(this.userIndex);
       }
     )
+    this.selectedProfileUser$.subscribe(user => console.log("user", user));
   }
     
   handleInputChange(e) {
@@ -137,6 +138,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onToggleFollow() {
     this.store.dispatch(new FollowProfileUserAction(this.selectedUser.id));
+  }
+
+  visitSocialLink(link) {
+    console.log("link", link);
+    window.open(link);
   }
 
   ngOnDestroy() {
