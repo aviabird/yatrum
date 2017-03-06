@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { UserComponent } from './user.component';
-// import { UserRoutes } from './user.routes';
 import { SharedModule } from '../../shared/index';
 
 const routes: Routes = [

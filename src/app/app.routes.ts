@@ -11,6 +11,7 @@ export const routes: Routes = [
   { path: 'auth', loadChildren: './shared/auth/auth.module#AuthModule' },
   { path: 'user', loadChildren: './components/user/user.module#UserModule' },
   { path: 'trips', loadChildren: './components/trips/trips.module#TripsModule' },
+  { path: 'stats', loadChildren: './components/stats/stats.module#StatsModule' },
 	{ path: 'instagram_authentication_callback_url', component: InstagramAuthenticationCallbackComponent },
   { path: 'ambassadors', component: AmbassadorComponent }
 ];

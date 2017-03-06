@@ -21,6 +21,7 @@
       <div class="menu">
         <a class="item" [routerLink]="['/trips','new']">Create Trip</a>
         <a class="item" [routerLink]="['/user', (user$ | async).id, 'trips' ]">Profile</a>
+        <a class="item" [routerLink]="['/stats']">Stats</a>
         <a class="item" [routerLink]="['/user','settings']">Settings</a>
         <a class="item" (click)="logout()">LogOut</a>
       </div>
