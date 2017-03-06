@@ -2,9 +2,11 @@
   <div style="height: 120px; background: gray; width: 100%">
   </div>
   <div class="twelve wide column">
-    {{data.labels}}
-    {{data.datasets}}
-    <p-chart type="bar" [data]="data" *ngIf="(data | json) != '{}'"></p-chart>
+    <div *ngIf="data">
+      <h1>Hello World</h1>
+      <p-chart #chart type="bar" [data]="data"></p-chart>
+    </div>
+
     <table class="ui celled table">
       <thead>
         <tr>
@@ -15,7 +17,7 @@
       <tbody>
         <tr *ngFor="let trip of userTrips$ | async">
           <td>
-            <a (click)="getGraphDataForTrip(trip.id, trip.name)">{{trip.name}}</a>
+            <a (click)="getGraphDataForTrip(trip.id, trip.name, chart)">{{trip.name}}</a>
           </td>
           <td>{{trip.view_count}}</td>
         </tr>
