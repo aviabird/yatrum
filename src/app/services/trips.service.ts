@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 /**
  * TODO: ALL Observable<any> must be changed to concreate Observable of some type - VoidZero
  *  
@@ -336,9 +337,24 @@ export class TripsService {
     return this.http.post(
       `${this.apiLink}/trips/increase_view_count`,
       { id: id }, { headers: headers }
-      )
+    )
       .map((data: Response) => data.status)
-      .catch((res: Response) => this.catchError(res));    
+      .catch((res: Response) => this.catchError(res));
+  }
+
+  get_graph_data_for_trip(id: any): Observable<any> {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.getUserAuthToken()
+      // use Restangular which creates interceptor
+    });
+
+    return this.http.post(
+      `${this.apiLink}/graph_data_for_trip`,
+      { id: id }, { headers: headers }
+    )
+      .map((data: Response) => data.json())
+      .catch((res: Response) => this.catchError(res));
   }
 
 
