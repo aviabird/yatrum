@@ -4,9 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { StatsComponent } from './stats.component';
 import { SharedModule } from '../../shared/index';
 import { CanActivateViaAuthGuard } from './../../guards/auth.guard';
+import { ChartModule } from 'primeng/primeng';
 
 const routes: Routes = [
-  { path: '', component: StatsComponent, canActivate: [ CanActivateViaAuthGuard ] }
+  { path: '', component: StatsComponent, canActivate: [CanActivateViaAuthGuard] }
 ];
 
 @NgModule({
@@ -16,7 +17,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    ChartModule
   ]
 })
 export class StatsModule { }

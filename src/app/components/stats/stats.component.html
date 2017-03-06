@@ -1,3 +1,25 @@
-<p>
-  stats works!
-</p>
+<div class="ui centered grid">
+  <div style="height: 120px; background: gray; width: 100%">
+  </div>
+  <div class="twelve wide column">
+    <p-chart type="bar" [data]="data"></p-chart>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Trips</th>
+          <th>Views</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trip1</td>
+          <td>310</td>
+        </tr>
+        <tr>
+          <td>Trip2</td>
+          <td>340</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
