@@ -18,6 +18,7 @@ export class TripsResolveGuard implements Resolve<boolean>{
 
 	resolve(route: ActivatedRouteSnapshot): boolean {
 		let tripIndex = route.params['id'];
-		return this.tripsService.getTrip(tripIndex);
+		if(tripIndex)
+			return this.tripsService.getTrip(tripIndex);
 	}
 }

@@ -27,7 +27,7 @@ export class TripEditComponent implements OnInit {
   trip = null;
   tripForm: FormGroup;
   totalPlaces: number = 0;
-  tags: string[];
+  tags: string[] = [];
   autocompleteTags: string[] = ['Ski and snowboarding holidays', 'Journeys by rail', 'Cruises','Safaris and wildlife','Arts and culture',
                                 'Camping', 'Golf','Spa holidays', 'Solo Travel', 'Great drives', 'Food and wine holidays',
                                 'Walking holidays', 'Activity and Adventure', 'Festivals and events', 'Cycling'];
