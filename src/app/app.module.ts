@@ -34,7 +34,7 @@ import { InstagramAuthenticationCallbackComponent } from './shared/instagram-aut
     Autosize,
     TripHasPlaces,
     AmbassadorComponent,
-    InstagramAuthenticationCallbackComponent
+    InstagramAuthenticationCallbackComponent,
   ],
   imports: [
     BrowserModule,
