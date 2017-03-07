@@ -47,7 +47,7 @@ export class TripEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tripForm.valueChanges.subscribe((form) => console.log("form",form));
+    this.tripForm.valueChanges.subscribe((form) => console.log("form",this.tripForm));
   }
 
   private checkIfTripIsNew() {
@@ -133,7 +133,13 @@ export class TripEditComponent implements OnInit {
     this.addTagsToTrips();
 
     if(!this.tripForm.valid) {
-      this.toastyService.warning({ title: "Invalid Trip", msg: "Trip must contain Name and atleast One Place" });
+      // this.toastyService.warning({ title: "Invalid Trip", msg: "Trip must contain Name and atleast One Place" });
+      $('.trip-submit-error').removeClass("hide")
+                             .delay(4500)
+                             .queue(function() {
+                                $(this).addClass("hide");
+                                $(this).dequeue();
+                             });
       return;
     }
 

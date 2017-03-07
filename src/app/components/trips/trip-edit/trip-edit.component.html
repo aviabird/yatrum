@@ -1,10 +1,12 @@
 <div class="trip ui centered grid cards">
   <div style="height: 120px; background: gray; width: 100%">
   </div>
+  <div class="six wide column trip-submit-error hide">A Trip must contain a name and atleast one place with name, date and description</div>
   <div class="trip-form twelve wide column ui card">
     <form class="ui form" [formGroup]="tripForm">
-      <div class="field">
+      <div class="field name">
         <textarea class="trip-title" autosize type="text" placeholder="Title" formControlName="name"></textarea>
+        <div *ngIf="tripForm.controls['name'].hasError('required') && tripForm.controls['name'].touched" class="alert">Trip must contain name</div>
         <button class="ui big button save-button" (click)="onSubmit()" type="button">Publish</button>
       </div>
       <div class="field">

@@ -120,3 +120,21 @@ tr-image-upload {
 	float: left;
 	margin: 0 2% 2% 0;
 }
+
+.name, .review {
+	position: relative;
+}
+
+.alert {
+	position: absolute;
+  bottom: -10px;
+  left: 45px;
+  color: red;
+}
+
+.alert-review {
+	position: absolute;
+  left: 23px;
+  color: red;
+	top: 124px;
+}

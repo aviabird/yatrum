@@ -7,22 +7,24 @@
     <form class="ui form" [formGroup]="placeForm">
       <div class="content form-header">
         <div class="inline fields">
-          <div class="twelve wide field">
+          <div class="twelve wide field name">
             <i class="marker big icon"></i>
             <input
               class="place-name" type="text" (focus)="focusFunction($event)"
               formControlName="name" placeholder="Add Place">
+              <div *ngIf="placeForm.controls['name'].hasError('required') && placeForm.controls['name'].touched" class="alert">Place name is required</div>
           </div>
           <div class="four wide field place-date-field">
             <p-calendar formControlName="visited_date" showTime="true" [showIcon]="true"></p-calendar> 
           </div>
         </div>
       </div>  
-      <div class="field">
+      <div class="field review">
         <textarea
           class="place-review" autosize class="" formControlName="review"
           placeholder="What's so cool about this place?"></textarea>
-      </div>  
+      </div>
+      <div *ngIf="placeForm.controls['review'].hasError('required') && placeForm.controls['review'].touched" class="alert-review">Place description is required</div>  
       <div class="field place-images">
         <tr-image-upload (imageData)="imageUploaded($event)"></tr-image-upload>
         <span *ngFor="let picture of placeForm.controls['pictures'].value; let i = index" class="images">

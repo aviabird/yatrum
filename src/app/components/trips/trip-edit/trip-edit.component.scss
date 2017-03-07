@@ -105,3 +105,26 @@ textarea {
     padding-bottom: 51px;
 	}
 }
+
+.name {
+	position: relative;
+}
+
+.alert {
+	color: red;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+}
+
+.trip-submit-error {
+	top: 20px;
+  background: red;
+  color: white;
+  position: absolute !important;
+	font-size: 13px;
+}
+
+.hide {
+	display: none !important;
+}

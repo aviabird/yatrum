@@ -6,6 +6,11 @@
 
 .trip-activity {
 	padding-left: 7rem !important;
+  @media only screen and (max-width: 767px) {
+    padding-left: 2rem !important;
+		padding-right: 2rem !important;
+  }
+
 }
 
 .ui.divider {

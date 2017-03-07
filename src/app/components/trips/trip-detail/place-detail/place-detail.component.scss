@@ -1,6 +1,10 @@
 .place-date {
 	text-align: right;
 	text-transform: capitalize;
+	@media only screen and (max-width: 767px) {
+		text-align: left;
+	  padding-top: 0rem !important;
+  }
 }
 
 .place-review {
