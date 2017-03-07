@@ -3,7 +3,9 @@
   </div>
   <div class="twelve wide column">
     <!--{{data | async | json}}-->
-    <p-chart #chart type="bar" [data]="(data | async) || dummyData "></p-chart>
+    <p-chart #chart type="bar" 
+      [data]="(data | async) || dummyData ">
+    </p-chart>
     <table class="ui celled table">
       <thead>
         <tr>
@@ -12,9 +14,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let trip of userTrips$ | async">
+        <tr *ngFor="let trip of userTrips$ | async" 
+            (click)="getGraphDataForTrip(trip.id, trip.name)"
+            class="trip-pointer">
           <td>
-            <a (click)="getGraphDataForTrip(trip.id, trip.name)">{{trip.name}}</a>
+            <a>{{trip.name}}</a>
           </td>
           <td>{{trip.view_count}}</td>
         </tr>
