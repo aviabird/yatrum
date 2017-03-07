@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import * as fromRoot from './../../reducers/index';
 import { LoadUserTripsAction } from './../../actions/trips.action';
 import { Trip } from './../../models/trip';
@@ -18,69 +18,81 @@ import { UIChart } from "primeng/components/chart/chart";
 })
 export class StatsComponent implements OnInit, OnDestroy {
 
-  @ViewChild("chart") chart;
+  @ViewChild("chart") chart: UIChart;
 
+  dummyData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: "Dummy Data",
+        backgroundColor: '#42A5F5',
+        borderColor: '#1E88E5',
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  }
   private subscription: Subscription;
   userTrips$: Observable<Trip[]>;
   userIndex: string;
-  data: any = {
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-              datasets: [
-                {
-                  label: "Dummy Data",
-                  backgroundColor: '#42A5F5',
-                  borderColor: '#1E88E5',
-                  data:  [28, 48, 40, 19, 86, 27, 90]
-                }
-              ]
-            }
+  data = new Subject();
 
   constructor(
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute,
     private tripService: TripsService
   ) {
-    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection);
 
-    /**Set Graph Data for First Trip */
-    this.userTrips$.subscribe(trips => {
-      if (trips && trips.length > 0) {
-        let trip = trips[0];
-        this.tripService.get_graph_data_for_trip(trip.id).subscribe(response => {
-          // this.set_graph_data(trip.name, response.labels, response.series, this.chart)
-          if(response) {
-            this.data = {
-              labels: response.labels,
-              datasets: [
-                {
-                  label: trip.name,
-                  backgroundColor: '#42A5F5',
-                  borderColor: '#1E88E5',
-                  data: response.series
-                }
-              ]
-            }
-          }
-        })
+    this.data.subscribe(response => {
+      if (this.chart && response) {
+        setTimeout(() => this.chart.refresh(), 10);
       }
     })
   }
+
 
   ngOnInit() {
     this.subscription = this.route.parent.params.subscribe(
       (params) => this.userIndex = params['id']
     )
     this.store.dispatch(new LoadUserTripsAction(this.userIndex));
+    this.setInitialGraphData();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.data.unsubscribe();
   }
 
-  getGraphDataForTrip(id, name, chart) {
+
+  setInitialGraphData() {
+    /**Set Graph Data for First Trip */
+    this.userTrips$ = this.store.select(fromRoot.getUserTripsCollection).do(trips => {
+      if (trips && trips.length > 0) {
+        let trip = trips[0];
+        this.tripService.get_graph_data_for_trip(trip.id).subscribe(response => {
+          let temp = {
+            labels: response.labels,
+            datasets: [
+              {
+                label: trip.name,
+                backgroundColor: '#42A5F5',
+                borderColor: '#1E88E5',
+                data: response.series
+              }
+            ]
+          }
+          // Service call end
+          this.data.next(temp);
+        })
+      }
+    })
+  }
+
+  getGraphDataForTrip(id, name) {
     this.tripService.get_graph_data_for_trip(id).subscribe(
       response => {
-        this.set_graph_data(name, response.labels, response.series, chart)
+        let temp = this.set_graph_data(name, response.labels, response.series);
+        this.data.next(temp)
       },
       err => {
         alert("Something went wrong");
@@ -88,10 +100,17 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   /**Sets Graph Data */
-  set_graph_data(label_name, labels, data, chart) {
-    this.data.labels = labels;
-    this.data.datasets[0].data = data;
-    this.data.datasets[0].label = label_name;
-    chart.refresh();
+  set_graph_data(label_name, labels, data) {
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: label_name,
+          backgroundColor: '#42A5F5',
+          borderColor: '#1E88E5',
+          data: data
+        }
+      ]
+    }
   }
 }

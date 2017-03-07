@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 /**
  * TODO: ALL Observable<any> must be changed to concreate Observable of some type - VoidZero
  *  
