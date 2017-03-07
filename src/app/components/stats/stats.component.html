@@ -1,0 +1,24 @@
+<div class="ui centered grid">
+  <div style="height: 120px; background: gray; width: 100%">
+  </div>
+  <div class="twelve wide column">
+    <!--{{data | async | json}}-->
+    <p-chart #chart type="bar" [data]="(data | async) || dummyData "></p-chart>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Trips</th>
+          <th>Views</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trip of userTrips$ | async">
+          <td>
+            <a (click)="getGraphDataForTrip(trip.id, trip.name)">{{trip.name}}</a>
+          </td>
+          <td>{{trip.view_count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
