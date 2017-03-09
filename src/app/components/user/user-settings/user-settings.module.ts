@@ -11,6 +11,7 @@ import { CanActivateViaAuthGuard } from './../../../guards/auth.guard';
 import { OtherDetailsComponent } from './other-details/other-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UserSettingsComponent } from './user-settings.component';
+import { EqualValidator } from '../../../Validators/equal-validator.directive';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
     // components
     UserSettingsComponent,
     ChangePasswordComponent,
-    OtherDetailsComponent
+    OtherDetailsComponent,
+    EqualValidator
   ],
   imports: [
     RouterModule.forChild(routes),

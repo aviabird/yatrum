@@ -1,6 +1,6 @@
 {
-  "name": "travel-app",
-  "version": "0.0.0",
+  "name": "Yatrum",
+  "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -9,7 +9,10 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "build:aot": "ngc -p tsconfig-aot.json && rollup -c rollup-config.js"
+    "build:aot": "ngc -p tsconfig-aot.json && rollup -c rollup-config.js",
+    "build--prod": "ng build --prod --aot --no-sourcemap --stats-json && npm run sw",
+    "sw": "sw-precache --root=dist --config=sw-precache-config.js",
+    "static-serve": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html"
   },
   "private": true,
   "dependencies": {
@@ -51,10 +54,12 @@
     "zone.js": "^0.7.7"
   },
   "devDependencies": {
+    "@angular/cli": "^1.0.0-rc.1",
+    "@ngrx/store-devtools": "^3.2.2",
+    "@ngrx/store-log-monitor": "^3.0.2",
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",
     "@types/selenium-webdriver": "^2.53.36",
-    "angular-cli": "1.0.0-beta.24",
     "codelyzer": "~2.0.0-beta.1",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
@@ -69,11 +74,14 @@
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
+    "sw-precache": "^5.0.0",
     "ts-node": "1.2.1",
     "tslint": "^4.0.0",
     "typescript": "~2.0.3",
-    "webdriver-manager": "10.2.5",
-    "@ngrx/store-devtools": "^3.2.2",
-    "@ngrx/store-log-monitor": "^3.0.2"
-  }
+    "webdriver-manager": "10.2.5"
+  },
+  "description": "Share your travell with the world",
+  "main": "index.js",
+  "repository": "git@github.com:aviabird/yatrum.git",
+  "author": "Pankaj Rawat <pankajrawat19sept@gmail.com>"
 }
