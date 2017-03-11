@@ -15,7 +15,7 @@ module.exports = {
   stripPrefix: 'dist/',
   navigateFallback: '/index.html',
   runtimeCaching: [{
-    urlPattern: /node-hnapi\.herokuapp\.com/,
+    urlPattern: /yatrum-api\.herokuapp\.com/,
     handler: 'networkFirst'
   }]
 };
