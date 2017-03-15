@@ -147,10 +147,9 @@ export class UserService {
   getAllGenders(): Observable<any> {
     let header = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers: header});
-    let g = this.http.get(`${this.apiLink}/users/genders`)
+    let genders = this.http.get(`${this.apiLink}/users/genders`)
       .map((res: Response) => <any>res.json());
-      console.log('log genders' + g);
-      return g;
+      return genders;
   }
 
 }

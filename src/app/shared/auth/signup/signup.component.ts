@@ -35,7 +35,6 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.getGenders();
-     console.log(this.getGenders());
   }
 
   initForm() {
@@ -67,16 +66,6 @@ export class SignupComponent implements OnInit {
       }
     )
   }
-
-  // getGenders() {
-  //   this.userService.getAllGenders()
-  //     .subscribe(data => {
-  //       parameters => this.parameters = parameters
-  //     }, 
-  //     error => {
-  //       console.log('Error returning genders');
-  //     });
-  // }
 
   getGenders() {
     this.userService.getAllGenders()
