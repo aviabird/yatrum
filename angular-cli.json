@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "service-worker.js"
       ],
       "index": "index.html",
       "main": "main.jit.ts",
@@ -32,8 +33,8 @@
         "../node_modules/semantic-ui/dist/semantic.min.js",
         "../node_modules/jshashes/hashes.min.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
