@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
@@ -8,7 +7,7 @@ import * as fromRoot from './../../reducers/index';
 import { LoadUserTripsAction } from './../../actions/trips.action';
 import { Trip } from './../../models/trip';
 import { TripsService } from './../../services/trips.service';
-import { UIChart } from "primeng/components/chart/chart";
+import { UIChart } from 'primeng/components/chart/chart';
 import * as moment from 'moment/moment';
 
 @Component({
@@ -19,19 +18,20 @@ import * as moment from 'moment/moment';
 })
 export class StatsComponent implements OnInit, OnDestroy {
 
-  @ViewChild("chart") chart: UIChart;
+  @ViewChild('chart') chart: UIChart;
 
   dummyData = {
     labels: ['', '', 'March', '', '', 'June', 'July', '', '', '', 'December'],
     datasets: [
       {
-        label: "Dummy Data",
+        label: 'Dummy Data',
         backgroundColor: 'rgba(2,184,117,.8)',
         borderColor: '#1E88E5',
         data: [28, 48, 40, 19, 86, 27, 90]
       }
     ]
-  }
+  };
+
   private subscription: Subscription;
   userTrips$: Observable<Trip[]>;
   userIndex: string;
@@ -42,31 +42,15 @@ export class StatsComponent implements OnInit, OnDestroy {
       fontSize: 20,
       fontColor: 'black',
       padding: 15,
-      text: "Trip Stats"
+      text: 'Trip Stats'
     },
 
     scales: {
       xAxes: [{
-        // gridLines: {
-        //   // You can change the color, the dash effect, the main axe color, etc.
-        //   borderDash: [1, 1],
-        //   color: "white"
-        // },
         ticks: {
           autoSkip: false,
-          // maxRotation: 180,
           minRotation: 360
         }
-      }],
-      // And this will affect the horizontal lines (yAxe) of your dataset
-      yAxes: [{
-        // gridLines: {
-        //   borderDash: [1, 1],
-        //   color: "black"
-        // }
-        // ticks: {
-        //   stepSize: 1,
-        // }
       }]
     },
     responsive: false,
@@ -89,7 +73,7 @@ export class StatsComponent implements OnInit, OnDestroy {
       if (this.chart && response) {
         setTimeout(() => this.chart.refresh(), 10);
       }
-    })
+    });
   }
 
   ngOnInit() {
@@ -107,12 +91,12 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   formatLabels(labels: Array<any>) {
     labels = labels.map((label, i) => {
-      if (i % 7 == 0) {
-        return moment(label).format("MMMM Do");
+      if (i % 7 === 0) {
+        return moment(label).format('MMMM Do');
       } else {
-        return ""
+        return '';
       }
-    })
+    });
     return labels;
   }
 
@@ -123,7 +107,7 @@ export class StatsComponent implements OnInit, OnDestroy {
       if (trips && trips.length > 0) {
         let trip = trips[0];
         this.tripService.get_graph_data_for_trip(trip.id).subscribe(response => {
-          let temp = {
+          let graphData = {
             labels: this.formatLabels(response.labels),
             datasets: [
               {
@@ -133,23 +117,23 @@ export class StatsComponent implements OnInit, OnDestroy {
                 data: response.series
               }
             ]
-          }
+          };
           // Service call end
-          this.data.next(temp);
-        })
+          this.data.next(graphData);
+        });
       }
-    })
+    });
   }
 
   getGraphDataForTrip(id, name) {
     this.tripService.get_graph_data_for_trip(id).subscribe(
       response => {
-        let temp = this.set_graph_data(name, response.labels, response.series);
-        this.data.next(temp)
+        let graphData = this.set_graph_data(name, response.labels, response.series);
+        this.data.next(graphData);
       },
       err => {
-        alert("Something went wrong");
-      })
+        alert('Something went wrong');
+      });
   }
 
   /**Sets Graph Data */
