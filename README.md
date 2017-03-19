@@ -35,7 +35,7 @@
 ## Angular Fundamentals Course
 
 <p align="center">
-  <a href="https://medium.com/aviabird/presenting-angular-fundamentals-course-62cb564d2ceb#.pur8ief8v">
+  <a>
     <img alt="Angular 2 Fundamentals Course" title="Angular 2 Fundamentals Course" src="http://res.cloudinary.com/zeus999/image/upload/c_limit,h_1041,w_1487/v1486458025/ANGULAR_2fundamentals_1_oxj2qd.png">
   </a>
 </p>
