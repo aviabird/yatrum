@@ -32,6 +32,12 @@
 * Travellers can create itinerary for their trips.
 * This application utilises @ngrx/store to manage the state of the app and to cache requests made to the Backend API, @angular/router to manage navigation between routes, @ngrx/effects to isolate side effects.
 
+## AngularSpree
+
+We have also created and open sourced __[AngularSpree](https://github.com/aviabird/angularspree)__: Plug and play frontend application for SPREE E-Commerce API built with ❤️ using Angular2, Redux, Observables & ImmutableJs.
+
+Check it out and join the our team on it's __[slack channel](https://angular-spree.herokuapp.com/)__ for discussions related to AngularSpree.
+
 ## Angular Fundamentals Course
 
 <p align="center">
