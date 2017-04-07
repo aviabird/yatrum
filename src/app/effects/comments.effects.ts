@@ -1,5 +1,3 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';

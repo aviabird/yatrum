@@ -2,7 +2,7 @@ import { PlaceFormService } from './../../../services/forms/place-form.service';
 import { TripFormService } from './../../../services/forms/trip-form.service';
 import { ToastyService } from 'ng2-toasty';
 import { TripsService } from './../../../services/trips.service';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { SaveTripAction, UpdateTripAction } from './../../../actions/trips.action';
 import { State } from './../../../reducers/index';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
