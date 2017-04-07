@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Services 
 import { ServiceModule } from './services/index';
@@ -44,7 +45,8 @@ import { InstagramAuthenticationCallbackComponent } from './shared/instagram-aut
     ComponentsModule,
     SharedModule,
     ServiceModule,
-    AppEffectsModule
+    AppEffectsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CanActivateViaAuthGuard,
