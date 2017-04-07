@@ -7,4 +7,3 @@ export const environment = {
     CLOUDINARY_UPLOAD_PRESET: 'blxtvppn',
     API_ENDPOINT: 'http://localhost:3000'
 };
-

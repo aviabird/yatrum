@@ -6,7 +6,7 @@ import { CloudinaryIntegrationService } from './../../../services/cloudinary-int
 import { UserProfile } from './../../../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import {
   Component,

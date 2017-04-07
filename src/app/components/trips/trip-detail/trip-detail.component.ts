@@ -1,6 +1,6 @@
 import { ServerAuthService } from './../../../services/server-auth.service';
 import { environment } from './../../../../environments/environment';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { FollowUserAction } from './../../../actions/user.action';
 import { LikeTripAction, IncreaseViewCountAction } from './../../../actions/trips.action';
 import { Trip } from './../../../models/trip';
