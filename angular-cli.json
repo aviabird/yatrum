@@ -17,6 +17,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "prefix": "tr",
+      "serviceWorker": true,
       "mobile": false,
       "compress": true,
       "styles": [
