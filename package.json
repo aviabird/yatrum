@@ -10,8 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build--prod": "ng build --prod --no-sourcemap --stats-json && npm run sw",
-    "sw": "sw-precache --root=dist --config=sw-precache-config.js",
+    "build--prod": "ng build --prod --aot --no-sourcemap --stats-json",
     "static-serve": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html"
   },
   "private": true,
@@ -55,8 +54,8 @@
   "devDependencies": {
     "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "4.0.0",
+    "@angular/service-worker": "^1.0.0-beta.8",
     "@ngrx/store-devtools": "^3.2.3",
-    "live-server": "^1.2.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0-beta.4",
@@ -68,6 +67,7 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "live-server": "^1.2.0",
     "ngrx-store-freeze": "^0.1.9",
     "node-sass": "^4.5.0",
     "protractor": "~5.1.0",

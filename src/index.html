@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Yatrum - Share and Discover Travel Stories, Itineraries, Travel Guides</title>
@@ -18,60 +19,53 @@
   <meta name="twitter:site" content="@yatrum_">
   <meta name="twitter:description" content="Yatrum is social travel platform to share and discover travel experiences, stories, Itineraries, blogs, travel guides, hotels and resorts, weekend getaways, attractions, places to visit, maps and tours.">
   <meta name="twitter:card" content="app">
-  
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy22IfZS49CL9q3zpBKtdnEVRaX4cRTqw&libraries=places"></script>
   <!--<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all">-->
   <!-- FIL should be served from the angular minification framework but for now this works -->
   <!--<link rel="stylesheet" href="./ionicons.min.css" media="all">-->
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-91415526-1', 'auto');
     ga('send', 'pageview');
   </script>
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/58a6dba11919dc09f9f42fd5/default';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/58a6dba11919dc09f9f42fd5/default';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
     })();
   </script>
   <!--End of Tawk.to Script-->
 </head>
+
 <body>
   <app-root>
-    <img
-      style="
+    <img style="
         position: absolute;
         transform: translate(6vw, 21vh);
         margin: 0 auto;
         top: 25vh;
         left: 42vw;
-        height: 5vw;"
-      src='assets/images/balls.svg'>
+        height: 5vw;" src='assets/images/balls.svg'>
   </app-root>
-  <script>window.module = 'aot';</script>
+  <script>
+    window.module = 'aot';
+  </script>
   <!--Charts Feature Requires Charts.js-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.bundle.min.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-        console.log('Service Worker registered');
-      }).catch(function(err) {
-        console.log('Service Worker registration failed: ', err);
-      });
-    }
-  </script>
-
 </body>
-</html>
 
+</html>
