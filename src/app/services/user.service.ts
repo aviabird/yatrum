@@ -82,8 +82,6 @@ export class UserService {
 
   // TODO: need to change the dirty implematation
   changePassword(current_password, new_password, confirm_password) {
-    console.log("Inside change password method", current_password, new_password, confirm_password)
-
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': this.getUserAuthToken()
