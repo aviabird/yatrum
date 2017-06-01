@@ -7,6 +7,8 @@ import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/
 import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
 import { passwordValidator } from '../../../shared/validators/password.validator';
+import { UserService } from '../../../services/user.service';
+
 
 @Component({
   selector: 'tr-signup',
@@ -18,18 +20,21 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   authStatus$: Observable<boolean>;
   formErrorMessage$: Observable<string>;
+  genders = [];
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private store: Store<fromRoot.State>,
-              private authService: ServerAuthService) {
+              private authService: ServerAuthService, 
+              private userService: UserService) {
     this.authStatus$ = this.store.select(fromRoot.getAuthStatus);
     this.formErrorMessage$ = this.store.select(fromRoot.getSignUpFormMessage)
     this.redirectIfUserLoggedIn()
   }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
+    this.getGenders();
   }
 
   initForm() {
@@ -60,6 +65,11 @@ export class SignupComponent implements OnInit {
         if(data == true){ this.router.navigateByUrl("/trips") }
       }
     )
+  }
+
+  getGenders() {
+    this.userService.getAllGenders()
+      .subscribe(genders => this.genders = genders);
   }
 
 }

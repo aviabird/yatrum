@@ -6,7 +6,8 @@ import { State } from './../reducers/index';
 import { Store } from '@ngrx/store';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+
 
 @Injectable()
 export class UserService {
@@ -142,5 +143,13 @@ export class UserService {
       .catch((res: Response) => this.catchError(res));
   }
 
+  // Get user genders 
+  getAllGenders(): Observable<any> {
+    let header = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({headers: header});
+    let genders = this.http.get(`${this.apiLink}/users/genders`)
+      .map((res: Response) => <any>res.json());
+      return genders;
+  }
 
 }

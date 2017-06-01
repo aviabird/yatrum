@@ -44,6 +44,16 @@
           <!--</div>-->
           
         </div>
+
+        <div class="field">
+          <select>
+            <option *ngFor="let gender of genders" 
+                    class="item">{{gender}}</option>
+          </select>
+          <p></p>
+        </div>
+      
+
         <div class="field"
           [ngClass]="{'has-error': (signUpForm.get('password').invalid && signUpForm.get('password').touched)}">
           <!--<label for="inputPassword3" class="col-sm-2 control-label">Password</label>-->
